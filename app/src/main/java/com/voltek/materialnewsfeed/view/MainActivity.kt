@@ -1,7 +1,8 @@
-package com.voltek.materialnewsfeed
+package com.voltek.materialnewsfeed.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.voltek.materialnewsfeed.R
 
 class MainActivity : AppCompatActivity() {
 
