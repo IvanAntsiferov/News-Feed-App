@@ -16,5 +16,5 @@ interface NewsApi {
     fun getSources(
             @Query("apiKey") apiKey: String,
             @Query("category") category: String
-    ): Observable<String>
+    ): Observable<NewsApiSourcesResponse>
 }
