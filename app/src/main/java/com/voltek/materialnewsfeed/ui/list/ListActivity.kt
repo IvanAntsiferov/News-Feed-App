@@ -9,6 +9,7 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.api.NewsApi
 import com.voltek.materialnewsfeed.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.api.NewsApiSourcesResponse
+import com.voltek.materialnewsfeed.utils.ActivityUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,7 +22,8 @@ class ListActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_list)
+        ActivityUtils.setupToolbar(this)
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(MaterialNewsFeedApp.BASE_URL)
@@ -33,12 +35,12 @@ class ListActivity : AppCompatActivity(),
         val observableA: Observable<NewsApiArticlesResponse> = api.getArticles(BuildConfig.ApiKey, "the-next-web")
         observableA.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleResponseA, this::handleError);
+                .subscribe(this::handleResponseA, this::handleError)
 
         val observableS: Observable<NewsApiSourcesResponse> = api.getSources(BuildConfig.ApiKey, "")
         observableS.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleResponseS, this::handleError);
+                .subscribe(this::handleResponseS, this::handleError)
     }
 
     fun handleResponseA(articles: NewsApiArticlesResponse) {
