@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.view
+package com.voltek.materialnewsfeed.ui.list
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
