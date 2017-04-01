@@ -41,6 +41,12 @@ class ListActivity : AppCompatActivity(),
         observableS.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleResponseS, this::handleError)
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_list,
+                        ListFragment.newInstance(),
+                        ListFragment::class.java.simpleName)
+                .commit()
     }
 
     fun handleResponseA(articles: NewsApiArticlesResponse) {
