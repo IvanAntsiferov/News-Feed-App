@@ -5,7 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.utils.ActivityUtils
 
-class DetailsActivity : AppCompatActivity() {
+class DetailsActivity : AppCompatActivity(),
+    DetailsContract.Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
