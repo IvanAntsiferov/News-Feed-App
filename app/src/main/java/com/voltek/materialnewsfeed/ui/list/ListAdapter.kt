@@ -10,7 +10,7 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.api.Article
 import kotlinx.android.synthetic.main.item_article.view.*
 
-class ListAdapter(val mContext: Context, var mItems: List<Article>)
+class ListAdapter(val mContext: Context, var mItems: MutableList<Article>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,5 +33,14 @@ class ListAdapter(val mContext: Context, var mItems: List<Article>)
 
     override fun getItemCount(): Int {
         return mItems.size
+    }
+
+    fun getItem(position: Int): Article {
+        return mItems[position]
+    }
+
+    fun addAll(articles: List<Article>) {
+        mItems.addAll(articles)
+        notifyDataSetChanged()
     }
 }

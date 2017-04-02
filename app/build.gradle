@@ -56,6 +56,9 @@ dependencies {
 
     // Images
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    // Data storage
+    compile 'com.orhanobut:hawk:2.0.1'
 }
 
 kapt {
