@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.di
 
-import com.voltek.materialnewsfeed.ui.details.DetailsFragment
-import com.voltek.materialnewsfeed.ui.list.ListFragment
+import com.voltek.materialnewsfeed.mvp.NewsModel
+import com.voltek.materialnewsfeed.ui.list.ListPresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,6 +12,7 @@ import javax.inject.Singleton
 )
 interface MainComponent {
 
-    fun inject(fragment: ListFragment)
-    fun inject(fragment: DetailsFragment)
+    fun inject(model: NewsModel)
+
+    fun inject(presenter: ListPresenter)
 }

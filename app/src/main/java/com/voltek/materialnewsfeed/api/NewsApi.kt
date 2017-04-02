@@ -7,13 +7,13 @@ import retrofit2.http.Query
 interface NewsApi {
 
     @GET("/v1/articles")
-    fun getArticles(
+    fun fetchArticles(
             @Query("apiKey") apiKey: String,
             @Query("source") source: String
     ): Observable<NewsApiArticlesResponse>
 
     @GET("/v1/sources")
-    fun getSources(
+    fun fetchSources(
             @Query("apiKey") apiKey: String,
             @Query("category") category: String
     ): Observable<NewsApiSourcesResponse>

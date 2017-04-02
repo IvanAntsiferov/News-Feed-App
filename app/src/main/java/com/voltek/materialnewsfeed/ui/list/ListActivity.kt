@@ -13,16 +13,6 @@ class ListActivity : AppCompatActivity(),
         setContentView(R.layout.activity)
         ActivityUtils.setupToolbar(this)
 
-        /*val observableA: Observable<NewsApiArticlesResponse> = api.getArticles(BuildConfig.ApiKey, "the-next-web")
-        observableA.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleResponseA, this::handleError)
-
-        val observableS: Observable<NewsApiSourcesResponse> = api.getSources(BuildConfig.ApiKey, "")
-        observableS.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleResponseS, this::handleError)*/
-
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_list,
                         ListFragment.newInstance(),

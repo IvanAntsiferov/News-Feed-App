@@ -10,7 +10,7 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.api.Article
 import kotlinx.android.synthetic.main.item_article.view.*
 
-class ListAdapter(val mContext: Context, var mItems: MutableList<Article>)
+class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
