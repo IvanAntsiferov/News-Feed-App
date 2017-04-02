@@ -27,5 +27,11 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         //
+        mPresenter?.attach(this)
+    }
+
+    override fun onDestroyView() {
+        mPresenter?.detach()
+        super.onDestroyView()
     }
 }

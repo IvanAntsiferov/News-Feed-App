@@ -6,11 +6,11 @@ abstract class AbstractPresenter<out Nav : BaseNavigator, View : BaseView>(nav: 
 
     protected val mNavigator: Nav = nav
 
-    override fun onAttach(view: View) {
+    override fun attach(view: View) {
         mView = view
     }
 
-    override fun onDetach() {
+    override fun detach() {
         mView = null
     }
 }
