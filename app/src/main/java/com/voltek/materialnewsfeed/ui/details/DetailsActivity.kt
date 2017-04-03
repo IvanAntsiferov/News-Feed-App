@@ -16,5 +16,11 @@ class DetailsActivity : AppCompatActivity(),
         ActivityUtils.setupToolbar(this)
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container,
+                        DetailsFragment.newInstance(article),
+                        DetailsFragment::class.java.simpleName)
+                .commit()
     }
 }

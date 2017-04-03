@@ -19,7 +19,7 @@ class ListActivity : AppCompatActivity(),
         ActivityUtils.setupToolbar(this)
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_list,
+                .replace(R.id.fragment_container,
                         ListFragment.newInstance(),
                         ListFragment::class.java.simpleName)
                 .commit()

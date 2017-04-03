@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.item_article.view.*
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.subjects.PublishSubject
 
-
 class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
@@ -26,7 +25,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val image = view.im_image
-        val title = view.tv_title
+        val title = view.tv_title!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -38,21 +37,17 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val item = mItems[position]
 
-        RxView.clicks(holder?.itemView as View)
-                .subscribe({ model ->
+        RxView.clicks(holder!!.itemView)
+                .subscribe({ _ ->
                     mViewClickSubject.onNext(item)
                 })
 
         Glide.with(mContext).load(item.urlToImage).into(holder.image)
-        holder.title?.text = item.title
+        holder.title.text = item.title
     }
 
     override fun getItemCount(): Int {
         return mItems.size
-    }
-
-    fun getItem(position: Int): Article {
-        return mItems[position]
     }
 
     fun addAll(articles: List<Article>) {
