@@ -1,7 +1,10 @@
 package com.voltek.materialnewsfeed.api
 
+import org.parceler.Parcel
+
 data class NewsApiArticlesResponse(val articles: List<Article>)
 
+@Parcel
 data class Article(
         val author: String,
         val title: String,

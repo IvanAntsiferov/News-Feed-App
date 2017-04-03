@@ -9,7 +9,7 @@ object ListContract {
 
     interface Navigator : BaseNavigator {
 
-        //
+        fun openDetails(article: Article)
     }
 
     interface View : BaseView {

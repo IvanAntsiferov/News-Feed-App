@@ -6,13 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
+import org.parceler.Parcels
 
 class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Presenter>(),
     DetailsContract.View {
 
     companion object {
-        fun newInstance() = DetailsFragment()
+        val ARG_ARTICLE = "ARG_ARTICLE"
+
+        fun newInstance(article: Article): DetailsFragment {
+            val detailsFragment = DetailsFragment()
+            val args = Bundle()
+            args.putParcelable(ARG_ARTICLE, Parcels.wrap(article))
+            detailsFragment.arguments = args
+            return detailsFragment
+        }
     }
 
     override fun onAttach(context: Context?)  {
