@@ -4,14 +4,14 @@ import org.parceler.Parcel
 
 data class NewsApiArticlesResponse(val articles: List<Article>)
 
-@Parcel
+@Parcel(Parcel.Serialization.BEAN)
 data class Article(
-        val author: String,
-        val title: String,
-        val description: String,
-        val url: String,
-        val urlToImage: String,
-        val publishedAt: String)
+        val author: String = "",
+        val title: String = "",
+        val description: String = "",
+        val url: String = "",
+        val urlToImage: String = "",
+        val publishedAt: String = "")
 
 data class NewsApiSourcesResponse(val sources: List<Source>)
 

@@ -8,10 +8,20 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.api.Article
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_article.view.*
+import com.jakewharton.rxbinding2.view.RxView
+import io.reactivex.subjects.PublishSubject
+
 
 class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+
+    private var mViewClickSubject: PublishSubject<Article> = PublishSubject.create<Article>()
+
+    fun getViewClickedObservable(): Observable<Article> {
+        return mViewClickSubject
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -21,14 +31,20 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
-        return ViewHolder(layoutInflater.inflate(R.layout.item_article, parent, false))
+        val view = layoutInflater.inflate(R.layout.item_article, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val item = mItems[position]
 
-        Glide.with(mContext).load(item.urlToImage).into(holder?.image)
-        holder?.title?.text = item.title
+        RxView.clicks(holder?.itemView as View)
+                .subscribe({ model ->
+                    mViewClickSubject.onNext(item)
+                })
+
+        Glide.with(mContext).load(item.urlToImage).into(holder.image)
+        holder.title?.text = item.title
     }
 
     override fun getItemCount(): Int {

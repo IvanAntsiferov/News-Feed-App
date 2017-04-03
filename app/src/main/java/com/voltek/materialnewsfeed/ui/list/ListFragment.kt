@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
@@ -37,6 +38,8 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
 
         mPresenter?.attach(this)
     }
+
+    override fun onItemClick(): Observable<Article> = mAdapter.getViewClickedObservable()
 
     override fun handleResponse(articles: List<Article>) {
         progress_bar.visibility = View.GONE

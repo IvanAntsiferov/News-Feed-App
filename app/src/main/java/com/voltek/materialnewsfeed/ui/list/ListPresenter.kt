@@ -23,6 +23,14 @@ class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter
 
     override fun attach(view: ListContract.View) {
         super.attach(view)
+
+        val listClicksDisposable = mView?.onItemClick()
+                ?.subscribe({ article ->
+                    mNavigator.openDetails(article)
+                }, this::handleError)
+
+        mDisposable.add(listClicksDisposable)
+
         getArticles()
     }
 
@@ -54,6 +62,6 @@ class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter
 
     fun handleError(error: Throwable) {
         error.printStackTrace()
-        mView?.handleError(error.localizedMessage)
+        mView?.handleError(error.javaClass.simpleName)
     }
 }
