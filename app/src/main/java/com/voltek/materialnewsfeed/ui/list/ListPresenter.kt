@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.ui.list
 
 import android.content.Context
-import com.voltek.materialnewsfeed.mvp.NewsModel
+import com.voltek.materialnewsfeed.ui.list.ArticleModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.net.ConnectivityManager
@@ -10,7 +10,7 @@ import com.voltek.materialnewsfeed.api.Article
 import com.voltek.materialnewsfeed.api.NewsApiArticlesResponse
 import javax.inject.Inject
 
-class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
+class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter<ListContract.Model>(navigator) {
 
     init {
         MaterialNewsFeedApp.mainComponent.inject(this)
@@ -19,7 +19,7 @@ class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter
     @Inject
     lateinit var mContext: Context
 
-    private var mNewsModel: NewsModel = NewsModel()
+    private var mNewsModel: ListContract.Model = ArticleModel()
 
     override fun attach(view: ListContract.View) {
         super.attach(view)

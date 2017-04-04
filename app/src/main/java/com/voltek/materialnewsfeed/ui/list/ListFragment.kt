@@ -12,7 +12,7 @@ import com.voltek.materialnewsfeed.ui.BaseFragment
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*
 
-class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
+class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter<ListContract.Model>>(),
         ListContract.View {
 
     companion object {
