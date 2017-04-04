@@ -1,16 +1,17 @@
 package com.voltek.materialnewsfeed.ui.list
 
 import android.content.Context
-import com.voltek.materialnewsfeed.ui.list.ArticleModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.api.Article
+import com.voltek.materialnewsfeed.api.ArticlesModel
 import com.voltek.materialnewsfeed.api.NewsApiArticlesResponse
+import com.voltek.materialnewsfeed.mvp.ModelContract
 import javax.inject.Inject
 
-class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter<ListContract.Model>(navigator) {
+class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
 
     init {
         MaterialNewsFeedApp.mainComponent.inject(this)
@@ -19,7 +20,7 @@ class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter
     @Inject
     lateinit var mContext: Context
 
-    private var mNewsModel: ListContract.Model = ArticleModel()
+    private var mModel: ModelContract.Articles = ArticlesModel()
 
     override fun attach(view: ListContract.View) {
         super.attach(view)
@@ -40,7 +41,7 @@ class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter
 
         // Check if internet connection is available
         if (networkInfo != null && networkInfo.isConnected) {
-            val observable = mNewsModel.provideArticles("the-next-web")
+            val observable = mModel.provideArticles("the-next-web")
             observable
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
