@@ -4,7 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.api.Article
+import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import com.voltek.materialnewsfeed.utils.ActivityUtils

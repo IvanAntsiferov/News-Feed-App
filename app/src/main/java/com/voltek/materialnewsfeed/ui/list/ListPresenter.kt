@@ -5,9 +5,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
-import com.voltek.materialnewsfeed.api.Article
-import com.voltek.materialnewsfeed.api.ArticlesModel
-import com.voltek.materialnewsfeed.api.NewsApiArticlesResponse
+import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.data.ArticlesModel
+import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.mvp.ModelContract
 import javax.inject.Inject
 

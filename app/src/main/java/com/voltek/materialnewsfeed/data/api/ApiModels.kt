@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.api
+package com.voltek.materialnewsfeed.data.api
 
 import org.parceler.Parcel
 

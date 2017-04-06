@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.api.Article
+import com.voltek.materialnewsfeed.data.api.Article
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_article.view.*
 import com.jakewharton.rxbinding2.view.RxView

@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.api
+package com.voltek.materialnewsfeed.data.api
 
 import io.reactivex.Observable
 import retrofit2.http.GET

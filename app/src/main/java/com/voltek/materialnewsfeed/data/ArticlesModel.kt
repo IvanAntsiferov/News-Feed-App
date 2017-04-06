@@ -1,9 +1,9 @@
-package com.voltek.materialnewsfeed.api
+package com.voltek.materialnewsfeed.data
 
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
-import com.voltek.materialnewsfeed.api.NewsApi
-import com.voltek.materialnewsfeed.api.NewsApiArticlesResponse
+import com.voltek.materialnewsfeed.data.api.NewsApi
+import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.mvp.ModelContract
 import com.voltek.materialnewsfeed.ui.list.ListContract
 import io.reactivex.Observable

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.api.Article
+import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.fragment_details.*
@@ -29,7 +29,7 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
 
     override fun onAttach(context: Context?)  {
         super.onAttach(context)
-        mPresenter = DetailsPresenter(activity as DetailsContract.Navigator)
+        mPresenter = DetailsPresenter(Parcels.unwrap(arguments.getParcelable(ARG_ARTICLE)))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,14 +37,14 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        val article: Article = Parcels.unwrap(arguments.getParcelable(ARG_ARTICLE))
+        mPresenter?.attach(this)
+    }
 
+    override fun showArticle(article: Article) {
         Glide.with(context).load(article.urlToImage).into(im_image)
         tv_author.text = article.author
         tv_title.text = article.title
         tv_date.text = article.publishedAt
         tv_description.text = article.description
-
-        mPresenter?.attach(this)
     }
 }

@@ -1,6 +1,6 @@
 package com.voltek.materialnewsfeed.di
 
-import com.voltek.materialnewsfeed.api.ArticlesModel
+import com.voltek.materialnewsfeed.data.ArticlesModel
 import com.voltek.materialnewsfeed.ui.list.ListPresenter
 import dagger.Component
 import javax.inject.Singleton

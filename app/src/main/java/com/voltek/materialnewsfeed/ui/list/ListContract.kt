@@ -1,6 +1,6 @@
 package com.voltek.materialnewsfeed.ui.list
 
-import com.voltek.materialnewsfeed.api.Article
+import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.mvp.AbstractNavigablePresenter
 import com.voltek.materialnewsfeed.mvp.BaseNavigator
 import com.voltek.materialnewsfeed.mvp.BaseView

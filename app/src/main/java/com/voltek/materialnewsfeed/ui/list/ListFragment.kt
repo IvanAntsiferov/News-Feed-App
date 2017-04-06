@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.api.Article
+import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*

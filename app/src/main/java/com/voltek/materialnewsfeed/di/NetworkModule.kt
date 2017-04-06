@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.di
 
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
-import com.voltek.materialnewsfeed.api.NewsApi
+import com.voltek.materialnewsfeed.data.api.NewsApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
