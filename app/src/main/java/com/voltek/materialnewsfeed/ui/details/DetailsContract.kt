@@ -16,7 +16,7 @@ object DetailsContract {
         //
     }
 
-    abstract class Presenter(nav: Navigator) : AbstractPresenter<Navigator, View>(nav) {
+    abstract class Presenter : AbstractPresenter<View>() {
 
         //
     }
