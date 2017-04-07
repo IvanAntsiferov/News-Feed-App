@@ -11,6 +11,8 @@ object ListContract {
     interface Navigator : BaseNavigator {
 
         fun openDetails(article: Article)
+
+        fun isDualPane(): Boolean
     }
 
     interface View : BaseView {
