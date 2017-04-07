@@ -16,7 +16,13 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         ListContract.View {
 
     companion object {
+        val TAG = "ListFragmentTag"
+
         fun newInstance() = ListFragment()
+    }
+
+    init {
+        retainInstance = true
     }
 
     private lateinit var mAdapter: ListAdapter
@@ -24,11 +30,12 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
     override fun onAttach(context: Context?)  {
         super.onAttach(context)
         mPresenter = ListPresenter(activity as ListContract.Navigator)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mAdapter = ListAdapter(context, ArrayList<Article>())
-        return inflater?.inflate(R.layout.fragment_list, container, false);
+        return inflater?.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

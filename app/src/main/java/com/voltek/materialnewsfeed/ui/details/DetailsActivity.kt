@@ -17,11 +17,13 @@ class DetailsActivity : AppCompatActivity(),
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.details_fragment_container,
-                        DetailsFragment.newInstance(article),
-                        DetailsFragment::class.java.simpleName)
-                .commit()
+        if (supportFragmentManager.findFragmentByTag(DetailsFragment.TAG) == null) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.details_fragment_container,
+                            DetailsFragment.newInstance(article),
+                            DetailsFragment.TAG)
+                    .commit()
+        }
 
         title = article.title
     }

@@ -12,7 +12,7 @@ import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : AppCompatActivity(),
-    ListContract.Navigator {
+        ListContract.Navigator {
 
     private var mDualPane = false
 
@@ -25,11 +25,13 @@ class ListActivity : AppCompatActivity(),
             mDualPane = true
         }
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.list_fragment_container,
-                        ListFragment.newInstance(),
-                        ListFragment::class.java.simpleName)
-                .commit()
+        if (supportFragmentManager.findFragmentByTag(ListFragment.TAG) == null) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.list_fragment_container,
+                            ListFragment.newInstance(),
+                            ListFragment.TAG)
+                    .commit()
+        }
     }
 
     override fun isDualPane(): Boolean = mDualPane
@@ -39,9 +41,9 @@ class ListActivity : AppCompatActivity(),
             supportFragmentManager.beginTransaction()
                     .replace(R.id.details_fragment_container,
                             DetailsFragment.newInstance(article),
-                            DetailsFragment::class.java.simpleName)
+                            DetailsFragment.TAG)
                     .commit()
-        } else{
+        } else {
             val intent = Intent(this, DetailsActivity::class.java)
             intent.putExtra(DetailsFragment.ARG_ARTICLE, Parcels.wrap(article))
             startActivity(intent)

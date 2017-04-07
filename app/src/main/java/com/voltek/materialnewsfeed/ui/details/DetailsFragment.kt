@@ -18,6 +18,8 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
     companion object {
         val ARG_ARTICLE = "ARG_ARTICLE"
 
+        val TAG = "DetailsFragmentTag"
+
         fun newInstance(article: Article): DetailsFragment {
             val detailsFragment = DetailsFragment()
             val args = Bundle()
@@ -25,6 +27,10 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
             detailsFragment.arguments = args
             return detailsFragment
         }
+    }
+
+    init {
+        retainInstance = true
     }
 
     override fun onAttach(context: Context?)  {
