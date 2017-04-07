@@ -16,6 +16,7 @@
             android:id="@+id/im_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="80dp"
             android:adjustViewBounds="true" />
 
         <TextView

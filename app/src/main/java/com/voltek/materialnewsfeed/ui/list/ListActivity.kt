@@ -21,9 +21,7 @@ class ListActivity : AppCompatActivity(),
         setContentView(R.layout.activity_list)
         ActivityUtils.setupToolbar(this)
 
-        if (details_fragment_container != null) {
-            mDualPane = true
-        }
+        mDualPane = details_fragment_container != null
 
         if (supportFragmentManager.findFragmentByTag(ListFragment.TAG) == null) {
             supportFragmentManager.beginTransaction()

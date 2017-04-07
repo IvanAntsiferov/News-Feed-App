@@ -29,17 +29,13 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
         }
     }
 
-    init {
-        retainInstance = true
-    }
-
     override fun onAttach(context: Context?)  {
         super.onAttach(context)
         mPresenter = DetailsPresenter(Parcels.unwrap(arguments.getParcelable(ARG_ARTICLE)))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_details, container, false);
+        return inflater?.inflate(R.layout.fragment_details, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

@@ -11,7 +11,7 @@ import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.mvp.ModelContract
 import javax.inject.Inject
 
-class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
+class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
 
     init {
         MaterialNewsFeedApp.mainComponent.inject(this)
@@ -56,7 +56,7 @@ class ListPresenter (navigator: ListContract.Navigator) : ListContract.Presenter
 
         if (articles.isEmpty()) {
             mView?.handleError("There is no news")
-        } else{
+        } else {
             mView?.handleResponse(articles)
         }
     }

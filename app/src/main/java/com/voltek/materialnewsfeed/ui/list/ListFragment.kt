@@ -21,10 +21,6 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         fun newInstance() = ListFragment()
     }
 
-    init {
-        retainInstance = true
-    }
-
     private lateinit var mAdapter: ListAdapter
 
     override fun onAttach(context: Context?)  {

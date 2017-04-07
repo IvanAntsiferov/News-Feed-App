@@ -8,6 +8,10 @@ abstract class BaseFragment<in View : BaseView, Presenter : BasePresenter<View>>
 
     var mPresenter: Presenter? = null
 
+    init {
+        retainInstance = true
+    }
+
     override fun onDestroyView() {
         mPresenter?.detach()
         super.onDestroyView()
