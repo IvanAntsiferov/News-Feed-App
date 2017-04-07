@@ -12,13 +12,13 @@ class DetailsActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity)
+        setContentView(R.layout.activity_details)
         ActivityUtils.setupToolbar(this)
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container,
+                .replace(R.id.details_fragment_container,
                         DetailsFragment.newInstance(article),
                         DetailsFragment::class.java.simpleName)
                 .commit()
