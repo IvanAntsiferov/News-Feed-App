@@ -9,16 +9,21 @@ import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import com.voltek.materialnewsfeed.utils.ActivityUtils
 import org.parceler.Parcels
+import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : AppCompatActivity(),
     ListContract.Navigator {
 
-    private var mDualPane = false;
+    private var mDualPane = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         ActivityUtils.setupToolbar(this)
+
+        if (details_fragment_container != null) {
+            mDualPane = true
+        }
 
         supportFragmentManager.beginTransaction()
                 .replace(R.id.list_fragment_container,

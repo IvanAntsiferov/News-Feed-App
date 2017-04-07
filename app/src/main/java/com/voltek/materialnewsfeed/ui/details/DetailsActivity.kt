@@ -22,5 +22,7 @@ class DetailsActivity : AppCompatActivity(),
                         DetailsFragment.newInstance(article),
                         DetailsFragment::class.java.simpleName)
                 .commit()
+
+        title = article.title
     }
 }
