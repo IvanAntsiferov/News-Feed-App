@@ -4,12 +4,12 @@ import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.api.NewsApi
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
-import com.voltek.materialnewsfeed.mvp.ModelContract
+import com.voltek.materialnewsfeed.data.DataSource
 import com.voltek.materialnewsfeed.ui.list.ListContract
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ArticlesModel : ModelContract.Articles {
+class ArticlesRepository : DataSource.Articles {
 
     init {
         MaterialNewsFeedApp.mainComponent.inject(this)

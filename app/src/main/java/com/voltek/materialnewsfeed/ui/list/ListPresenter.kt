@@ -7,9 +7,9 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.api.Article
-import com.voltek.materialnewsfeed.data.ArticlesModel
+import com.voltek.materialnewsfeed.data.ArticlesRepository
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
-import com.voltek.materialnewsfeed.mvp.ModelContract
+import com.voltek.materialnewsfeed.data.DataSource
 import org.parceler.Parcels
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     @Inject
     lateinit var mContext: Context
 
-    private var mModel: ModelContract.Articles = ArticlesModel()
+    private var mRepository: DataSource.Articles = ArticlesRepository()
 
     override fun attach(view: ListContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)
@@ -54,7 +54,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
 
         // Check if internet connection is available
         if (networkInfo != null && networkInfo.isConnected) {
-            val observable = mModel.provideArticles("the-next-web")
+            val observable = mRepository.provideArticles("the-next-web")
             observable
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())

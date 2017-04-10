@@ -1,9 +1,9 @@
-package com.voltek.materialnewsfeed.mvp
+package com.voltek.materialnewsfeed.data
 
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import io.reactivex.Observable
 
-object ModelContract {
+object DataSource {
 
     interface Articles {
 
