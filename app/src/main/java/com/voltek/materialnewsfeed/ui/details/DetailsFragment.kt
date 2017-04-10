@@ -39,7 +39,7 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        mPresenter?.attach(this)
+        mPresenter?.attach(this, savedInstanceState)
     }
 
     override fun showArticle(article: Article) {

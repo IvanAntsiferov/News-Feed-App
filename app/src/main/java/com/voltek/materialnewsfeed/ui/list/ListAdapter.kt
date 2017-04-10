@@ -54,4 +54,6 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         mItems.addAll(articles)
         notifyDataSetChanged()
     }
+
+    fun getItems(): List<Article> = mItems
 }

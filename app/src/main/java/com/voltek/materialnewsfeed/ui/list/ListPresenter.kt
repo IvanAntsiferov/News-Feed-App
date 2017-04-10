@@ -4,11 +4,13 @@ import android.content.Context
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.net.ConnectivityManager
+import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.ArticlesModel
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.mvp.ModelContract
+import org.parceler.Parcels
 import javax.inject.Inject
 
 class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
@@ -22,8 +24,8 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
 
     private var mModel: ModelContract.Articles = ArticlesModel()
 
-    override fun attach(view: ListContract.View) {
-        super.attach(view)
+    override fun attach(view: ListContract.View, savedInstanceState: Bundle?) {
+        super.attach(view, savedInstanceState)
 
         val listClicksDisposable = mView?.onItemClick()
                 ?.subscribe({ article ->
@@ -31,8 +33,19 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
                 }, this::handleError)
 
         mDisposable.add(listClicksDisposable)
+    }
 
+    override fun onFirstLaunch() {
         getArticles()
+    }
+
+    override fun onRestore(savedInstanceState: Bundle?) {
+        val articles: List<Article> = Parcels.unwrap(savedInstanceState?.getParcelable(ListFragment.BUNDLE_ARTICLES))
+        if (articles.isEmpty()) {
+            getArticles()
+        } else {
+            mView?.handleResponse(articles)
+        }
     }
 
     fun getArticles() {

@@ -11,12 +11,14 @@ import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*
+import org.parceler.Parcels
 
 class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         ListContract.View {
 
     companion object {
         val TAG = "ListFragmentTag"
+        val BUNDLE_ARTICLES = "BUNDLE_ARTICLES"
 
         fun newInstance() = ListFragment()
     }
@@ -39,7 +41,13 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = mAdapter
 
-        mPresenter?.attach(this)
+        mPresenter?.attach(this, savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        val articles = Parcels.wrap(ArrayList(mAdapter.getItems()))
+        outState?.putParcelable(BUNDLE_ARTICLES, articles)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onItemClick(): Observable<Article> = mAdapter.getViewClickedObservable()
