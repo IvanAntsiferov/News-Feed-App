@@ -1,17 +1,16 @@
 package com.voltek.materialnewsfeed.ui.list
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.ui.BaseActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
-import com.voltek.materialnewsfeed.utils.ActivityUtils
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
 
-class ListActivity : AppCompatActivity(),
+class ListActivity : BaseActivity(),
         ListContract.Navigator {
 
     private var mDualPane = false
@@ -19,7 +18,6 @@ class ListActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        ActivityUtils.setupToolbar(this)
 
         mDualPane = details_fragment_container != null
 

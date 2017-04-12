@@ -1,25 +1,23 @@
 package com.voltek.materialnewsfeed.ui.details
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
-import com.voltek.materialnewsfeed.utils.ActivityUtils
+import com.voltek.materialnewsfeed.ui.BaseActivity
 import org.parceler.Parcels
 
-class DetailsActivity : AppCompatActivity(),
+class DetailsActivity : BaseActivity(),
     DetailsContract.Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
-        ActivityUtils.setupToolbar(this)
+        setContentView(R.layout.activity_generic)
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
 
         if (supportFragmentManager.findFragmentByTag(DetailsFragment.TAG) == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.details_fragment_container,
+                    .replace(R.id.fragment_container,
                             DetailsFragment.newInstance(article),
                             DetailsFragment.TAG)
                     .commit()

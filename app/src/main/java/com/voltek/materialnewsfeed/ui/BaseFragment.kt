@@ -6,7 +6,7 @@ import com.voltek.materialnewsfeed.mvp.BaseView
 
 abstract class BaseFragment<in View : BaseView, Presenter : BasePresenter<View>> : Fragment() {
 
-    var mPresenter: Presenter? = null
+    protected var mPresenter: Presenter? = null
 
     init {
         retainInstance = true
