@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.list.ListActivity">
+        <activity
+            android:name=".ui.list.ListActivity"
+            android:label="@string/title_list">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +25,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.details.DetailsActivity" />
+        <activity
+            android:name=".ui.details.DetailsActivity"
+            android:label="@string/title_details" />
 
-        <activity android:name=".ui.news_sources.NewsSourcesActivity" />
+        <activity
+            android:name=".ui.news_sources.NewsSourcesActivity"
+            android:label="@string/title_news_sources" />
 
     </application>
 

@@ -7,6 +7,7 @@ import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
+import com.voltek.materialnewsfeed.utils.ActivityUtils
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
 
@@ -18,6 +19,7 @@ class ListActivity : BaseActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+        ActivityUtils.setupToolbar(this)
 
         mDualPane = details_fragment_container != null
 

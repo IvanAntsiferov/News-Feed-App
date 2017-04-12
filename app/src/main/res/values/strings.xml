@@ -2,4 +2,8 @@
 
     <string name="app_name">Material News Feed</string>
 
+    <string name="title_list">Latest News</string>
+    <string name="title_details">Details</string>
+    <string name="title_news_sources">News Sources</string>
+
 </resources>
