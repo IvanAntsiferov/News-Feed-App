@@ -28,6 +28,19 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    supportLibraryVersion = '25.3.1'
+    retrofitVersion = '2.2.0'
+    rxJavaVersion = '2.0.8'
+    rxAndroidVersion = '2.0.1'
+    rxKotlinVersion = '2.0.0'
+    rxBindingKotlinVersion = '2.0.0'
+    daggerVersion = '2.10'
+    glideVersion = '3.7.0'
+    hawkVersion = '2.0.1'
+    parcelerVersion = '1.1.6'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -35,35 +48,35 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Android support library
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.android.support:design:${supportLibraryVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
 
     // Networking
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-    compile 'com.squareup.retrofit2:converter-moshi:2.2.0'
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-moshi:${retrofitVersion}"
 
     // Rx
-    compile "io.reactivex.rxjava2:rxjava:2.0.8"
-    compile 'io.reactivex.rxjava2:rxkotlin:2.0.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
+    compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    compile "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+    compile "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxBindingKotlinVersion}"
 
     // Dependency injection
-    compile 'com.google.dagger:dagger:2.10'
-    kapt 'com.google.dagger:dagger-compiler:2.10'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "com.google.dagger:dagger:${daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    provided "org.glassfish:javax.annotation:10.0-b28"
 
     // Images
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile "com.github.bumptech.glide:glide:${glideVersion}"
 
     // Data storage
-    compile 'com.orhanobut:hawk:2.0.1'
+    compile "com.orhanobut:hawk:${hawkVersion}"
 
     // Parcel
-    compile 'org.parceler:parceler-api:1.1.6'
-    kapt 'org.parceler:parceler:1.1.6'
+    compile "org.parceler:parceler-api:${parcelerVersion}"
+    kapt "org.parceler:parceler:${parcelerVersion}"
 }
 
 kapt {
