@@ -14,7 +14,6 @@ interface NewsApi {
 
     @GET("/v1/sources")
     fun fetchSources(
-            @Query("apiKey") apiKey: String,
-            @Query("category") category: String
+            @Query("apiKey") apiKey: String
     ): Observable<NewsApiSourcesResponse>
 }

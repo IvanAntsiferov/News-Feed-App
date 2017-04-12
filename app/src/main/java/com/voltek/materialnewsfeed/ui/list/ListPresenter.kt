@@ -9,7 +9,7 @@ import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.ArticlesRepository
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
-import com.voltek.materialnewsfeed.data.DataSource
+import com.voltek.materialnewsfeed.data.DataProvider
 import org.parceler.Parcels
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     @Inject
     lateinit var mContext: Context
 
-    private var mRepository: DataSource.Articles = ArticlesRepository()
+    private var mRepository: DataProvider.Articles = ArticlesRepository()
 
     override fun attach(view: ListContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)
