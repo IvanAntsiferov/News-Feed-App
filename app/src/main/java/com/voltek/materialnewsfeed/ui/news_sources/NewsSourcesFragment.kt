@@ -37,7 +37,7 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
 
     override fun handleResponse(sources: List<Source>) {
         progress_bar.visibility = View.GONE
-        //mAdapter.addAll(sources)
+        mAdapter.addAll(sources)
     }
 
     override fun handleError(error: String) {

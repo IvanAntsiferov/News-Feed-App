@@ -2,6 +2,8 @@ package com.voltek.materialnewsfeed.ui.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
+import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
@@ -9,6 +11,8 @@ import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
+import io.reactivex.Observable
+import kotlinx.android.synthetic.main.toolbar.*
 
 class ListActivity : BaseActivity(),
         ListContract.Navigator {
@@ -29,6 +33,8 @@ class ListActivity : BaseActivity(),
                     ListFragment.TAG)
         }
     }
+
+    override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
 
     override fun isDualPane(): Boolean = mDualPane
 

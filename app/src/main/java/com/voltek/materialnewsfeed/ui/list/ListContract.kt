@@ -1,5 +1,6 @@
 package com.voltek.materialnewsfeed.ui.list
 
+import android.view.MenuItem
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.mvp.AbstractNavigablePresenter
 import com.voltek.materialnewsfeed.mvp.BaseNavigator
@@ -9,6 +10,8 @@ import io.reactivex.Observable
 object ListContract {
 
     interface Navigator : BaseNavigator {
+
+        fun toolbarClicks(): Observable<MenuItem>
 
         fun openDetails(article: Article)
 

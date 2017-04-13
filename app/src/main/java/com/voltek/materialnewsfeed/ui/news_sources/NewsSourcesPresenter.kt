@@ -23,10 +23,6 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
 
     private var mRepository: DataProvider.NewsSources = NewsSourcesRepository()
 
-    override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
-        super.attach(view, savedInstanceState)
-    }
-
     override fun onFirstLaunch() {
         getSources()
     }

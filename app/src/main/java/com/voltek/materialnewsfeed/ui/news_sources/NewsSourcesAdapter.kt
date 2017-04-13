@@ -37,5 +37,10 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         holder?.country?.text = item.country
     }
 
+    fun addAll(sources: List<Source>) {
+        mItems.addAll(sources)
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = mItems.size
 }
