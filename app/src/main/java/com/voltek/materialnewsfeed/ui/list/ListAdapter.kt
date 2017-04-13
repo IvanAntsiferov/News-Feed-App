@@ -21,7 +21,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     fun getViewClickedObservable(): Observable<Article> = mViewClickSubject
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image = view.im_image
+        val image = view.im_image!!
         val title = view.tv_title!!
     }
 
