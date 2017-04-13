@@ -2,8 +2,7 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.os.Bundle
 
-class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator)
-    : NewsSourcesContract.Presenter(navigator) {
+class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
 
     override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)

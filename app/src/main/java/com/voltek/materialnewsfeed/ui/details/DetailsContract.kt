@@ -7,8 +7,6 @@ import com.voltek.materialnewsfeed.mvp.BaseView
 
 object DetailsContract {
 
-    interface Navigator : BaseNavigator
-
     interface View : BaseView {
 
         fun showArticle(article: Article)

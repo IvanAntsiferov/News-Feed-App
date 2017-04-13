@@ -6,8 +6,7 @@ import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import org.parceler.Parcels
 
-class DetailsActivity : BaseActivity(),
-    DetailsContract.Navigator {
+class DetailsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
