@@ -2,6 +2,7 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,10 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        recycler_view.hasFixedSize()
+        recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.adapter = mAdapter
+
         mPresenter?.attach(this, savedInstanceState)
     }
 

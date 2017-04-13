@@ -15,9 +15,6 @@ import com.voltek.materialnewsfeed.data.DataProvider
 import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
-import io.reactivex.disposables.Disposable
-
-
 
 class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
 
@@ -85,7 +82,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
 
     fun onOptionsItemSelected(item: MenuItem) {
         when(item.itemId) {
-            //
+            R.id.action_news_sources -> mNavigator.openNewsSources()
         }
     }
 }

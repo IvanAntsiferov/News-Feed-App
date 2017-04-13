@@ -2,6 +2,7 @@ package com.voltek.materialnewsfeed.ui.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
@@ -9,6 +10,7 @@ import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
+import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
 import io.reactivex.Observable
@@ -34,6 +36,11 @@ class ListActivity : BaseActivity(),
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_list, menu)
+        return true
+    }
+
     override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
 
     override fun isDualPane(): Boolean = mDualPane
@@ -49,5 +56,10 @@ class ListActivity : BaseActivity(),
             intent.putExtra(DetailsFragment.ARG_ARTICLE, Parcels.wrap(article))
             startActivity(intent)
         }
+    }
+
+    override fun openNewsSources() {
+        val intent = Intent(this, NewsSourcesActivity::class.java)
+        startActivity(intent)
     }
 }

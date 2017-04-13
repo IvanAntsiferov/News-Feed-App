@@ -22,5 +22,4 @@ data class Source(
         val url: String,
         val category: String,
         val language: String,
-        val country: String,
-        val urlsToLogos: List<String>)
+        val country: String)

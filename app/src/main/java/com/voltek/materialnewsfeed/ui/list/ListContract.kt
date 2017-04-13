@@ -15,6 +15,8 @@ object ListContract {
 
         fun openDetails(article: Article)
 
+        fun openNewsSources()
+
         fun isDualPane(): Boolean
     }
 

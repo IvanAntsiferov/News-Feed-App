@@ -12,12 +12,6 @@
         android:elevation="4dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/im_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true" />
-
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"

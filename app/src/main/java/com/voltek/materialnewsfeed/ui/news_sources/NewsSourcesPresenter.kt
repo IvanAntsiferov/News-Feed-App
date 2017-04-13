@@ -35,13 +35,12 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
         val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = cm.activeNetworkInfo
 
-        // Check if internet connection is available
         if (networkInfo != null && networkInfo.isConnected) {
             val observable = mRepository.provideNewsSources()
             observable
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ (sources) -> mView?.handleResponse(sources) }) { Timber.e(it) }
+                    .subscribe({response -> mView?.handleResponse(response.sources)}, Timber::e)
         } else {
             mView?.handleError(mContext.getString(R.string.error_no_connection))
         }
