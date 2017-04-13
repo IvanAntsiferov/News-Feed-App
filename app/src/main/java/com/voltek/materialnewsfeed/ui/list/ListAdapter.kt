@@ -18,12 +18,9 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
 
     private var mViewClickSubject: PublishSubject<Article> = PublishSubject.create<Article>()
 
-    fun getViewClickedObservable(): Observable<Article> {
-        return mViewClickSubject
-    }
+    fun getViewClickedObservable(): Observable<Article> = mViewClickSubject
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         val image = view.im_image
         val title = view.tv_title!!
     }
@@ -46,9 +43,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         holder.title.text = item.title
     }
 
-    override fun getItemCount(): Int {
-        return mItems.size
-    }
+    override fun getItemCount(): Int = mItems.size
 
     fun addAll(articles: List<Article>) {
         mItems.addAll(articles)

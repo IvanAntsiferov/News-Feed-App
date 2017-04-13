@@ -14,13 +14,11 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl(MaterialNewsFeedApp.BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-    }
+    fun provideRetrofit(): Retrofit = Retrofit.Builder()
+            .baseUrl(MaterialNewsFeedApp.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
 
     @Provides
     @Singleton

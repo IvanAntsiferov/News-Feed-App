@@ -9,7 +9,7 @@ import com.voltek.materialnewsfeed.di.MainComponent
 class MaterialNewsFeedApp : Application() {
 
     companion object {
-        val BASE_URL = "https://newsapi.org/"
+        const val BASE_URL = "https://newsapi.org/"
 
         lateinit var mainComponent: MainComponent
     }

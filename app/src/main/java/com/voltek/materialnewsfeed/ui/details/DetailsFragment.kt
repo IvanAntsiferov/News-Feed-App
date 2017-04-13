@@ -16,9 +16,8 @@ class DetailsFragment : BaseFragment<DetailsContract.View, DetailsContract.Prese
     DetailsContract.View {
 
     companion object {
-        val ARG_ARTICLE = "ARG_ARTICLE"
-
-        val TAG = "DetailsFragmentTag"
+        const val TAG = "DetailsFragmentTag"
+        const val ARG_ARTICLE = "ARG_ARTICLE"
 
         fun newInstance(article: Article): DetailsFragment {
             val detailsFragment = DetailsFragment()

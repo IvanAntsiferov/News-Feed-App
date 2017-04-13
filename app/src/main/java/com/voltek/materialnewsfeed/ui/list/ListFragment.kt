@@ -17,8 +17,8 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         ListContract.View {
 
     companion object {
-        val TAG = "ListFragmentTag"
-        val BUNDLE_ARTICLES = "BUNDLE_ARTICLES"
+        const val TAG = "ListFragmentTag"
+        const val BUNDLE_ARTICLES = "BUNDLE_ARTICLES"
 
         fun newInstance() = ListFragment()
     }
