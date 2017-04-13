@@ -16,11 +16,10 @@ class DetailsActivity : BaseActivity() {
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
 
         if (supportFragmentManager.findFragmentByTag(DetailsFragment.TAG) == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container,
-                            DetailsFragment.newInstance(article),
-                            DetailsFragment.TAG)
-                    .commit()
+            replaceFragment(
+                    DetailsFragment.newInstance(article),
+                    R.id.fragment_container,
+                    DetailsFragment.TAG)
         }
     }
 }

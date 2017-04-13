@@ -23,11 +23,10 @@ class ListActivity : BaseActivity(),
         mDualPane = details_fragment_container != null
 
         if (supportFragmentManager.findFragmentByTag(ListFragment.TAG) == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.list_fragment_container,
-                            ListFragment.newInstance(),
-                            ListFragment.TAG)
-                    .commit()
+            replaceFragment(
+                    ListFragment.newInstance(),
+                    R.id.list_fragment_container,
+                    ListFragment.TAG)
         }
     }
 
@@ -35,11 +34,10 @@ class ListActivity : BaseActivity(),
 
     override fun openDetails(article: Article) {
         if (mDualPane) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.details_fragment_container,
-                            DetailsFragment.newInstance(article),
-                            DetailsFragment.TAG)
-                    .commit()
+            replaceFragment(
+                    DetailsFragment.newInstance(article),
+                    R.id.details_fragment_container,
+                    DetailsFragment.TAG)
         } else {
             val intent = Intent(this, DetailsActivity::class.java)
             intent.putExtra(DetailsFragment.ARG_ARTICLE, Parcels.wrap(article))
