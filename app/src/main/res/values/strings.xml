@@ -6,4 +6,7 @@
     <string name="title_details">Details</string>
     <string name="title_news_sources">News Sources</string>
 
+    <string name="error_no_connection">There is no internet connection</string>
+    <string name="error_empty_response">There is now news</string>
+
 </resources>

@@ -3,6 +3,7 @@ package com.voltek.materialnewsfeed.di
 import com.voltek.materialnewsfeed.data.ArticlesRepository
 import com.voltek.materialnewsfeed.data.NewsSourcesRepository
 import com.voltek.materialnewsfeed.ui.list.ListPresenter
+import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesPresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -20,4 +21,6 @@ interface MainComponent {
 
     // Presenters
     fun inject(presenter: ListPresenter)
+
+    fun inject(presenter: NewsSourcesPresenter)
 }

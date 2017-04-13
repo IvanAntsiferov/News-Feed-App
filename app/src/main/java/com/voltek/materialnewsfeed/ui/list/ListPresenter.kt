@@ -6,11 +6,13 @@ import io.reactivex.schedulers.Schedulers
 import android.net.ConnectivityManager
 import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.ArticlesRepository
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.data.DataProvider
 import org.parceler.Parcels
+import timber.log.Timber
 import javax.inject.Inject
 
 class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
@@ -30,7 +32,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
         val listClicksDisposable = mView?.onItemClick()
                 ?.subscribe({ article ->
                     mNavigator.openDetails(article)
-                }, this::handleError)
+                }) { Timber.e(it) }
 
         mDisposable.add(listClicksDisposable)
     }
@@ -58,9 +60,9 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
             observable
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::handleResponse, this::handleError)
+                    .subscribe(this::handleResponse, Timber::e)
         } else {
-            handleError(NoSuchMethodError())
+            mView?.handleError(mContext.getString(R.string.error_no_connection))
         }
     }
 
@@ -68,14 +70,9 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
         val articles: List<Article> = response.articles
 
         if (articles.isEmpty()) {
-            mView?.handleError("There is no news")
+            mView?.handleError(mContext.getString(R.string.error_empty_response))
         } else {
             mView?.handleResponse(articles)
         }
-    }
-
-    fun handleError(error: Throwable) {
-        error.printStackTrace()
-        mView?.handleError(error.javaClass.simpleName)
     }
 }

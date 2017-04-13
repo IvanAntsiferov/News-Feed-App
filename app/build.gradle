@@ -39,6 +39,7 @@ ext {
     glideVersion = '3.7.0'
     hawkVersion = '2.0.1'
     parcelerVersion = '1.1.6'
+    timberVersion = '4.5.1'
 }
 
 dependencies {
@@ -77,6 +78,9 @@ dependencies {
     // Parcel
     compile "org.parceler:parceler-api:${parcelerVersion}"
     kapt "org.parceler:parceler:${parcelerVersion}"
+
+    // Logging
+    compile "com.jakewharton.timber:timber:${timberVersion}"
 }
 
 kapt {
