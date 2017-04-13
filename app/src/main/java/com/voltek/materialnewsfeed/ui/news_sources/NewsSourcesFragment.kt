@@ -19,12 +19,15 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         fun newInstance(): NewsSourcesFragment = NewsSourcesFragment()
     }
 
+    private lateinit var mAdapter: NewsSourcesAdapter
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         mPresenter = NewsSourcesPresenter()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mAdapter = NewsSourcesAdapter(context, ArrayList<Source>())
         return inflater?.inflate(R.layout.fragment_list, container, false)
     }
 
