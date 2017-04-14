@@ -17,6 +17,7 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         val description = view.tv_description!!
         val category = view.tv_category!!
         val country = view.tv_country!!
+        val enabled = view.cb_enable!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -32,6 +33,7 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         holder?.description?.text = item.description
         holder?.category?.text = item.category
         holder?.country?.text = item.country
+        holder?.enabled?.isChecked = item.isEnabled
     }
 
     fun addAll(sources: List<Source>) {
