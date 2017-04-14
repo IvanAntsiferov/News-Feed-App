@@ -9,13 +9,14 @@ import com.voltek.materialnewsfeed.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    protected fun setupToolbar(
+            displayHomeAsUpEnabled: Boolean = false,
+            displayShowHomeEnabled: Boolean = false) {
 
-    protected fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
+        supportActionBar?.setDisplayShowHomeEnabled(displayShowHomeEnabled)
     }
 
     protected fun replaceFragment(fragment: Fragment,
