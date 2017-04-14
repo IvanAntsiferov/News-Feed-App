@@ -18,7 +18,7 @@ class ArticlesRepository : DataProvider.Articles {
     @Inject
     lateinit var mApi: NewsApi
 
-    override fun provideArticles(source: String): Observable<NewsApiArticlesResponse> {
-        return mApi.fetchArticles(BuildConfig.ApiKey, source)
+    override fun provideArticles(): Observable<NewsApiArticlesResponse> {
+        return mApi.fetchArticles(BuildConfig.ApiKey, "the-next-web")
     }
 }

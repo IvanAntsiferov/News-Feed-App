@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 25
@@ -22,6 +23,9 @@ android {
             it.buildConfigField 'String', 'ApiKey', ApiKey
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 repositories {
@@ -38,6 +42,7 @@ ext {
     daggerVersion = '2.10'
     glideVersion = '3.7.0'
     hawkVersion = '2.0.1'
+    kotlinRealmExtensionsVersion = '1.0.6'
     parcelerVersion = '1.1.6'
     timberVersion = '4.5.1'
 }
@@ -75,6 +80,7 @@ dependencies {
 
     // Data storage
     compile "com.orhanobut:hawk:${hawkVersion}"
+    compile "com.github.vicpinm:krealmextensions:${kotlinRealmExtensionsVersion}"
 
     // Parcel
     compile "org.parceler:parceler-api:${parcelerVersion}"

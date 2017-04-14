@@ -60,7 +60,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
 
         // Check if internet connection is available
         if (networkInfo != null && networkInfo.isConnected) {
-            val observable = mRepository.provideArticles("the-next-web")
+            val observable = mRepository.provideArticles()
             observable
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())

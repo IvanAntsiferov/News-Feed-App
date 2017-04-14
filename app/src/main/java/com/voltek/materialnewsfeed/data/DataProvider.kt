@@ -8,7 +8,7 @@ object DataProvider {
 
     interface Articles {
 
-        fun provideArticles(source: String): Observable<NewsApiArticlesResponse>
+        fun provideArticles(): Observable<NewsApiArticlesResponse>
     }
 
     interface NewsSources {
