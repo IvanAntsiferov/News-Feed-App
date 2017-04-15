@@ -25,6 +25,7 @@ class ListActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         setupToolbar()
+        title = getString(R.string.title_list)
 
         mDualPane = details_fragment_container != null
 

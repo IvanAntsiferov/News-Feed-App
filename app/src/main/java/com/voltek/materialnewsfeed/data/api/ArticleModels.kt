@@ -1,6 +1,5 @@
 package com.voltek.materialnewsfeed.data.api
 
-import io.realm.RealmObject
 import org.parceler.Parcel
 
 data class NewsApiArticlesResponse(val articles: List<Article>)
@@ -12,5 +11,5 @@ data class Article(
         val description: String? = null,
         val url: String? = null,
         val urlToImage: String? = null,
-        val publishedAt: String? = null)
-
+        val publishedAt: String? = null,
+        val source: String? = null)

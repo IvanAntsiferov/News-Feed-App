@@ -5,6 +5,7 @@ import com.orhanobut.hawk.Hawk
 import com.voltek.materialnewsfeed.di.AppModule
 import com.voltek.materialnewsfeed.di.DaggerMainComponent
 import com.voltek.materialnewsfeed.di.MainComponent
+import io.realm.Realm
 import timber.log.Timber
 
 class MaterialNewsFeedApp : Application() {
@@ -22,8 +23,8 @@ class MaterialNewsFeedApp : Application() {
                 .appModule(AppModule(this))
                 .build()
 
+        Realm.init(this)
         Hawk.init(this).build()
-
-        Timber.plant()
+        Timber.plant(Timber.DebugTree())
     }
 }

@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.data
 
 import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
-import com.voltek.materialnewsfeed.data.api.NewsApiSourcesResponse
+import com.voltek.materialnewsfeed.data.api.Source
 import io.reactivex.Observable
 
 object DataProvider {
@@ -13,6 +13,6 @@ object DataProvider {
 
     interface NewsSources {
 
-        fun provideNewsSources(): Observable<NewsApiSourcesResponse>
+        fun provideNewsSources(): Observable<List<Source>>
     }
 }

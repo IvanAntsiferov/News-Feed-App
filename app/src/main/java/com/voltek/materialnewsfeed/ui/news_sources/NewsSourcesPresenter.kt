@@ -1,10 +1,8 @@
 package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
-import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.NewsSourcesRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,17 +32,14 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     fun getSources() {
         mView?.handleLoading()
 
-        val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = cm.activeNetworkInfo
-
-        if (networkInfo != null && networkInfo.isConnected) {
-            val observable = mRepository.provideNewsSources()
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({response -> mView?.handleResponse(response.sources)}, Timber::e)
-        } else {
-            mView?.handleError(mContext.getString(R.string.error_no_connection))
-        }
+        val observable = mRepository.provideNewsSources()
+        observable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    mView?.handleResponse(it)
+                }, {
+                    Timber.e(it)
+                })
     }
 }
