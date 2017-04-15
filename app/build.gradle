@@ -69,6 +69,7 @@ dependencies {
     compile "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
     compile "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxBindingKotlinVersion}"
     compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:${rxBindingKotlinVersion}"
+    compile "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${rxBindingKotlinVersion}"
 
     // Dependency injection
     compile "com.google.dagger:dagger:${daggerVersion}"

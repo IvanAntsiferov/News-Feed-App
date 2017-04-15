@@ -37,16 +37,28 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = mAdapter
 
+        swipe_container.isEnabled = false
+
         mPresenter?.attach(this, savedInstanceState)
     }
 
+    override fun handleLoading() {
+        swipe_container.isEnabled = true
+        swipe_container.isRefreshing = true
+    }
+
     override fun handleResponse(sources: List<Source>) {
-        progress_bar.visibility = View.GONE
+        loadingFinished()
         mAdapter.addAll(sources)
     }
 
     override fun handleError(error: String) {
-        progress_bar.visibility = View.GONE
+        loadingFinished()
         tv_empty_state.text = error
+    }
+
+    private fun loadingFinished() {
+        swipe_container.isRefreshing = false
+        swipe_container.isEnabled = false
     }
 }

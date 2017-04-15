@@ -32,6 +32,8 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     }
 
     fun getSources() {
+        mView?.handleLoading()
+
         val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = cm.activeNetworkInfo
 

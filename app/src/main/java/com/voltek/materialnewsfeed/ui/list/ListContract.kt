@@ -22,7 +22,11 @@ object ListContract {
 
     interface View : BaseView {
 
+        fun onSwipeToRefresh(): Observable<Unit>
+
         fun onItemClick(): Observable<Article>
+
+        fun handleLoading()
 
         fun handleResponse(articles: List<Article>)
 

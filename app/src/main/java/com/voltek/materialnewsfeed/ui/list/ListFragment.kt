@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
@@ -50,15 +51,26 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         super.onSaveInstanceState(outState)
     }
 
+    override fun onSwipeToRefresh(): Observable<Unit> = RxSwipeRefreshLayout.refreshes(swipe_container).map {  }
+
     override fun onItemClick(): Observable<Article> = mAdapter.getViewClickedObservable()
 
+    override fun handleLoading() {
+        swipe_container.isRefreshing = true
+    }
+
     override fun handleResponse(articles: List<Article>) {
-        progress_bar.visibility = View.GONE
+        loadingFinished()
+        mAdapter.clear()
         mAdapter.addAll(articles)
     }
 
     override fun handleError(error: String) {
-        progress_bar.visibility = View.GONE
+        loadingFinished()
         tv_empty_state.text = error
+    }
+
+    private fun loadingFinished() {
+        swipe_container.isRefreshing = false
     }
 }

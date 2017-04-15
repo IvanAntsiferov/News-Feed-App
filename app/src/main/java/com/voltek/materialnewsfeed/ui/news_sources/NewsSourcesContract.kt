@@ -8,6 +8,8 @@ object NewsSourcesContract {
 
     interface View : BaseView {
 
+        fun handleLoading()
+
         fun handleResponse(sources: List<Source>)
 
         fun handleError(error: String)
