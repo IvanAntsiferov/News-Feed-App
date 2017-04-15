@@ -2,6 +2,7 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.content.Context
 import android.os.Bundle
+import com.vicpin.krealmextensions.save
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.NewsSourcesRepository
@@ -27,7 +28,7 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
         super.attach(view, savedInstanceState)
 
         val onItemClick = mView!!.onItemClick()
-                .subscribe()
+                .subscribe({ it.save() }, { Timber.e(it) })
 
         mDisposable.addAll(onItemClick)
     }

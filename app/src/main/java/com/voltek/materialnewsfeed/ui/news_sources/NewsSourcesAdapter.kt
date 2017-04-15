@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.api.Source
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -37,7 +36,11 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val item = mItems[position]
 
-        RxView.clicks(holder!!.itemView).subscribe({ mViewClickSubject.onNext(item) })
+        RxView.clicks(holder!!.itemView).subscribe({
+            item.isEnabled = !item.isEnabled
+            holder.enabled.isChecked = item.isEnabled
+            mViewClickSubject.onNext(item)
+        })
 
         holder.name.text = item.name
         holder.description.text = item.description

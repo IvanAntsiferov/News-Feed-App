@@ -5,7 +5,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.R
@@ -32,17 +31,13 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
         super.attach(view, savedInstanceState)
 
         val swipeToRefresh = mView?.onSwipeToRefresh()
-                ?.subscribe({
-                    getArticles()
-                }, Timber::e)
+                ?.subscribe({ getArticles() }, { Timber.e(it) })
 
         val toolbarClicks = mNavigator.toolbarClicks()
                 .subscribe(this::onOptionsItemSelected, Timber::e)
 
         val listClicks = mView?.onItemClick()
-                ?.subscribe({ article ->
-                    mNavigator.openDetails(article)
-                }, Timber::e)
+                ?.subscribe({ mNavigator.openDetails(it) }, { Timber.e(it) })
 
         mDisposable.addAll(swipeToRefresh, toolbarClicks, listClicks)
     }
