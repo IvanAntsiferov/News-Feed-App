@@ -29,7 +29,6 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
     override fun onAttach(context: Context?)  {
         super.onAttach(context)
         mPresenter = ListPresenter(activity as ListContract.Navigator)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,11 +56,11 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
 
     override fun handleLoading() {
         swipe_container.isRefreshing = true
+        mAdapter.clear()
     }
 
     override fun handleResponse(articles: List<Article>) {
         loadingFinished()
-        mAdapter.clear()
         mAdapter.addAll(articles)
     }
 

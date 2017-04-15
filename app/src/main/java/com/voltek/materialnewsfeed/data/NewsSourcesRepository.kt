@@ -3,6 +3,7 @@ package com.voltek.materialnewsfeed.data
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.NetworkOnMainThreadException
+import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
@@ -48,4 +49,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
             emitter.onNext(sourcesCache)
         }
     }
+
+    override fun provideEnabledSources(): List<Source> =
+            Source().query { query -> query.equalTo("isEnabled", true) }
 }

@@ -10,7 +10,6 @@ import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.ArticlesRepository
-import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
 import com.voltek.materialnewsfeed.data.DataProvider
 import org.parceler.Parcels
 import timber.log.Timber
@@ -73,9 +72,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
         }
     }
 
-    fun handleResponse(response: NewsApiArticlesResponse) {
-        val articles: List<Article> = response.articles
-
+    fun handleResponse(articles: List<Article>) {
         if (articles.isEmpty()) {
             mView?.handleError(mContext.getString(R.string.error_empty_response))
         } else {
