@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Source
 import com.voltek.materialnewsfeed.ui.BaseFragment
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.parceler.Parcels
 
@@ -49,6 +50,8 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         outState?.putParcelable(BUNDLE_SOURCES, sources)
         super.onSaveInstanceState(outState)
     }
+
+    override fun onItemClick(): Observable<Source> = mAdapter.getViewClickedObservable()
 
     override fun handleLoading() {
         swipe_container.isEnabled = true

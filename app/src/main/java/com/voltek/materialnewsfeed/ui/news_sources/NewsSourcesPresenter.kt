@@ -5,9 +5,7 @@ import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.NewsSourcesRepository
-import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.api.Source
-import com.voltek.materialnewsfeed.ui.list.ListFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.parceler.Parcels
@@ -23,7 +21,16 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     @Inject
     lateinit var mContext: Context
 
-    private var mRepository: DataProvider.NewsSources = NewsSourcesRepository()
+    private val mRepository: DataProvider.NewsSources = NewsSourcesRepository()
+
+    override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
+        super.attach(view, savedInstanceState)
+
+        val onItemClick = mView!!.onItemClick()
+                .subscribe()
+
+        mDisposable.addAll(onItemClick)
+    }
 
     override fun onFirstLaunch() {
         getSources()

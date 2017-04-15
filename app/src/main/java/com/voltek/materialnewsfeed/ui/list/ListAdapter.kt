@@ -34,10 +34,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         val item = mItems[position]
 
-        RxView.clicks(holder!!.itemView)
-                .subscribe({ _ ->
-                    mViewClickSubject.onNext(item)
-                })
+        RxView.clicks(holder!!.itemView).subscribe({ mViewClickSubject.onNext(item) })
 
         Glide.with(mContext).load(item.urlToImage).into(holder.image)
         holder.title.text = item.title
