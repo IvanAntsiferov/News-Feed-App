@@ -42,4 +42,6 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
     }
 
     override fun getItemCount(): Int = mItems.size
+
+    fun getItems(): List<Source> = mItems
 }

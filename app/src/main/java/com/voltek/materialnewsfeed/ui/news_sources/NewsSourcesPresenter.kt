@@ -5,8 +5,12 @@ import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.NewsSourcesRepository
+import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.data.api.Source
+import com.voltek.materialnewsfeed.ui.list.ListFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -26,7 +30,13 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     }
 
     override fun onRestore(savedInstanceState: Bundle?) {
-        //
+        val sources: List<Source> = Parcels.unwrap(
+                savedInstanceState?.getParcelable(NewsSourcesFragment.BUNDLE_SOURCES))
+        if (sources.isEmpty()) {
+            getSources()
+        } else {
+            mView?.handleResponse(sources)
+        }
     }
 
     fun getSources() {

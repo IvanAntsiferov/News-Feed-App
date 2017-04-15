@@ -10,12 +10,14 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Source
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_list.*
+import org.parceler.Parcels
 
 class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesContract.Presenter>(),
         NewsSourcesContract.View {
 
     companion object {
         const val TAG = "NewsSourcesFragment"
+        const val BUNDLE_SOURCES = "BUNDLE_SOURCES"
 
         fun newInstance(): NewsSourcesFragment = NewsSourcesFragment()
     }
@@ -40,6 +42,12 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         swipe_container.isEnabled = false
 
         mPresenter?.attach(this, savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        val sources = Parcels.wrap(ArrayList(mAdapter.getItems()))
+        outState?.putParcelable(BUNDLE_SOURCES, sources)
+        super.onSaveInstanceState(outState)
     }
 
     override fun handleLoading() {
