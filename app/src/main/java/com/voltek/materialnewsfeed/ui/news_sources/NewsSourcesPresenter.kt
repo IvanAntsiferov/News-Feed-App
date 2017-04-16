@@ -40,14 +40,13 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     fun getSources() {
         mView?.handleLoading()
 
-        val observable = mRepository.provideNewsSources()
-        observable
-                .subscribeOn(Schedulers.newThread())
+        mRepository.provideNewsSources()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     mView?.handleResponse(it)
                 }, {
-                    Timber.e(it)
+                    mView?.handleError(it.toString())
                 })
     }
 }

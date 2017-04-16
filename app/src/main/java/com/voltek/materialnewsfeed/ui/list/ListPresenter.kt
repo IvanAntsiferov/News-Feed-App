@@ -32,7 +32,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
                 ?.subscribe({ getArticles() }, { Timber.e(it) })
 
         val toolbarClicks = mNavigator.toolbarClicks()
-                .subscribe(this::onOptionsItemSelected, Timber::e)
+                .subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })
 
         val listClicks = mView?.onItemClick()
                 ?.subscribe({ mNavigator.openDetails(it) }, { Timber.e(it) })
@@ -56,19 +56,17 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     fun getArticles() {
         mView?.handleLoading()
 
-        val observable = mRepository.provideArticles()
-        observable
-                .subscribeOn(Schedulers.newThread())
+        mRepository.provideArticles()
+                .filter { it.isEmpty() }
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleResponse, Timber::e)
-    }
-
-    fun handleResponse(articles: List<Article>) {
-        if (articles.isEmpty()) {
-            mView?.handleError(mContext.getString(R.string.error_empty_response))
-        } else {
-            mView?.handleResponse(articles)
-        }
+                .subscribe({
+                    mView?.handleResponse(it)
+                }, {
+                    mView?.handleError(it.toString())
+                }, {
+                    // TODO onComplete
+                })
     }
 
     fun onOptionsItemSelected(item: MenuItem) {

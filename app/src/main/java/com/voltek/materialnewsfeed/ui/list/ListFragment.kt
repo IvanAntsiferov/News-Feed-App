@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
@@ -26,7 +29,7 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
 
     private lateinit var mAdapter: ListAdapter
 
-    override fun onAttach(context: Context?)  {
+    override fun onAttach(context: Context?) {
         super.onAttach(context)
         mPresenter = ListPresenter(activity as ListContract.Navigator)
     }
@@ -50,12 +53,14 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         super.onSaveInstanceState(outState)
     }
 
-    override fun onSwipeToRefresh(): Observable<Unit> = RxSwipeRefreshLayout.refreshes(swipe_container).map {  }
+    override fun onSwipeToRefresh(): Observable<Unit> = RxSwipeRefreshLayout.refreshes(swipe_container).map { }
 
     override fun onItemClick(): Observable<Article> = mAdapter.getViewClickedObservable()
 
     override fun handleLoading() {
         swipe_container.isRefreshing = true
+        tv_empty_state.visibility = GONE
+        tv_empty_state.text = ""
         mAdapter.clear()
     }
 
@@ -64,9 +69,14 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         mAdapter.addAll(articles)
     }
 
-    override fun handleError(error: String) {
+    override fun handleError(message: String) {
         loadingFinished()
-        tv_empty_state.text = error
+        if (mAdapter.itemCount == 0) {
+            tv_empty_state.text = message
+            tv_empty_state.visibility = VISIBLE
+        } else {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun loadingFinished() {

@@ -30,7 +30,7 @@ object ListContract {
 
         fun handleResponse(articles: List<Article>)
 
-        fun handleError(error: String)
+        fun handleError(message: String)
     }
 
     abstract class Presenter(nav: Navigator) : AbstractNavigablePresenter<Navigator, View>(nav)
