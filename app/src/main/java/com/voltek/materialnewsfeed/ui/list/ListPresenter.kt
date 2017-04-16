@@ -3,7 +3,6 @@ package com.voltek.materialnewsfeed.ui.list
 import android.content.Context
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.MenuItem
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
@@ -57,19 +56,11 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     fun getArticles() {
         mView?.handleLoading()
 
-        val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = cm.activeNetworkInfo
-
-        // Check if internet connection is available
-        if (networkInfo != null && networkInfo.isConnected) {
-            val observable = mRepository.provideArticles()
-            observable
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::handleResponse, Timber::e)
-        } else {
-            mView?.handleError(mContext.getString(R.string.error_no_connection))
-        }
+        val observable = mRepository.provideArticles()
+        observable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponse, Timber::e)
     }
 
     fun handleResponse(articles: List<Article>) {
@@ -81,7 +72,7 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     }
 
     fun onOptionsItemSelected(item: MenuItem) {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.action_news_sources -> mNavigator.openNewsSources()
         }
     }

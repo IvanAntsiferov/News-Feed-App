@@ -44,6 +44,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
                     emitter.onError(NetworkOnMainThreadException())
                 }
             } else {
+                // No internet connection
                 emitter.onError(NetworkOnMainThreadException())
             }
         } else {
