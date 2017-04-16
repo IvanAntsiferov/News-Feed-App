@@ -35,19 +35,21 @@ class NewsSourcesRepository : DataProvider.NewsSources {
             val networkInfo = cm.activeNetworkInfo
 
             if (networkInfo != null && networkInfo.isConnected) {
-                val observable = mApi.fetchSources(BuildConfig.ApiKey)
-                observable.subscribe({
-                    it.sources.saveAll()
+                val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
+                if (call.isSuccessful) {
+                    call.body().sources.saveAll()
                     emitter.onNext(Source().queryAll())
-                }, {
-                    emitter.onError(it)
-                })
+                } else {
+                    //call.errorBody()
+                    emitter.onError(NetworkOnMainThreadException())
+                }
             } else {
                 emitter.onError(NetworkOnMainThreadException())
             }
         } else {
             emitter.onNext(sourcesCache)
         }
+        emitter.onComplete()
     }
 
     override fun provideEnabledSources(): List<Source> =

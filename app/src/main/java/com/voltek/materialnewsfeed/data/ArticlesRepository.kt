@@ -1,12 +1,10 @@
 package com.voltek.materialnewsfeed.data
 
+import android.os.NetworkOnMainThreadException
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.api.NewsApi
-import com.voltek.materialnewsfeed.data.api.NewsApiArticlesResponse
-import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.api.Article
-import com.voltek.materialnewsfeed.ui.list.ListContract
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -28,13 +26,18 @@ class ArticlesRepository : DataProvider.Articles {
 
         if (!sources.isEmpty()) {
             for (source in sources) {
-                val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id)
-                val articles = call.execute().body().articles
-                emitter.onNext(articles)
+                val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
+                if (call.isSuccessful) {
+                    emitter.onNext(call.body().articles)
+                } else {
+                    //call.errorBody()
+                    emitter.onError(NetworkOnMainThreadException())
+                }
             }
         } else {
             // There is no news sources chosen
             emitter.onError(NullPointerException())
         }
+        emitter.onComplete()
     }
 }

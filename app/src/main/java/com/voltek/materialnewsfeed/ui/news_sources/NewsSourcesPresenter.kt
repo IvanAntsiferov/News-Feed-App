@@ -2,7 +2,6 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.content.Context
 import android.os.Bundle
-import com.vicpin.krealmextensions.save
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.NewsSourcesRepository
@@ -23,15 +22,6 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     lateinit var mContext: Context
 
     private val mRepository: DataProvider.NewsSources = NewsSourcesRepository()
-
-    override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
-        super.attach(view, savedInstanceState)
-
-        val onItemClick = mView!!.onItemClick()
-                .subscribe({ it.save() }, { Timber.e(it) })
-
-        mDisposable.addAll(onItemClick)
-    }
 
     override fun onFirstLaunch() {
         getSources()
