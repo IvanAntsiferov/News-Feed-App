@@ -19,11 +19,27 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
         MaterialNewsFeedApp.MainComponent.inject(this)
     }
 
+    companion object {
+        val CATEGORY_ITEMS_IDS = arrayOf(
+                R.id.action_all,
+                R.id.action_business,
+                R.id.action_entertainment,
+                R.id.action_gaming,
+                R.id.action_general,
+                R.id.action_music,
+                R.id.action_politics,
+                R.id.action_science_and_nature,
+                R.id.action_sport,
+                R.id.action_technology)
+    }
+
     @Inject
     lateinit var mContext: Context
 
     @Inject
     lateinit var mRepository: DataProvider.NewsSources
+
+    private var mIsLoading = false
 
     override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)
@@ -49,11 +65,14 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
     }
 
     fun getSources() {
-        mView?.handleLoading()
-
         mRepository.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    mView?.handleLoading()
+                    mIsLoading = true
+                }
+                .doFinally { mIsLoading = false }
                 .subscribe({
                     mView?.handleResponse(it)
                 }, {
@@ -63,17 +82,8 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
 
     fun onOptionsItemSelected(item: MenuItem) {
         when (item.itemId) {
-            R.id.action_all,
-            R.id.action_business,
-            R.id.action_entertainment,
-            R.id.action_gaming,
-            R.id.action_general,
-            R.id.action_music,
-            R.id.action_politics,
-            R.id.action_science_and_nature,
-            R.id.action_sport,
-            R.id.action_technology -> {
-                if (!item.isChecked) {
+            in CATEGORY_ITEMS_IDS -> {
+                if (!mIsLoading && !item.isChecked) {
                     item.isChecked = true
                     mView?.filterData(item.title.toString())
                 }

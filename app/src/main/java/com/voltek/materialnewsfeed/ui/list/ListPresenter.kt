@@ -54,18 +54,15 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     }
 
     fun getArticles() {
-        mView?.handleLoading()
-
         mRepository.getAll()
                 .filter { !it.isEmpty() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { mView?.handleLoading() }
                 .subscribe({
                     mView?.handleResponse(it)
                 }, {
                     mView?.handleError(it.toString())
-                }, {
-                    // TODO onComplete
                 })
     }
 
