@@ -8,6 +8,7 @@
 
     <string name="action_news_sources">News Sources</string>
     <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
 
     <string name="error_no_connection">There is no internet connection</string>
     <string name="error_empty_response">There is no news</string>
