@@ -17,8 +17,7 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_description"
@@ -30,8 +29,7 @@
             android:id="@+id/tv_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_description"
-            android:textStyle="italic" />
+            android:layout_below="@id/tv_description" />
 
         <ImageView
             android:id="@+id/im_country"
@@ -39,8 +37,7 @@
             android:layout_height="@dimen/country_icon_size"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_description"
-            android:adjustViewBounds="true"
-            android:textStyle="bold" />
+            android:adjustViewBounds="true" />
 
         <CheckBox
             android:id="@+id/cb_enable"

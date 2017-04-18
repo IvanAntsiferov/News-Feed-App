@@ -45,6 +45,7 @@ ext {
     kotlinRealmExtensionsVersion = '1.0.6'
     parcelerVersion = '1.1.6'
     timberVersion = '4.5.1'
+    calligraphyVersion = '2.2.0'
 }
 
 dependencies {
@@ -89,6 +90,9 @@ dependencies {
 
     // Logging
     compile "com.jakewharton.timber:timber:${timberVersion}"
+
+    // Fonts
+    compile "uk.co.chrisjenx:calligraphy:${calligraphyVersion}"
 }
 
 kapt {
