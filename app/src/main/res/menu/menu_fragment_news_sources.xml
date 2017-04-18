@@ -6,7 +6,22 @@
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_filter_list_white_24dp"
         android:title="@string/action_filter"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <group
+                android:id="@+id/action_categories_group"
+                android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/action_all"
+                    android:checked="true"
+                    android:title="@string/category_all" />
+
+            </group>
+        </menu>
+
+    </item>
 
     <item
         android:id="@+id/action_search"

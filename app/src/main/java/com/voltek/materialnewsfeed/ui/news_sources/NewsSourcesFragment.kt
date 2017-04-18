@@ -21,6 +21,10 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         const val TAG = "NewsSourcesFragment"
         const val BUNDLE_SOURCES = "BUNDLE_SOURCES"
 
+        val CATEGORIES = arrayOf(
+                "business", "entertainment", "gaming", "general", "music",
+                "politics", "science-and-nature", "sport", "technology")
+
         fun newInstance(): NewsSourcesFragment = NewsSourcesFragment()
     }
 
@@ -63,7 +67,7 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
 
     override fun handleResponse(sources: List<Source>) {
         loadingFinished()
-        mAdapter.addAll(sources)
+        mAdapter.replaceItems(sources)
     }
 
     override fun handleError(error: String) {

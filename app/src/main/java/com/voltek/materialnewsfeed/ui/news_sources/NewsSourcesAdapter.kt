@@ -10,9 +10,12 @@ import com.vicpin.krealmextensions.save
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Source
 import kotlinx.android.synthetic.main.item_source.view.*
+import java.util.*
 
 class NewsSourcesAdapter(private val mContext: Context, private var mItems: MutableList<Source>)
     : RecyclerView.Adapter<NewsSourcesAdapter.ViewHolder>() {
+
+    private val mItemsClean: MutableList<Source> = mItems
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name = view.tv_name!!
@@ -44,12 +47,27 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         holder.enabled.isChecked = item.isEnabled
     }
 
-    fun addAll(sources: List<Source>) {
+    fun replaceItems(sources: List<Source>) {
+        mItemsClean.clear()
+        mItemsClean.addAll(sources)
+        mItems.clear()
         mItems.addAll(sources)
+        notifyDataSetChanged()
+    }
+
+    fun filterCategory(category: String) {
+        mItems = ArrayList<Source>()
+        mItemsClean.filterTo(mItems) { it.category == category }
+        notifyDataSetChanged()
+    }
+
+    fun cancelFilters() {
+        mItems.clear()
+        mItems.addAll(mItemsClean)
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = mItems.size
 
-    fun getItems(): List<Source> = mItems
+    fun getItems(): List<Source> = mItemsClean
 }
