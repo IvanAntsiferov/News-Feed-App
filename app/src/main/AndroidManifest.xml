@@ -27,7 +27,8 @@
 
         <activity
             android:name=".ui.news_sources.NewsSourcesActivity"
-            android:label="@string/title_news_sources" />
+            android:label="@string/title_news_sources"
+            android:parentActivityName=".ui.list.ListActivity" />
 
     </application>
 

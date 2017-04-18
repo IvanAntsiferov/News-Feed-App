@@ -32,7 +32,7 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        mPresenter = NewsSourcesPresenter()
+        mPresenter = NewsSourcesPresenter(activity as NewsSourcesContract.Navigator)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
