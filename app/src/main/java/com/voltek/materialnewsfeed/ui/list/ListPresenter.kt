@@ -8,7 +8,6 @@ import android.view.MenuItem
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
-import com.voltek.materialnewsfeed.data.ArticlesRepository
 import com.voltek.materialnewsfeed.data.DataProvider
 import org.parceler.Parcels
 import timber.log.Timber
@@ -17,13 +16,14 @@ import javax.inject.Inject
 class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
 
     init {
-        MaterialNewsFeedApp.mainComponent.inject(this)
+        MaterialNewsFeedApp.MainComponent.inject(this)
     }
 
     @Inject
     lateinit var mContext: Context
 
-    private var mRepository: DataProvider.Articles = ArticlesRepository()
+    @Inject
+    lateinit var mRepository: DataProvider.Articles
 
     override fun attach(view: ListContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)
@@ -56,8 +56,8 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
     fun getArticles() {
         mView?.handleLoading()
 
-        mRepository.provideArticles()
-                .filter { it.isEmpty() }
+        mRepository.getAll()
+                .filter { !it.isEmpty() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

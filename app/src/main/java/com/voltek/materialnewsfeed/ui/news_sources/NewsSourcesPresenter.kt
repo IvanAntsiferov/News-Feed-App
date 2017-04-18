@@ -4,24 +4,23 @@ import android.content.Context
 import android.os.Bundle
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
 import com.voltek.materialnewsfeed.data.DataProvider
-import com.voltek.materialnewsfeed.data.NewsSourcesRepository
 import com.voltek.materialnewsfeed.data.api.Source
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.parceler.Parcels
-import timber.log.Timber
 import javax.inject.Inject
 
 class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
 
     init {
-        MaterialNewsFeedApp.mainComponent.inject(this)
+        MaterialNewsFeedApp.MainComponent.inject(this)
     }
 
     @Inject
     lateinit var mContext: Context
 
-    private val mRepository: DataProvider.NewsSources = NewsSourcesRepository()
+    @Inject
+    lateinit var mRepository: DataProvider.NewsSources
 
     override fun onFirstLaunch() {
         getSources()
@@ -40,7 +39,7 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
     fun getSources() {
         mView?.handleLoading()
 
-        mRepository.provideNewsSources()
+        mRepository.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

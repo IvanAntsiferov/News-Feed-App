@@ -8,13 +8,13 @@ object DataProvider {
 
     interface Articles {
 
-        fun provideArticles(): Observable<List<Article>>
+        fun getAll(): Observable<List<Article>>
     }
 
     interface NewsSources {
 
-        fun provideNewsSources(): Observable<List<Source>>
+        fun getAll(): Observable<List<Source>>
 
-        fun provideEnabledSources(): List<Source>
+        fun getEnabled(): List<Source>
     }
 }

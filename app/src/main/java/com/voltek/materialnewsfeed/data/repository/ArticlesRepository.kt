@@ -1,19 +1,20 @@
-package com.voltek.materialnewsfeed.data
+package com.voltek.materialnewsfeed.data.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.os.NetworkOnMainThreadException
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.api.NewsApi
 import com.voltek.materialnewsfeed.data.api.Article
 import io.reactivex.Observable
+import timber.log.Timber
 import javax.inject.Inject
 
 class ArticlesRepository : DataProvider.Articles {
 
     init {
-        MaterialNewsFeedApp.mainComponent.inject(this)
+        MaterialNewsFeedApp.MainComponent.inject(this)
     }
 
     @Inject
@@ -22,12 +23,13 @@ class ArticlesRepository : DataProvider.Articles {
     @Inject
     lateinit var mContext: Context
 
-    private val mSourcesRepo: DataProvider.NewsSources = NewsSourcesRepository()
+    @Inject
+    lateinit var mSourcesRepo: DataProvider.NewsSources
 
-    override fun provideArticles(): Observable<List<Article>> = Observable.create {
+    override fun getAll(): Observable<List<Article>> = Observable.create {
         val emitter = it
 
-        val sources = mSourcesRepo.provideEnabledSources()
+        val sources = mSourcesRepo.getEnabled()
 
         val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = cm.activeNetworkInfo
@@ -40,16 +42,16 @@ class ArticlesRepository : DataProvider.Articles {
                         emitter.onNext(call.body().articles)
                     } else {
                         //call.errorBody()
-                        emitter.onError(NetworkOnMainThreadException())
+                        emitter.onError(Exception())
                     }
                 }
             } else {
                 // No internet connection
-                emitter.onError(NetworkOnMainThreadException())
+                emitter.onError(Exception())
             }
         } else {
             // There is no news sources chosen
-            emitter.onError(NullPointerException())
+            emitter.onError(Exception())
         }
         emitter.onComplete()
     }

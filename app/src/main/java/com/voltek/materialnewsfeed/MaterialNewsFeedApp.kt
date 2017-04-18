@@ -13,13 +13,13 @@ class MaterialNewsFeedApp : Application() {
     companion object {
         const val BASE_URL = "https://newsapi.org/"
 
-        lateinit var mainComponent: MainComponent
+        lateinit var MainComponent: MainComponent
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        mainComponent = DaggerMainComponent.builder()
+        MainComponent = DaggerMainComponent.builder()
                 .appModule(AppModule(this))
                 .build()
 
