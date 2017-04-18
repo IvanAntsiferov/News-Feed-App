@@ -21,10 +21,6 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         const val TAG = "NewsSourcesFragment"
         const val BUNDLE_SOURCES = "BUNDLE_SOURCES"
 
-        val CATEGORIES = arrayOf(
-                "business", "entertainment", "gaming", "general", "music",
-                "politics", "science-and-nature", "sport", "technology")
-
         fun newInstance(): NewsSourcesFragment = NewsSourcesFragment()
     }
 
@@ -58,6 +54,14 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_fragment_news_sources, menu)
+    }
+
+    override fun filterData(category: String) {
+        if (category == getString(R.string.category_all)) {
+            mAdapter.cancelFilters()
+        } else {
+            mAdapter.filterCategory(category.toLowerCase())
+        }
     }
 
     override fun handleLoading() {

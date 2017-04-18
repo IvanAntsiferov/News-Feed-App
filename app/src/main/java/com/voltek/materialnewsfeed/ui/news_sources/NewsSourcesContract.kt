@@ -16,6 +16,8 @@ object NewsSourcesContract {
 
     interface View : BaseView {
 
+        fun filterData(category: String)
+
         fun handleLoading()
 
         fun handleResponse(sources: List<Source>)
