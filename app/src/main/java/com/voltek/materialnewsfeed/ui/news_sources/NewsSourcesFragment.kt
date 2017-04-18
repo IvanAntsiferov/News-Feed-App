@@ -3,9 +3,7 @@ package com.voltek.materialnewsfeed.ui.news_sources
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Source
 import com.voltek.materialnewsfeed.ui.BaseFragment
@@ -14,6 +12,10 @@ import org.parceler.Parcels
 
 class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesContract.Presenter>(),
         NewsSourcesContract.View {
+
+    init {
+        setHasOptionsMenu(true)
+    }
 
     companion object {
         const val TAG = "NewsSourcesFragment"
@@ -48,6 +50,10 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         val sources = Parcels.wrap(ArrayList(mAdapter.getItems()))
         outState?.putParcelable(BUNDLE_SOURCES, sources)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_fragment_news_sources, menu)
     }
 
     override fun handleLoading() {
