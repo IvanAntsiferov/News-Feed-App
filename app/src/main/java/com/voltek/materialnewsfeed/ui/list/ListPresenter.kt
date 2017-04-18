@@ -44,8 +44,8 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
         getArticles()
     }
 
-    override fun onRestore(savedInstanceState: Bundle?) {
-        val articles: List<Article> = Parcels.unwrap(savedInstanceState?.getParcelable(ListFragment.BUNDLE_ARTICLES))
+    override fun onRestore(savedInstanceState: Bundle) {
+        val articles: List<Article> = Parcels.unwrap(savedInstanceState.getParcelable(ListFragment.BUNDLE_ARTICLES))
         if (articles.isEmpty()) {
             getArticles()
         } else {

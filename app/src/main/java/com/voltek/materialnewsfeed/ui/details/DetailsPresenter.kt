@@ -15,7 +15,7 @@ class DetailsPresenter(val article: Article) : DetailsContract.Presenter() {
         //
     }
 
-    override fun onRestore(savedInstanceState: Bundle?) {
+    override fun onRestore(savedInstanceState: Bundle) {
         //
     }
 }

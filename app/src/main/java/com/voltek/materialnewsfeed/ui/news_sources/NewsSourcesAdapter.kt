@@ -73,6 +73,12 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         notifyDataSetChanged()
     }
 
+    fun filterEnabled() {
+        mItems = ArrayList<Source>()
+        mItemsClean.filterTo(mItems) { it.isEnabled }
+        notifyDataSetChanged()
+    }
+
     fun cancelFilters() {
         mItems.clear()
         mItems.addAll(mItemsClean)

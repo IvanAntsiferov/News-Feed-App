@@ -85,7 +85,7 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
             in CATEGORY_ITEMS_IDS -> {
                 if (!mIsLoading && !item.isChecked) {
                     item.isChecked = true
-                    mView?.filterData(item.title.toString())
+                    mView?.filterCategory(item.title.toString())
                 }
             }
         }

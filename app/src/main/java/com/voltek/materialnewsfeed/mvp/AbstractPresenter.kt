@@ -11,6 +11,7 @@ abstract class AbstractPresenter<View : BaseView> : BasePresenter<View> {
 
     override fun attach(view: View, savedInstanceState: Bundle?) {
         mView = view
+
         if (savedInstanceState == null) {
             onFirstLaunch()
         } else {
@@ -25,5 +26,5 @@ abstract class AbstractPresenter<View : BaseView> : BasePresenter<View> {
 
     abstract fun onFirstLaunch()
 
-    abstract fun onRestore(savedInstanceState: Bundle?)
+    abstract fun onRestore(savedInstanceState: Bundle)
 }
