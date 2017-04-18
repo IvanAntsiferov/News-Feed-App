@@ -18,6 +18,42 @@
                     android:checked="true"
                     android:title="@string/category_all" />
 
+                <item
+                    android:id="@+id/action_business"
+                    android:title="@string/category_business" />
+
+                <item
+                    android:id="@+id/action_entertainment"
+                    android:title="@string/category_entertainment" />
+
+                <item
+                    android:id="@+id/action_gaming"
+                    android:title="@string/category_gaming" />
+
+                <item
+                    android:id="@+id/action_general"
+                    android:title="@string/category_general" />
+
+                <item
+                    android:id="@+id/action_music"
+                    android:title="@string/category_music" />
+
+                <item
+                    android:id="@+id/action_politics"
+                    android:title="@string/category_politics" />
+
+                <item
+                    android:id="@+id/action_science_and_nature"
+                    android:title="@string/category_science_and_nature" />
+
+                <item
+                    android:id="@+id/action_sport"
+                    android:title="@string/category_sport" />
+
+                <item
+                    android:id="@+id/action_technology"
+                    android:title="@string/category_technology" />
+
             </group>
         </menu>
 
