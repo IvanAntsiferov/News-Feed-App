@@ -33,12 +33,13 @@
             android:layout_below="@id/tv_description"
             android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/tv_country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/im_country"
+            android:layout_width="@dimen/country_icon_size"
+            android:layout_height="@dimen/country_icon_size"
             android:layout_alignParentRight="true"
             android:layout_below="@id/tv_description"
+            android:adjustViewBounds="true"
             android:textStyle="bold" />
 
         <CheckBox

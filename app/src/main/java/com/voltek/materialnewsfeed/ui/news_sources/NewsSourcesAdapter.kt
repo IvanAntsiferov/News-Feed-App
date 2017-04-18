@@ -5,6 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
 import com.vicpin.krealmextensions.save
 import com.voltek.materialnewsfeed.R
@@ -18,11 +22,11 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
     private val mItemsClean: MutableList<Source> = mItems
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name = view.tv_name!!
-        val description = view.tv_description!!
-        val category = view.tv_category!!
-        val country = view.tv_country!!
-        val enabled = view.cb_enable!!
+        val name: TextView = view.tv_name
+        val description: TextView = view.tv_description
+        val category: TextView = view.tv_category
+        val country: ImageView = view.im_country
+        val enabled: CheckBox = view.cb_enable
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -43,8 +47,16 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         holder.name.text = item.name
         holder.description.text = item.description
         holder.category.text = item.category
-        holder.country.text = item.country
         holder.enabled.isChecked = item.isEnabled
+
+        when(item.country) {
+            "au" -> Glide.with(mContext).load("").error(R.drawable.ic_australia_24dp).into(holder.country)
+            "de" -> Glide.with(mContext).load("").error(R.drawable.ic_germany_24dp).into(holder.country)
+            "gb" -> Glide.with(mContext).load("").error(R.drawable.ic_united_kingdom_24dp).into(holder.country)
+            "in" -> Glide.with(mContext).load("").error(R.drawable.ic_india_24dp).into(holder.country)
+            "it" -> Glide.with(mContext).load("").error(R.drawable.ic_italy_24dp).into(holder.country)
+            "us" -> Glide.with(mContext).load("").error(R.drawable.ic_united_states_24dp).into(holder.country)
+        }
     }
 
     fun replaceItems(sources: List<Source>) {
