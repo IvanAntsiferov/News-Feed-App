@@ -16,9 +16,7 @@ object NewsSourcesContract {
 
     interface View : BaseView {
 
-        fun filterCategory(category: String)
-
-        fun filterEnabled(enabled: Boolean)
+        fun filter(category: String)
 
         fun handleLoading()
 

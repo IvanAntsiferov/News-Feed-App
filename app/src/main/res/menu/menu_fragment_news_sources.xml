@@ -19,6 +19,10 @@
                     android:title="@string/category_all" />
 
                 <item
+                    android:id="@+id/action_enabled"
+                    android:title="@string/category_enabled" />
+
+                <item
                     android:id="@+id/action_business"
                     android:title="@string/category_business" />
 
@@ -58,5 +62,10 @@
         </menu>
 
     </item>
+
+    <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_refresh"
+        app:showAsAction="never" />
 
 </menu>

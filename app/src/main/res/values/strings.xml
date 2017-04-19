@@ -8,8 +8,10 @@
 
     <string name="action_news_sources">News Sources</string>
     <string name="action_filter">Filter</string>
+    <string name="action_refresh">Refresh</string>
 
     <string name="category_all">All</string>
+    <string name="category_enabled">Enabled</string>
     <string name="category_business">Business</string>
     <string name="category_entertainment">Entertainment</string>
     <string name="category_gaming">Gaming</string>

@@ -22,6 +22,7 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
     companion object {
         val CATEGORY_ITEMS_IDS = arrayOf(
                 R.id.action_all,
+                R.id.action_enabled,
                 R.id.action_business,
                 R.id.action_entertainment,
                 R.id.action_gaming,
@@ -54,9 +55,9 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
         getSources()
     }
 
-    override fun onRestore(savedInstanceState: Bundle?) {
+    override fun onRestore(savedInstanceState: Bundle) {
         val sources: List<Source> = Parcels.unwrap(
-                savedInstanceState?.getParcelable(NewsSourcesFragment.BUNDLE_SOURCES))
+                savedInstanceState.getParcelable(NewsSourcesFragment.BUNDLE_SOURCES))
         if (sources.isEmpty()) {
             getSources()
         } else {
@@ -85,7 +86,7 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
             in CATEGORY_ITEMS_IDS -> {
                 if (!mIsLoading && !item.isChecked) {
                     item.isChecked = true
-                    mView?.filterCategory(item.title.toString())
+                    mView?.filter(item.title.toString())
                 }
             }
         }

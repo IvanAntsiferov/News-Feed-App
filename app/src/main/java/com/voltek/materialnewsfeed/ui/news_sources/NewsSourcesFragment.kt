@@ -56,19 +56,13 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         inflater?.inflate(R.menu.menu_fragment_news_sources, menu)
     }
 
-    override fun filterCategory(category: String) {
+    override fun filter(category: String) {
         if (category == getString(R.string.category_all)) {
             mAdapter.cancelFilters()
-        } else {
-            mAdapter.filterCategory(category.toLowerCase())
-        }
-    }
-
-    override fun filterEnabled(enabled: Boolean) {
-        if (enabled) {
+        } else if (category == getString(R.string.category_enabled)) {
             mAdapter.filterEnabled()
         } else {
-            mAdapter.cancelFilters()
+            mAdapter.filterCategory(category.toLowerCase())
         }
     }
 
