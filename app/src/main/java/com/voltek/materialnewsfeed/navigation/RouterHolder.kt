@@ -1,9 +1,9 @@
-package com.voltek.mvpdemo.library.navigation
+package com.voltek.materialnewsfeed.navigation
 
-import com.voltek.mvpdemo.library.navigation.proxy.Navigator
-import com.voltek.mvpdemo.library.navigation.proxy.RouterBus
-import com.voltek.mvpdemo.library.navigation.proxy.RouterBinder
-import com.voltek.mvpdemo.library.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.navigation.proxy.Navigator
+import com.voltek.materialnewsfeed.navigation.proxy.RouterBus
+import com.voltek.materialnewsfeed.navigation.proxy.RouterBinder
+import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 
 /**
  * Управляет навигацией. Живет столько же, сколько приложение.

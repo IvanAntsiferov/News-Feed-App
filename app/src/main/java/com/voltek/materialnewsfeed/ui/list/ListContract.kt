@@ -8,16 +8,9 @@ import io.reactivex.Observable
 
 object ListContract {
 
-    interface Navigator {
-
-        fun openDetails(article: Article)
-
-        fun openNewsSources()
-    }
-
     interface View : BaseView {
 
-        fun toolbarClicks(): Observable<MenuItem>
+        //fun toolbarClicks(): Observable<MenuItem>
 
         fun onSwipeToRefresh(): Observable<Unit>
 

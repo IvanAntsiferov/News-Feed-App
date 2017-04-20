@@ -9,6 +9,8 @@ import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.DataProvider
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsDetails
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsSources
 import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
@@ -31,13 +33,13 @@ class ListPresenter : ListContract.Presenter() {
         val swipeToRefresh = mView?.onSwipeToRefresh()
                 ?.subscribe({ getArticles() }, { Timber.e(it) })
 
-        val toolbarClicks = mView?.toolbarClicks()
-                ?.subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })
+        /*val toolbarClicks = mView?.toolbarClicks()
+                ?.subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })*/
 
         val listClicks = mView?.onItemClick()
-                ?.subscribe({ mNavigator.openDetails(it) }, { Timber.e(it) })
+                ?.subscribe({ mRouter.execute(CommandOpenNewsDetails(it)) }, { Timber.e(it) })
 
-        mDisposable.addAll(swipeToRefresh, toolbarClicks, listClicks)
+        mDisposable.addAll(swipeToRefresh, /*toolbarClicks,*/ listClicks)
     }
 
     override fun onFirstLaunch() {
@@ -68,7 +70,7 @@ class ListPresenter : ListContract.Presenter() {
 
     fun onOptionsItemSelected(item: MenuItem) {
         when (item.itemId) {
-            R.id.action_news_sources -> mNavigator.openNewsSources()
+            R.id.action_news_sources -> mRouter.execute(CommandOpenNewsSources())
         }
     }
 }

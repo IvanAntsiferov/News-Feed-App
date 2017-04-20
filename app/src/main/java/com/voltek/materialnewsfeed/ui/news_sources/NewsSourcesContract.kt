@@ -10,7 +10,7 @@ object NewsSourcesContract {
 
     interface View : BaseView {
 
-        fun toolbarClicks(): Observable<MenuItem>
+        //fun toolbarClicks(): Observable<MenuItem>
 
         fun filter(category: String)
 

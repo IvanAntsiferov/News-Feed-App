@@ -1,4 +1,6 @@
-package com.voltek.mvpdemo.library.navigation.proxy
+package com.voltek.materialnewsfeed.navigation.proxy
+
+import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 
 /**
  * Этот интерфейс реализуется классом, который способен выполнять обязанности навигатора.
@@ -7,5 +9,5 @@ package com.voltek.mvpdemo.library.navigation.proxy
  */
 interface Navigator {
 
-    fun executeCommand(commandId: NavigatorCommand): Boolean
+    fun executeCommand(command: NavigatorCommand): Boolean
 }

@@ -1,4 +1,4 @@
-package com.voltek.mvpdemo.library.navigation.proxy
+package com.voltek.materialnewsfeed.navigation.proxy
 
 /**
  * Держит информацию о команде для навигатора.

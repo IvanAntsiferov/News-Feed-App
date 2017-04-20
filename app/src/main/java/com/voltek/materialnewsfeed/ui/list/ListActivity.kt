@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.Menu
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsDetails
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsSources
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity
-import com.voltek.mvpdemo.library.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
 
@@ -38,11 +40,19 @@ class ListActivity : BaseActivity() {
         return true
     }
 
-    override fun executeCommand(commandId: NavigatorCommand): Boolean {
-        return false
+    override fun executeCommand(command: NavigatorCommand): Boolean {
+        if (command is CommandOpenNewsDetails) {
+            openDetails(command.article)
+            return true
+        } else if (command is CommandOpenNewsSources) {
+            openNewsSources()
+            return true
+        } else {
+            return false
+        }
     }
 
-    fun openDetails(article: Article) {
+    private fun openDetails(article: Article) {
         if (mDualPane) {
             replaceFragment(
                     DetailsFragment.newInstance(article),
@@ -55,7 +65,7 @@ class ListActivity : BaseActivity() {
         }
     }
 
-    fun openNewsSources() {
+    private fun openNewsSources() {
         val intent = Intent(this, NewsSourcesActivity::class.java)
         startActivity(intent)
     }

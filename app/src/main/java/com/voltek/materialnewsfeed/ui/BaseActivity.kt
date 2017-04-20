@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
-import com.voltek.mvpdemo.library.navigation.proxy.Navigator
+import com.voltek.materialnewsfeed.navigation.proxy.Navigator
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 abstract class BaseActivity : AppCompatActivity(), Navigator {

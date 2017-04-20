@@ -34,7 +34,7 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        mPresenter = ListPresenter(activity as ListContract.Navigator)
+        mPresenter = ListPresenter()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,7 +56,7 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         super.onSaveInstanceState(outState)
     }
 
-    override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
+    //override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
 
     override fun onSwipeToRefresh(): Observable<Unit> = RxSwipeRefreshLayout.refreshes(swipe_container).map { }
 

@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
-import com.voltek.mvpdemo.library.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 import org.parceler.Parcels
 
 class DetailsActivity : BaseActivity() {
@@ -24,7 +24,7 @@ class DetailsActivity : BaseActivity() {
         }
     }
 
-    override fun executeCommand(commandId: NavigatorCommand): Boolean {
+    override fun executeCommand(command: NavigatorCommand): Boolean {
         return false
     }
 }

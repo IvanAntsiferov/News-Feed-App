@@ -1,6 +1,4 @@
-package com.voltek.mvpdemo.library.navigation.proxy
-
-import com.voltek.mvpdemo.library.navigation.proxy.Navigator
+package com.voltek.materialnewsfeed.navigation.proxy
 
 /**
  * Интерфейс, доступ к которому предоставляется из класса приложения.

@@ -5,9 +5,9 @@ import com.orhanobut.hawk.Hawk
 import com.voltek.materialnewsfeed.di.AppModule
 import com.voltek.materialnewsfeed.di.DaggerMainComponent
 import com.voltek.materialnewsfeed.di.MainComponent
-import com.voltek.mvpdemo.library.navigation.RouterHolder
-import com.voltek.mvpdemo.library.navigation.proxy.RouterBinder
-import com.voltek.mvpdemo.library.navigation.proxy.RouterBus
+import com.voltek.materialnewsfeed.navigation.RouterHolder
+import com.voltek.materialnewsfeed.navigation.proxy.RouterBinder
+import com.voltek.materialnewsfeed.navigation.proxy.RouterBus
 import io.realm.Realm
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig

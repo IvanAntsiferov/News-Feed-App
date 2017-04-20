@@ -5,7 +5,7 @@ import android.view.MenuItem
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.ui.BaseActivity
-import com.voltek.mvpdemo.library.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 import kotlinx.android.synthetic.main.toolbar.*
 
 class NewsSourcesActivity : BaseActivity() {
@@ -23,7 +23,7 @@ class NewsSourcesActivity : BaseActivity() {
         }
     }
 
-    override fun executeCommand(commandId: NavigatorCommand): Boolean {
+    override fun executeCommand(command: NavigatorCommand): Boolean {
         return false
     }
 }
