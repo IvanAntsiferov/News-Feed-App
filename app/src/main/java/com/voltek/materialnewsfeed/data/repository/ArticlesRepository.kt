@@ -3,7 +3,7 @@ package com.voltek.materialnewsfeed.data.repository
 import android.content.Context
 import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.BuildConfig
-import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.api.NewsApi
 import com.voltek.materialnewsfeed.data.api.Article
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class ArticlesRepository : DataProvider.Articles {
 
     init {
-        MaterialNewsFeedApp.MainComponent.inject(this)
+        NewsApp.MainComponent.inject(this)
     }
 
     @Inject

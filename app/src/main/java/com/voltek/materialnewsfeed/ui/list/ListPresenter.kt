@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import android.os.Bundle
 import android.view.MenuItem
-import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.DataProvider
@@ -13,10 +13,10 @@ import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
 
-class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(navigator) {
+class ListPresenter : ListContract.Presenter() {
 
     init {
-        MaterialNewsFeedApp.MainComponent.inject(this)
+        NewsApp.MainComponent.inject(this)
     }
 
     @Inject
@@ -31,8 +31,8 @@ class ListPresenter(navigator: ListContract.Navigator) : ListContract.Presenter(
         val swipeToRefresh = mView?.onSwipeToRefresh()
                 ?.subscribe({ getArticles() }, { Timber.e(it) })
 
-        val toolbarClicks = mNavigator.toolbarClicks()
-                .subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })
+        val toolbarClicks = mView?.toolbarClicks()
+                ?.subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })
 
         val listClicks = mView?.onItemClick()
                 ?.subscribe({ mNavigator.openDetails(it) }, { Timber.e(it) })

@@ -3,7 +3,7 @@ package com.voltek.materialnewsfeed.ui.news_sources
 import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
-import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.api.Source
@@ -13,10 +13,10 @@ import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
 
-class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourcesContract.Presenter(navigator) {
+class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
 
     init {
-        MaterialNewsFeedApp.MainComponent.inject(this)
+        NewsApp.MainComponent.inject(this)
     }
 
     companion object {
@@ -45,8 +45,8 @@ class NewsSourcesPresenter(navigator: NewsSourcesContract.Navigator) : NewsSourc
     override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)
 
-        val toolbarClicks = mNavigator.toolbarClicks()
-                .subscribe(this::onOptionsItemSelected, Timber::e)
+        val toolbarClicks = mView?.toolbarClicks()
+                ?.subscribe(this::onOptionsItemSelected, Timber::e)
 
         mDisposable.addAll(toolbarClicks)
     }

@@ -4,17 +4,20 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
+import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.parceler.Parcels
 
 class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
@@ -52,6 +55,8 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         outState?.putParcelable(BUNDLE_ARTICLES, articles)
         super.onSaveInstanceState(outState)
     }
+
+    override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
 
     override fun onSwipeToRefresh(): Observable<Unit> = RxSwipeRefreshLayout.refreshes(swipe_container).map { }
 

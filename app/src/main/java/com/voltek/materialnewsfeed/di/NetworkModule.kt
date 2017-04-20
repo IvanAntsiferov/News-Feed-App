@@ -1,6 +1,6 @@
 package com.voltek.materialnewsfeed.di
 
-import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.api.NewsApi
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
-            .baseUrl(MaterialNewsFeedApp.BASE_URL)
+            .baseUrl(NewsApp.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

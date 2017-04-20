@@ -1,13 +1,13 @@
 package com.voltek.materialnewsfeed.di
 
 import android.content.Context
-import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.NewsApp
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class AppModule(val app: MaterialNewsFeedApp) {
+class AppModule(val app: NewsApp) {
 
     @Provides
     @Singleton
@@ -15,5 +15,5 @@ class AppModule(val app: MaterialNewsFeedApp) {
 
     @Provides
     @Singleton
-    fun provideApplication(): MaterialNewsFeedApp = app
+    fun provideApplication(): NewsApp = app
 }

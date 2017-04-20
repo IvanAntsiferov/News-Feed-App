@@ -3,21 +3,17 @@ package com.voltek.materialnewsfeed.ui.list
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
-import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity
+import com.voltek.mvpdemo.library.navigation.proxy.NavigatorCommand
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
-import io.reactivex.Observable
-import kotlinx.android.synthetic.main.toolbar.*
 
-class ListActivity : BaseActivity(),
-        ListContract.Navigator {
+class ListActivity : BaseActivity() {
 
     private var mDualPane = false
 
@@ -42,11 +38,11 @@ class ListActivity : BaseActivity(),
         return true
     }
 
-    override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
+    override fun executeCommand(commandId: NavigatorCommand): Boolean {
+        return false
+    }
 
-    override fun isDualPane(): Boolean = mDualPane
-
-    override fun openDetails(article: Article) {
+    fun openDetails(article: Article) {
         if (mDualPane) {
             replaceFragment(
                     DetailsFragment.newInstance(article),
@@ -59,7 +55,7 @@ class ListActivity : BaseActivity(),
         }
     }
 
-    override fun openNewsSources() {
+    fun openNewsSources() {
         val intent = Intent(this, NewsSourcesActivity::class.java)
         startActivity(intent)
     }

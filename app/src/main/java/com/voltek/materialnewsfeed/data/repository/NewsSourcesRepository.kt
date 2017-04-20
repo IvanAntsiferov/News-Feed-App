@@ -7,7 +7,7 @@ import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
-import com.voltek.materialnewsfeed.MaterialNewsFeedApp
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.api.NewsApi
 import com.voltek.materialnewsfeed.data.api.Source
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class NewsSourcesRepository : DataProvider.NewsSources {
 
     init {
-        MaterialNewsFeedApp.MainComponent.inject(this)
+        NewsApp.MainComponent.inject(this)
     }
 
     @Inject

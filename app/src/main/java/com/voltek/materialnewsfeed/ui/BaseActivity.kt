@@ -5,10 +5,22 @@ import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
+import com.voltek.mvpdemo.library.navigation.proxy.Navigator
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), Navigator {
+
+    override fun onResume() {
+        super.onResume()
+        NewsApp.getRouterBinder().setNavigator(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        NewsApp.getRouterBinder().removeNavigator()
+    }
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))

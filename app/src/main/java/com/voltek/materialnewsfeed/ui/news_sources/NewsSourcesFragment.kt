@@ -4,10 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.api.Source
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.parceler.Parcels
 
 class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesContract.Presenter>(),
@@ -55,6 +57,8 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_fragment_news_sources, menu)
     }
+
+    override fun toolbarClicks(): io.reactivex.Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
 
     override fun filter(category: String) {
         if (category == getString(R.string.category_all)) {

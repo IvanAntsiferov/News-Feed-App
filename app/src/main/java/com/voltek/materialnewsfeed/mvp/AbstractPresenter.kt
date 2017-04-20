@@ -1,6 +1,7 @@
 package com.voltek.materialnewsfeed.mvp
 
 import android.os.Bundle
+import com.voltek.materialnewsfeed.NewsApp
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class AbstractPresenter<View : BaseView> : BasePresenter<View> {
@@ -8,6 +9,8 @@ abstract class AbstractPresenter<View : BaseView> : BasePresenter<View> {
     protected val mDisposable = CompositeDisposable()
 
     protected var mView: View? = null
+
+    protected val mRouter = NewsApp.getRouterBus()
 
     override fun attach(view: View, savedInstanceState: Bundle?) {
         mView = view

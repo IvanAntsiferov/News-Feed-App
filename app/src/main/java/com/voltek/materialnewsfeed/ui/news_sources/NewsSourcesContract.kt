@@ -2,19 +2,15 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.view.MenuItem
 import com.voltek.materialnewsfeed.data.api.Source
-import com.voltek.materialnewsfeed.mvp.AbstractNavigablePresenter
-import com.voltek.materialnewsfeed.mvp.BaseNavigator
+import com.voltek.materialnewsfeed.mvp.AbstractPresenter
 import com.voltek.materialnewsfeed.mvp.BaseView
 import io.reactivex.Observable
 
 object NewsSourcesContract {
 
-    interface Navigator : BaseNavigator {
+    interface View : BaseView {
 
         fun toolbarClicks(): Observable<MenuItem>
-    }
-
-    interface View : BaseView {
 
         fun filter(category: String)
 
@@ -25,5 +21,5 @@ object NewsSourcesContract {
         fun handleError(error: String)
     }
 
-    abstract class Presenter(nav: Navigator) : AbstractNavigablePresenter<Navigator, View>(nav)
+    abstract class Presenter : AbstractPresenter<View>()
 }
