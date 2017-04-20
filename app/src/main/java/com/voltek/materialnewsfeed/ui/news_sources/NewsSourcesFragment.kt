@@ -58,7 +58,7 @@ class NewsSourcesFragment : BaseFragment<NewsSourcesContract.View, NewsSourcesCo
         inflater?.inflate(R.menu.menu_fragment_news_sources, menu)
     }
 
-    //override fun toolbarClicks(): io.reactivex.Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
+    override fun toolbarClicks(): io.reactivex.Observable<MenuItem> = RxToolbar.itemClicks(activity.toolbar)
 
     override fun filter(category: String) {
         if (category == getString(R.string.category_all)) {

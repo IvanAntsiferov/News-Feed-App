@@ -10,7 +10,7 @@ object ListContract {
 
     interface View : BaseView {
 
-        //fun toolbarClicks(): Observable<MenuItem>
+        fun toolbarClicks(): Observable<MenuItem>
 
         fun onSwipeToRefresh(): Observable<Unit>
 

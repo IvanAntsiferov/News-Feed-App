@@ -33,13 +33,13 @@ class ListPresenter : ListContract.Presenter() {
         val swipeToRefresh = mView?.onSwipeToRefresh()
                 ?.subscribe({ getArticles() }, { Timber.e(it) })
 
-        /*val toolbarClicks = mView?.toolbarClicks()
-                ?.subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })*/
+        val toolbarClicks = mView?.toolbarClicks()
+                ?.subscribe({ onOptionsItemSelected(it) }, { Timber.e(it) })
 
         val listClicks = mView?.onItemClick()
                 ?.subscribe({ mRouter.execute(CommandOpenNewsDetails(it)) }, { Timber.e(it) })
 
-        mDisposable.addAll(swipeToRefresh, /*toolbarClicks,*/ listClicks)
+        mDisposable.addAll(swipeToRefresh, toolbarClicks, listClicks)
     }
 
     override fun onFirstLaunch() {

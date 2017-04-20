@@ -56,7 +56,7 @@ class ListFragment : BaseFragment<ListContract.View, ListContract.Presenter>(),
         super.onSaveInstanceState(outState)
     }
 
-    //override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(toolbar)
+    override fun toolbarClicks(): Observable<MenuItem> = RxToolbar.itemClicks(activity.toolbar)
 
     override fun onSwipeToRefresh(): Observable<Unit> = RxSwipeRefreshLayout.refreshes(swipe_container).map { }
 

@@ -42,14 +42,14 @@ class NewsSourcesPresenter : NewsSourcesContract.Presenter() {
 
     private var mIsLoading = false
 
-    /*override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
+    override fun attach(view: NewsSourcesContract.View, savedInstanceState: Bundle?) {
         super.attach(view, savedInstanceState)
 
         val toolbarClicks = mView?.toolbarClicks()
                 ?.subscribe(this::onOptionsItemSelected, Timber::e)
 
         mDisposable.addAll(toolbarClicks)
-    }*/
+    }
 
     override fun onFirstLaunch() {
         getSources()
