@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.di
+package com.voltek.materialnewsfeed.di.module
 
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.api.NewsApi

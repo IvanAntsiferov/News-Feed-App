@@ -2,9 +2,9 @@ package com.voltek.materialnewsfeed
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
-import com.voltek.materialnewsfeed.di.AppModule
-import com.voltek.materialnewsfeed.di.DaggerMainComponent
-import com.voltek.materialnewsfeed.di.MainComponent
+import com.voltek.materialnewsfeed.di.module.AppModule
+import com.voltek.materialnewsfeed.di.component.*
+import com.voltek.materialnewsfeed.di.module.*
 import com.voltek.materialnewsfeed.navigation.RouterHolder
 import com.voltek.materialnewsfeed.navigation.proxy.RouterBinder
 import com.voltek.materialnewsfeed.navigation.proxy.RouterBus
@@ -28,16 +28,44 @@ class NewsApp : Application() {
         fun getRouterBinder(): RouterBinder = routerHolder
 
         // DI
+        lateinit var presenterComponent: PresenterComponent
+
+        lateinit var interactorComponent: InteractorComponent
+
+        lateinit var dataComponent: DataComponent
+
         lateinit var MainComponent: MainComponent
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        MainComponent = DaggerMainComponent.builder()
-                .appModule(AppModule(this))
+        val appModule = AppModule(this)
+        val useCaseModule = UseCaseModule()
+        val repositoryModule = RepositoryModule()
+        val networkModule = NetworkModule()
+
+        // Dependency injection
+        presenterComponent = DaggerPresenterComponent.builder()
+                .useCaseModule(useCaseModule)
                 .build()
 
+        interactorComponent = DaggerInteractorComponent.builder()
+                .repositoryModule(repositoryModule)
+                .build()
+
+        dataComponent = DaggerDataComponent.builder()
+                .appModule(appModule)
+                .networkModule(networkModule)
+                .build()
+
+        MainComponent = DaggerMainComponent.builder()
+                .appModule(appModule)
+                .networkModule(networkModule)
+                .repositoryModule(repositoryModule)
+                .build()
+
+        // Libs init
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
                 .setDefaultFontPath(FONT_PATH)
                 .setFontAttrId(R.attr.fontPath)

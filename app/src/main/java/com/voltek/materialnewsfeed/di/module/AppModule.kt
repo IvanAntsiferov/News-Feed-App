@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.di
+package com.voltek.materialnewsfeed.di.module
 
 import android.content.Context
 import com.voltek.materialnewsfeed.NewsApp
