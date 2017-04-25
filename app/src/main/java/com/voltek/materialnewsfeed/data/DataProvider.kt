@@ -4,6 +4,9 @@ import com.voltek.materialnewsfeed.data.api.Article
 import com.voltek.materialnewsfeed.data.api.Source
 import io.reactivex.Observable
 
+/**
+ * Holds set of interfaces that provides access to data.
+ */
 object DataProvider {
 
     interface Articles {
