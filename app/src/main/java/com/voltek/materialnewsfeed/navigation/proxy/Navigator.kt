@@ -1,13 +1,12 @@
 package com.voltek.materialnewsfeed.navigation.proxy
 
-import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
-
 /**
- * Этот интерфейс реализуется классом, который способен выполнять обязанности навигатора.
- * Содержит единственный метод, который возвращает true, если навигатор поддерживает данный тип
- * команд, и false, если не поддерживает.
+ * Implement this interface in class, that handles app navigation (usually activity class)
  */
 interface Navigator {
 
+    /**
+     * @return true, if command was executed, false, if wasn't.
+     */
     fun executeCommand(command: NavigatorCommand): Boolean
 }

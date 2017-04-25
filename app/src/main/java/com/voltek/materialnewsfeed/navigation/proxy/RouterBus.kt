@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.navigation.proxy
 
 /**
- * Принимает команды для навигатора.
+ * Entry point for navigation commands.
  */
 interface RouterBus {
 

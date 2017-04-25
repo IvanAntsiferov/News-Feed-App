@@ -6,31 +6,28 @@ import com.voltek.materialnewsfeed.navigation.proxy.RouterBinder
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 
 /**
- * Управляет навигацией. Живет столько же, сколько приложение.
- * Одновременно может содержать лишь один навигатор, которому передает выполнение команд.
- * Если команда не может быть выполнена - она записывается в очередь.
- * Как только подключается новый навигатор, пытается с помощью него выполнить всю текущую
- * очередь команд.
+ * Manages app navigation, lifecycle tied to app process. Can hold only one navigator at a time.
+ * When RouterBus receives command, it will be executed by current navigator or added to queue,
+ * if there is no navigator attached or current navigator can not execute it.
+ * When new navigator get attached, holder will try to execute queued commands.
  */
 class RouterHolder : RouterBus, RouterBinder {
 
-    private val commandsQueue: ArrayList<NavigatorCommand> = ArrayList()
-
     private var navigator: Navigator? = null
 
-    // Реализация интерфейса RouterBus
+    private var commandsQueue: NavigatorCommand? = null
+
+    // RouterBus
     override fun execute(command: NavigatorCommand) {
-        // Если navigator = null вернет false,
-        // если он может выполнить команду, вернет true,
-        // если не может - false.
-        if (!(navigator?.executeCommand(command) ?: false)) {
-            // Добавит в очередь, если в команде не был переопредлен параметр addToQueue.
+        // If navigator = null returns false,
+        // If command executed, returns true,
+        // if command cannot be executed - false.
+        if (!(navigator?.executeCommand(command) ?: false))
             if (command.addToQueue)
-                commandsQueue.add(command)
-        }
+                commandsQueue = command
     }
 
-    // Реализация интерфейса RouterBinder
+    // RouterBinder
     override fun setNavigator(navigator: Navigator) {
         this.navigator = navigator
         executeQueue()
@@ -40,14 +37,10 @@ class RouterHolder : RouterBus, RouterBinder {
         this.navigator = null
     }
 
-    // Вызывается при подключении нового навигатора
     private fun executeQueue() {
-        // Для каждой команды в очереди, начиная с первой добавленой
-        for (command in commandsQueue) {
-            // Если навигатор выполняет команду, удалить ее из очереди
-            if (navigator?.executeCommand(command) ?: false) {
-                commandsQueue.remove(command)
-            }
-        }
+        if (commandsQueue != null && // If queue if not empty
+                navigator != null && // If navigator attached
+                (navigator?.executeCommand(commandsQueue!!) ?: false)) // Try to execute command
+            commandsQueue = null // Remove command, if it was executed
     }
 }

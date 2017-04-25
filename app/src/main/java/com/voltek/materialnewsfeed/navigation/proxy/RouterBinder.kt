@@ -1,13 +1,10 @@
 package com.voltek.materialnewsfeed.navigation.proxy
 
 /**
- * Интерфейс, доступ к которому предоставляется из класса приложения.
- * Его вызывает класс, реализующий интерфейс Navigator.
- * Как только этот класс готов предоставлять навигацию, он вызывает setNavigator(this).
- * (Для Activity это метод onResume)
- * Как только класс более не готов предоставлять навигацию он вызывает removeNavigator().
- * Отписывать навигатор от роутера стоит каждый раз, когда он более не способен мгоновенно
- * обработать команду. (Для activity это метод onPause)
+ * Class, that implements navigator, calls setNavigator when ready to perform in app navigation.
+ * (onResume for activity class)
+ * When it can no longer provide navigation, calls removeNavigator.
+ * (onPause for activity class)
  */
 interface RouterBinder {
 
