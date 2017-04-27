@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.voltek.materialnewsfeed.NewsApp
 import io.reactivex.disposables.CompositeDisposable
 
-@Deprecated("Move to Mosby MVI architecture")
+@Deprecated("Migrate to new MVP architecture")
 abstract class AbstractPresenter<View : BaseView> : BasePresenter<View> {
 
     protected val mDisposable = CompositeDisposable()

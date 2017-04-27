@@ -7,7 +7,7 @@ import android.view.*
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.networking.Source
-import com.voltek.materialnewsfeed.ui.BaseFragment
+import com.voltek.materialnewsfeed.mvp_deprecated.BaseFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.parceler.Parcels

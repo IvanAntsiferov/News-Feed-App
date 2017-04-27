@@ -1,12 +1,9 @@
 package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.os.Bundle
-import android.view.MenuItem
-import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.ui.BaseActivity
+import com.voltek.materialnewsfeed.mvp_deprecated.BaseActivity
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
-import kotlinx.android.synthetic.main.toolbar.*
 
 class NewsSourcesActivity : BaseActivity() {
 

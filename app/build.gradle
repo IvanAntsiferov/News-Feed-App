@@ -46,9 +46,7 @@ ext {
     parcelerVersion = '1.1.6'
     timberVersion = '4.5.1'
     calligraphyVersion = '2.2.0'
-    mosbyVersion = '3.0.3'
-    conductorVersion = '2.1.2'
-    mosbyConductorPluginVersion = '3.0.0'
+    moxyVersion = '1.5.1'
 }
 
 dependencies {
@@ -97,11 +95,10 @@ dependencies {
     // Fonts
     compile "uk.co.chrisjenx:calligraphy:${calligraphyVersion}"
 
-    // MVI
-    compile "com.hannesdorfmann.mosby3:mvi:${mosbyVersion}"
-    compile "com.bluelinelabs:conductor:${conductorVersion}"
-    compile "com.bluelinelabs:conductor-rxlifecycle2:${conductorVersion}"
-    compile "com.hannesdorfmann.mosby3:mvi-conductor:${mosbyConductorPluginVersion}"
+    // MVP
+    compile "com.arello-mobile:moxy:${moxyVersion}"
+    compile "com.arello-mobile:moxy-app-compat:${moxyVersion}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxyVersion}"
 }
 
 kapt {

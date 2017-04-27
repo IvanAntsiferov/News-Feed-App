@@ -14,7 +14,7 @@ import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.networking.Article
-import com.voltek.materialnewsfeed.ui.BaseFragment
+import com.voltek.materialnewsfeed.mvp_deprecated.BaseFragment
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.toolbar.*

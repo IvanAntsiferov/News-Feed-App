@@ -1,4 +1,4 @@
 package com.voltek.materialnewsfeed.mvp_deprecated
 
-@Deprecated("Move to Mosby MVI architecture")
+@Deprecated("Migrate to new MVP architecture")
 interface BaseView
