@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.mvp_deprecated
+package com.voltek.materialnewsfeed.deprecated
 
 @Deprecated("Migrate to new MVP architecture")
 interface BaseView

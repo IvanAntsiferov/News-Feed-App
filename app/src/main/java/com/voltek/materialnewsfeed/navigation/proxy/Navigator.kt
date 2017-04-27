@@ -8,5 +8,5 @@ interface Navigator {
     /**
      * @return true, if command was executed, false, if wasn't.
      */
-    fun executeCommand(command: NavigatorCommand): Boolean
+    fun executeCommand(command: Command): Boolean
 }

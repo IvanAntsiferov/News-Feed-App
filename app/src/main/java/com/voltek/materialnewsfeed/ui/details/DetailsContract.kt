@@ -1,8 +1,8 @@
 package com.voltek.materialnewsfeed.ui.details
 
 import com.voltek.materialnewsfeed.data.networking.Article
-import com.voltek.materialnewsfeed.mvp_deprecated.AbstractPresenter
-import com.voltek.materialnewsfeed.mvp_deprecated.BaseView
+import com.voltek.materialnewsfeed.deprecated.AbstractPresenter
+import com.voltek.materialnewsfeed.deprecated.BaseView
 
 object DetailsContract {
 

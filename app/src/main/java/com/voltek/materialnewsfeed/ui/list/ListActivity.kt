@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.Menu
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.networking.Article
-import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsDetails
-import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsSources
-import com.voltek.materialnewsfeed.mvp_deprecated.BaseActivity
+import com.voltek.materialnewsfeed.deprecated.CommandOpenNewsDetails
+import com.voltek.materialnewsfeed.deprecated.CommandOpenNewsSources
+import com.voltek.materialnewsfeed.deprecated.BaseActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity
-import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.navigation.proxy.Command
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.activity_list.*
 
@@ -40,7 +40,7 @@ class ListActivity : BaseActivity() {
         return true
     }
 
-    override fun executeCommand(command: NavigatorCommand): Boolean {
+    override fun executeCommand(command: Command): Boolean {
         if (command is CommandOpenNewsDetails) {
             openDetails(command.article)
             return true

@@ -3,8 +3,8 @@ package com.voltek.materialnewsfeed.ui.details
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.networking.Article
-import com.voltek.materialnewsfeed.mvp_deprecated.BaseActivity
-import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.deprecated.BaseActivity
+import com.voltek.materialnewsfeed.navigation.proxy.Command
 import org.parceler.Parcels
 
 class DetailsActivity : BaseActivity() {
@@ -24,7 +24,7 @@ class DetailsActivity : BaseActivity() {
         }
     }
 
-    override fun executeCommand(command: NavigatorCommand): Boolean {
+    override fun executeCommand(command: Command): Boolean {
         return false
     }
 }

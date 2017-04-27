@@ -2,8 +2,8 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.mvp_deprecated.BaseActivity
-import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
+import com.voltek.materialnewsfeed.deprecated.BaseActivity
+import com.voltek.materialnewsfeed.navigation.proxy.Command
 
 class NewsSourcesActivity : BaseActivity() {
 
@@ -20,7 +20,7 @@ class NewsSourcesActivity : BaseActivity() {
         }
     }
 
-    override fun executeCommand(command: NavigatorCommand): Boolean {
+    override fun executeCommand(command: Command): Boolean {
         return false
     }
 }

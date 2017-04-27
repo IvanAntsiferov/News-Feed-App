@@ -5,5 +5,5 @@ package com.voltek.materialnewsfeed.navigation.proxy
  */
 interface RouterBus {
 
-    fun execute(command: NavigatorCommand)
+    fun execute(command: Command)
 }

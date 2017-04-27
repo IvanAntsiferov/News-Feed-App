@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.mvp_deprecated
+package com.voltek.materialnewsfeed.deprecated
 
 import android.content.Context
 import android.support.annotation.IdRes

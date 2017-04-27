@@ -16,7 +16,7 @@ import io.reactivex.subjects.PublishSubject
 class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
-    private var mViewClickSubject: PublishSubject<Article> = PublishSubject.create<Article>()
+    private var mViewClickSubject: PublishSubject<Article> = PublishSubject.create()
 
     fun getViewClickedObservable(): Observable<Article> = mViewClickSubject
 

@@ -9,8 +9,8 @@ import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.networking.Article
 import com.voltek.materialnewsfeed.data.DataProvider
-import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsDetails
-import com.voltek.materialnewsfeed.navigation.command.CommandOpenNewsSources
+import com.voltek.materialnewsfeed.deprecated.CommandOpenNewsDetails
+import com.voltek.materialnewsfeed.deprecated.CommandOpenNewsSources
 import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
