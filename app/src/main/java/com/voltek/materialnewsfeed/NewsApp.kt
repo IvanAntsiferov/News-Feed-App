@@ -70,7 +70,6 @@ class NewsApp : Application() {
                 .setDefaultFontPath(FONT_PATH)
                 .setFontAttrId(R.attr.fontPath)
                 .build())
-
         Realm.init(this)
         Hawk.init(this).build()
         Timber.plant(Timber.DebugTree())
