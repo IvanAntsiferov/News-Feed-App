@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.data.networking.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import org.parceler.Parcels
 import kotlinx.android.synthetic.main.fragment_details.*

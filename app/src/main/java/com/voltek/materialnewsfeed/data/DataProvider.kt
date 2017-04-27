@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.data
 
-import com.voltek.materialnewsfeed.data.api.Article
-import com.voltek.materialnewsfeed.data.api.Source
+import com.voltek.materialnewsfeed.data.networking.Article
+import com.voltek.materialnewsfeed.data.networking.Source
 import io.reactivex.Observable
 
 /**

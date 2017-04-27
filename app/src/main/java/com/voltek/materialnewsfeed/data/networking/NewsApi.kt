@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.data.api
+package com.voltek.materialnewsfeed.data.networking
 
 import retrofit2.Call
 import retrofit2.http.GET

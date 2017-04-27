@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.data.api
+package com.voltek.materialnewsfeed.data.networking
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

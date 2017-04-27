@@ -9,8 +9,8 @@ import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.DataProvider
-import com.voltek.materialnewsfeed.data.api.NewsApi
-import com.voltek.materialnewsfeed.data.api.Source
+import com.voltek.materialnewsfeed.data.networking.NewsApi
+import com.voltek.materialnewsfeed.data.networking.Source
 import io.reactivex.Observable
 import javax.inject.Inject
 

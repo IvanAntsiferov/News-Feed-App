@@ -6,7 +6,7 @@ import android.view.MenuItem
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
-import com.voltek.materialnewsfeed.data.api.Source
+import com.voltek.materialnewsfeed.data.networking.Source
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.parceler.Parcels

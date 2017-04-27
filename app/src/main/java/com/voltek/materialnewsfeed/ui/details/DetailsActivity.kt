@@ -2,7 +2,7 @@ package com.voltek.materialnewsfeed.ui.details
 
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.data.networking.Article
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorCommand
 import org.parceler.Parcels

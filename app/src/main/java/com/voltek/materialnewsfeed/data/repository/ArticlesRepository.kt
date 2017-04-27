@@ -5,10 +5,9 @@ import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.DataProvider
-import com.voltek.materialnewsfeed.data.api.NewsApi
-import com.voltek.materialnewsfeed.data.api.Article
+import com.voltek.materialnewsfeed.data.networking.NewsApi
+import com.voltek.materialnewsfeed.data.networking.Article
 import io.reactivex.Observable
-import timber.log.Timber
 import javax.inject.Inject
 
 class ArticlesRepository : DataProvider.Articles {
