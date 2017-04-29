@@ -1,8 +1,9 @@
 package com.voltek.materialnewsfeed.ui.news_sources
 
 import com.voltek.materialnewsfeed.data.entity.Source
+import com.voltek.materialnewsfeed.ui.BaseModel
 
-sealed class NewsSourcesModel {
+sealed class NewsSourcesModel : BaseModel {
 
     class Loading : NewsSourcesModel()
 

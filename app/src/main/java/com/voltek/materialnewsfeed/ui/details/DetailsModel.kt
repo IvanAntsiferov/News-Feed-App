@@ -1,6 +1,8 @@
 package com.voltek.materialnewsfeed.ui.details
 
-sealed class DetailsModel {
+import com.voltek.materialnewsfeed.ui.BaseModel
+
+sealed class DetailsModel : BaseModel {
 
     class Loaded(
             val author: String,

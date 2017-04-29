@@ -1,6 +1,7 @@
 package com.voltek.materialnewsfeed.di.component
 
 import com.voltek.materialnewsfeed.di.module.RepositoryModule
+import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesInteractor
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,5 +11,5 @@ import javax.inject.Singleton
 )
 interface InteractorComponent {
 
-    //
+    fun inject(interactor: NewsSourcesInteractor)
 }

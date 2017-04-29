@@ -3,7 +3,10 @@ package com.voltek.materialnewsfeed.ui.news_sources
 import android.view.MenuItem
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.ui.BaseInteractor
+import javax.inject.Inject
 
 @InjectViewState
 class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
@@ -20,7 +23,15 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
                 R.id.action_politics,
                 R.id.action_science_and_nature,
                 R.id.action_sport,
-                R.id.action_technology)
+                R.id.action_technology
+        )
+    }
+
+    @Inject
+    lateinit var mInteractor: BaseInteractor<NewsSourcesModel>
+
+    init {
+        NewsApp.presenterComponent.inject(this)
     }
 
     override fun attachView(view: NewsSourcesView?) {
