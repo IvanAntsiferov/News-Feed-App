@@ -11,7 +11,7 @@ abstract class AbstractPresenter<View : BaseView> : BasePresenter<View> {
 
     protected var mView: View? = null
 
-    protected val mRouter = NewsApp.getRouterBus()
+    protected val mRouter = NewsApp.getRouter()
 
     override fun attach(view: View, savedInstanceState: Bundle?) {
         mView = view

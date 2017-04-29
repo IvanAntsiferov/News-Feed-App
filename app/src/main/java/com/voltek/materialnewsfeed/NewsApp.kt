@@ -6,8 +6,8 @@ import com.voltek.materialnewsfeed.di.module.AppModule
 import com.voltek.materialnewsfeed.di.component.*
 import com.voltek.materialnewsfeed.di.module.*
 import com.voltek.materialnewsfeed.navigation.RouterHolder
-import com.voltek.materialnewsfeed.navigation.proxy.RouterBinder
-import com.voltek.materialnewsfeed.navigation.proxy.RouterBus
+import com.voltek.materialnewsfeed.navigation.proxy.NavigatorBinder
+import com.voltek.materialnewsfeed.navigation.proxy.Router
 import io.realm.Realm
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
@@ -23,9 +23,9 @@ class NewsApp : Application() {
         // Navigation
         private val routerHolder: RouterHolder = RouterHolder()
 
-        fun getRouterBus(): RouterBus = routerHolder
+        fun getRouter(): Router = routerHolder
 
-        fun getRouterBinder(): RouterBinder = routerHolder
+        fun getNavigatorBinder(): NavigatorBinder = routerHolder
 
         // DI
         lateinit var presenterComponent: PresenterComponent

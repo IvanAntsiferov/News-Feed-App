@@ -1,12 +1,12 @@
 package com.voltek.materialnewsfeed.navigation.proxy
 
 /**
- * Class, that implements navigator, calls setNavigator when ready to perform in app navigation.
+ * Class, that implements navigator, calls setNavigator when ready to perform in-app navigation.
  * (onResume for activity class)
  * When it can no longer provide navigation, calls removeNavigator.
  * (onPause for activity class)
  */
-interface RouterBinder {
+interface NavigatorBinder {
 
     fun setNavigator(navigator: Navigator)
 

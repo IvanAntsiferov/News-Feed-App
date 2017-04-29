@@ -13,12 +13,12 @@ abstract class BaseActivity : MvpAppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        NewsApp.getRouterBinder().setNavigator(this)
+        NewsApp.getNavigatorBinder().setNavigator(this)
     }
 
     override fun onPause() {
         super.onPause()
-        NewsApp.getRouterBinder().removeNavigator()
+        NewsApp.getNavigatorBinder().removeNavigator()
     }
 
     override fun attachBaseContext(newBase: Context) {

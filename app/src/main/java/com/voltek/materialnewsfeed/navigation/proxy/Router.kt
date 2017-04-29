@@ -3,7 +3,7 @@ package com.voltek.materialnewsfeed.navigation.proxy
 /**
  * Entry point for navigation commands.
  */
-interface RouterBus {
+interface Router {
 
     fun execute(command: Command)
 }

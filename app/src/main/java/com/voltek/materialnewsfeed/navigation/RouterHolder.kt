@@ -1,20 +1,16 @@
 package com.voltek.materialnewsfeed.navigation
 
 import com.voltek.materialnewsfeed.navigation.command.CommandNavigatorAttached
-import com.voltek.materialnewsfeed.navigation.proxy.Navigator
-import com.voltek.materialnewsfeed.navigation.proxy.RouterBus
-import com.voltek.materialnewsfeed.navigation.proxy.RouterBinder
-import com.voltek.materialnewsfeed.navigation.proxy.Command
+import com.voltek.materialnewsfeed.navigation.proxy.*
 import io.reactivex.subjects.PublishSubject
-import timber.log.Timber
 
 /**
  * Manages app navigation, lifecycle tied to app process. Can hold only one navigator at a time.
- * When RouterBus receives command, it will be executed by current navigator or added to queue,
+ * When Router receives command, it will be executed by current navigator or added to queue,
  * if there is no navigator attached or current navigator can not execute it.
  * When new navigator get attached, holder will try to execute queued commands.
  */
-class RouterHolder : RouterBus, RouterBinder {
+class RouterHolder : Router, NavigatorBinder {
 
     val CommandsFeed: PublishSubject<Command> = PublishSubject.create()
 
@@ -26,15 +22,15 @@ class RouterHolder : RouterBus, RouterBinder {
         CommandsFeed
                 .filter { !runCommand(it) } // If command executed
                 .filter { !runQueue(it) } // If new navigator attached
-                .subscribe({ addToQueue(it) }, Timber::e) // Else, try to add command to queue
+                .subscribe({ addToQueue(it) }) // Else, try to add command to queue
     }
 
-    // RouterBus
+    // Router
     override fun execute(command: Command) {
         CommandsFeed.onNext(command)
     }
 
-    // RouterBinder
+    // NavigatorBinder
     override fun setNavigator(navigator: Navigator) {
         this.navigator = navigator
         CommandsFeed.onNext(CommandNavigatorAttached())
@@ -73,7 +69,8 @@ class RouterHolder : RouterBus, RouterBinder {
      */
     private fun addToQueue(command: Command): Boolean {
         if (command.addToQueue) {
-            command.id = commandsQueue[commandsQueue.lastIndex].id + 1
+            if (!commandsQueue.isEmpty())
+                command.id = commandsQueue[commandsQueue.lastIndex].id + 1
             return commandsQueue.add(command)
         } else {
             return false
