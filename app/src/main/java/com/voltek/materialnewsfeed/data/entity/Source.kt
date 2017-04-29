@@ -1,11 +1,9 @@
-package com.voltek.materialnewsfeed.data.networking
+package com.voltek.materialnewsfeed.data.entity
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import org.parceler.Parcel
-
-data class NewsApiSourcesResponse(val sources: List<Source>)
 
 @RealmClass
 @Parcel

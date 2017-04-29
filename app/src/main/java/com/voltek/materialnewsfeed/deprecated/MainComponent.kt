@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.di.component
+package com.voltek.materialnewsfeed.deprecated
 
 import com.voltek.materialnewsfeed.data.repository.ArticlesRepository
 import com.voltek.materialnewsfeed.data.repository.NewsSourcesRepository

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.networking.Article
+import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.deprecated.CommandOpenNewsDetails
 import com.voltek.materialnewsfeed.deprecated.CommandOpenNewsSources
 import com.voltek.materialnewsfeed.deprecated.BaseActivity

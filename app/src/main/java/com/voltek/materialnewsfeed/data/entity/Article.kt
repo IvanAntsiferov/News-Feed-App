@@ -1,8 +1,6 @@
-package com.voltek.materialnewsfeed.data.networking
+package com.voltek.materialnewsfeed.data.entity
 
 import org.parceler.Parcel
-
-data class NewsApiArticlesResponse(val articles: List<Article>)
 
 @Parcel
 data class Article(

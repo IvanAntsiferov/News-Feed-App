@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.ui.details
 
 import android.os.Bundle
-import com.voltek.materialnewsfeed.data.networking.Article
+import com.voltek.materialnewsfeed.data.entity.Article
 
 class DetailsPresenter(val article: Article) : DetailsContract.Presenter() {
 

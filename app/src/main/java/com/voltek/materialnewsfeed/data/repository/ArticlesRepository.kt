@@ -6,7 +6,7 @@ import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
-import com.voltek.materialnewsfeed.data.networking.Article
+import com.voltek.materialnewsfeed.data.entity.Article
 import io.reactivex.Observable
 import javax.inject.Inject
 

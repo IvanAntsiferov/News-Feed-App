@@ -2,6 +2,8 @@ package com.voltek.materialnewsfeed
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
+import com.voltek.materialnewsfeed.deprecated.DaggerMainComponent
+import com.voltek.materialnewsfeed.deprecated.MainComponent
 import com.voltek.materialnewsfeed.di.module.AppModule
 import com.voltek.materialnewsfeed.di.component.*
 import com.voltek.materialnewsfeed.di.module.*

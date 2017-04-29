@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
 import com.vicpin.krealmextensions.save
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.networking.Source
+import com.voltek.materialnewsfeed.data.entity.Source
 import kotlinx.android.synthetic.main.item_source.view.*
 import java.util.*
 

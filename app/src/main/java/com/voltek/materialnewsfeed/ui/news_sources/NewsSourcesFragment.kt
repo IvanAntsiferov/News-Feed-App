@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.networking.Source
+import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.deprecated.BaseFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.toolbar.*
