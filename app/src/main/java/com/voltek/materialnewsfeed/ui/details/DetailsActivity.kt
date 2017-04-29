@@ -12,7 +12,7 @@ class DetailsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generic)
-        setupToolbar(true, true)
+        setupToolbar(displayHomeAsUpEnabled = true)
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
 

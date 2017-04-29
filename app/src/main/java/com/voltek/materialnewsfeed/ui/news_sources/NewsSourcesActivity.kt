@@ -2,8 +2,8 @@ package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.deprecated.BaseActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Command
+import com.voltek.materialnewsfeed.ui.BaseActivity
 
 class NewsSourcesActivity : BaseActivity() {
 

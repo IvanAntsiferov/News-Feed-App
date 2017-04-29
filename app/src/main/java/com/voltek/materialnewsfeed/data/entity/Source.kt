@@ -3,10 +3,8 @@ package com.voltek.materialnewsfeed.data.entity
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
-import org.parceler.Parcel
 
 @RealmClass
-@Parcel
 open class Source : RealmObject() {
 
     @PrimaryKey

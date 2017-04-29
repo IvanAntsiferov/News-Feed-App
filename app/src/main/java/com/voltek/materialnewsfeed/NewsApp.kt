@@ -30,8 +30,6 @@ class NewsApp : Application() {
         fun getNavigatorBinder(): NavigatorBinder = routerHolder
 
         // DI
-        lateinit var presenterComponent: PresenterComponent
-
         lateinit var interactorComponent: InteractorComponent
 
         lateinit var dataComponent: DataComponent
@@ -43,15 +41,10 @@ class NewsApp : Application() {
         super.onCreate()
 
         val appModule = AppModule(this)
-        val useCaseModule = UseCaseModule()
         val repositoryModule = RepositoryModule()
         val networkModule = NetworkModule()
 
         // Dependency injection
-        presenterComponent = DaggerPresenterComponent.builder()
-                .useCaseModule(useCaseModule)
-                .build()
-
         interactorComponent = DaggerInteractorComponent.builder()
                 .repositoryModule(repositoryModule)
                 .build()
