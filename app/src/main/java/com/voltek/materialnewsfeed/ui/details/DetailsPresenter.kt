@@ -1,21 +1,34 @@
 package com.voltek.materialnewsfeed.ui.details
 
-import android.os.Bundle
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.data.entity.Article
 
-class DetailsPresenter(val article: Article) : DetailsContract.Presenter() {
+@InjectViewState
+class DetailsPresenter(val article: Article) : MvpPresenter<DetailsView>() {
 
-    override fun attach(view: DetailsContract.View, savedInstanceState: Bundle?) {
-        super.attach(view, savedInstanceState)
-
-        mView?.showArticle(article)
+    init {
+        if (article.isEmpty())
+            viewState.render(DetailsModel.Error())
+        else
+            viewState.render(
+                    DetailsModel.Loaded(
+                            article.author!!,
+                            article.title!!,
+                            article.description!!,
+                            article.urlToImage!!,
+                            article.publishedAt!!
+                    )
+            )
     }
 
-    override fun onFirstLaunch() {
-        //
+    override fun attachView(view: DetailsView?) {
+        super.attachView(view)
+        viewState.attachInputListeners()
     }
 
-    override fun onRestore(savedInstanceState: Bundle) {
-        //
+    override fun detachView(view: DetailsView?) {
+        viewState.detachInputListeners()
+        super.detachView(view)
     }
 }

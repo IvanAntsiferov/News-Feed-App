@@ -9,4 +9,8 @@ data class Article(
         val description: String? = null,
         val url: String? = null,
         val urlToImage: String? = null,
-        val publishedAt: String? = null)
+        val publishedAt: String? = null) {
+
+    fun isEmpty() = author == null || title == null || description == null || url == null ||
+            urlToImage == null || publishedAt == null
+}

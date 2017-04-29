@@ -27,12 +27,10 @@ class ListActivity : BaseActivity() {
 
         mDualPane = details_fragment_container != null
 
-        if (supportFragmentManager.findFragmentByTag(ListFragment.TAG) == null) {
-            replaceFragment(
-                    ListFragment.newInstance(),
-                    R.id.list_fragment_container,
-                    ListFragment.TAG)
-        }
+        replaceFragment(
+                ListFragment.newInstance(),
+                R.id.list_fragment_container,
+                ListFragment.TAG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

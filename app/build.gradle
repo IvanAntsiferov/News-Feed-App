@@ -98,7 +98,7 @@ dependencies {
     // MVP
     compile "com.arello-mobile:moxy:${moxyVersion}"
     compile "com.arello-mobile:moxy-app-compat:${moxyVersion}"
-    annotationProcessor "com.arello-mobile:moxy-compiler:${moxyVersion}"
+    kapt "com.arello-mobile:moxy-compiler:${moxyVersion}"
 }
 
 kapt {
