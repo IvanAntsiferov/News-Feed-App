@@ -13,9 +13,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".ui.list.ListActivity"
-            android:launchMode="singleInstance">
+        <activity android:name=".ui.experimental.ExperimentalActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +22,10 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".ui.list.ListActivity"
+            android:launchMode="singleInstance" />
 
         <activity
             android:name=".ui.details.DetailsActivity"

@@ -1,6 +1,6 @@
 package com.voltek.materialnewsfeed.mvi
 
 /**
- * Implement this interface by input event sealed class
+ * Implement this interface in input event sealed classes
  */
 interface BaseEvent
