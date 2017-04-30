@@ -28,8 +28,8 @@ abstract class BaseActivity : MvpAppCompatActivity(),
 
     protected fun setupToolbar(
             displayHomeAsUpEnabled: Boolean = false,
-            displayShowHomeEnabled: Boolean = false) {
-
+            displayShowHomeEnabled: Boolean = false
+    ) {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
@@ -45,8 +45,8 @@ abstract class BaseActivity : MvpAppCompatActivity(),
     ) {
         val transaction = supportFragmentManager.beginTransaction()
 
-        //if (shouldAnimate)
-        //transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+        if (shouldAnimate)
+            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
 
         if (shouldAddToBackStack)
             transaction.addToBackStack(tag)
