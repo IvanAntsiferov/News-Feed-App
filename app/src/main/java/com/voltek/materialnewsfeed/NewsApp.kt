@@ -2,9 +2,7 @@ package com.voltek.materialnewsfeed
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
-import com.voltek.materialnewsfeed.deprecated.DaggerMainComponent
-import com.voltek.materialnewsfeed.deprecated.MainComponent
-import com.voltek.materialnewsfeed.di.module.AppModule
+import com.voltek.materialnewsfeed.deprecated.*
 import com.voltek.materialnewsfeed.di.component.*
 import com.voltek.materialnewsfeed.di.module.*
 import com.voltek.materialnewsfeed.navigation.RouterHolder
@@ -30,8 +28,6 @@ class NewsApp : Application() {
         fun getNavigatorBinder(): NavigatorBinder = routerHolder
 
         // DI
-        lateinit var presenterComponent: PresenterComponent
-
         lateinit var interactorComponent: InteractorComponent
 
         lateinit var dataComponent: DataComponent
@@ -42,16 +38,11 @@ class NewsApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val modelModule = ModelModule()
         val appModule = AppModule(this)
         val repositoryModule = RepositoryModule()
         val networkModule = NetworkModule()
 
         // Dependency injection
-        presenterComponent = DaggerPresenterComponent.builder()
-                .modelModule(modelModule)
-                .build()
-
         interactorComponent = DaggerInteractorComponent.builder()
                 .repositoryModule(repositoryModule)
                 .build()

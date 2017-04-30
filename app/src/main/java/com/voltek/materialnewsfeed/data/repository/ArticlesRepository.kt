@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
+import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Article
@@ -28,7 +29,7 @@ class ArticlesRepository : DataProvider.Articles {
     override fun getAll(): Observable<List<Article>> = Observable.create {
         val emitter = it
 
-        val sources = mSourcesRepo.getEnabled()
+        val sources = mSourcesRepo.getCategory(mContext.getString(R.string.category_enabled))
 
         val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = cm.activeNetworkInfo

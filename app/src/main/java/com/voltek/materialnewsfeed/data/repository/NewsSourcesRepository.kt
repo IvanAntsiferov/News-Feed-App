@@ -8,6 +8,7 @@ import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
+import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Source
@@ -54,6 +55,13 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         emitter.onComplete()
     }
 
-    override fun getEnabled(): List<Source> =
-            Source().query { query -> query.equalTo("isEnabled", true) }
+    override fun getCategory(category: String): List<Source> {
+        if (category == mContext.getString(R.string.category_all)) {
+            return Source().queryAll()
+        } else if (category == mContext.getString(R.string.category_enabled)) {
+            return Source().query { query -> query.equalTo("isEnabled", true) }
+        } else {
+            return Source().query { query -> query.equalTo("category", category) }
+        }
+    }
 }

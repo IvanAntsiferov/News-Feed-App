@@ -1,37 +1,25 @@
 package com.voltek.materialnewsfeed.ui.news_sources
 
-import android.view.MenuItem
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.voltek.materialnewsfeed.NewsApp
-import com.voltek.materialnewsfeed.R
+import com.arellomobile.mvp.MvpView
+import com.voltek.materialnewsfeed.ui.BaseEvent
 import com.voltek.materialnewsfeed.ui.BaseInteractor
-import javax.inject.Inject
+import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.Subject
+import timber.log.Timber
 
 @InjectViewState
 class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
-    companion object {
-        private val CATEGORY_ITEMS_IDS = arrayOf(
-                R.id.action_all,
-                R.id.action_enabled,
-                R.id.action_business,
-                R.id.action_entertainment,
-                R.id.action_gaming,
-                R.id.action_general,
-                R.id.action_music,
-                R.id.action_politics,
-                R.id.action_science_and_nature,
-                R.id.action_sport,
-                R.id.action_technology
-        )
-    }
+    private val mInteractor: BaseInteractor<NewsSourcesModel, NewsSourcesEvent> =
+            NewsSourcesInteractor()
 
-    @Inject
-    lateinit var mInteractor: BaseInteractor<NewsSourcesModel>
+    private val mStateChanges: Disposable
 
     init {
-        NewsApp.presenterComponent.inject(this)
+        mStateChanges = mInteractor.stateChangesFeed()
+                .subscribe({ viewState.render(it) }, Timber::e)
     }
 
     override fun attachView(view: NewsSourcesView?) {
@@ -44,15 +32,9 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
         super.detachView(view)
     }
 
-
-    fun onOptionsItemSelected(item: MenuItem) {
-        when (item.itemId) {
-            in CATEGORY_ITEMS_IDS -> {
-                /*if (!mIsLoading && !item.isChecked) {
-                    item.isChecked = true
-                    mView?.filter(item.title.toString())
-                }*/
-            }
-        }
+    override fun onDestroy() {
+        mStateChanges.dispose()
     }
+
+    fun inputEventsFeed() = mInteractor.inputEventsFeed()
 }

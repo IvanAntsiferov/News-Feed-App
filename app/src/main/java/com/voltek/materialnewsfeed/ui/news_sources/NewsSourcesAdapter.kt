@@ -67,6 +67,11 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        mItems.clear()
+        notifyDataSetChanged()
+    }
+
     fun filterCategory(category: String) {
         mItems = ArrayList<Source>()
         mItemsClean.filterTo(mItems) { it.category == category }
@@ -86,6 +91,4 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
     }
 
     override fun getItemCount(): Int = mItems.size
-
-    fun getItems(): List<Source> = mItemsClean
 }

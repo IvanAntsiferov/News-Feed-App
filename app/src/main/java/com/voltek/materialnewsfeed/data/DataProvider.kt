@@ -18,6 +18,6 @@ object DataProvider {
 
         fun getAll(): Observable<List<Source>>
 
-        fun getEnabled(): List<Source>
+        fun getCategory(category: String): List<Source>
     }
 }

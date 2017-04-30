@@ -1,8 +1,11 @@
 package com.voltek.materialnewsfeed.ui
 
 import io.reactivex.Observable
+import io.reactivex.subjects.Subject
 
-interface BaseInteractor<Model : BaseModel> {
+interface BaseInteractor<Model : BaseModel, Event : BaseEvent> {
 
-    fun StateChangesFeed(): Observable<Model>
+    fun stateChangesFeed(): Observable<Model>
+
+    fun inputEventsFeed(): Subject<Event>
 }

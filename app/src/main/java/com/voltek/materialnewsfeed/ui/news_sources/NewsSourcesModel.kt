@@ -7,7 +7,7 @@ sealed class NewsSourcesModel : BaseModel {
 
     class Loading : NewsSourcesModel()
 
-    class Result(items: List<Source>) : NewsSourcesModel()
+    class Result(val items: List<Source>) : NewsSourcesModel()
 
-    class Error(message: String) : NewsSourcesModel()
+    class Error(val message: String) : NewsSourcesModel()
 }

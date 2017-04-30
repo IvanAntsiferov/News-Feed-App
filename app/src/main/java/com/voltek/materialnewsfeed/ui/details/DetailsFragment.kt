@@ -19,7 +19,6 @@ class DetailsFragment : BaseFragment(),
 
     companion object {
         const val TAG = "DetailsFragmentTag"
-
         const val ARG_ARTICLE = "ARG_ARTICLE"
 
         fun newInstance(article: Article): DetailsFragment {
