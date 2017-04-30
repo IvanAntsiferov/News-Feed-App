@@ -2,9 +2,6 @@ package com.voltek.materialnewsfeed
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
-import com.voltek.materialnewsfeed.deprecated.*
-import com.voltek.materialnewsfeed.di.component.*
-import com.voltek.materialnewsfeed.di.module.*
 import com.voltek.materialnewsfeed.navigation.RouterHolder
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorBinder
 import com.voltek.materialnewsfeed.navigation.proxy.Router
@@ -26,37 +23,10 @@ class NewsApp : Application() {
         fun getRouter(): Router = routerHolder
 
         fun getNavigatorBinder(): NavigatorBinder = routerHolder
-
-        // DI
-        lateinit var interactorComponent: InteractorComponent
-
-        lateinit var dataComponent: DataComponent
-
-        lateinit var MainComponent: MainComponent
     }
 
     override fun onCreate() {
         super.onCreate()
-
-        val appModule = AppModule(this)
-        val repositoryModule = RepositoryModule()
-        val networkModule = NetworkModule()
-
-        // Dependency injection
-        interactorComponent = DaggerInteractorComponent.builder()
-                .repositoryModule(repositoryModule)
-                .build()
-
-        dataComponent = DaggerDataComponent.builder()
-                .appModule(appModule)
-                .networkModule(networkModule)
-                .build()
-
-        MainComponent = DaggerMainComponent.builder()
-                .appModule(appModule)
-                .networkModule(networkModule)
-                .repositoryModule(repositoryModule)
-                .build()
 
         // Libs init
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()

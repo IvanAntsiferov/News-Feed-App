@@ -11,13 +11,6 @@ class NewsSourcesActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generic)
         setupToolbar(displayHomeAsUpEnabled = true)
-
-        if (supportFragmentManager.findFragmentByTag(NewsSourcesFragment.TAG) == null) {
-            replaceFragment(
-                    NewsSourcesFragment.newInstance(),
-                    R.id.fragment_container,
-                    NewsSourcesFragment.TAG)
-        }
     }
 
     override fun executeCommand(command: Command): Boolean {
