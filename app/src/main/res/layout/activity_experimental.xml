@@ -9,22 +9,35 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set flag state (1 sec loading" />
+
+        <Button
             android:id="@+id/btn_potato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="set potato state" />
+            android:text="set potato (3 sec loading" />
 
         <Button
             android:id="@+id/btn_tomato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="set tomato state" />
+            android:text="set tomato state (5 sec loading)" />
 
         <Button
             android:id="@+id/btn_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="throw random error" />
+            android:text="throw random error (2 sec loading)" />
+
+        <ImageView
+            android:id="@+id/im_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true" />
 
         <TextView
             android:id="@+id/tv_state"

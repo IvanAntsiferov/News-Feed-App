@@ -1,6 +1,7 @@
 package com.voltek.materialnewsfeed
 
 import android.app.Application
+import android.content.Context
 import com.orhanobut.hawk.Hawk
 import com.voltek.materialnewsfeed.navigation.RouterHolder
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorBinder
@@ -12,6 +13,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 class NewsApp : Application() {
 
     companion object {
+
         // Const
         const val BASE_URL = "https://newsapi.org/"
 
@@ -23,10 +25,14 @@ class NewsApp : Application() {
         fun getRouter(): Router = routerHolder
 
         fun getNavigatorBinder(): NavigatorBinder = routerHolder
+
+        lateinit var context: Context
     }
 
     override fun onCreate() {
         super.onCreate()
+
+        context = applicationContext
 
         // Libs init
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()

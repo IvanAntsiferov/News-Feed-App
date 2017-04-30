@@ -5,14 +5,18 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
+import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.mvi.BaseView
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.ui.BaseActivity
+import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalEvents
+import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalModel
 import kotlinx.android.synthetic.main.activity_experimental.*
+import timber.log.Timber
 
 class ExperimentalActivity : BaseActivity(),
-        BaseView<ExperimentalModel> {
+        ExperimentalContract.ExperimentalView {
 
     companion object {
         const val TAG = "ExperimentalActivity"
@@ -31,9 +35,27 @@ class ExperimentalActivity : BaseActivity(),
     }
 
     override fun attachInputListeners() {
+        val btnPotatoClick = RxView.clicks(btn_potato)
+                .subscribe({
+                    mPresenter.input.onNext(ExperimentalEvents.PotatoButton())
+                })
 
+        val btnTomatoClick = RxView.clicks(btn_tomato)
+                .subscribe({
+                    mPresenter.input.onNext(ExperimentalEvents.TomatoButton())
+                })
 
-        mDisposable.addAll()
+        val btnErrorClick = RxView.clicks(btn_error)
+                .subscribe({
+                    mPresenter.input.onNext(ExperimentalEvents.ErrorButton())
+                })
+
+        val btnFlagClick = RxView.clicks(btn_flag)
+                .subscribe({
+                    mPresenter.input.onNext(ExperimentalEvents.FlagButton())
+                })
+
+        mDisposable.addAll(btnPotatoClick, btnTomatoClick, btnErrorClick, btnFlagClick)
     }
 
     override fun detachInputListeners() {
@@ -41,26 +63,53 @@ class ExperimentalActivity : BaseActivity(),
     }
 
     override fun render(model: ExperimentalModel) {
+        Timber.d("render: " + model.javaClass.simpleName)
         when (model) {
             is ExperimentalModel.Loading -> {
+                im_image.visibility = GONE
+
                 progress_bar.visibility = VISIBLE
+
                 tv_error.text = ""
+
                 tv_state.text = ""
             }
             is ExperimentalModel.Error -> {
+                im_image.visibility = GONE
+
                 progress_bar.visibility = GONE
+
                 tv_error.text = model.message
+
                 tv_state.text = ""
             }
             is ExperimentalModel.Potato -> {
+                im_image.visibility = GONE
+
                 progress_bar.visibility = GONE
+
                 tv_error.text = ""
+
                 tv_state.text = "POTATO"
             }
             is ExperimentalModel.Tomato -> {
+                im_image.visibility = GONE
+
                 progress_bar.visibility = GONE
+
                 tv_error.text = ""
+
                 tv_state.text = "TOMATO"
+            }
+            is ExperimentalModel.Flag -> {
+                Glide.with(this).load("").error(model.id).into(im_image)
+                im_image.visibility = VISIBLE
+
+                progress_bar.visibility = GONE
+
+                tv_error.text = ""
+
+                tv_state.text = model.name
             }
         }
     }
