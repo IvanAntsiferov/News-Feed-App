@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base text style -->
+    <style name="Text">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- Small -->
+    <style name="Text.Small">
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    </style>
+
+    <style name="Text.Small.Light">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
+
+    <style name="Text.Small.Bold">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <!-- Medium -->
+    <style name="Text.Medium">
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <style name="Text.Medium.Light">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
+
+    <style name="Text.Medium.Bold">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <!-- Large -->
+    <style name="Text.Large">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+    </style>
+
+    <style name="Text.Large.Light">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
+
+    <style name="Text.Large.Bold">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+</resources>
