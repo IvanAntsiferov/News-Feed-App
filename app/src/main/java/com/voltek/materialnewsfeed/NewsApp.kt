@@ -1,8 +1,11 @@
 package com.voltek.materialnewsfeed
 
 import android.app.Application
-import android.content.Context
 import com.orhanobut.hawk.Hawk
+import com.voltek.materialnewsfeed.di.component.DaggerDataComponent
+import com.voltek.materialnewsfeed.di.component.DataComponent
+import com.voltek.materialnewsfeed.di.module.AppModule
+import com.voltek.materialnewsfeed.di.module.NetworkModule
 import com.voltek.materialnewsfeed.navigation.RouterHolder
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorBinder
 import com.voltek.materialnewsfeed.navigation.proxy.Router
@@ -26,13 +29,20 @@ class NewsApp : Application() {
 
         fun getNavigatorBinder(): NavigatorBinder = routerHolder
 
-        lateinit var context: Context
+        // DI
+        lateinit var dataComponent: DataComponent
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        context = applicationContext
+        val appModule = AppModule(this)
+        val networkModule = NetworkModule()
+
+        dataComponent = DaggerDataComponent.builder()
+                .appModule(appModule)
+                .networkModule(networkModule)
+                .build()
 
         // Libs init
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()

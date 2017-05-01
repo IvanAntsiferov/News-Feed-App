@@ -35,7 +35,7 @@ repositories {
 ext {
     supportLibraryVersion = '25.3.1'
     retrofitVersion = '2.2.0'
-    rxJavaVersion = '2.0.8'
+    rxJavaVersion = '2.1.0'
     rxAndroidVersion = '2.0.1'
     rxKotlinVersion = '2.0.0'
     rxBindingKotlinVersion = '2.0.0'
@@ -76,7 +76,6 @@ dependencies {
     // Dependency injection
     compile "com.google.dagger:dagger:${daggerVersion}"
     kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
-    provided "org.glassfish:javax.annotation:10.0-b28"
 
     // Images
     compile "com.github.bumptech.glide:glide:${glideVersion}"
