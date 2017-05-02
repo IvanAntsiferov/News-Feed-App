@@ -11,7 +11,7 @@ object DataProvider {
 
     interface Articles {
 
-        fun getAll(): Observable<List<Article>>
+        fun get(): Observable<List<Article>>
     }
 
     interface NewsSources {

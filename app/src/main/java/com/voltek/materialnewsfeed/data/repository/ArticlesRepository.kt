@@ -22,7 +22,7 @@ class ArticlesRepository : DataProvider.Articles {
     @Inject
     lateinit var mSourcesRepo: DataProvider.NewsSources
 
-    override fun getAll(): Observable<List<Article>> = Observable.create {
+    override fun get(): Observable<List<Article>> = Observable.create {
         val emitter = it
 
         val sources = mSourcesRepo.getCategory(mContext.getString(R.string.category_enabled))
