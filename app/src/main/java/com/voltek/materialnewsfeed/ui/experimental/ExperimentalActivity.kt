@@ -35,31 +35,37 @@ class ExperimentalActivity : BaseActivity(),
     }
 
     override fun attachInputListeners() {
-        val btnPotatoClick = RxView.clicks(btn_potato)
+        // Button potato click
+        RxView.clicks(btn_potato)
                 .subscribe({
                     mPresenter.input.onNext(ExperimentalEvents.PotatoButton())
                 })
+                .bind()
 
-        val btnTomatoClick = RxView.clicks(btn_tomato)
+        // Button tomato click
+        RxView.clicks(btn_tomato)
                 .subscribe({
                     mPresenter.input.onNext(ExperimentalEvents.TomatoButton())
                 })
+                .bind()
 
-        val btnErrorClick = RxView.clicks(btn_error)
+        // Button error click
+        RxView.clicks(btn_error)
                 .subscribe({
                     mPresenter.input.onNext(ExperimentalEvents.ErrorButton())
                 })
+                .bind()
 
-        val btnFlagClick = RxView.clicks(btn_flag)
+        // Button flag click
+        RxView.clicks(btn_flag)
                 .subscribe({
                     mPresenter.input.onNext(ExperimentalEvents.FlagButton())
                 })
-
-        mDisposable.addAll(btnPotatoClick, btnTomatoClick, btnErrorClick, btnFlagClick)
+                .bind()
     }
 
     override fun detachInputListeners() {
-        mDisposable.clear()
+        resetCompositeDisposable()
     }
 
     override fun render(model: ExperimentalModel) {
