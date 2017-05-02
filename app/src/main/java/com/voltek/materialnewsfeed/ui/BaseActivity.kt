@@ -1,12 +1,14 @@
 package com.voltek.materialnewsfeed.ui
 
 import android.content.Context
+import android.content.Intent
 import android.support.annotation.IdRes
 import android.support.v7.widget.Toolbar
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.junto.boxy.ui.CompositeDisposableComponent
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Navigator
 import io.reactivex.disposables.CompositeDisposable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -31,6 +33,20 @@ abstract class BaseActivity : MvpAppCompatActivity(),
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
+    // Base navigator commands
+    protected fun startActivity(command: CommandStartActivity) {
+        val intent = Intent(this, command.activity.javaClass)
+
+        if (command.args != null)
+            intent.putExtras(command.args)
+
+        startActivity(intent)
+
+        if (command.finish)
+            finish()
+    }
+
+    // Activity helper methods
     protected fun setupToolbar(
             displayHomeAsUpEnabled: Boolean = false,
             displayShowHomeEnabled: Boolean = false

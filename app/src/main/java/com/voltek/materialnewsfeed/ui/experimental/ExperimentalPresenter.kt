@@ -7,6 +7,7 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalEvents
 import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalModel
 import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalView
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 import java.util.*
@@ -14,12 +15,21 @@ import java.util.*
 @InjectViewState
 class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
 
-    val input: PublishSubject<ExperimentalEvents> =
-            PublishSubject.create()
+    // Holds current model through full presenter lifecycle
+    private var mModel: ExperimentalModel = ExperimentalModel.Error("start state")
+
+    // Receive input events from view
+    val input: PublishSubject<ExperimentalEvents> = PublishSubject.create()
+
+    // Emit new states and update model
+    private val output: BehaviorSubject<ExperimentalModel> = BehaviorSubject.createDefault(mModel)
+
+    private fun updateModel(model: ExperimentalModel) {
+        mModel = model
+        output.onNext(mModel)
+    }
 
     init {
-        viewState.render(ExperimentalModel.Error("Press any button (start state)"))
-
         input.subscribe({
             Timber.d("input: " + it.javaClass.simpleName)
             viewState.render(ExperimentalModel.Loading())
@@ -29,6 +39,9 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
                 is ExperimentalEvents.TomatoButton -> tomato()
                 is ExperimentalEvents.FlagButton -> flag()
             }
+        })
+        output.subscribe({
+            viewState.render(it)
         })
     }
 
@@ -48,11 +61,11 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
             val random = Random()
             val i = random.nextInt(4)
             when (i) {
-                0 -> viewState.render(ExperimentalModel.Error("No internet connection (error 0)"))
-                1 -> viewState.render(ExperimentalModel.Error("Request failed (error 1)"))
-                2 -> viewState.render(ExperimentalModel.Error("Nothing found (error 2)"))
-                3 -> viewState.render(ExperimentalModel.Error("Try again (error 3)"))
-                else -> viewState.render(ExperimentalModel.Error("Something went wrong (error common)"))
+                0 -> updateModel(ExperimentalModel.Error("No internet connection (error 0)"))
+                1 -> updateModel(ExperimentalModel.Error("Request failed (error 1)"))
+                2 -> updateModel(ExperimentalModel.Error("Nothing found (error 2)"))
+                3 -> updateModel(ExperimentalModel.Error("Try again (error 3)"))
+                else -> updateModel(ExperimentalModel.Error("Something went wrong (error common)"))
             }
         }, 2000)
     }
@@ -60,14 +73,14 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
     private fun potato() {
         val handler = Handler()
         handler.postDelayed({
-            viewState.render(ExperimentalModel.Potato())
+            updateModel(ExperimentalModel.Potato())
         }, 3000)
     }
 
     private fun tomato() {
         val handler = Handler()
         handler.postDelayed({
-            viewState.render(ExperimentalModel.Tomato())
+            updateModel(ExperimentalModel.Tomato())
         }, 5000)
     }
 
@@ -77,13 +90,13 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
             val random = Random()
             val i = random.nextInt(6)
             when (i) {
-                0 -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_australia_24dp, "AUSTRALIA"))
-                1 -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_germany_24dp, "GERMANY"))
-                2 -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_india_24dp, "INDIA"))
-                3 -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_italy_24dp, "ITALY"))
-                4 -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_united_kingdom_24dp, "UNITED KINGDOM"))
-                5 -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_united_states_24dp, "UNITED STATES"))
-                else -> viewState.render(ExperimentalModel.Flag(R.drawable.ic_filter_list_white_24dp, ":("))
+                0 -> updateModel(ExperimentalModel.Flag(R.drawable.ic_australia_24dp, "AUSTRALIA"))
+                1 -> updateModel(ExperimentalModel.Flag(R.drawable.ic_germany_24dp, "GERMANY"))
+                2 -> updateModel(ExperimentalModel.Flag(R.drawable.ic_india_24dp, "INDIA"))
+                3 -> updateModel(ExperimentalModel.Flag(R.drawable.ic_italy_24dp, "ITALY"))
+                4 -> updateModel(ExperimentalModel.Flag(R.drawable.ic_united_kingdom_24dp, "UNITED KINGDOM"))
+                5 -> updateModel(ExperimentalModel.Flag(R.drawable.ic_united_states_24dp, "UNITED STATES"))
+                else -> updateModel(ExperimentalModel.Flag(R.drawable.ic_filter_list_white_24dp, ":("))
             }
         }, 1000)
     }
