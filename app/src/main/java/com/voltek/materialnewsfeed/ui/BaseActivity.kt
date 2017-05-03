@@ -14,7 +14,8 @@ import io.reactivex.disposables.CompositeDisposable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 abstract class BaseActivity : MvpAppCompatActivity(),
-        Navigator, CompositeDisposableComponent {
+        Navigator,
+        CompositeDisposableComponent {
 
     // Holds all disposables with input events subscriptions
     override val mDisposable = CompositeDisposable()

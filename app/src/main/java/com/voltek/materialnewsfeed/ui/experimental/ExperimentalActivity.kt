@@ -10,7 +10,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.ui.BaseActivity
-import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalEvents
+import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalEvent
 import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalModel
 import kotlinx.android.synthetic.main.activity_experimental.*
 import timber.log.Timber
@@ -38,28 +38,28 @@ class ExperimentalActivity : BaseActivity(),
         // Button potato click
         RxView.clicks(btn_potato)
                 .subscribe({
-                    mPresenter.event(ExperimentalEvents.PotatoButton())
+                    mPresenter.event(ExperimentalEvent.PotatoButton())
                 })
                 .bind()
 
         // Button tomato click
         RxView.clicks(btn_tomato)
                 .subscribe({
-                    mPresenter.event(ExperimentalEvents.TomatoButton())
+                    mPresenter.event(ExperimentalEvent.TomatoButton())
                 })
                 .bind()
 
         // Button error click
         RxView.clicks(btn_error)
                 .subscribe({
-                    mPresenter.event(ExperimentalEvents.ErrorButton())
+                    mPresenter.event(ExperimentalEvent.ErrorButton())
                 })
                 .bind()
 
         // Button flag click
         RxView.clicks(btn_flag)
                 .subscribe({
-                    mPresenter.event(ExperimentalEvents.FlagButton())
+                    mPresenter.event(ExperimentalEvent.FlagButton())
                 })
                 .bind()
     }

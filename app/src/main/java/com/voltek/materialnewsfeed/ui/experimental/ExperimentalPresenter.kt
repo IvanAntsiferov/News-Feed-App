@@ -4,7 +4,7 @@ import android.os.Handler
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalEvents
+import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalEvent
 import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalModel
 import com.voltek.materialnewsfeed.ui.experimental.ExperimentalContract.ExperimentalView
 import io.reactivex.subjects.BehaviorSubject
@@ -19,12 +19,12 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
     private var mModel: ExperimentalModel = ExperimentalModel.Error("start state")
 
     // Receive input events from view
-    private val input: PublishSubject<ExperimentalEvents> = PublishSubject.create()
+    private val input: PublishSubject<ExperimentalEvent> = PublishSubject.create()
 
     // Emits new states and update model
     private val output: BehaviorSubject<ExperimentalModel> = BehaviorSubject.createDefault(mModel)
 
-    fun event(event: ExperimentalEvents) {
+    fun event(event: ExperimentalEvent) {
         input.onNext(event)
     }
 
@@ -38,10 +38,10 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
             Timber.d("input: " + it.javaClass.simpleName)
             viewState.render(ExperimentalModel.Loading())
             when (it) {
-                is ExperimentalEvents.ErrorButton -> error()
-                is ExperimentalEvents.PotatoButton -> potato()
-                is ExperimentalEvents.TomatoButton -> tomato()
-                is ExperimentalEvents.FlagButton -> flag()
+                is ExperimentalEvent.ErrorButton -> error()
+                is ExperimentalEvent.PotatoButton -> potato()
+                is ExperimentalEvent.TomatoButton -> tomato()
+                is ExperimentalEvent.FlagButton -> flag()
             }
         })
         output.subscribe({

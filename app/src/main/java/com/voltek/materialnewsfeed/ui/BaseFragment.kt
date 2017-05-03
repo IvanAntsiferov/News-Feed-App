@@ -7,7 +7,7 @@ import com.voltek.materialnewsfeed.mvi.CompositeDisposableComponent
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseFragment : MvpAppCompatFragment(),
-        CompositeDisposableComponent {
+        CompositeDisposableComponent{
 
     // Holds all disposables with input events subscriptions
     override val mDisposable = CompositeDisposable()

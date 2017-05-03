@@ -22,15 +22,15 @@ object ExperimentalContract {
         class Error(val message: String) : ExperimentalModel()
     }
 
-    sealed class ExperimentalEvents : BaseEvent {
+    sealed class ExperimentalEvent : BaseEvent {
 
-        class FlagButton : ExperimentalEvents()
+        class FlagButton : ExperimentalEvent()
 
-        class TomatoButton : ExperimentalEvents()
+        class TomatoButton : ExperimentalEvent()
 
-        class PotatoButton : ExperimentalEvents()
+        class PotatoButton : ExperimentalEvent()
 
-        class ErrorButton : ExperimentalEvents()
+        class ErrorButton : ExperimentalEvent()
     }
 
 

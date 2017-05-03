@@ -7,6 +7,10 @@ import com.voltek.materialnewsfeed.ui.BaseActivity
 
 class NewsSourcesActivity : BaseActivity() {
 
+    companion object {
+        const val TAG = "NewsSourcesActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generic)

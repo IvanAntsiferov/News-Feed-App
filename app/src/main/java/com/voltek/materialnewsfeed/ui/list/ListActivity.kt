@@ -11,6 +11,10 @@ import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : BaseActivity() {
 
+    companion object {
+        const val TAG = "ListActivity"
+    }
+
     private var mDualPane = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
