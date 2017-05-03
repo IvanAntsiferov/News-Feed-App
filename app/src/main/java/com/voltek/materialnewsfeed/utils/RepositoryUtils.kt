@@ -2,8 +2,10 @@ package com.voltek.materialnewsfeed.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.exception.NoConnectionException
 
+// TODO reorganize utils package
 object RepositoryUtils {
 
     /**
@@ -14,7 +16,7 @@ object RepositoryUtils {
         val networkInfo = cm.activeNetworkInfo
 
         if (networkInfo == null || !networkInfo.isConnected) {
-            throw NoConnectionException()
+            throw NoConnectionException(context.getString(R.string.error_no_connection))
         }
     }
 }

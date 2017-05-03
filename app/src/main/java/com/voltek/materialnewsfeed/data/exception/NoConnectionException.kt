@@ -1,3 +1,3 @@
 package com.voltek.materialnewsfeed.data.exception
 
-class NoConnectionException : Exception()
+class NoConnectionException(message: String) : Exception(message)

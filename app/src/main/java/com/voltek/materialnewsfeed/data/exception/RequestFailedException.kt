@@ -1,3 +1,3 @@
 package com.voltek.materialnewsfeed.data.exception
 
-class RequestFailedException : Exception()
+class RequestFailedException(message: String) : Exception(message)

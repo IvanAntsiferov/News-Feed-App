@@ -47,8 +47,6 @@ class ListFragment : BaseFragment(),
     }
 
     override fun render(model: ListModel) {
-        when (model) {
-
-        }
+        //
     }
 }

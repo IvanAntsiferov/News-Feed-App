@@ -36,11 +36,15 @@ class ArticlesRepository : DataProvider.Articles {
                 if (call.isSuccessful) {
                     emitter.onNext(call.body().articles)
                 } else {
-                    emitter.onError(RequestFailedException())
+                    emitter.onError(
+                            RequestFailedException(mContext.getString(R.string.error_request_failed))
+                    )
                 }
             }
         } else {
-            emitter.onError(NoNewsSourcesException())
+            emitter.onError(
+                    NoNewsSourcesException(mContext.getString(R.string.error_no_news_sources))
+            )
         }
 
         emitter.onComplete()
