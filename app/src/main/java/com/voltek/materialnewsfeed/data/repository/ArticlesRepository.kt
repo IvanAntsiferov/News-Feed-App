@@ -4,9 +4,14 @@ import android.content.Context
 import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.Utils.RepositoryUtils
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.data.entity.Source
+import com.voltek.materialnewsfeed.data.exception.NoConnectionException
+import com.voltek.materialnewsfeed.data.exception.NoNewsSourcesException
+import com.voltek.materialnewsfeed.data.exception.RequestFailedException
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -23,32 +28,25 @@ class ArticlesRepository : DataProvider.Articles {
     lateinit var mSourcesRepo: DataProvider.NewsSources
 
     override fun get(): Observable<List<Article>> = Observable.create {
+        RepositoryUtils.checkConnection(mContext)
+
         val emitter = it
 
         val sources = mSourcesRepo.getCategory(mContext.getString(R.string.category_enabled))
 
-        val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = cm.activeNetworkInfo
-        // If there is some news sources enabled and device has internet connection
         if (!sources.isEmpty()) {
-            if (networkInfo != null && networkInfo.isConnected) {
-                for (source in sources) {
-                    val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
-                    if (call.isSuccessful) {
-                        emitter.onNext(call.body().articles)
-                    } else {
-                        //call.errorBody()
-                        emitter.onError(Exception())
-                    }
+            for (source in sources) {
+                val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
+                if (call.isSuccessful) {
+                    emitter.onNext(call.body().articles)
+                } else {
+                    emitter.onError(RequestFailedException())
                 }
-            } else {
-                // No internet connection
-                emitter.onError(Exception())
             }
         } else {
-            // There is no news sources chosen
-            emitter.onError(Exception())
+            emitter.onError(NoNewsSourcesException())
         }
+
         emitter.onComplete()
     }
 }
