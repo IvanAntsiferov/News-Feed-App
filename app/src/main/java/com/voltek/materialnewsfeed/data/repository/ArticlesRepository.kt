@@ -1,28 +1,24 @@
 package com.voltek.materialnewsfeed.data.repository
 
 import android.content.Context
-import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.Utils.RepositoryUtils
+import com.voltek.materialnewsfeed.utils.RepositoryUtils
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Article
-import com.voltek.materialnewsfeed.data.entity.Source
-import com.voltek.materialnewsfeed.data.exception.NoConnectionException
 import com.voltek.materialnewsfeed.data.exception.NoNewsSourcesException
 import com.voltek.materialnewsfeed.data.exception.RequestFailedException
 import io.reactivex.Observable
 import javax.inject.Inject
 
-// TODO refactor ArticlesRepository
 class ArticlesRepository : DataProvider.Articles {
 
     @Inject
-    lateinit var mApi: NewsApi
+    lateinit var mContext: Context
 
     @Inject
-    lateinit var mContext: Context
+    lateinit var mApi: NewsApi
 
     @Inject
     lateinit var mSourcesRepo: DataProvider.NewsSources

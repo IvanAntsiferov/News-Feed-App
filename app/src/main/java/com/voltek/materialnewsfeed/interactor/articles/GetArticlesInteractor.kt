@@ -18,7 +18,6 @@ class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Sc
         NewsApp.interactorComponent.inject(this)
     }
 
-    override fun buildObservable(parameter: Unit?): Observable<List<Article>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun buildObservable(parameter: Unit?): Observable<List<Article>> =
+            mArticlesRepo.get()
 }

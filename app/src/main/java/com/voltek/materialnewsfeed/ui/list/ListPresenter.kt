@@ -3,10 +3,12 @@ package com.voltek.materialnewsfeed.ui.list
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.NewsApp
+import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.interactor.articles.GetArticlesInteractor
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListEvent
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListModel
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListView
+import io.reactivex.functions.Consumer
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
@@ -47,6 +49,17 @@ class ListPresenter : MvpPresenter<ListView>() {
         output.subscribe({
             viewState.render(it)
         })
+
+        mArticles.execute(
+                null,
+                Consumer {
+
+                },
+                Consumer {
+                    when (it) {
+
+                    }
+                })
     }
 
     override fun attachView(view: ListView?) {

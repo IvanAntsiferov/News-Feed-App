@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.Utils
+package com.voltek.materialnewsfeed.utils
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

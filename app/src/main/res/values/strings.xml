@@ -22,8 +22,9 @@
     <string name="category_sport">Sport</string>
     <string name="category_technology">Technology</string>
 
+    <string name="error_common">Something went wrong</string>
     <string name="error_no_connection">There is no internet connection</string>
-    <string name="error_empty_response">There is no news</string>
+    <string name="error_request_failed">Server does not respond</string>
     <string name="error_empty_details">An error occurred while loading article details</string>
 
 </resources>

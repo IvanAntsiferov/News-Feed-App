@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.Utils
+package com.voltek.materialnewsfeed.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

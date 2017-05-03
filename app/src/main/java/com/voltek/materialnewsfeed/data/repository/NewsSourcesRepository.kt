@@ -23,6 +23,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
     @Inject
     lateinit var mContext: Context
 
+    // TODO switch to single
     override fun getAll(): Observable<List<Source>> = Observable.create {
         val emitter = it
 
@@ -51,6 +52,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         emitter.onComplete()
     }
 
+    // TODO switch to single
     override fun getCategory(category: String): List<Source> {
         if (category == mContext.getString(R.string.category_all)) {
             return Source().queryAll()

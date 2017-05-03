@@ -1,6 +1,6 @@
 package com.voltek.materialnewsfeed.interactor
 
-import com.voltek.materialnewsfeed.Utils.CompositeDisposableComponent
+import com.voltek.materialnewsfeed.utils.CompositeDisposableComponent
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -18,11 +18,15 @@ abstract class BaseInteractor<ResultType, in ParameterType>(
     /**
      * @param parameter pass null, if parameter does not needed
      */
-    fun execute(parameter: ParameterType?, consumer: Consumer<ResultType>) {
+    fun execute(
+            parameter: ParameterType?,
+            onNextConsumer: Consumer<ResultType>,
+            onErrorConsumer: Consumer<Throwable>
+    ) {
         buildObservable(parameter)
                 .subscribeOn(jobScheduler)
                 .observeOn(uiScheduler)
-                .subscribe(consumer)
+                .subscribe(onNextConsumer, onErrorConsumer)
                 .bind()
     }
 
