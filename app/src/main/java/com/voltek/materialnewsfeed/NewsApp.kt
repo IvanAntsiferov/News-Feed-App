@@ -7,6 +7,8 @@ import com.voltek.materialnewsfeed.di.module.*
 import com.voltek.materialnewsfeed.navigation.RouterHolder
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorBinder
 import com.voltek.materialnewsfeed.navigation.proxy.Router
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
@@ -39,17 +41,16 @@ class NewsApp : Application() {
         super.onCreate()
 
         val appModule = AppModule(this)
-        val interactorModule = InteractorModule()
+        val interactorModule =
+                InteractorModule(Schedulers.computation(), AndroidSchedulers.mainThread())
         val networkModule = NetworkModule(BASE_URL)
         val repositoryModule = RepositoryModule()
-        val schedulerModule = SchedulerModule()
 
         presenterComponent = DaggerPresenterComponent.builder()
                 .interactorModule(interactorModule)
                 .build()
 
         interactorComponent = DaggerInteractorComponent.builder()
-                .schedulerModule(schedulerModule)
                 .repositoryModule(repositoryModule)
                 .build()
 

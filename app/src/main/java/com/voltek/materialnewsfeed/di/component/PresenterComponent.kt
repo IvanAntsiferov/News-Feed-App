@@ -1,6 +1,7 @@
 package com.voltek.materialnewsfeed.di.component
 
 import com.voltek.materialnewsfeed.di.module.InteractorModule
+import com.voltek.materialnewsfeed.ui.list.ListPresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,5 +11,5 @@ import javax.inject.Singleton
 )
 interface PresenterComponent {
 
-    //fun inject(presenter: )
+    fun inject(presenter: ListPresenter)
 }

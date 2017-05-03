@@ -24,6 +24,12 @@ class ListActivity : BaseActivity() {
         title = getString(R.string.title_list)
 
         mDualPane = details_fragment_container != null
+
+        if (savedInstanceState == null)
+            replaceFragment(
+                    ListFragment.newInstance(),
+                    R.id.list_fragment_container,
+                    ListFragment.TAG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
