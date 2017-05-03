@@ -38,28 +38,28 @@ class ExperimentalActivity : BaseActivity(),
         // Button potato click
         RxView.clicks(btn_potato)
                 .subscribe({
-                    mPresenter.input.onNext(ExperimentalEvents.PotatoButton())
+                    mPresenter.event(ExperimentalEvents.PotatoButton())
                 })
                 .bind()
 
         // Button tomato click
         RxView.clicks(btn_tomato)
                 .subscribe({
-                    mPresenter.input.onNext(ExperimentalEvents.TomatoButton())
+                    mPresenter.event(ExperimentalEvents.TomatoButton())
                 })
                 .bind()
 
         // Button error click
         RxView.clicks(btn_error)
                 .subscribe({
-                    mPresenter.input.onNext(ExperimentalEvents.ErrorButton())
+                    mPresenter.event(ExperimentalEvents.ErrorButton())
                 })
                 .bind()
 
         // Button flag click
         RxView.clicks(btn_flag)
                 .subscribe({
-                    mPresenter.input.onNext(ExperimentalEvents.FlagButton())
+                    mPresenter.event(ExperimentalEvents.FlagButton())
                 })
                 .bind()
     }

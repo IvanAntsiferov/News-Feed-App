@@ -1,4 +1,4 @@
-package com.junto.boxy.ui
+package com.voltek.materialnewsfeed.mvi
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable
 interface CompositeDisposableComponent {
 
     /**
-     * Holds Disposables of input events
+     * Holds Disposables
      */
     val mDisposable: CompositeDisposable
 
@@ -16,7 +16,7 @@ interface CompositeDisposableComponent {
     fun Disposable.bind() = mDisposable.add(this)
 
     /**
-     * Unsubscribe presenter from input events
+     * Unsubscribe when subscriptions no longer needed
      */
     fun resetCompositeDisposable() {
         mDisposable.clear()

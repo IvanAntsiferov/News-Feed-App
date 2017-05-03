@@ -19,10 +19,14 @@ class ExperimentalPresenter : MvpPresenter<ExperimentalView>() {
     private var mModel: ExperimentalModel = ExperimentalModel.Error("start state")
 
     // Receive input events from view
-    val input: PublishSubject<ExperimentalEvents> = PublishSubject.create()
+    private val input: PublishSubject<ExperimentalEvents> = PublishSubject.create()
 
-    // Emit new states and update model
+    // Emits new states and update model
     private val output: BehaviorSubject<ExperimentalModel> = BehaviorSubject.createDefault(mModel)
+
+    fun event(event: ExperimentalEvents) {
+        input.onNext(event)
+    }
 
     private fun updateModel(model: ExperimentalModel) {
         mModel = model

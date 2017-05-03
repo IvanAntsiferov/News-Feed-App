@@ -5,7 +5,7 @@ import android.content.Intent
 import android.support.annotation.IdRes
 import android.support.v7.widget.Toolbar
 import com.arellomobile.mvp.MvpAppCompatActivity
-import com.junto.boxy.ui.CompositeDisposableComponent
+import com.voltek.materialnewsfeed.mvi.CompositeDisposableComponent
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity

@@ -3,7 +3,7 @@ package com.voltek.materialnewsfeed.ui
 import android.support.annotation.StringRes
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.junto.boxy.ui.CompositeDisposableComponent
+import com.voltek.materialnewsfeed.mvi.CompositeDisposableComponent
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseFragment : MvpAppCompatFragment(),
