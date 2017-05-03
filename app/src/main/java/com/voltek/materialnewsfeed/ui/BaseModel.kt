@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.mvi
+package com.voltek.materialnewsfeed.ui
 
 /**
  *  Implement this interface in model sealed classes

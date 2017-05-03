@@ -1,6 +1,6 @@
 package com.voltek.materialnewsfeed.interactor
 
-import com.voltek.materialnewsfeed.mvi.CompositeDisposableComponent
+import com.voltek.materialnewsfeed.Utils.CompositeDisposableComponent
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable

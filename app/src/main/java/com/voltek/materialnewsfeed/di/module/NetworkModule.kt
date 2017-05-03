@@ -10,12 +10,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class NetworkModule(val baseUrl: String) {
 
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
-            .baseUrl(NewsApp.BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

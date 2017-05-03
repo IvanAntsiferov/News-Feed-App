@@ -1,4 +1,4 @@
-package com.voltek.materialnewsfeed.mvi
+package com.voltek.materialnewsfeed.ui
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy

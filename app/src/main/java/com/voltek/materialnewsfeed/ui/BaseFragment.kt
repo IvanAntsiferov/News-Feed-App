@@ -3,11 +3,11 @@ package com.voltek.materialnewsfeed.ui
 import android.support.annotation.StringRes
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.voltek.materialnewsfeed.mvi.CompositeDisposableComponent
+import com.voltek.materialnewsfeed.Utils.CompositeDisposableComponent
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseFragment : MvpAppCompatFragment(),
-        CompositeDisposableComponent{
+        CompositeDisposableComponent {
 
     // Holds all disposables with input events subscriptions
     override val mDisposable = CompositeDisposable()

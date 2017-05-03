@@ -16,7 +16,7 @@ class NewsApp : Application() {
     companion object {
 
         // Const
-        const val BASE_URL = "https://newsapi.org/"
+        private const val BASE_URL = "https://newsapi.org/"
 
         private const val FONT_PATH = "fonts/Roboto-Regular.ttf"
 
@@ -40,7 +40,7 @@ class NewsApp : Application() {
 
         val appModule = AppModule(this)
         val interactorModule = InteractorModule()
-        val networkModule = NetworkModule()
+        val networkModule = NetworkModule(BASE_URL)
         val repositoryModule = RepositoryModule()
         val schedulerModule = SchedulerModule()
 
