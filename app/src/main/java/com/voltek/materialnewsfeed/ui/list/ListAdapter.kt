@@ -42,16 +42,10 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
 
     override fun getItemCount(): Int = mItems.size
 
-    fun clear() {
-        mItems.clear()
-        notifyDataSetChanged()
-    }
 
     fun replace(items: List<Article>) {
         mItems.clear()
         mItems.addAll(items)
         notifyDataSetChanged()
     }
-
-    fun getItems(): List<Article> = mItems
 }

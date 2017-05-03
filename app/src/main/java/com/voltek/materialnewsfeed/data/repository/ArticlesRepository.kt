@@ -2,6 +2,7 @@ package com.voltek.materialnewsfeed.data.repository
 
 import android.content.Context
 import com.voltek.materialnewsfeed.BuildConfig
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.utils.RepositoryUtils
 import com.voltek.materialnewsfeed.data.DataProvider
@@ -23,9 +24,12 @@ class ArticlesRepository : DataProvider.Articles {
     @Inject
     lateinit var mSourcesRepo: DataProvider.NewsSources
 
+    init {
+        NewsApp.dataComponent.inject(this)
+    }
+
     override fun get(): Observable<List<Article>> = Observable.create {
         RepositoryUtils.checkConnection(mContext)
-
         val emitter = it
 
         val sources = mSourcesRepo.getCategory(mContext.getString(R.string.category_enabled))

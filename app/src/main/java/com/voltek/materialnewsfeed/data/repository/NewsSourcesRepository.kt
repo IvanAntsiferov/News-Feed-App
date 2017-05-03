@@ -7,6 +7,7 @@ import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
@@ -22,6 +23,10 @@ class NewsSourcesRepository : DataProvider.NewsSources {
 
     @Inject
     lateinit var mContext: Context
+
+    init {
+        NewsApp.dataComponent.inject(this)
+    }
 
     // TODO switch to single
     override fun getAll(): Observable<List<Source>> = Observable.create {

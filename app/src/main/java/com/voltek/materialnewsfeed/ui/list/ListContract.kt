@@ -10,24 +10,16 @@ import com.voltek.materialnewsfeed.ui.BaseView
 object ListContract {
 
     class ListModel : BaseModel {
-        var showLoading: Boolean = false
-        var data: ArrayList<Article> = ArrayList()
+        var loading: Boolean = false
+        var articles: ArrayList<Article> = ArrayList()
         var error: String = ""
+
+        fun addData(data: List<Article>) {
+            articles.addAll(data)
+        }
     }
 
-    /*sealed class ListModel : BaseModel {
-
-        class Loading : ListModel()
-
-        class ResultLoading(val data: List<Article>) : ListModel()
-
-        class Result(val data: List<Article>) : ListModel()
-
-        class ErrorNoData(val error: String) : ListModel()
-
-        class ErrorWithData(val error: String, val data: List<Article>) : ListModel()
-    }*/
-
+    // TODO make independent events system
     sealed class ListEvent : BaseEvent {
 
         class OpenDetails(val article: Article) : ListEvent()

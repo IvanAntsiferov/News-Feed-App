@@ -38,9 +38,8 @@ class ListPresenter : MvpPresenter<ListView>() {
         input.onNext(event)
     }
 
-    // Update and apply view model
-    private fun updateModel(model: ListModel) {
-        mModel = model
+    // Update and apply news view model
+    private fun updateModel() {
         output.onNext(mModel)
     }
 
@@ -54,6 +53,15 @@ class ListPresenter : MvpPresenter<ListView>() {
                 }
                 is ListEvent.OpenNewsSources -> {
                     mRouter.execute(CommandStartActivity(NewsSourcesActivity()))
+                }
+                is ListEvent.SwipeToRefresh -> {
+                    if (!mModel.loading) {
+                        mModel.articles.clear()
+                        mModel.loading = true
+                        mModel.error = ""
+                        updateModel()
+                        loadArticles()
+                    }
                 }
             }
         })
@@ -79,13 +87,21 @@ class ListPresenter : MvpPresenter<ListView>() {
         mArticles.execute(
                 null,
                 Consumer {
-
+                    mModel.addData(it)
+                    updateModel()
                 },
                 Consumer {
-
+                    mModel.error = it.message ?: ""
+                    finishLoading()
                 },
                 Action {
-
+                    finishLoading()
                 })
+    }
+
+    private fun finishLoading() {
+        mModel.loading = false
+        mArticles.unsubscribe()
+        updateModel()
     }
 }
