@@ -3,13 +3,11 @@ package com.voltek.materialnewsfeed.ui.experimental
 import android.support.annotation.IdRes
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.voltek.materialnewsfeed.ui.BaseEvent
-import com.voltek.materialnewsfeed.ui.BaseModel
 import com.voltek.materialnewsfeed.ui.BaseView
 
 object ExperimentalContract {
 
-    sealed class ExperimentalModel : BaseModel {
+    sealed class ExperimentalModel {
 
         class Loading : ExperimentalModel()
 
@@ -22,7 +20,7 @@ object ExperimentalContract {
         class Error(val message: String) : ExperimentalModel()
     }
 
-    sealed class ExperimentalEvent : BaseEvent {
+    sealed class ExperimentalEvent {
 
         class FlagButton : ExperimentalEvent()
 

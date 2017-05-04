@@ -13,7 +13,7 @@ import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
-import com.voltek.materialnewsfeed.ui.list.ListContract.ListEvent
+import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListModel
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListView
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -49,19 +49,19 @@ class ListFragment : BaseFragment(),
         RxToolbar.itemClicks(activity.toolbar)
                 .subscribe({
                     when (it.itemId) {
-                        R.id.action_news_sources -> mPresenter.event(ListEvent.OpenNewsSources())
+                        R.id.action_news_sources -> mPresenter.notify(Event.OpenNewsSources())
                     }
                 })
                 .bind()
 
         // On article click
         mAdapter.getOnItemClickObservable()
-                .subscribe({ mPresenter.event(ListEvent.OpenDetails(it)) })
+                .subscribe({ mPresenter.notify(Event.OpenArticleDetails(it)) })
                 .bind()
 
         // Swipe to refresh
         RxSwipeRefreshLayout.refreshes(swipe_container)
-                .subscribe({ mPresenter.event(ListEvent.SwipeToRefresh()) })
+                .subscribe({ mPresenter.notify(Event.Refresh()) })
                 .bind()
     }
 

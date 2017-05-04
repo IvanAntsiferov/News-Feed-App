@@ -6,7 +6,7 @@ import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.interactor.articles.GetArticlesInteractor
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Router
-import com.voltek.materialnewsfeed.ui.list.ListContract.ListEvent
+import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListModel
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListView
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity
@@ -29,13 +29,13 @@ class ListPresenter : MvpPresenter<ListView>() {
     private var mModel: ListModel = ListModel()
 
     // Receive input events from view
-    private val input: PublishSubject<ListEvent> = PublishSubject.create()
+    private val input: PublishSubject<Event> = PublishSubject.create()
 
     // Emits new states and update model
     private val output: BehaviorSubject<ListModel> = BehaviorSubject.createDefault(mModel)
 
     // View notify presenter about events using this method
-    fun event(event: ListEvent) {
+    fun notify(event: Event) {
         input.onNext(event)
     }
 
@@ -49,13 +49,13 @@ class ListPresenter : MvpPresenter<ListView>() {
 
         input.subscribe({
             when (it) {
-                is ListEvent.OpenDetails -> {
+                is Event.OpenArticleDetails -> {
                     mRouter.execute(CommandOpenDetails(it.article))
                 }
-                is ListEvent.OpenNewsSources -> {
+                is Event.OpenNewsSources -> {
                     mRouter.execute(CommandStartActivity(NewsSourcesActivity()))
                 }
-                is ListEvent.SwipeToRefresh -> {
+                is Event.Refresh -> {
                     if (!mModel.loading) {
                         mModel.articles.clear()
                         mModel.loading = true
