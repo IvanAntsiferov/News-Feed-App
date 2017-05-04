@@ -2,7 +2,6 @@ package com.voltek.materialnewsfeed.data.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.os.NetworkOnMainThreadException
 import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
@@ -12,10 +11,11 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Source
+import com.voltek.materialnewsfeed.interactor.Result
+import com.voltek.materialnewsfeed.utils.RepositoryUtils
 import io.reactivex.Observable
 import javax.inject.Inject
 
-// TODO refactor NewsSourcesRepository
 class NewsSourcesRepository : DataProvider.NewsSources {
 
     @Inject
@@ -28,43 +28,43 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         NewsApp.dataComponent.inject(this)
     }
 
-    // TODO switch to single
-    override fun getAll(): Observable<List<Source>> = Observable.create {
+    override fun getAll(): Observable<Result<List<Source>>> = Observable.create {
         val emitter = it
 
         val sourcesCache = Source().queryAll()
 
         if (sourcesCache.isEmpty()) {
-            val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val networkInfo = cm.activeNetworkInfo
+            try {
+                RepositoryUtils.checkConnection(mContext)
 
-            if (networkInfo != null && networkInfo.isConnected) {
                 val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
                 if (call.isSuccessful) {
                     call.body().sources.saveAll()
-                    emitter.onNext(Source().queryAll())
+                    emitter.onNext(Result(Source().queryAll()))
                 } else {
-                    //call.errorBody()
-                    emitter.onError(NetworkOnMainThreadException())
+                    emitter.onNext(Result(null, mContext.getString(R.string.error_request_failed)))
                 }
-            } else {
-                // No internet connection
-                emitter.onError(NetworkOnMainThreadException())
+            } catch (e: Exception) {
+                emitter.onNext(Result(null, mContext.getString(R.string.error_no_connection)))
             }
         } else {
-            emitter.onNext(sourcesCache)
+            emitter.onNext(Result(sourcesCache))
         }
+
         emitter.onComplete()
     }
 
-    // TODO switch to single
-    override fun getCategory(category: String): List<Source> {
+    override fun getCategory(category: String): Observable<Result<List<Source>>> = Observable.create {
+        val emitter = it
+
         if (category == mContext.getString(R.string.category_all)) {
-            return Source().queryAll()
+            emitter.onNext(Result(Source().queryAll()))
         } else if (category == mContext.getString(R.string.category_enabled)) {
-            return Source().query { query -> query.equalTo("isEnabled", true) }
+            emitter.onNext(Result(Source().query({ query -> query.equalTo("isEnabled", true) })))
         } else {
-            return Source().query { query -> query.equalTo("category", category) }
+            emitter.onNext(Result(Source().query({ query -> query.equalTo("category", category) })))
         }
+
+        emitter.onComplete()
     }
 }

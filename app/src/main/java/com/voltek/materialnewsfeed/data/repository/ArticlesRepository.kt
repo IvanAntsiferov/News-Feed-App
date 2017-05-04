@@ -6,7 +6,9 @@ import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.utils.RepositoryUtils
 import com.voltek.materialnewsfeed.data.DataProvider
+import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.data.networking.NewsApi
+import com.voltek.materialnewsfeed.interactor.Result
 import com.voltek.materialnewsfeed.interactor.articles.ArticlesResult
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -26,7 +28,7 @@ class ArticlesRepository : DataProvider.Articles {
         NewsApp.dataComponent.inject(this)
     }
 
-    override fun get(): Observable<ArticlesResult> = Observable.create {
+    override fun get(): Observable<Result<List<Article>>> = Observable.create {
         RepositoryUtils.checkConnection(mContext)
         val emitter = it
 

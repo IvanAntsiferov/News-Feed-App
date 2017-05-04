@@ -89,7 +89,7 @@ class ListPresenter : MvpPresenter<ListView>() {
         mArticles.execute(
                 null,
                 Consumer {
-                    mModel.addData(it.articles)
+                    mModel.addData(it.data?.articles)
                     mModel.message = it.message
                     updateModel()
                 },
