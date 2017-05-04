@@ -20,9 +20,10 @@ import javax.inject.Inject
 class ListPresenter : MvpPresenter<ListView>() {
 
     @Inject
-    lateinit var mArticles: GetArticlesInteractor
+    lateinit var mRouter: Router
 
-    private val mRouter: Router = NewsApp.getRouter()
+    @Inject
+    lateinit var mArticles: GetArticlesInteractor
 
     // Holds current model through full presenter lifecycle
     private var mModel: ListModel = ListModel()

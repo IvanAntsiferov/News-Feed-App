@@ -42,7 +42,6 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
 
     override fun getItemCount(): Int = mItems.size
 
-
     fun replace(items: List<Article>) {
         mItems.clear()
         mItems.addAll(items)
