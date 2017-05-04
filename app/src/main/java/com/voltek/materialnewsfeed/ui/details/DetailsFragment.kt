@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bumptech.glide.Glide
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsView
+import kotlinx.android.synthetic.main.fragment_details.*
 import org.parceler.Parcels
 
 class DetailsFragment : BaseFragment(),
- DetailsView{
+        DetailsView {
 
     companion object {
         const val TAG = "DetailsFragmentTag"
@@ -50,6 +52,22 @@ class DetailsFragment : BaseFragment(),
     }
 
     override fun render(model: DetailsContract.DetailsModel) {
-        //
+        if (model.articleLoaded) {
+            Glide.with(context).load(model.urlToImage).into(im_image)
+            tv_author.text = model.author
+            tv_title.text = model.title
+            tv_published_at.text = model.publishedAt
+            tv_description.text = model.description
+
+            tv_message.text = ""
+        } else {
+            im_image.setImageResource(android.R.color.transparent)
+            tv_author.text = ""
+            tv_title.text = ""
+            tv_published_at.text = ""
+            tv_description.text = ""
+
+            tv_message.text = getString(R.string.error_empty_details)
+        }
     }
 }

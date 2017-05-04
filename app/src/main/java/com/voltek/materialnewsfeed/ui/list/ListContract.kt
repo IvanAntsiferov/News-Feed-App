@@ -10,7 +10,7 @@ object ListContract {
     class ListModel {
         var loading: Boolean = false
         var articles: ArrayList<Article> = ArrayList()
-        var error: String = ""
+        var message: String = ""
 
         fun addData(data: List<Article>?) {
             if (data != null && !data.isEmpty())

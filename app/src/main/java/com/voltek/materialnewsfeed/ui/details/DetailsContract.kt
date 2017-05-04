@@ -7,13 +7,13 @@ import com.voltek.materialnewsfeed.ui.BaseView
 object DetailsContract {
 
     class DetailsModel {
-        val author: String = ""
-        val title: String = ""
-        val description: String = ""
-        val urlToImage: String = ""
-        val publishedAt: String = ""
+        var articleLoaded = false
 
-        val message: String = ""
+        var author: String = ""
+        var title: String = ""
+        var description: String = ""
+        var urlToImage: String = ""
+        var publishedAt: String = ""
     }
 
     interface DetailsView : BaseView {

@@ -74,18 +74,18 @@ class ListFragment : BaseFragment(),
 
         mAdapter.replace(model.articles)
 
-        if (!model.error.isEmpty()) {
+        if (!model.message.isEmpty()) {
             if (model.articles.isEmpty()) {
-                tv_empty_state.text = model.error
-                tv_empty_state.visibility = VISIBLE
+                tv_message.text = model.message
+                tv_message.visibility = VISIBLE
             } else {
-                tv_empty_state.visibility = GONE
-                tv_empty_state.text = ""
-                toast(model.error)
+                tv_message.visibility = GONE
+                tv_message.text = ""
+                toast(model.message)
             }
         } else {
-            tv_empty_state.visibility = GONE
-            tv_empty_state.text = ""
+            tv_message.visibility = GONE
+            tv_message.text = ""
         }
     }
 }

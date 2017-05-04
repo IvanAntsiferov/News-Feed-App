@@ -83,18 +83,18 @@ class ListPresenter : MvpPresenter<ListView>() {
     private fun loadArticles() {
         mModel.articles.clear()
         mModel.loading = true
-        mModel.error = ""
+        mModel.message = ""
         updateModel()
 
         mArticles.execute(
                 null,
                 Consumer {
                     mModel.addData(it.articles)
-                    mModel.error = it.message
+                    mModel.message = it.message
                     updateModel()
                 },
                 Consumer {
-                    mModel.error = it.message ?: ""
+                    mModel.message = it.message ?: ""
                     finishLoading()
                 },
                 Action {
