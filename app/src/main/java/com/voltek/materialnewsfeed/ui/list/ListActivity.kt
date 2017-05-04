@@ -1,5 +1,6 @@
 package com.voltek.materialnewsfeed.ui.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.voltek.materialnewsfeed.R
@@ -7,7 +8,10 @@ import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.ui.BaseActivity
+import com.voltek.materialnewsfeed.ui.details.DetailsActivity
+import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import kotlinx.android.synthetic.main.activity_list.*
+import org.parceler.Parcels
 
 class ListActivity : BaseActivity() {
 
@@ -51,14 +55,14 @@ class ListActivity : BaseActivity() {
 
     private fun openDetails(article: Article) {
         if (mDualPane) {
-            /*replaceFragment(
+            replaceFragment(
                     DetailsFragment.newInstance(article),
                     R.id.details_fragment_container,
-                    DetailsFragment.TAG)*/
+                    DetailsFragment.TAG)
         } else {
-            /*val intent = Intent(this, DetailsActivity::class.java)
+            val intent = Intent(this, DetailsActivity::class.java)
             intent.putExtra(DetailsFragment.ARG_ARTICLE, Parcels.wrap(article))
-            startActivity(intent)*/
+            startActivity(intent)
         }
     }
 }
