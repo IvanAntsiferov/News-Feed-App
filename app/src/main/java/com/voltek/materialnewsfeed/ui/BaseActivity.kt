@@ -36,7 +36,7 @@ abstract class BaseActivity : MvpAppCompatActivity(),
 
     // Base navigator commands
     protected fun startActivity(command: CommandStartActivity) {
-        val intent = Intent(this, command.activity.javaClass)
+        val intent = Intent(this, command.activity)
 
         if (command.args != null)
             intent.putExtras(command.args)
