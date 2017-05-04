@@ -2,7 +2,6 @@ package com.voltek.materialnewsfeed.interactor.articles
 
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.DataProvider
-import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.interactor.BaseInteractor
 import io.reactivex.Observable
 import io.reactivex.Scheduler
