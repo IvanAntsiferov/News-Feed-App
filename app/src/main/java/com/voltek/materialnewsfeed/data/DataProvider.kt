@@ -12,13 +12,13 @@ object DataProvider {
 
     interface Articles {
 
-        fun get(): Observable<Result<List<Article>>>
+        fun get(sources: List<Source>): Observable<Result<List<Article>?>>
     }
 
     interface NewsSources {
 
-        fun getAll(): Observable<Result<List<Source>>>
+        fun getAll(): Observable<Result<List<Source>?>>
 
-        fun getCategory(category: String): Observable<Result<List<Source>>>
+        fun getCategory(category: String): Observable<Result<List<Source>?>>
     }
 }

@@ -7,7 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
 
-abstract class BaseInteractor<ResultType : Any, in ParameterType>(
+abstract class BaseInteractor<ResultType : Any?, in ParameterType>(
         protected val jobScheduler: Scheduler,
         protected val uiScheduler: Scheduler
 ) : CompositeDisposableComponent {

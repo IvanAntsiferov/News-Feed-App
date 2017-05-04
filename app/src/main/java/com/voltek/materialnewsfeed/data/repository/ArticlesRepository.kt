@@ -7,9 +7,9 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.utils.RepositoryUtils
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.interactor.Result
-import com.voltek.materialnewsfeed.interactor.articles.ArticlesResult
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -28,20 +28,18 @@ class ArticlesRepository : DataProvider.Articles {
         NewsApp.dataComponent.inject(this)
     }
 
-    override fun get(): Observable<Result<List<Article>>> = Observable.create {
+    override fun get(sources: List<Source>): Observable<Result<List<Article>?>> = Observable.create {
         RepositoryUtils.checkConnection(mContext)
         val emitter = it
-
-        val sources = mSourcesRepo.getCategory(mContext.getString(R.string.category_enabled))
 
         if (!sources.isEmpty()) {
             for (source in sources) {
                 val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
                 if (call.isSuccessful) {
-                    emitter.onNext(ArticlesResult(call.body().articles))
+                    emitter.onNext(Result(call.body().articles))
                 } else {
                     emitter.onNext(
-                            ArticlesResult(
+                            Result(
                                     null,
                                     mContext.getString(R.string.error_retrieve_failed, source.name)
                             )

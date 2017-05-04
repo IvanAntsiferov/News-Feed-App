@@ -1,7 +1,6 @@
 package com.voltek.materialnewsfeed.data.repository
 
 import android.content.Context
-import android.net.ConnectivityManager
 import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
@@ -28,7 +27,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         NewsApp.dataComponent.inject(this)
     }
 
-    override fun getAll(): Observable<Result<List<Source>>> = Observable.create {
+    override fun getAll(): Observable<Result<List<Source>?>> = Observable.create {
         val emitter = it
 
         val sourcesCache = Source().queryAll()
@@ -54,7 +53,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         emitter.onComplete()
     }
 
-    override fun getCategory(category: String): Observable<Result<List<Source>>> = Observable.create {
+    override fun getCategory(category: String): Observable<Result<List<Source>?>> = Observable.create {
         val emitter = it
 
         if (category == mContext.getString(R.string.category_all)) {
