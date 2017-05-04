@@ -15,10 +15,14 @@ class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Sc
     @Inject
     lateinit var mArticlesRepo: DataProvider.Articles
 
+    @Inject
+    lateinit var mNewsSourcesRepo: DataProvider.NewsSources
+
     init {
         NewsApp.interactorComponent.inject(this)
     }
 
     override fun buildObservable(parameter: Unit?): Observable<Result<List<Article>?>> =
-            mArticlesRepo.get()
+            mNewsSourcesRepo.getCategory("")
+                    .flatMap { mArticlesRepo.get(it.data ?: ArrayList()) }
 }
