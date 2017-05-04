@@ -42,7 +42,7 @@ ext {
     daggerVersion = '2.10'
     glideVersion = '3.7.0'
     hawkVersion = '2.0.1'
-    kotlinRealmExtensionsVersion = '1.0.6'
+    kotlinRealmExtensionsVersion = '1.0.7'
     parcelerVersion = '1.1.6'
     timberVersion = '4.5.1'
     calligraphyVersion = '2.2.0'

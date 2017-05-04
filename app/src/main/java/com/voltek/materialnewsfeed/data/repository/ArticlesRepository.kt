@@ -4,7 +4,7 @@ import android.content.Context
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.utils.RepositoryUtils
+import com.voltek.materialnewsfeed.utils.NetworkUtils
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.data.entity.Source
@@ -29,7 +29,7 @@ class ArticlesRepository : DataProvider.Articles {
     }
 
     override fun get(sources: List<Source>): Observable<Result<List<Article>?>> = Observable.create {
-        RepositoryUtils.checkConnection(mContext)
+        NetworkUtils.checkConnection(mContext)
         val emitter = it
 
         if (!sources.isEmpty()) {

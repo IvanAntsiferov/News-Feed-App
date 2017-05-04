@@ -80,6 +80,10 @@ class ListPresenter : MvpPresenter<ListView>() {
         super.detachView(view)
     }
 
+    override fun onDestroy() {
+        mArticles.unsubscribe()
+    }
+
     private fun loadArticles() {
         mModel.articles.clear()
         mModel.loading = true

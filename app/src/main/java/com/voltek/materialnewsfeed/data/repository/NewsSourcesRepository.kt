@@ -11,7 +11,7 @@ import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.interactor.Result
-import com.voltek.materialnewsfeed.utils.RepositoryUtils
+import com.voltek.materialnewsfeed.utils.NetworkUtils
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -34,7 +34,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
 
         if (sourcesCache.isEmpty()) {
             try {
-                RepositoryUtils.checkConnection(mContext)
+                NetworkUtils.checkConnection(mContext)
 
                 val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
                 if (call.isSuccessful) {

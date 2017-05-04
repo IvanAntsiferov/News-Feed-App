@@ -19,7 +19,7 @@ class DetailsFragment : BaseFragment(),
         DetailsView {
 
     companion object {
-        const val TAG = "DetailsFragmentTag"
+        const val TAG = "DetailsFragment"
 
         const val ARG_ARTICLE = "ARG_ARTICLE"
 

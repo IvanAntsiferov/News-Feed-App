@@ -23,7 +23,7 @@ class ListFragment : BaseFragment(),
         ListView {
 
     companion object {
-        const val TAG = "ListFragmentTag"
+        const val TAG = "ListFragment"
 
         fun newInstance() = ListFragment()
     }

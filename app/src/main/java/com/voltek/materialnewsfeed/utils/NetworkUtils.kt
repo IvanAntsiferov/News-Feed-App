@@ -4,8 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import com.voltek.materialnewsfeed.R
 
-// TODO reorganize utils package
-object RepositoryUtils {
+object NetworkUtils {
 
     /**
      * @throws Exception
