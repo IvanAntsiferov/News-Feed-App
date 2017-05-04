@@ -12,8 +12,9 @@ object ListContract {
         var articles: ArrayList<Article> = ArrayList()
         var error: String = ""
 
-        fun addData(data: List<Article>) {
-            articles.addAll(data)
+        fun addData(data: List<Article>?) {
+            if (data != null && !data.isEmpty())
+                articles.addAll(data)
         }
     }
 

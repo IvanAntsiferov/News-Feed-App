@@ -9,7 +9,7 @@ import io.reactivex.Scheduler
 import javax.inject.Inject
 
 class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Scheduler)
-    : BaseInteractor<List<Article>, Unit>(jobScheduler, uiScheduler) {
+    : BaseInteractor<ArticlesResult, Unit>(jobScheduler, uiScheduler) {
 
     @Inject
     lateinit var mArticlesRepo: DataProvider.Articles
@@ -18,6 +18,5 @@ class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Sc
         NewsApp.interactorComponent.inject(this)
     }
 
-    override fun buildObservable(parameter: Unit?): Observable<List<Article>> =
-            mArticlesRepo.get()
+    override fun buildObservable(parameter: Unit?): Observable<ArticlesResult> = mArticlesRepo.get()
 }

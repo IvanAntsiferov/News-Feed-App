@@ -57,10 +57,6 @@ class ListPresenter : MvpPresenter<ListView>() {
                 }
                 is Event.Refresh -> {
                     if (!mModel.loading) {
-                        mModel.articles.clear()
-                        mModel.loading = true
-                        mModel.error = ""
-                        updateModel()
                         loadArticles()
                     }
                 }
@@ -85,10 +81,16 @@ class ListPresenter : MvpPresenter<ListView>() {
     }
 
     private fun loadArticles() {
+        mModel.articles.clear()
+        mModel.loading = true
+        mModel.error = ""
+        updateModel()
+
         mArticles.execute(
                 null,
                 Consumer {
-                    mModel.addData(it)
+                    mModel.addData(it.articles)
+                    mModel.error = it.message
                     updateModel()
                 },
                 Consumer {

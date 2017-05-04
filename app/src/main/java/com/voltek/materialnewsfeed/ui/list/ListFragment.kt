@@ -78,8 +78,7 @@ class ListFragment : BaseFragment(),
             if (model.articles.isEmpty()) {
                 tv_empty_state.text = model.error
                 tv_empty_state.visibility = VISIBLE
-            }
-            else {
+            } else {
                 tv_empty_state.visibility = GONE
                 tv_empty_state.text = ""
                 toast(model.error)

@@ -7,9 +7,7 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.utils.RepositoryUtils
 import com.voltek.materialnewsfeed.data.DataProvider
 import com.voltek.materialnewsfeed.data.networking.NewsApi
-import com.voltek.materialnewsfeed.data.entity.Article
-import com.voltek.materialnewsfeed.data.exception.NoNewsSourcesException
-import com.voltek.materialnewsfeed.data.exception.RequestFailedException
+import com.voltek.materialnewsfeed.interactor.articles.ArticlesResult
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -28,7 +26,7 @@ class ArticlesRepository : DataProvider.Articles {
         NewsApp.dataComponent.inject(this)
     }
 
-    override fun get(): Observable<List<Article>> = Observable.create {
+    override fun get(): Observable<ArticlesResult> = Observable.create {
         RepositoryUtils.checkConnection(mContext)
         val emitter = it
 
@@ -38,17 +36,18 @@ class ArticlesRepository : DataProvider.Articles {
             for (source in sources) {
                 val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
                 if (call.isSuccessful) {
-                    emitter.onNext(call.body().articles)
+                    emitter.onNext(ArticlesResult(call.body().articles))
                 } else {
-                    emitter.onError(
-                            RequestFailedException(mContext.getString(R.string.error_request_failed))
+                    emitter.onNext(
+                            ArticlesResult(
+                                    null,
+                                    mContext.getString(R.string.error_retrieve_failed, source.name)
+                            )
                     )
                 }
             }
         } else {
-            emitter.onError(
-                    NoNewsSourcesException(mContext.getString(R.string.error_no_news_sources))
-            )
+            emitter.onError(Exception(mContext.getString(R.string.error_no_news_sources)))
         }
 
         emitter.onComplete()
