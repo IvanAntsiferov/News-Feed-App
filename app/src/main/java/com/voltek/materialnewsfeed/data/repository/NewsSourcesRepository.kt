@@ -14,7 +14,6 @@ import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.interactor.Result
 import com.voltek.materialnewsfeed.utils.NetworkUtils
 import io.reactivex.Observable
-import io.reactivex.Single
 import javax.inject.Inject
 
 class NewsSourcesRepository : DataProvider.NewsSources {
@@ -58,21 +57,54 @@ class NewsSourcesRepository : DataProvider.NewsSources {
     override fun getCategory(category: String): Observable<Result<List<Source>?>> = Observable.create {
         val emitter = it
 
+        val query: List<Source>
+        var message = ""
+
         if (category == mContext.getString(R.string.category_all)) {
-            emitter.onNext(Result(Source().queryAll()))
+            query = Source().queryAll()
+
+            if (query.isEmpty())
+                message = mContext.getString(R.string.error_no_news_sources_loaded)
         } else if (category == mContext.getString(R.string.category_enabled) || category.isEmpty()) {
-            emitter.onNext(Result(Source().query({ query -> query.equalTo("isEnabled", true) })))
+            query = Source().query({ query -> query.equalTo("isEnabled", true) })
+
+            if (query.isEmpty())
+                message = mContext.getString(R.string.error_no_news_sources_selected_yet)
         } else {
-            emitter.onNext(Result(Source().query(
-                    { query -> query.equalTo("category", category.toLowerCase()) }
-            )))
+            query = Source().query({ query -> query.equalTo("category", category.toLowerCase()) })
+
+            if (query.isEmpty())
+                message = mContext.getString(R.string.error_no_news_sources_for_category)
         }
 
+        emitter.onNext(Result(query, message))
         emitter.onComplete()
     }
 
-    override fun deleteAll(): Single<Boolean> = Single.create {
-        Source().deleteAll()
-        it.onSuccess(true)
+    override fun update(): Observable<Result<List<Source>?>> = Observable.create {
+        val emitter = it
+        try {
+            NetworkUtils.checkConnection(mContext)
+
+            val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
+            if (call.isSuccessful) {
+                val current = Source().query({ query -> query.equalTo("isEnabled", true) })
+                val new = call.body().sources as ArrayList
+
+                for (source in new)
+                    for (enabled in current)
+                        if (source.id == enabled.id)
+                            source.isEnabled = true
+
+                Source().deleteAll()
+                new.saveAll()
+                emitter.onNext(Result(Source().queryAll()))
+            } else {
+                emitter.onNext(Result(null, mContext.getString(R.string.error_request_failed)))
+            }
+        } catch (e: Exception) {
+            emitter.onNext(Result(Source().queryAll(), mContext.getString(R.string.error_no_connection)))
+        }
+        emitter.onComplete()
     }
 }

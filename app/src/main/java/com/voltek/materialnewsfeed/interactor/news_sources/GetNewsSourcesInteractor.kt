@@ -27,8 +27,7 @@ class GetNewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
         if (parameter == null){
             return mNewsSourcesRepo.getAll()
         } else if (parameter == REFRESH) {
-            return mNewsSourcesRepo.deleteAll()
-                    .flatMapObservable { mNewsSourcesRepo.getAll() }
+            return mNewsSourcesRepo.update()
         } else {
             return mNewsSourcesRepo.getCategory(parameter)
         }

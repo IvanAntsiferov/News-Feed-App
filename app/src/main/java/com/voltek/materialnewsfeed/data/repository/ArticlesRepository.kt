@@ -47,7 +47,7 @@ class ArticlesRepository : DataProvider.Articles {
                 }
             }
         } else {
-            emitter.onError(Exception(mContext.getString(R.string.error_no_news_sources)))
+            emitter.onError(Exception(mContext.getString(R.string.error_no_news_sources_selected)))
         }
 
         emitter.onComplete()

@@ -27,7 +27,10 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
                 mModel.categoryId = event.id
                 loadNewsSources(event.filter)
             }
-            is Event.Refresh -> loadNewsSources(GetNewsSourcesInteractor.REFRESH)
+            is Event.Refresh -> {
+                mModel.resetId()
+                loadNewsSources(GetNewsSourcesInteractor.REFRESH)
+            }
         }
     }
 

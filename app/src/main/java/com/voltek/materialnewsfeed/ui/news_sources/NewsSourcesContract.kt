@@ -13,6 +13,10 @@ object NewsSourcesContract {
         var loading: Boolean = false
         var sources: ArrayList<Source> = ArrayList()
         var message: String = ""
+
+        fun resetId() {
+            categoryId = R.id.action_all
+        }
     }
 
     interface NewsSourcesView : BaseView {
