@@ -63,7 +63,9 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         } else if (category == mContext.getString(R.string.category_enabled) || category.isEmpty()) {
             emitter.onNext(Result(Source().query({ query -> query.equalTo("isEnabled", true) })))
         } else {
-            emitter.onNext(Result(Source().query({ query -> query.equalTo("category", category) })))
+            emitter.onNext(Result(Source().query(
+                    { query -> query.equalTo("category", category.toLowerCase()) }
+            )))
         }
 
         emitter.onComplete()

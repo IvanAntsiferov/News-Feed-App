@@ -1,6 +1,7 @@
 package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -67,8 +68,9 @@ class NewsSourcesFragment : BaseFragment(),
                     when (it.itemId) {
                         in CATEGORY_ITEMS_IDS -> {
                             if (!it.isChecked) {
-                                it.isChecked = true
-                                mPresenter.notify(Event.Filter(it.title.toString()))
+                                mPresenter.notify(
+                                        Event.FilterSources(it.title.toString(), it.itemId)
+                                )
                             }
                         }
                         R.id.action_refresh -> mPresenter.notify(Event.Refresh())
@@ -87,6 +89,22 @@ class NewsSourcesFragment : BaseFragment(),
 
         mAdapter.replace(model.sources)
 
+        veryBadPractice(model.categoryId)
+
+        when (model.categoryId) {
+            R.id.action_all -> activity.title = getString(R.string.category_all)
+            R.id.action_enabled -> activity.title = getString(R.string.category_enabled)
+            R.id.action_business -> activity.title = getString(R.string.category_business)
+            R.id.action_entertainment -> activity.title = getString(R.string.category_entertainment)
+            R.id.action_gaming -> activity.title = getString(R.string.category_gaming)
+            R.id.action_general -> activity.title = getString(R.string.category_general)
+            R.id.action_music -> activity.title = getString(R.string.category_music)
+            R.id.action_politics -> activity.title = getString(R.string.category_politics)
+            R.id.action_science_and_nature -> activity.title = getString(R.string.category_science_and_nature)
+            R.id.action_sport -> activity.title = getString(R.string.category_sport)
+            R.id.action_technology -> activity.title = getString(R.string.category_technology)
+        }
+
         if (!model.message.isEmpty()) {
             if (model.sources.isEmpty()) {
                 tv_message.text = model.message
@@ -99,6 +117,18 @@ class NewsSourcesFragment : BaseFragment(),
         } else {
             tv_message.visibility = View.GONE
             tv_message.text = ""
+        }
+    }
+
+    private fun veryBadPractice(id: Int) {
+        val handler = Handler()
+        if (activity.toolbar.menu.findItem(id) != null) {
+            val item = activity.toolbar.menu.findItem(id)
+            item.isChecked = true
+        } else {
+            handler.postDelayed({
+                veryBadPractice(id)
+            }, 16)
         }
     }
 }

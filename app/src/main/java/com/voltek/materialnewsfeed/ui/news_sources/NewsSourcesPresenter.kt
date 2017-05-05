@@ -10,6 +10,7 @@ import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourc
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesView
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
+import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
@@ -22,7 +23,10 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
     fun notify(event: Event) {
         when (event) {
-            is Event.Filter -> loadNewsSources(event.filter)
+            is Event.FilterSources -> {
+                mModel.categoryId = event.id
+                loadNewsSources(event.filter)
+            }
             is Event.Refresh -> loadNewsSources(GetNewsSourcesInteractor.REFRESH)
         }
     }
@@ -33,11 +37,11 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
     init {
         NewsApp.presenterComponent.inject(this)
-
         loadNewsSources(null)
     }
 
     override fun attachView(view: NewsSourcesView?) {
+        Timber.d("attachView")
         super.attachView(view)
         viewState.attachInputListeners()
     }
