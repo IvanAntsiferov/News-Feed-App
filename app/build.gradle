@@ -46,7 +46,7 @@ ext {
     parcelerVersion = '1.1.6'
     timberVersion = '4.5.1'
     calligraphyVersion = '2.2.0'
-    moxyVersion = '1.5.1'
+    moxyVersion = '1.5.2'
 }
 
 dependencies {

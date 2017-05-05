@@ -8,6 +8,7 @@ import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.ui.BaseActivity
+import com.voltek.materialnewsfeed.ui.details.CommandShareArticle
 import com.voltek.materialnewsfeed.ui.details.DetailsActivity
 import com.voltek.materialnewsfeed.ui.details.DetailsFragment
 import kotlinx.android.synthetic.main.activity_list.*
@@ -42,18 +43,13 @@ class ListActivity : BaseActivity() {
     }
 
     override fun executeCommand(command: Command): Boolean = when (command) {
-        is CommandStartActivity -> {
-            startActivity(command)
-            true
-        }
-        is CommandOpenDetails -> {
-            openDetails(command.article)
-            true
-        }
+        is CommandStartActivity -> startActivity(command)
+        is CommandOpenArticleDetails -> openDetails(command.article)
+        is CommandShareArticle -> shareArticle(command)
         else -> false
     }
 
-    private fun openDetails(article: Article) {
+    private fun openDetails(article: Article): Boolean {
         if (mDualPane) {
             replaceFragment(
                     DetailsFragment.newInstance(article),
@@ -64,5 +60,6 @@ class ListActivity : BaseActivity() {
             intent.putExtra(DetailsFragment.ARG_ARTICLE, Parcels.wrap(article))
             startActivity(intent)
         }
+        return true
     }
 }

@@ -2,19 +2,29 @@ package com.voltek.materialnewsfeed.ui.details
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.navigation.proxy.Router
 import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsModel
 import com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsView
+import javax.inject.Inject
 
 @InjectViewState
-class DetailsPresenter(article: Article) : MvpPresenter<DetailsView>() {
+class DetailsPresenter(private val article: Article) : MvpPresenter<DetailsView>() {
+
+    @Inject
+    lateinit var mRouter: Router
 
     private var mModel: DetailsModel = DetailsModel()
 
     fun notify(event: Event) {
         when (event) {
-
+            is Event.Share -> {
+                if (!article.isEmpty()) {
+                    mRouter.execute(CommandShareArticle(article.title ?: "", article.url ?: ""))
+                }
+            }
         }
     }
 
@@ -23,6 +33,8 @@ class DetailsPresenter(article: Article) : MvpPresenter<DetailsView>() {
     }
 
     init {
+        NewsApp.presenterComponent.inject(this)
+
         if (article.isEmpty()) {
             mModel.articleLoaded = false
             updateModel()

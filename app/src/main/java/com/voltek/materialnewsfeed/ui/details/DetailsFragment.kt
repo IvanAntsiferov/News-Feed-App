@@ -1,18 +1,19 @@
 package com.voltek.materialnewsfeed.ui.details
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
+import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsView
 import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.parceler.Parcels
 
 class DetailsFragment : BaseFragment(),
@@ -32,6 +33,10 @@ class DetailsFragment : BaseFragment(),
         }
     }
 
+    init {
+        setHasOptionsMenu(true)
+    }
+
     @InjectPresenter(type = PresenterType.LOCAL, tag = TAG)
     lateinit var mPresenter: DetailsPresenter
 
@@ -43,8 +48,18 @@ class DetailsFragment : BaseFragment(),
         return inflater?.inflate(R.layout.fragment_details, container, false)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_fragment_details, menu)
+    }
+
     override fun attachInputListeners() {
-        //
+        RxToolbar.itemClicks(activity.toolbar)
+                .subscribe({
+                    when (it.itemId) {
+                        R.id.action_share -> mPresenter.notify(Event.Share())
+                    }
+                })
+                .bind()
     }
 
     override fun detachInputListeners() {

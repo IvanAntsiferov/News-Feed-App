@@ -9,4 +9,6 @@ sealed class Event {
     class OpenArticleDetails(val article: Article) : Event()
 
     class Refresh : Event()
+
+    class Share : Event()
 }

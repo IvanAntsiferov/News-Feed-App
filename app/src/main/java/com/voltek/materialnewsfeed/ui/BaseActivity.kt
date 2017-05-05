@@ -10,6 +10,7 @@ import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Navigator
+import com.voltek.materialnewsfeed.ui.details.CommandShareArticle
 import io.reactivex.disposables.CompositeDisposable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -35,7 +36,7 @@ abstract class BaseActivity : MvpAppCompatActivity(),
     }
 
     // Base navigator commands
-    protected fun startActivity(command: CommandStartActivity) {
+    protected fun startActivity(command: CommandStartActivity): Boolean {
         val intent = Intent(this, command.activity)
 
         if (command.args != null)
@@ -45,6 +46,20 @@ abstract class BaseActivity : MvpAppCompatActivity(),
 
         if (command.finish)
             finish()
+
+        return true
+    }
+
+    protected fun shareArticle(command: CommandShareArticle): Boolean {
+        if (!command.url.isEmpty() && !command.title.isEmpty()) {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+            shareIntent.type = "text/plain"
+            //shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, command.url)
+            startActivity(Intent.createChooser(shareIntent, command.title))
+        }
+        return true
     }
 
     // Activity helper methods

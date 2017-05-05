@@ -20,13 +20,15 @@ class DetailsActivity : BaseActivity() {
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
 
-        replaceFragment(
-                DetailsFragment.newInstance(article),
-                R.id.fragment_container,
-                DetailsFragment.TAG)
+        if (savedInstanceState == null)
+            replaceFragment(
+                    DetailsFragment.newInstance(article),
+                    R.id.fragment_container,
+                    DetailsFragment.TAG)
     }
 
-    override fun executeCommand(command: Command): Boolean {
-        return false
+    override fun executeCommand(command: Command): Boolean = when (command) {
+        is CommandShareArticle -> shareArticle(command)
+        else -> false
     }
 }

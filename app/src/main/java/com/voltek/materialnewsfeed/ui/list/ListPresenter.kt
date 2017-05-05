@@ -29,12 +29,8 @@ class ListPresenter : MvpPresenter<ListView>() {
     // View notify presenter about events using this method
     fun notify(event: Event) {
         when (event) {
-            is Event.OpenArticleDetails -> {
-                mRouter.execute(CommandOpenDetails(event.article))
-            }
-            is Event.OpenNewsSources -> {
-                mRouter.execute(CommandStartActivity(NewsSourcesActivity()))
-            }
+            is Event.OpenArticleDetails -> mRouter.execute(CommandOpenArticleDetails(event.article))
+            is Event.OpenNewsSources -> mRouter.execute(CommandStartActivity(NewsSourcesActivity()))
             is Event.Refresh -> {
                 if (!mModel.loading) {
                     loadArticles()
@@ -87,7 +83,8 @@ class ListPresenter : MvpPresenter<ListView>() {
                 },
                 Action {
                     finishLoading()
-                })
+                }
+        )
     }
 
     private fun finishLoading() {
