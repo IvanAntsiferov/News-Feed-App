@@ -120,6 +120,7 @@ class NewsSourcesFragment : BaseFragment(),
         }
     }
 
+    // TODO find better solution
     private fun veryBadPractice(id: Int) {
         val handler = Handler()
         if (activity.toolbar.menu.findItem(id) != null) {

@@ -4,6 +4,8 @@ import com.voltek.materialnewsfeed.data.entity.Article
 
 sealed class Event {
 
+    class OpenWebsite(val url: String = "") : Event()
+
     class OpenNewsSources : Event()
 
     class OpenArticleDetails(val article: Article) : Event()

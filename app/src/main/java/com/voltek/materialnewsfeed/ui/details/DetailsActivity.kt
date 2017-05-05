@@ -3,6 +3,7 @@ package com.voltek.materialnewsfeed.ui.details
 import android.os.Bundle
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.ui.BaseActivity
 import org.parceler.Parcels
@@ -29,6 +30,7 @@ class DetailsActivity : BaseActivity() {
 
     override fun executeCommand(command: Command): Boolean = when (command) {
         is CommandShareArticle -> shareArticle(command)
+        is CommandOpenWebsite -> openWebsite(command)
         else -> false
     }
 }

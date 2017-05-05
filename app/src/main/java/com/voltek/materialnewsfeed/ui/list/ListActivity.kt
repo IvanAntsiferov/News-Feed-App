@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.ui.BaseActivity
@@ -46,6 +47,7 @@ class ListActivity : BaseActivity() {
         is CommandStartActivity -> startActivity(command)
         is CommandOpenArticleDetails -> openDetails(command.article)
         is CommandShareArticle -> shareArticle(command)
+        is CommandOpenWebsite -> openWebsite(command)
         else -> false
     }
 

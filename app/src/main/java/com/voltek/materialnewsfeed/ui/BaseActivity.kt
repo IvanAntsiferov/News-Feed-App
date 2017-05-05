@@ -2,17 +2,20 @@ package com.voltek.materialnewsfeed.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.support.annotation.IdRes
 import android.support.v7.widget.Toolbar
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.voltek.materialnewsfeed.utils.CompositeDisposableComponent
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Navigator
 import com.voltek.materialnewsfeed.ui.details.CommandShareArticle
 import io.reactivex.disposables.CompositeDisposable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import android.widget.Toast
 
 abstract class BaseActivity : MvpAppCompatActivity(),
         Navigator,
@@ -57,6 +60,17 @@ abstract class BaseActivity : MvpAppCompatActivity(),
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_TEXT, command.url)
             startActivity(Intent.createChooser(shareIntent, command.title))
+        }
+        return true
+    }
+
+    protected fun openWebsite(command: CommandOpenWebsite): Boolean {
+        if (!command.url.isEmpty()) {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(command.url))
+            if (browserIntent.resolveActivity(packageManager) != null)
+                startActivity(browserIntent)
+            else
+                Toast.makeText(this, getString(R.string.error_no_browser), Toast.LENGTH_LONG).show()
         }
         return true
     }

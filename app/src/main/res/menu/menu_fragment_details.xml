@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_website"
+        android:icon="@drawable/ic_public_24dp"
+        android:title="@string/action_website"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:icon="@android:drawable/ic_menu_share"

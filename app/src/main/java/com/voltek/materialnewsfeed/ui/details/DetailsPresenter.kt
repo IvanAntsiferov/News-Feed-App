@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.materialnewsfeed.navigation.proxy.Router
 import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsModel
@@ -25,6 +26,7 @@ class DetailsPresenter(private val article: Article) : MvpPresenter<DetailsView>
                     mRouter.execute(CommandShareArticle(article.title ?: "", article.url ?: ""))
                 }
             }
+            is Event.OpenWebsite -> mRouter.execute(CommandOpenWebsite(article.url ?: ""))
         }
     }
 

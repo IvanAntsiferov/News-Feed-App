@@ -10,6 +10,7 @@
     <string name="action_filter">Filter</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_share">Share</string>
+    <string name="action_website">Website</string>
 
     <string name="category_all">All</string>
     <string name="category_enabled">Enabled</string>
@@ -29,5 +30,6 @@
     <string name="error_retrieve_failed">Failed to retrieve news from <xliff:g id="source">%s</xliff:g></string>
     <string name="error_no_news_sources">Choose at least one news source</string>
     <string name="error_empty_details">An error occurred while loading article details</string>
+    <string name="error_no_browser">You don\'t have web-browser installed on your device</string>
 
 </resources>
