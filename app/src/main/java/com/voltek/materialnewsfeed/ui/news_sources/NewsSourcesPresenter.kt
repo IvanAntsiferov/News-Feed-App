@@ -25,6 +25,8 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
     init {
         NewsApp.presenterComponent.inject(this)
+
+        loadNewsSources("")
     }
 
     override fun attachView(view: NewsSourcesView?) {
@@ -35,5 +37,14 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
     override fun detachView(view: NewsSourcesView?) {
         viewState.detachInputListeners()
         super.detachView(view)
+    }
+
+    private fun loadNewsSources(filter: String) {
+        mModel.sources.clear()
+        mModel.loading = true
+        mModel.message = ""
+        updateModel()
+
+        //
     }
 }

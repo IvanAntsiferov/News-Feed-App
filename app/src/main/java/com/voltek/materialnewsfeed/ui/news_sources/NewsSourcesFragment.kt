@@ -6,6 +6,7 @@ import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesView
@@ -38,17 +39,21 @@ class NewsSourcesFragment : BaseFragment(),
     @InjectPresenter
     lateinit var mPresenter: NewsSourcesPresenter
 
+    private lateinit var mAdapter: NewsSourcesAdapter
+
     init {
         setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mAdapter = NewsSourcesAdapter(context, ArrayList<Source>())
         return inflater?.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.adapter = mAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -77,6 +82,23 @@ class NewsSourcesFragment : BaseFragment(),
     }
 
     override fun render(model: NewsSourcesContract.NewsSourcesModel) {
-        //
+        swipe_container.isEnabled = model.loading
+        swipe_container.isRefreshing = model.loading
+
+        mAdapter.replace(model.sources)
+
+        if (!model.message.isEmpty()) {
+            if (model.sources.isEmpty()) {
+                tv_message.text = model.message
+                tv_message.visibility = View.VISIBLE
+            } else {
+                tv_message.visibility = View.GONE
+                tv_message.text = ""
+                toast(model.message)
+            }
+        } else {
+            tv_message.visibility = View.GONE
+            tv_message.text = ""
+        }
     }
 }
