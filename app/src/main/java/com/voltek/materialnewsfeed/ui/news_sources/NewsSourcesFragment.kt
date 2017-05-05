@@ -124,8 +124,7 @@ class NewsSourcesFragment : BaseFragment(),
     private fun veryBadPractice(id: Int) {
         val handler = Handler()
         if (activity.toolbar.menu.findItem(id) != null) {
-            val item = activity.toolbar.menu.findItem(id)
-            item.isChecked = true
+            activity.toolbar.menu.findItem(id).isChecked = true
         } else {
             handler.postDelayed({
                 veryBadPractice(id)

@@ -18,6 +18,8 @@ import javax.inject.Inject
 
 class NewsSourcesRepository : DataProvider.NewsSources {
 
+    // TODO hide access to realm under DB facade
+
     @Inject
     lateinit var mApi: NewsApi
 

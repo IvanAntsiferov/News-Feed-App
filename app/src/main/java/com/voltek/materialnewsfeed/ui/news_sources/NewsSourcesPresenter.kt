@@ -10,7 +10,6 @@ import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourc
 import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesView
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
@@ -44,7 +43,6 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
     }
 
     override fun attachView(view: NewsSourcesView?) {
-        Timber.d("attachView")
         super.attachView(view)
         viewState.attachInputListeners()
     }
