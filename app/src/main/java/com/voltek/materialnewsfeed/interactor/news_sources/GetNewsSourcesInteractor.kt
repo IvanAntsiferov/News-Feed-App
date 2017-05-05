@@ -19,6 +19,10 @@ class GetNewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
         NewsApp.interactorComponent.inject(this)
     }
 
-    override fun buildObservable(parameter: String?): Observable<Result<List<Source>?>> =
-            mNewsSourcesRepo.getAll()
+    override fun buildObservable(parameter: String?): Observable<Result<List<Source>?>> {
+        if (parameter == null)
+            return mNewsSourcesRepo.getAll()
+        else
+            return mNewsSourcesRepo.getCategory(parameter)
+    }
 }
