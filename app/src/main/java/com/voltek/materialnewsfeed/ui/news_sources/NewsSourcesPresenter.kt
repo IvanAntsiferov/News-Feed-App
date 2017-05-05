@@ -22,8 +22,8 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
     fun notify(event: Event) {
         when (event) {
-            is Event.Filter -> {}
-            is Event.Refresh -> {}
+            is Event.Filter -> loadNewsSources(event.filter)
+            is Event.Refresh -> loadNewsSources(GetNewsSourcesInteractor.REFRESH)
         }
     }
 

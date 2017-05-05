@@ -12,6 +12,10 @@ import javax.inject.Inject
 class GetNewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
     : BaseInteractor<List<Source>?, String>(jobScheduler, uiScheduler) {
 
+    companion object {
+        const val REFRESH = "REFRESH"
+    }
+
     @Inject
     lateinit var mNewsSourcesRepo: DataProvider.NewsSources
 
@@ -20,9 +24,13 @@ class GetNewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
     }
 
     override fun buildObservable(parameter: String?): Observable<Result<List<Source>?>> {
-        if (parameter == null)
+        if (parameter == null){
             return mNewsSourcesRepo.getAll()
-        else
+        } else if (parameter == REFRESH) {
+            return mNewsSourcesRepo.deleteAll()
+                    .flatMapObservable { mNewsSourcesRepo.getAll() }
+        } else {
             return mNewsSourcesRepo.getCategory(parameter)
+        }
     }
 }

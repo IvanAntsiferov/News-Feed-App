@@ -1,6 +1,7 @@
 package com.voltek.materialnewsfeed.data.repository
 
 import android.content.Context
+import com.vicpin.krealmextensions.deleteAll
 import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
@@ -13,6 +14,7 @@ import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.interactor.Result
 import com.voltek.materialnewsfeed.utils.NetworkUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 class NewsSourcesRepository : DataProvider.NewsSources {
@@ -65,5 +67,10 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         }
 
         emitter.onComplete()
+    }
+
+    override fun deleteAll(): Single<Boolean> = Single.create {
+        Source().deleteAll()
+        it.onSuccess(true)
     }
 }
