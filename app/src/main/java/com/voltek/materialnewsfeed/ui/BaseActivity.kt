@@ -55,7 +55,6 @@ abstract class BaseActivity : MvpAppCompatActivity(),
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
             shareIntent.type = "text/plain"
-            //shareIntent.putExtra(Intent.EXTRA_SUBJECT, title)
             shareIntent.putExtra(Intent.EXTRA_TEXT, command.url)
             startActivity(Intent.createChooser(shareIntent, command.title))
         }

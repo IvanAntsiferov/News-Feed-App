@@ -11,4 +11,6 @@ sealed class Event {
     class Refresh : Event()
 
     class Share : Event()
+
+    class Filter(val filter: String) : Event()
 }
