@@ -1,7 +1,6 @@
 package com.voltek.materialnewsfeed.ui.news_sources
 
 import android.os.Bundle
-import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -42,6 +41,8 @@ class NewsSourcesFragment : BaseFragment(),
 
     private lateinit var mAdapter: NewsSourcesAdapter
 
+    private var mCategory: Int = R.id.action_all
+
     init {
         setHasOptionsMenu(true)
     }
@@ -59,6 +60,7 @@ class NewsSourcesFragment : BaseFragment(),
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_fragment_news_sources, menu)
+        menu?.findItem(mCategory)?.isChecked = true
     }
 
     override fun attachInputListeners() {
@@ -89,7 +91,7 @@ class NewsSourcesFragment : BaseFragment(),
 
         mAdapter.replace(model.sources)
 
-        veryBadPractice(model.categoryId)
+        mCategory = model.categoryId
 
         when (model.categoryId) {
             R.id.action_all -> activity.title = getString(R.string.category_all)
@@ -117,18 +119,6 @@ class NewsSourcesFragment : BaseFragment(),
         } else {
             tv_message.visibility = View.GONE
             tv_message.text = ""
-        }
-    }
-
-    // TODO find better solution
-    private fun veryBadPractice(id: Int) {
-        val handler = Handler()
-        if (activity.toolbar.menu.findItem(id) != null) {
-            activity.toolbar.menu.findItem(id).isChecked = true
-        } else {
-            handler.postDelayed({
-                veryBadPractice(id)
-            }, 16)
         }
     }
 }
