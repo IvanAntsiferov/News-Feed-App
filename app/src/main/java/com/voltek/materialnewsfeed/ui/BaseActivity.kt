@@ -96,7 +96,7 @@ abstract class BaseActivity : MvpAppCompatActivity(),
         val transaction = supportFragmentManager.beginTransaction()
 
         if (shouldAnimate)
-            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         if (shouldAddToBackStack)
             transaction.addToBackStack(tag)

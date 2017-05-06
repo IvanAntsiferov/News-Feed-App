@@ -3,13 +3,8 @@
     android:shareInterpolator="false">
 
     <translate
-        android:duration="600"
+        android:duration="@android:integer/config_longAnimTime"
         android:fromXDelta="0%"
         android:toXDelta="-100%" />
-
-    <alpha
-        android:duration="600"
-        android:fromAlpha="1.0"
-        android:toAlpha="0.0" />
 
 </set>
