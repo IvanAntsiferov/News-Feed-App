@@ -33,7 +33,12 @@ class ArticlesRepository : Repository.Articles {
             for (source in sources) {
                 val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
                 if (call.isSuccessful) {
-                    emitter.onNext(Result(call.body().articles))
+                    val result = ArrayList<Article>()
+                    val sourceTitle = Article()
+                    sourceTitle.source = source.name
+                    result.add(sourceTitle)
+                    result.addAll(call.body().articles)
+                    emitter.onNext(Result(result))
                 } else {
                     emitter.onNext(
                             Result(

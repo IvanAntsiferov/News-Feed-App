@@ -11,7 +11,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.ui.BaseFragment
 import com.voltek.materialnewsfeed.ui.Event
 import com.voltek.materialnewsfeed.ui.list.ListContract.ListModel
@@ -34,7 +33,7 @@ class ListFragment : BaseFragment(),
     private lateinit var mAdapter: ListAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mAdapter = ListAdapter(context, ArrayList<Article>())
+        mAdapter = ListAdapter(context, ArrayList())
         return inflater?.inflate(R.layout.fragment_list, container, false)
     }
 
