@@ -63,6 +63,10 @@ class NewsSourcesFragment : BaseFragment(),
         menu?.findItem(mCategory)?.isChecked = true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        menu?.findItem(mCategory)?.isChecked = true
+    }
+
     override fun attachInputListeners() {
         RxToolbar.itemClicks(activity.toolbar)
                 .filter { !swipe_container.isRefreshing }
@@ -92,6 +96,7 @@ class NewsSourcesFragment : BaseFragment(),
         mAdapter.replace(model.sources)
 
         mCategory = model.categoryId
+        activity.invalidateOptionsMenu()
 
         when (model.categoryId) {
             R.id.action_all -> activity.title = getString(R.string.category_all)
