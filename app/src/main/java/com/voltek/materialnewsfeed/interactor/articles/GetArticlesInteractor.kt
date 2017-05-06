@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.interactor.articles
 
 import com.voltek.materialnewsfeed.NewsApp
-import com.voltek.materialnewsfeed.data.DataProvider
+import com.voltek.materialnewsfeed.data.Repository
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.interactor.BaseInteractor
 import com.voltek.materialnewsfeed.interactor.Result
@@ -13,10 +13,10 @@ class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Sc
     : BaseInteractor<List<Article>?, Unit>(jobScheduler, uiScheduler) {
 
     @Inject
-    lateinit var mArticlesRepo: DataProvider.Articles
+    lateinit var mArticlesRepo: Repository.Articles
 
     @Inject
-    lateinit var mNewsSourcesRepo: DataProvider.NewsSources
+    lateinit var mNewsSourcesRepo: Repository.NewsSources
 
     init {
         NewsApp.interactorComponent.inject(this)

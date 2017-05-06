@@ -8,7 +8,7 @@ import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
-import com.voltek.materialnewsfeed.data.DataProvider
+import com.voltek.materialnewsfeed.data.Repository
 import com.voltek.materialnewsfeed.data.networking.NewsApi
 import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.interactor.Result
@@ -16,18 +16,16 @@ import com.voltek.materialnewsfeed.utils.NetworkUtils
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class NewsSourcesRepository : DataProvider.NewsSources {
-
-    // TODO hide access to realm under DB facade
-
-    @Inject
-    lateinit var mApi: NewsApi
+class NewsSourcesRepository : Repository.NewsSources {
 
     @Inject
     lateinit var mContext: Context
 
+    @Inject
+    lateinit var mApi: NewsApi
+
     init {
-        NewsApp.dataComponent.inject(this)
+        NewsApp.repositoryComponent.inject(this)
     }
 
     override fun getAll(): Observable<Result<List<Source>?>> = Observable.create {
@@ -83,7 +81,7 @@ class NewsSourcesRepository : DataProvider.NewsSources {
         emitter.onComplete()
     }
 
-    override fun update(): Observable<Result<List<Source>?>> = Observable.create {
+    override fun refresh(): Observable<Result<List<Source>?>> = Observable.create {
         val emitter = it
         try {
             NetworkUtils.checkConnection(mContext)

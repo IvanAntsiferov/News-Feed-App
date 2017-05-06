@@ -46,7 +46,7 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         holder.category.text = item.category
         holder.enabled.isChecked = item.isEnabled
 
-        when(item.country) {
+        when (item.country) {
             "au" -> Glide.with(mContext).load("").error(R.drawable.ic_australia_24dp).into(holder.country)
             "de" -> Glide.with(mContext).load("").error(R.drawable.ic_germany_24dp).into(holder.country)
             "gb" -> Glide.with(mContext).load("").error(R.drawable.ic_united_kingdom_24dp).into(holder.country)

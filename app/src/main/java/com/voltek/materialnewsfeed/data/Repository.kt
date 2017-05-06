@@ -5,10 +5,7 @@ import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.interactor.Result
 import io.reactivex.Observable
 
-/**
- * Holds set of interfaces that provides access to data.
- */
-object DataProvider {
+object Repository {
 
     interface Articles {
 
@@ -21,6 +18,6 @@ object DataProvider {
 
         fun getCategory(category: String): Observable<Result<List<Source>?>>
 
-        fun update(): Observable<Result<List<Source>?>>
+        fun refresh(): Observable<Result<List<Source>?>>
     }
 }

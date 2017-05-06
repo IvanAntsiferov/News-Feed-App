@@ -1,7 +1,7 @@
 package com.voltek.materialnewsfeed.interactor.news_sources
 
 import com.voltek.materialnewsfeed.NewsApp
-import com.voltek.materialnewsfeed.data.DataProvider
+import com.voltek.materialnewsfeed.data.Repository
 import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.interactor.BaseInteractor
 import com.voltek.materialnewsfeed.interactor.Result
@@ -17,7 +17,7 @@ class GetNewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
     }
 
     @Inject
-    lateinit var mNewsSourcesRepo: DataProvider.NewsSources
+    lateinit var mNewsSourcesRepo: Repository.NewsSources
 
     init {
         NewsApp.interactorComponent.inject(this)
@@ -27,7 +27,7 @@ class GetNewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
         if (parameter == null){
             return mNewsSourcesRepo.getAll()
         } else if (parameter == REFRESH) {
-            return mNewsSourcesRepo.update()
+            return mNewsSourcesRepo.refresh()
         } else {
             return mNewsSourcesRepo.getCategory(parameter)
         }

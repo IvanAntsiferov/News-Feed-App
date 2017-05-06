@@ -2,6 +2,9 @@ package com.voltek.materialnewsfeed.ui
 
 import com.voltek.materialnewsfeed.data.entity.Article
 
+/**
+ * UI input events
+ */
 sealed class Event {
 
     class OpenWebsite(val url: String = "") : Event()

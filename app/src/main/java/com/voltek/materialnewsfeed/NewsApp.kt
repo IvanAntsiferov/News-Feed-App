@@ -31,7 +31,7 @@ class NewsApp : Application() {
 
         lateinit var interactorComponent: InteractorComponent
 
-        lateinit var dataComponent: DataComponent
+        lateinit var repositoryComponent: RepositoryComponent
     }
 
     override fun onCreate() {
@@ -53,7 +53,7 @@ class NewsApp : Application() {
                 .repositoryModule(repositoryModule)
                 .build()
 
-        dataComponent = DaggerDataComponent.builder()
+        repositoryComponent = DaggerRepositoryComponent.builder()
                 .appModule(appModule)
                 .networkModule(networkModule)
                 .build()
