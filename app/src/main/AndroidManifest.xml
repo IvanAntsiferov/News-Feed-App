@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.list.ListActivity"
+            android:name=".presentation.list.ListActivity"
             android:launchMode="singleTask">
 
             <intent-filter>
@@ -26,14 +26,14 @@
         </activity>
 
         <activity
-            android:name=".ui.details.DetailsActivity"
+            android:name=".presentation.details.DetailsActivity"
             android:label="@string/title_details"
-            android:parentActivityName=".ui.list.ListActivity" />
+            android:parentActivityName=".presentation.list.ListActivity" />
 
         <activity
-            android:name=".ui.news_sources.NewsSourcesActivity"
+            android:name=".presentation.news_sources.NewsSourcesActivity"
             android:label="@string/title_news_sources"
-            android:parentActivityName=".ui.list.ListActivity" />
+            android:parentActivityName=".presentation.list.ListActivity" />
 
     </application>
 

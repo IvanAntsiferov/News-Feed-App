@@ -2,8 +2,8 @@ package com.voltek.materialnewsfeed
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
-import com.voltek.materialnewsfeed.di.component.*
-import com.voltek.materialnewsfeed.di.module.*
+import com.voltek.materialnewsfeed.dagger.component.*
+import com.voltek.materialnewsfeed.dagger.module.*
 import com.voltek.materialnewsfeed.navigation.RouterHolder
 import com.voltek.materialnewsfeed.navigation.proxy.NavigatorBinder
 import io.reactivex.android.schedulers.AndroidSchedulers

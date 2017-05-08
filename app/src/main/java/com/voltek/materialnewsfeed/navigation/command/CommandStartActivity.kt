@@ -3,7 +3,7 @@ package com.voltek.materialnewsfeed.navigation.command
 import com.voltek.materialnewsfeed.navigation.proxy.Command
 import android.os.Bundle
 import android.support.annotation.Nullable
-import com.voltek.materialnewsfeed.ui.BaseActivity
+import com.voltek.materialnewsfeed.presentation.BaseActivity
 
 /**
  * Basic command for between activity navigation.
