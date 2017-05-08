@@ -11,14 +11,13 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.presentation.BaseFragment
 import com.voltek.materialnewsfeed.presentation.Event
-import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsModel
 import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsView
-import org.parceler.Parcels
-import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.android.synthetic.main.toolbar.*
+import org.parceler.Parcels
 
 class DetailsFragment : BaseFragment(),
-       DetailsView {
+        DetailsView {
 
     companion object {
         const val TAG = "DetailsFragment"
@@ -27,8 +26,8 @@ class DetailsFragment : BaseFragment(),
 
         fun newInstance(article: Article): DetailsFragment {
             val fragment = DetailsFragment()
-            val args = android.os.Bundle()
-            args.putParcelable(DetailsFragment.Companion.ARG_ARTICLE, Parcels.wrap(article))
+            val args = Bundle()
+            args.putParcelable(ARG_ARTICLE, Parcels.wrap(article))
             fragment.arguments = args
             return fragment
         }
@@ -54,7 +53,7 @@ class DetailsFragment : BaseFragment(),
     }
 
     override fun attachInputListeners() {
-        RxToolbar.itemClicks(toolbar)
+        RxToolbar.itemClicks(activity.toolbar)
                 .subscribe({
                     when (it.itemId) {
                         R.id.action_share -> mPresenter.notify(Event.Share())
@@ -68,7 +67,7 @@ class DetailsFragment : BaseFragment(),
         resetCompositeDisposable()
     }
 
-    override fun render(model: DetailsModel) {
+    override fun render(model: DetailsContract.DetailsModel) {
         if (model.articleLoaded) {
             Glide.with(context).load(model.urlToImage).into(im_image)
             tv_author.text = model.author
@@ -84,7 +83,7 @@ class DetailsFragment : BaseFragment(),
             tv_published_at.text = ""
             tv_description.text = ""
 
-            tv_message.text = getString(com.voltek.materialnewsfeed.R.string.error_empty_details)
+            tv_message.text = getString(R.string.error_empty_details)
         }
     }
 }

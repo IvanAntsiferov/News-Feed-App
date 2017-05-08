@@ -2,17 +2,20 @@ package com.voltek.materialnewsfeed.presentation.details
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.navigation.command.CommandOpenWebsite
+import com.voltek.materialnewsfeed.navigation.proxy.Router
 import com.voltek.materialnewsfeed.presentation.Event
 import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsModel
 import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsView
+import javax.inject.Inject
 
 @InjectViewState
 class DetailsPresenter(private val article: Article) : MvpPresenter<DetailsView>() {
 
-    @javax.inject.Inject
-    lateinit var mRouter: com.voltek.materialnewsfeed.navigation.proxy.Router
+    @Inject
+    lateinit var mRouter: Router
 
     private var mModel: DetailsModel = DetailsModel()
 
@@ -32,7 +35,7 @@ class DetailsPresenter(private val article: Article) : MvpPresenter<DetailsView>
     }
 
     init {
-        com.voltek.materialnewsfeed.NewsApp.Companion.presenterComponent.inject(this)
+        NewsApp.presenterComponent.inject(this)
 
         if (article.isEmpty()) {
             mModel.articleLoaded = false
