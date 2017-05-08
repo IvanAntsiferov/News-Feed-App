@@ -5,13 +5,15 @@ package com.voltek.materialnewsfeed.data
  */
 object Provider {
 
-    interface Network {
+    object Api {
 
-        //
+        interface Articles {}
+
+        interface NewsSources {}
     }
 
-    interface Database {
+    object Database {
 
-        //
+        interface NewsSources {}
     }
 }
