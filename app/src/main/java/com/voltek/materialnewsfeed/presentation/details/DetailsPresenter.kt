@@ -5,10 +5,12 @@ import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.navigation.command.CommandOpenWebsite
+import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Router
 import com.voltek.materialnewsfeed.presentation.Event
 import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsModel
 import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsView
+import com.voltek.materialnewsfeed.presentation.news_sources.NewsSourcesActivity
 import javax.inject.Inject
 
 @InjectViewState
@@ -27,6 +29,7 @@ class DetailsPresenter(private val article: Article) : MvpPresenter<DetailsView>
                 }
             }
             is Event.OpenWebsite -> mRouter.execute(CommandOpenWebsite(article.url ?: ""))
+            is Event.OpenNewsSources -> mRouter.execute(CommandStartActivity(NewsSourcesActivity()))
         }
     }
 

@@ -58,6 +58,7 @@ class DetailsFragment : BaseFragment(),
                     when (it.itemId) {
                         R.id.action_share -> mPresenter.notify(Event.Share())
                         R.id.action_website -> mPresenter.notify(Event.OpenWebsite())
+                        R.id.action_news_sources -> mPresenter.notify(Event.OpenNewsSources())
                     }
                 })
                 .bind()
