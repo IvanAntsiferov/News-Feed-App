@@ -7,7 +7,7 @@ import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.utils.NetworkUtils
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.data.entity.Source
-import com.voltek.materialnewsfeed.data.networking.NewsApi
+import com.voltek.materialnewsfeed.data.network.api.NewsApi
 import com.voltek.materialnewsfeed.domain.interactor.Result
 import io.reactivex.Observable
 import javax.inject.Inject

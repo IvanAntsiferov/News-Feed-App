@@ -5,7 +5,7 @@ package com.voltek.materialnewsfeed.data
  */
 object Provider {
 
-    interface API {
+    interface Network {
 
         //
     }

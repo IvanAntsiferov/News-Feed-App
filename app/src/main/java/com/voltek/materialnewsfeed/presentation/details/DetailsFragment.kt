@@ -1,22 +1,34 @@
 package com.voltek.materialnewsfeed.presentation.details
 
+import android.os.Bundle
+import android.view.*
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.PresenterType
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
+import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.presentation.BaseFragment
-import com.voltek.materialnewsfeed.ui.Event
-import com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsView
+import com.voltek.materialnewsfeed.presentation.Event
+import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsModel
+import com.voltek.materialnewsfeed.presentation.details.DetailsContract.DetailsView
 import org.parceler.Parcels
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : BaseFragment(),
-        com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsView {
+       DetailsView {
 
     companion object {
         const val TAG = "DetailsFragment"
 
         const val ARG_ARTICLE = "ARG_ARTICLE"
 
-        fun newInstance(article: com.voltek.materialnewsfeed.data.entity.Article): com.voltek.materialnewsfeed.presentation.DetailsFragment {
-            val fragment = com.voltek.materialnewsfeed.presentation.DetailsFragment()
+        fun newInstance(article: Article): DetailsFragment {
+            val fragment = DetailsFragment()
             val args = android.os.Bundle()
-            args.putParcelable(com.voltek.materialnewsfeed.presentation.DetailsFragment.Companion.ARG_ARTICLE, org.parceler.Parcels.wrap(article))
+            args.putParcelable(DetailsFragment.Companion.ARG_ARTICLE, Parcels.wrap(article))
             fragment.arguments = args
             return fragment
         }
@@ -26,27 +38,27 @@ class DetailsFragment : BaseFragment(),
         setHasOptionsMenu(true)
     }
 
-    @com.arellomobile.mvp.presenter.InjectPresenter(type = com.arellomobile.mvp.presenter.PresenterType.LOCAL, tag = com.voltek.materialnewsfeed.presentation.DetailsFragment.Companion.TAG)
+    @InjectPresenter(type = PresenterType.LOCAL, tag = TAG)
     lateinit var mPresenter: DetailsPresenter
 
-    @com.arellomobile.mvp.presenter.ProvidePresenter(type = com.arellomobile.mvp.presenter.PresenterType.LOCAL, tag = com.voltek.materialnewsfeed.presentation.DetailsFragment.Companion.TAG)
+    @ProvidePresenter(type = PresenterType.LOCAL, tag = TAG)
     fun providePresenter(): DetailsPresenter =
             DetailsPresenter(Parcels.unwrap(arguments.getParcelable(ARG_ARTICLE)))
 
-    override fun onCreateView(inflater: android.view.LayoutInflater?, container: android.view.ViewGroup?, savedInstanceState: android.os.Bundle?): android.view.View? {
-        return inflater?.inflate(com.voltek.materialnewsfeed.R.layout.fragment_details, container, false)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(R.layout.fragment_details, container, false)
     }
 
-    override fun onCreateOptionsMenu(menu: android.view.Menu?, inflater: android.view.MenuInflater?) {
-        inflater?.inflate(com.voltek.materialnewsfeed.R.menu.menu_fragment_details, menu)
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_fragment_details, menu)
     }
 
     override fun attachInputListeners() {
-        com.jakewharton.rxbinding2.support.v7.widget.RxToolbar.itemClicks(kotlinx.android.synthetic.main.toolbar.toolbar)
+        RxToolbar.itemClicks(toolbar)
                 .subscribe({
                     when (it.itemId) {
-                        com.voltek.materialnewsfeed.R.id.action_share -> mPresenter.notify(com.voltek.materialnewsfeed.ui.Event.Share())
-                        com.voltek.materialnewsfeed.R.id.action_website -> mPresenter.notify(com.voltek.materialnewsfeed.ui.Event.OpenWebsite())
+                        R.id.action_share -> mPresenter.notify(Event.Share())
+                        R.id.action_website -> mPresenter.notify(Event.OpenWebsite())
                     }
                 })
                 .bind()
@@ -56,23 +68,23 @@ class DetailsFragment : BaseFragment(),
         resetCompositeDisposable()
     }
 
-    override fun render(model: com.voltek.materialnewsfeed.ui.details.DetailsContract.DetailsModel) {
+    override fun render(model: DetailsModel) {
         if (model.articleLoaded) {
-            com.bumptech.glide.Glide.with(context).load(model.urlToImage).into(kotlinx.android.synthetic.main.fragment_details.im_image)
-            kotlinx.android.synthetic.main.fragment_details.tv_author.text = model.author
-            kotlinx.android.synthetic.main.fragment_details.tv_title.text = model.title
-            kotlinx.android.synthetic.main.fragment_details.tv_published_at.text = model.publishedAt
-            kotlinx.android.synthetic.main.fragment_details.tv_description.text = model.description
+            Glide.with(context).load(model.urlToImage).into(im_image)
+            tv_author.text = model.author
+            tv_title.text = model.title
+            tv_published_at.text = model.publishedAt
+            tv_description.text = model.description
 
-            kotlinx.android.synthetic.main.fragment_details.tv_message.text = ""
+            tv_message.text = ""
         } else {
-            kotlinx.android.synthetic.main.fragment_details.im_image.setImageResource(android.R.color.transparent)
-            kotlinx.android.synthetic.main.fragment_details.tv_author.text = ""
-            kotlinx.android.synthetic.main.fragment_details.tv_title.text = ""
-            kotlinx.android.synthetic.main.fragment_details.tv_published_at.text = ""
-            kotlinx.android.synthetic.main.fragment_details.tv_description.text = ""
+            im_image.setImageResource(android.R.color.transparent)
+            tv_author.text = ""
+            tv_title.text = ""
+            tv_published_at.text = ""
+            tv_description.text = ""
 
-            kotlinx.android.synthetic.main.fragment_details.tv_message.text = getString(com.voltek.materialnewsfeed.R.string.error_empty_details)
+            tv_message.text = getString(com.voltek.materialnewsfeed.R.string.error_empty_details)
         }
     }
 }

@@ -8,6 +8,7 @@ import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Source
+import com.voltek.materialnewsfeed.data.network.api.NewsApi
 import com.voltek.materialnewsfeed.domain.interactor.Result
 import io.reactivex.Observable
 
@@ -17,7 +18,7 @@ class NewsSourcesRepository {
     lateinit var mContext: android.content.Context
 
     @javax.inject.Inject
-    lateinit var mApi: com.voltek.materialnewsfeed.data.networking.NewsApi
+    lateinit var mApi: NewsApi
 
     init {
        NewsApp.repositoryComponent.inject(this)

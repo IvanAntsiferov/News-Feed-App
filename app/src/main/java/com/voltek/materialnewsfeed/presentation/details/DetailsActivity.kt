@@ -1,25 +1,24 @@
 package com.voltek.materialnewsfeed.presentation.details
 
-import com.voltek.materialnewsfeed.ui.BaseActivity
+import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.data.entity.Article
+import com.voltek.materialnewsfeed.presentation.BaseActivity
+import org.parceler.Parcels
 
-class DetailsActivity : com.voltek.materialnewsfeed.ui.BaseActivity() {
-
-    companion object {
-        const val TAG = "DetailsActivity"
-    }
+class DetailsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.voltek.materialnewsfeed.R.layout.activity_generic)
         setupToolbar(displayHomeAsUpEnabled = true)
 
-        val article: com.voltek.materialnewsfeed.data.entity.Article = org.parceler.Parcels.unwrap(intent.getParcelableExtra(com.voltek.materialnewsfeed.ui.details.DetailsFragment.Companion.ARG_ARTICLE))
+        val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.Companion.ARG_ARTICLE))
 
         if (savedInstanceState == null)
             replaceFragment(
-                    com.voltek.materialnewsfeed.ui.details.DetailsFragment.Companion.newInstance(article),
-                    com.voltek.materialnewsfeed.R.id.fragment_container,
-                    com.voltek.materialnewsfeed.ui.details.DetailsFragment.Companion.TAG)
+                    DetailsFragment.Companion.newInstance(article),
+                    R.id.fragment_container,
+                    DetailsFragment.Companion.TAG)
     }
 
     override fun executeCommand(command: com.voltek.materialnewsfeed.navigation.proxy.Command): Boolean = when (command) {
