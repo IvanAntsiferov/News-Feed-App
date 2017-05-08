@@ -1,28 +1,37 @@
 package com.voltek.materialnewsfeed.presentation.list
 
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
+import com.voltek.materialnewsfeed.NewsApp
+import com.voltek.materialnewsfeed.domain.interactor.articles.GetArticlesInteractor
+import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
+import com.voltek.materialnewsfeed.navigation.proxy.Router
 import com.voltek.materialnewsfeed.presentation.Event
-import com.voltek.materialnewsfeed.ui.list.ListContract.ListModel
-import com.voltek.materialnewsfeed.ui.list.ListContract.ListView
-import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity
+import com.voltek.materialnewsfeed.presentation.list.ListContract.ListModel
+import com.voltek.materialnewsfeed.presentation.list.ListContract.ListView
+import com.voltek.materialnewsfeed.presentation.news_sources.NewsSourcesActivity
+import io.reactivex.functions.Action
+import io.reactivex.functions.Consumer
+import javax.inject.Inject
 
-@com.arellomobile.mvp.InjectViewState
-class ListPresenter : com.arellomobile.mvp.MvpPresenter<ListView>() {
+@InjectViewState
+class ListPresenter : MvpPresenter<ListView>() {
 
-    @javax.inject.Inject
-    lateinit var mRouter: com.voltek.materialnewsfeed.navigation.proxy.Router
+    @Inject
+    lateinit var mRouter: Router
 
-    @javax.inject.Inject
-    lateinit var mArticles: com.voltek.materialnewsfeed.domain.interactor.articles.GetArticlesInteractor
+    @Inject
+    lateinit var mArticles: GetArticlesInteractor
 
     // Holds current model through full presenter lifecycle
-    private var mModel: com.voltek.materialnewsfeed.ui.list.ListContract.ListModel = com.voltek.materialnewsfeed.ui.list.ListContract.ListModel()
+    private var mModel: ListModel = ListModel()
 
     // View notify presenter about events using this method
     fun notify(event: Event) {
         when (event) {
-            is com.voltek.materialnewsfeed.ui.Event.OpenArticleDetails -> mRouter.execute(com.voltek.materialnewsfeed.ui.list.CommandOpenArticleDetails(event.article))
-            is com.voltek.materialnewsfeed.ui.Event.OpenNewsSources -> mRouter.execute(com.voltek.materialnewsfeed.navigation.command.CommandStartActivity(com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesActivity()))
-            is com.voltek.materialnewsfeed.ui.Event.Refresh -> {
+            is Event.OpenArticleDetails -> mRouter.execute(CommandOpenArticleDetails(event.article))
+            is Event.OpenNewsSources -> mRouter.execute(CommandStartActivity(NewsSourcesActivity()))
+            is Event.Refresh -> {
                 if (!mModel.loading) {
                     loadArticles()
                 }
@@ -36,17 +45,17 @@ class ListPresenter : com.arellomobile.mvp.MvpPresenter<ListView>() {
     }
 
     init {
-        com.voltek.materialnewsfeed.NewsApp.Companion.presenterComponent.inject(this)
+        NewsApp.presenterComponent.inject(this)
 
         loadArticles()
     }
 
-    override fun attachView(view: com.voltek.materialnewsfeed.ui.list.ListContract.ListView?) {
+    override fun attachView(view: ListView?) {
         super.attachView(view)
         viewState.attachInputListeners()
     }
 
-    override fun detachView(view: com.voltek.materialnewsfeed.ui.list.ListContract.ListView?) {
+    override fun detachView(view: ListView?) {
         viewState.detachInputListeners()
         super.detachView(view)
     }
@@ -63,16 +72,16 @@ class ListPresenter : com.arellomobile.mvp.MvpPresenter<ListView>() {
 
         mArticles.execute(
                 null,
-                io.reactivex.functions.Consumer {
+                Consumer {
                     mModel.addData(it.data)
                     mModel.message = it.message
                     updateModel()
                 },
-                io.reactivex.functions.Consumer {
+                Consumer {
                     mModel.message = it.message ?: ""
                     finishLoading()
                 },
-                io.reactivex.functions.Action {
+                Action {
                     finishLoading()
                 }
         )

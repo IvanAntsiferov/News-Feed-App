@@ -16,68 +16,68 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_title.view.*
 
-class ListAdapter(private val mContext: android.content.Context, private var mItems: MutableList<com.voltek.materialnewsfeed.data.entity.Article>)
-    : android.support.v7.widget.RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TITLE = 0
         private const val ARTICLE = 1
     }
 
-    private var mOnItemClickSubject: io.reactivex.subjects.PublishSubject<Article> = io.reactivex.subjects.PublishSubject.create()
+    private var mOnItemClickSubject: PublishSubject<Article> = PublishSubject.create()
 
-    fun getOnItemClickObservable(): io.reactivex.Observable<Article> = mOnItemClickSubject
+    fun getOnItemClickObservable(): Observable<Article> = mOnItemClickSubject
 
-    class ViewHolderTitle(view: android.view.View) : android.support.v7.widget.RecyclerView.ViewHolder(view) {
-        val title: android.widget.TextView = kotlinx.android.synthetic.main.item_title.view.tv_source_title
+    class ViewHolderTitle(view: View) : RecyclerView.ViewHolder(view) {
+        val title: TextView = view.tv_source_title
     }
 
-    class ViewHolderArticle(view: android.view.View) : android.support.v7.widget.RecyclerView.ViewHolder(view) {
-        val image: android.widget.ImageView = kotlinx.android.synthetic.main.item_article.view.im_image
-        val title: android.widget.TextView = kotlinx.android.synthetic.main.item_article.view.tv_title
+    class ViewHolderArticle(view: View) : RecyclerView.ViewHolder(view) {
+        val image: ImageView = view.im_image
+        val title: TextView = view.tv_title
     }
 
-    override fun onCreateViewHolder(parent: android.view.ViewGroup?, viewType: Int): android.support.v7.widget.RecyclerView.ViewHolder {
-        val layoutInflater = android.view.LayoutInflater.from(parent?.context)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent?.context)
         when (viewType) {
-            com.voltek.materialnewsfeed.presentation.ListAdapter.Companion.TITLE -> {
-                val view = layoutInflater.inflate(com.voltek.materialnewsfeed.R.layout.item_title, parent, false)
-                return com.voltek.materialnewsfeed.presentation.ListAdapter.ViewHolderTitle(view)
+            TITLE -> {
+                val view = layoutInflater.inflate(R.layout.item_title, parent, false)
+                return ViewHolderTitle(view)
             }
             else -> {
-                val view = layoutInflater.inflate(com.voltek.materialnewsfeed.R.layout.item_article, parent, false)
-                return com.voltek.materialnewsfeed.presentation.ListAdapter.ViewHolderArticle(view)
+                val view = layoutInflater.inflate(R.layout.item_article, parent, false)
+                return ViewHolderArticle(view)
             }
         }
     }
 
-    override fun onBindViewHolder(holder: android.support.v7.widget.RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (holder?.itemViewType) {
-            com.voltek.materialnewsfeed.presentation.ListAdapter.Companion.TITLE -> bindTitle(holder as com.voltek.materialnewsfeed.presentation.ListAdapter.ViewHolderTitle, position)
-            com.voltek.materialnewsfeed.presentation.ListAdapter.Companion.ARTICLE -> bindArticle(holder as com.voltek.materialnewsfeed.presentation.ListAdapter.ViewHolderArticle, position)
+            TITLE -> bindTitle(holder as ViewHolderTitle, position)
+            ARTICLE -> bindArticle(holder as ViewHolderArticle, position)
         }
     }
 
-    private fun bindTitle(holder: com.voltek.materialnewsfeed.presentation.ListAdapter.ViewHolderTitle, position: Int) {
+    private fun bindTitle(holder: ViewHolderTitle, position: Int) {
         val item = mItems[position]
         holder.title.text = item.source
     }
 
-    private fun bindArticle(holder: com.voltek.materialnewsfeed.presentation.ListAdapter.ViewHolderArticle, position: Int) {
+    private fun bindArticle(holder: ViewHolderArticle, position: Int) {
         val item = mItems[position]
 
-        com.jakewharton.rxbinding2.view.RxView.clicks(holder.itemView).subscribe({ mOnItemClickSubject.onNext(item) })
+        RxView.clicks(holder.itemView).subscribe({ mOnItemClickSubject.onNext(item) })
 
-        com.bumptech.glide.Glide.with(mContext).load(item.urlToImage).into(holder.image)
+        Glide.with(mContext).load(item.urlToImage).into(holder.image)
         holder.title.text = item.title
     }
 
     override fun getItemCount(): Int = mItems.size
 
     override fun getItemViewType(position: Int): Int =
-            if (mItems[position].isEmpty()) com.voltek.materialnewsfeed.presentation.ListAdapter.Companion.TITLE else com.voltek.materialnewsfeed.presentation.ListAdapter.Companion.ARTICLE
+            if (mItems[position].isEmpty()) TITLE else ARTICLE
 
-    fun replace(items: List<com.voltek.materialnewsfeed.data.entity.Article>) {
+    fun replace(items: List<Article>) {
         mItems.clear()
         mItems.addAll(items)
         notifyDataSetChanged()
