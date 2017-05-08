@@ -1,27 +1,34 @@
 package com.voltek.materialnewsfeed.presentation.news_sources
 
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
+import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.entity.Source
-import com.voltek.materialnewsfeed.ui.Event
-import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesModel
-import com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesView
+import com.voltek.materialnewsfeed.domain.interactor.news_sources.NewsSourcesInteractor
+import com.voltek.materialnewsfeed.presentation.Event
+import com.voltek.materialnewsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesModel
+import com.voltek.materialnewsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesView
+import io.reactivex.functions.Action
+import io.reactivex.functions.Consumer
+import javax.inject.Inject
 
-@com.arellomobile.mvp.InjectViewState
-class NewsSourcesPresenter : com.arellomobile.mvp.MvpPresenter<NewsSourcesView>() {
+@InjectViewState
+class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
-    @javax.inject.Inject
-    lateinit var mNewsSources: com.voltek.materialnewsfeed.domain.interactor.news_sources.NewsSourcesInteractor
+    @Inject
+    lateinit var mNewsSources: NewsSourcesInteractor
 
-    private var mModel: com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesModel = com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesModel()
+    private var mModel: NewsSourcesModel = NewsSourcesModel()
 
-    fun notify(event: com.voltek.materialnewsfeed.ui.Event) {
+    fun notify(event: Event) {
         when (event) {
-            is com.voltek.materialnewsfeed.ui.Event.FilterSources -> {
+            is Event.FilterSources -> {
                 mModel.categoryId = event.id
                 loadNewsSources(event.filter)
             }
-            is com.voltek.materialnewsfeed.ui.Event.Refresh -> {
+            is Event.Refresh -> {
                 mModel.resetId()
-                loadNewsSources(com.voltek.materialnewsfeed.domain.interactor.news_sources.NewsSourcesInteractor.Companion.REFRESH)
+                loadNewsSources(NewsSourcesInteractor.REFRESH)
             }
         }
     }
@@ -31,16 +38,16 @@ class NewsSourcesPresenter : com.arellomobile.mvp.MvpPresenter<NewsSourcesView>(
     }
 
     init {
-        com.voltek.materialnewsfeed.NewsApp.Companion.presenterComponent.inject(this)
+        NewsApp.presenterComponent.inject(this)
         loadNewsSources(null)
     }
 
-    override fun attachView(view: com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesView?) {
+    override fun attachView(view: NewsSourcesView?) {
         super.attachView(view)
         viewState.attachInputListeners()
     }
 
-    override fun detachView(view: com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesContract.NewsSourcesView?) {
+    override fun detachView(view: NewsSourcesView?) {
         viewState.detachInputListeners()
         super.detachView(view)
     }
@@ -57,16 +64,16 @@ class NewsSourcesPresenter : com.arellomobile.mvp.MvpPresenter<NewsSourcesView>(
 
         mNewsSources.execute(
                 filter,
-                io.reactivex.functions.Consumer {
+                Consumer {
                     mModel.sources = ArrayList(it.data ?: ArrayList<Source>())
                     mModel.message = it.message
                     updateModel()
                 },
-                io.reactivex.functions.Consumer {
+                Consumer {
                     mModel.message = it.message ?: ""
                     finishLoading()
                 },
-                io.reactivex.functions.Action {
+                Action {
                     finishLoading()
                 }
         )

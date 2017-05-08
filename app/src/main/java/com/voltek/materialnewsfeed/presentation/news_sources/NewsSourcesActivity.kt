@@ -1,26 +1,25 @@
 package com.voltek.materialnewsfeed.presentation.news_sources
 
+import android.os.Bundle
+import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.navigation.proxy.Command
 import com.voltek.materialnewsfeed.presentation.BaseActivity
 
 class NewsSourcesActivity : BaseActivity() {
 
-    companion object {
-        const val TAG = "NewsSourcesActivity"
-    }
-
-    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.voltek.materialnewsfeed.R.layout.activity_generic)
+        setContentView(R.layout.activity_generic)
         setupToolbar(displayHomeAsUpEnabled = true)
 
         if (savedInstanceState == null)
             replaceFragment(
-                    com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesFragment.Companion.newInstance(),
-                    com.voltek.materialnewsfeed.R.id.fragment_container,
-                    com.voltek.materialnewsfeed.ui.news_sources.NewsSourcesFragment.Companion.TAG)
+                    NewsSourcesFragment.newInstance(),
+                    R.id.fragment_container,
+                    NewsSourcesFragment.TAG)
     }
 
-    override fun executeCommand(command: com.voltek.materialnewsfeed.navigation.proxy.Command): Boolean {
+    override fun executeCommand(command: Command): Boolean {
         return false
     }
 }
