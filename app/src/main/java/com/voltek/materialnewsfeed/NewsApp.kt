@@ -32,6 +32,8 @@ class NewsApp : Application() {
         lateinit var interactorComponent: InteractorComponent
 
         lateinit var repositoryComponent: RepositoryComponent
+
+        lateinit var dataComponent: DataComponent
     }
 
     override fun onCreate() {
@@ -43,6 +45,7 @@ class NewsApp : Application() {
         val networkModule = NetworkModule(BASE_URL)
         val repositoryModule = RepositoryModule()
         val routerModule = RouterModule(routerHolder)
+        val dataModule = DataModule()
 
         presenterComponent = DaggerPresenterComponent.builder()
                 .routerModule(routerModule)
@@ -54,6 +57,10 @@ class NewsApp : Application() {
                 .build()
 
         repositoryComponent = DaggerRepositoryComponent.builder()
+                .dataModule(dataModule)
+                .build()
+
+        dataComponent = DaggerDataComponent.builder()
                 .appModule(appModule)
                 .networkModule(networkModule)
                 .build()

@@ -12,11 +12,5 @@ class RepositoryModule {
     fun provideArticlesRepository(): ArticlesRepository = ArticlesRepository()
 
     @Provides
-    fun provideArticles(repository: ArticlesRepository): Repository.Articles = repository
-
-    @Provides
     fun provideNewsSourcesRepository(): NewsSourcesRepository = NewsSourcesRepository()
-
-    @Provides
-    fun provideNewsSources(repository: NewsSourcesRepository): Repository.NewsSources = repository
 }

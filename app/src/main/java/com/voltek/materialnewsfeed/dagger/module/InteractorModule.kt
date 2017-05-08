@@ -14,6 +14,6 @@ class InteractorModule(val jobScheduler: Scheduler, val uiScheduler: Scheduler) 
             GetArticlesInteractor(jobScheduler, uiScheduler)
 
     @Provides
-    fun provideGetNewsSourcesInteractor(): NewsSourcesInteractor =
+    fun provideNewsSourcesInteractor(): NewsSourcesInteractor =
             NewsSourcesInteractor(jobScheduler, uiScheduler)
 }
