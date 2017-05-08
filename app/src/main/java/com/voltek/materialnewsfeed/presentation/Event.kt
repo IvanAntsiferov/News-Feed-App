@@ -7,15 +7,15 @@ import com.voltek.materialnewsfeed.data.entity.Article
  */
 sealed class Event {
 
-    class OpenWebsite(val url: String = "") : com.voltek.materialnewsfeed.presentation.Event()
+    class OpenWebsite(val url: String = "") : Event()
 
-    class OpenNewsSources : com.voltek.materialnewsfeed.presentation.Event()
+    class OpenNewsSources : Event()
 
-    class OpenArticleDetails(val article: com.voltek.materialnewsfeed.data.entity.Article) : com.voltek.materialnewsfeed.presentation.Event()
+    class OpenArticleDetails(val article: Article) : Event()
 
-    class Refresh : com.voltek.materialnewsfeed.presentation.Event()
+    class Refresh : Event()
 
-    class Share : com.voltek.materialnewsfeed.presentation.Event()
+    class Share : Event()
 
-    class FilterSources(val filter: String, val id: Int) : com.voltek.materialnewsfeed.presentation.Event()
+    class FilterSources(val filter: String, val id: Int) : Event()
 }
