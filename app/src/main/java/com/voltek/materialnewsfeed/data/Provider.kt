@@ -1,5 +1,7 @@
 package com.voltek.materialnewsfeed.data
 
+import com.voltek.materialnewsfeed.data.entity.Source
+
 /**
  * Set of interfaces, that provides access to data layer
  */
@@ -14,6 +16,17 @@ object Provider {
 
     object Database {
 
-        interface NewsSources {}
+        interface NewsSources {
+
+            fun queryAll(): List<Source>
+
+            fun queryEnabled(): List<Source>
+
+            fun queryCategory(category: String): List<Source>
+
+            fun save(items: List<Source>)
+
+            fun deleteAll()
+        }
     }
 }

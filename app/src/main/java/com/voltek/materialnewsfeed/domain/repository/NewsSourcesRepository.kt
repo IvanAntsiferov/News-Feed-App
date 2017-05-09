@@ -8,19 +8,24 @@ import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.data.Provider
 import com.voltek.materialnewsfeed.data.entity.Source
 import com.voltek.materialnewsfeed.data.network.api.NewsApi
 import com.voltek.materialnewsfeed.domain.interactor.Result
 import com.voltek.materialnewsfeed.utils.NetworkUtils
 import io.reactivex.Observable
+import javax.inject.Inject
 
 class NewsSourcesRepository {
 
-    @javax.inject.Inject
+    @Inject
     lateinit var mContext: Context
 
-    @javax.inject.Inject
+    @Inject
     lateinit var mApi: NewsApi
+
+    @Inject
+    lateinit var mDb: Provider.Database.NewsSources
 
     init {
        NewsApp.repositoryComponent.inject(this)
@@ -29,7 +34,7 @@ class NewsSourcesRepository {
     fun getAll(): Observable<Result<List<Source>?>> = Observable.create {
         val emitter = it
 
-        val sourcesCache = Source().queryAll()
+        val sourcesCache = mDb.queryAll()
 
         if (sourcesCache.isEmpty()) {
             try {
@@ -37,8 +42,8 @@ class NewsSourcesRepository {
 
                 val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
                 if (call.isSuccessful) {
-                    call.body().sources.saveAll()
-                    emitter.onNext(Result(Source().queryAll()))
+                    mDb.save(call.body().sources)
+                    emitter.onNext(Result(mDb.queryAll()))
                 } else {
                     emitter.onNext(Result(null, mContext.getString(R.string.error_request_failed)))
                 }
@@ -59,17 +64,17 @@ class NewsSourcesRepository {
         var message = ""
 
         if (category == mContext.getString(com.voltek.materialnewsfeed.R.string.category_all)) {
-            query = Source().queryAll()
+            query = mDb.queryAll()
 
             if (query.isEmpty())
                 message = mContext.getString(R.string.error_no_news_sources_loaded)
         } else if (category == mContext.getString(com.voltek.materialnewsfeed.R.string.category_enabled) || category.isEmpty()) {
-            query = Source().query({ query -> query.equalTo("isEnabled", true) })
+            query = mDb.queryEnabled()
 
             if (query.isEmpty())
                 message = mContext.getString(R.string.error_no_news_sources_selected_yet)
         } else {
-            query = Source().query({ query -> query.equalTo("category", category.toLowerCase()) })
+            query = mDb.queryCategory(category.toLowerCase())
 
             if (query.isEmpty())
                 message = mContext.getString(R.string.error_no_news_sources_for_category)
