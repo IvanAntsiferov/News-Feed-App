@@ -101,4 +101,12 @@ class NewsSourcesRepository {
 
         emitter.onComplete()
     }
+
+    fun update(vararg source: Source): Observable<Unit> = Observable.create {
+        val emitter = it
+
+        mDb.save(source.toMutableList())
+
+        emitter.onComplete()
+    }
 }

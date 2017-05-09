@@ -83,6 +83,10 @@ class NewsSourcesFragment : BaseFragment(),
                     }
                 })
                 .bind()
+
+        mAdapter.getOnItemClickObservable()
+                .subscribe({ mPresenter.notify(Event.EnableNewsSource(it)) })
+                .bind()
     }
 
     override fun detachInputListeners() {

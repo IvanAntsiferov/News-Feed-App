@@ -10,13 +10,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
-import com.vicpin.krealmextensions.save
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.entity.Source
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_source.view.*
 
 class NewsSourcesAdapter(private val mContext: Context, private var mItems: MutableList<Source>)
     : RecyclerView.Adapter<NewsSourcesAdapter.ViewHolder>() {
+
+    private var mOnItemClickSubject: PublishSubject<Source> = PublishSubject.create()
+
+    fun getOnItemClickObservable(): Observable<Source> = mOnItemClickSubject
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.tv_name
@@ -36,9 +41,8 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         val item = mItems[position]
 
         RxView.clicks(holder!!.itemView).subscribe({
-            item.isEnabled = !item.isEnabled
-            holder.enabled.isChecked = item.isEnabled
-            item.save()
+            holder.enabled.isChecked = !holder.enabled.isChecked
+            mOnItemClickSubject.onNext(item)
         })
 
         holder.name.text = item.name
