@@ -1,24 +1,18 @@
 package com.voltek.materialnewsfeed.domain.repository
 
-import com.vicpin.krealmextensions.deleteAll
-import com.vicpin.krealmextensions.query
-import com.vicpin.krealmextensions.queryAll
-import com.vicpin.krealmextensions.saveAll
-import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.Provider
 import com.voltek.materialnewsfeed.data.entity.Source
-import com.voltek.materialnewsfeed.data.network.api.NewsApi
+import com.voltek.materialnewsfeed.data.exception.NoConnectionException
 import com.voltek.materialnewsfeed.domain.interactor.Result
-import com.voltek.materialnewsfeed.utils.NetworkUtils
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class NewsSourcesRepository {
 
     @Inject
-    lateinit var mApi: NewsApi
+    lateinit var mNet: Provider.Api.NewsSources
 
     @Inject
     lateinit var mDb: Provider.Database.NewsSources
@@ -36,19 +30,17 @@ class NewsSourcesRepository {
         val sourcesCache = mDb.queryAll()
 
         if (sourcesCache.isEmpty()) {
-            try {
-                NetworkUtils.checkConnection(mContext)
-
-                val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
-                if (call.isSuccessful) {
-                    mDb.save(call.body().sources)
-                    emitter.onNext(Result(mDb.queryAll()))
-                } else {
-                    emitter.onNext(Result(null, mContext.getString(R.string.error_request_failed)))
-                }
-            } catch (e: Exception) {
-                emitter.onNext(Result(null, mContext.getString(R.string.error_no_connection)))
-            }
+            mNet.get()
+                    .subscribe({
+                        mDb.save(it)
+                        emitter.onNext(Result(mDb.queryAll()))
+                    }, {
+                        val message: String = when (it) {
+                            is NoConnectionException -> mRes.getString(R.string.error_no_connection)
+                            else -> mRes.getString(R.string.error_request_failed)
+                        }
+                        emitter.onNext(Result(null, message))
+                    })
         } else {
             emitter.onNext(Result(sourcesCache))
         }
@@ -67,7 +59,7 @@ class NewsSourcesRepository {
 
             if (query.isEmpty())
                 message = mRes.getString(R.string.error_no_news_sources_loaded)
-        } else if (category == mContext.getString(com.voltek.materialnewsfeed.R.string.category_enabled) || category.isEmpty()) {
+        } else if (category == mRes.getString(R.string.category_enabled) || category.isEmpty()) {
             query = mDb.queryEnabled()
 
             if (query.isEmpty())
@@ -85,28 +77,28 @@ class NewsSourcesRepository {
 
     fun refresh(): Observable<Result<List<Source>?>> = Observable.create {
         val emitter = it
-        try {
-            NetworkUtils.checkConnection(mContext)
 
-            val call = mApi.fetchSources(BuildConfig.ApiKey).execute()
-            if (call.isSuccessful) {
-                val current = Source().query({ query -> query.equalTo("isEnabled", true) })
-                val new = call.body().sources as ArrayList
+        mNet.get()
+                .subscribe({
+                    val current = mDb.queryEnabled()
+                    val new = it as ArrayList
 
-                for (source in new)
-                    for (enabled in current)
-                        if (source.id == enabled.id)
-                            source.isEnabled = true
+                    for (source in new)
+                        for (enabled in current)
+                            if (source.id == enabled.id)
+                                source.isEnabled = true
 
-                Source().deleteAll()
-                new.saveAll()
-                emitter.onNext(Result(Source().queryAll()))
-            } else {
-                emitter.onNext(Result(null, mRes.getString(R.string.error_request_failed)))
-            }
-        } catch (e: Exception) {
-            emitter.onNext(Result(Source().queryAll(), mRes.getString(R.string.error_no_connection)))
-        }
+                    mDb.deleteAll()
+                    mDb.save(new)
+                    emitter.onNext(Result(mDb.queryAll()))
+                }, {
+                    val message: String = when (it) {
+                        is NoConnectionException -> mRes.getString(R.string.error_no_connection)
+                        else -> mRes.getString(R.string.error_request_failed)
+                    }
+                    emitter.onNext(Result(mDb.queryAll(), message))
+                })
+
         emitter.onComplete()
     }
 }

@@ -3,6 +3,7 @@ package com.voltek.materialnewsfeed.dagger.module
 import com.voltek.materialnewsfeed.data.Provider
 import com.voltek.materialnewsfeed.data.db.DatabaseDelegate
 import com.voltek.materialnewsfeed.data.network.ApiDelegate
+import com.voltek.materialnewsfeed.data.platform.ResourcesDelegate
 import dagger.Module
 import dagger.Provides
 
@@ -25,4 +26,7 @@ class DataModule {
 
     @Provides
     fun provideApiNewsSources(api: ApiDelegate): Provider.Api.NewsSources = api
+
+    @Provides
+    fun provideResources(): Provider.Platform.Resources = ResourcesDelegate()
 }

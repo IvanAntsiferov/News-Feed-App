@@ -1,13 +1,11 @@
 package com.voltek.materialnewsfeed.domain.repository
 
-import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
 import com.voltek.materialnewsfeed.data.Provider
-import com.voltek.materialnewsfeed.utils.NetworkUtils
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.data.entity.Source
-import com.voltek.materialnewsfeed.data.network.api.NewsApi
+import com.voltek.materialnewsfeed.data.exception.NoConnectionException
 import com.voltek.materialnewsfeed.domain.interactor.Result
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -15,7 +13,7 @@ import javax.inject.Inject
 class ArticlesRepository {
 
     @Inject
-    lateinit var mApi: NewsApi
+    lateinit var mNet: Provider.Api.Articles
 
     @Inject
     lateinit var mRes: Provider.Platform.Resources
@@ -25,27 +23,25 @@ class ArticlesRepository {
     }
 
     fun get(sources: List<Source>): Observable<Result<List<Article>?>> = Observable.create {
-        NetworkUtils.checkConnection(mContext)
         val emitter = it
 
         if (!sources.isEmpty()) {
             for (source in sources) {
-                val call = mApi.fetchArticles(BuildConfig.ApiKey, source.id).execute()
-                if (call.isSuccessful) {
-                    val result = ArrayList<Article>()
-                    val sourceTitle = Article()
-                    sourceTitle.source = source.name
-                    result.add(sourceTitle)
-                    result.addAll(call.body().articles)
-                    emitter.onNext(Result(result))
-                } else {
-                    emitter.onNext(
-                            Result(
-                                    null,
-                                    mRes.getString(R.string.error_retrieve_failed, source.name)
-                            )
-                    )
-                }
+                mNet.get(source.id)
+                        .subscribe({
+                            val result = ArrayList<Article>()
+                            val sourceTitle = Article()
+                            sourceTitle.source = source.name
+                            result.add(sourceTitle)
+                            result.addAll(it)
+                            emitter.onNext(Result(result))
+                        }, {
+                            val message: String = when (it) {
+                                is NoConnectionException -> mRes.getString(R.string.error_no_connection)
+                                else -> mRes.getString(R.string.error_retrieve_failed, source.name)
+                            }
+                            emitter.onNext(Result(null, message))
+                        })
             }
         } else {
             emitter.onError(Exception(mRes.getString(R.string.error_no_news_sources_selected)))

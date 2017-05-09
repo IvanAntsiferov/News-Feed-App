@@ -58,8 +58,6 @@ class NewsApp : Application() {
 
         repositoryComponent = DaggerRepositoryComponent.builder()
                 .dataModule(dataModule)
-                .appModule(appModule)
-                .networkModule(networkModule)
                 .build()
 
         dataComponent = DaggerDataComponent.builder()
