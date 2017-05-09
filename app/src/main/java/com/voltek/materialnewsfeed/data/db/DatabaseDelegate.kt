@@ -1,6 +1,5 @@
 package com.voltek.materialnewsfeed.data.db
 
-import android.content.Context
 import com.vicpin.krealmextensions.deleteAll
 import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
@@ -8,12 +7,8 @@ import com.vicpin.krealmextensions.saveAll
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.Provider
 import com.voltek.materialnewsfeed.data.entity.Source
-import javax.inject.Inject
 
 class DatabaseDelegate : Provider.Database.NewsSources {
-
-    @Inject
-    lateinit var mContext: Context
 
     init {
         NewsApp.dataComponent.inject(this)

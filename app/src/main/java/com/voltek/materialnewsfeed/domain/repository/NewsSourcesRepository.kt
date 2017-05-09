@@ -1,6 +1,5 @@
 package com.voltek.materialnewsfeed.domain.repository
 
-import android.content.Context
 import com.vicpin.krealmextensions.deleteAll
 import com.vicpin.krealmextensions.query
 import com.vicpin.krealmextensions.queryAll
@@ -19,13 +18,13 @@ import javax.inject.Inject
 class NewsSourcesRepository {
 
     @Inject
-    lateinit var mContext: Context
-
-    @Inject
     lateinit var mApi: NewsApi
 
     @Inject
     lateinit var mDb: Provider.Database.NewsSources
+
+    @Inject
+    lateinit var mRes: Provider.Platform.Resources
 
     init {
        NewsApp.repositoryComponent.inject(this)
@@ -63,21 +62,21 @@ class NewsSourcesRepository {
         val query: List<Source>
         var message = ""
 
-        if (category == mContext.getString(com.voltek.materialnewsfeed.R.string.category_all)) {
+        if (category == mRes.getString(R.string.category_all)) {
             query = mDb.queryAll()
 
             if (query.isEmpty())
-                message = mContext.getString(R.string.error_no_news_sources_loaded)
+                message = mRes.getString(R.string.error_no_news_sources_loaded)
         } else if (category == mContext.getString(com.voltek.materialnewsfeed.R.string.category_enabled) || category.isEmpty()) {
             query = mDb.queryEnabled()
 
             if (query.isEmpty())
-                message = mContext.getString(R.string.error_no_news_sources_selected_yet)
+                message = mRes.getString(R.string.error_no_news_sources_selected_yet)
         } else {
             query = mDb.queryCategory(category.toLowerCase())
 
             if (query.isEmpty())
-                message = mContext.getString(R.string.error_no_news_sources_for_category)
+                message = mRes.getString(R.string.error_no_news_sources_for_category)
         }
 
         emitter.onNext(Result(query, message))
@@ -103,10 +102,10 @@ class NewsSourcesRepository {
                 new.saveAll()
                 emitter.onNext(Result(Source().queryAll()))
             } else {
-                emitter.onNext(Result(null, mContext.getString(R.string.error_request_failed)))
+                emitter.onNext(Result(null, mRes.getString(R.string.error_request_failed)))
             }
         } catch (e: Exception) {
-            emitter.onNext(Result(Source().queryAll(), mContext.getString(R.string.error_no_connection)))
+            emitter.onNext(Result(Source().queryAll(), mRes.getString(R.string.error_no_connection)))
         }
         emitter.onComplete()
     }

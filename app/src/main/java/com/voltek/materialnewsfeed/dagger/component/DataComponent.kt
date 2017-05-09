@@ -4,6 +4,7 @@ import com.voltek.materialnewsfeed.dagger.module.AppModule
 import com.voltek.materialnewsfeed.dagger.module.NetworkModule
 import com.voltek.materialnewsfeed.data.db.DatabaseDelegate
 import com.voltek.materialnewsfeed.data.network.ApiDelegate
+import com.voltek.materialnewsfeed.data.platform.ResourcesDelegate
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,4 +18,6 @@ interface DataComponent {
     fun inject(database: DatabaseDelegate)
 
     fun inject(api: ApiDelegate)
+
+    fun inject(resources: ResourcesDelegate)
 }

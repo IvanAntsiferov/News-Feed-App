@@ -1,5 +1,6 @@
 package com.voltek.materialnewsfeed.data
 
+import android.support.annotation.IdRes
 import com.voltek.materialnewsfeed.data.entity.Source
 
 /**
@@ -27,6 +28,16 @@ object Provider {
             fun save(items: List<Source>)
 
             fun deleteAll()
+        }
+    }
+
+    object Platform {
+
+        interface Resources {
+
+            fun getString(@IdRes id: Int): String
+
+            fun getString(@IdRes id: Int, vararg args: Any): String
         }
     }
 }

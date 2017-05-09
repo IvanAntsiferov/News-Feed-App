@@ -1,9 +1,9 @@
 package com.voltek.materialnewsfeed.domain.repository
 
-import android.content.Context
 import com.voltek.materialnewsfeed.BuildConfig
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.R
+import com.voltek.materialnewsfeed.data.Provider
 import com.voltek.materialnewsfeed.utils.NetworkUtils
 import com.voltek.materialnewsfeed.data.entity.Article
 import com.voltek.materialnewsfeed.data.entity.Source
@@ -15,10 +15,10 @@ import javax.inject.Inject
 class ArticlesRepository {
 
     @Inject
-    lateinit var mContext: Context
+    lateinit var mApi: NewsApi
 
     @Inject
-    lateinit var mApi: NewsApi
+    lateinit var mRes: Provider.Platform.Resources
 
     init {
         NewsApp.repositoryComponent.inject(this)
@@ -42,13 +42,13 @@ class ArticlesRepository {
                     emitter.onNext(
                             Result(
                                     null,
-                                    mContext.getString(R.string.error_retrieve_failed, source.name)
+                                    mRes.getString(R.string.error_retrieve_failed, source.name)
                             )
                     )
                 }
             }
         } else {
-            emitter.onError(Exception(mContext.getString(R.string.error_no_news_sources_selected)))
+            emitter.onError(Exception(mRes.getString(R.string.error_no_news_sources_selected)))
         }
 
         emitter.onComplete()
