@@ -14,13 +14,13 @@ abstract class BaseInteractor<ResultType : Any?, in ParameterType>(
 
     override val mDisposable = CompositeDisposable()
 
-    protected abstract fun buildObservable(parameter: ParameterType?): Observable<Result<ResultType>>
+    protected abstract fun buildObservable(parameter: Parameter<ParameterType?>): Observable<Result<ResultType>>
 
     /**
      * @param parameter pass null, if parameter does not needed
      */
     fun execute(
-            parameter: ParameterType?,
+            parameter: Parameter<ParameterType?>,
             onNext: Consumer<Result<ResultType>>,
             onError: Consumer<Throwable>,
             onComplete: Action

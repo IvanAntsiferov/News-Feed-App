@@ -3,6 +3,7 @@ package com.voltek.materialnewsfeed.presentation.list
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.NewsApp
+import com.voltek.materialnewsfeed.domain.interactor.Parameter
 import com.voltek.materialnewsfeed.domain.interactor.articles.GetArticlesInteractor
 import com.voltek.materialnewsfeed.navigation.command.CommandStartActivity
 import com.voltek.materialnewsfeed.navigation.proxy.Router
@@ -71,7 +72,7 @@ class ListPresenter : MvpPresenter<ListView>() {
         updateModel()
 
         mArticles.execute(
-                null,
+                Parameter(),
                 Consumer {
                     mModel.addData(it.data)
                     mModel.message = it.message

@@ -4,13 +4,13 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.materialnewsfeed.NewsApp
 import com.voltek.materialnewsfeed.data.entity.Source
+import com.voltek.materialnewsfeed.domain.interactor.Parameter
 import com.voltek.materialnewsfeed.domain.interactor.news_sources.NewsSourcesInteractor
 import com.voltek.materialnewsfeed.presentation.Event
 import com.voltek.materialnewsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesModel
 import com.voltek.materialnewsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesView
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
@@ -31,7 +31,12 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
                 mModel.resetId()
                 loadNewsSources(NewsSourcesInteractor.REFRESH)
             }
-            is Event.EnableNewsSource -> { Timber.d("update source: " + event.source.id) }
+            is Event.EnableNewsSource -> {
+                mNewsSources.execute(
+                        Parameter(NewsSourcesInteractor.ENABLE, event.source),
+                        Consumer {}, Consumer {}, Action {}
+                )
+            }
         }
     }
 
@@ -41,7 +46,7 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
     init {
         NewsApp.presenterComponent.inject(this)
-        loadNewsSources(null)
+        loadNewsSources(NewsSourcesInteractor.GET)
     }
 
     override fun attachView(view: NewsSourcesView?) {
@@ -58,14 +63,14 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
         mNewsSources.unsubscribe()
     }
 
-    private fun loadNewsSources(filter: String?) {
+    private fun loadNewsSources(filter: String) {
         mModel.sources.clear()
         mModel.loading = true
         mModel.message = ""
         updateModel()
 
         mNewsSources.execute(
-                filter,
+                Parameter(filter),
                 Consumer {
                     mModel.sources = ArrayList(it.data ?: ArrayList<Source>())
                     mModel.message = it.message
