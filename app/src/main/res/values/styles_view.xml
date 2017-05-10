@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Generic"/>
+
+    <style name="Generic.Container">
+        <item name="android:padding">@dimen/generic_padding</item>
+        <item name="android:layout_margin">@dimen/generic_margin</item>
+        <item name="android:background">@drawable/ll_generic_container</item>
+        <item name="android:elevation">@dimen/generic_elevation</item>
+    </style>
+
+    <style name="Generic.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_marginBottom">@dimen/divider_bottom_margin</item>
+    </style>
+
+</resources>

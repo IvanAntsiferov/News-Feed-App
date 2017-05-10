@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="generic_margin">16dp</dimen>
+    <dimen name="generic_padding">8dp</dimen>
+    <dimen name="generic_elevation">4dp</dimen>
+
+    <dimen name="divider_bottom_margin">4dp</dimen>
+
     <dimen name="country_icon_size">24dp</dimen>
 
 </resources>

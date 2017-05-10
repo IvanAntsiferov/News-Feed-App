@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Generic.Container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/Text.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:ellipsize="end"
+        android:maxLines="1" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp" />
+    <CheckBox
+        android:id="@+id/cb_enable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:clickable="false"
+        android:focusable="false" />
 
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name" />
+    <View
+        android:id="@+id/divider"
+        style="@style/Generic.Divider"
+        android:layout_below="@id/cb_enable" />
 
-        <TextView
-            android:id="@+id/tv_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_description" />
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/Text.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider" />
 
-        <ImageView
-            android:id="@+id/im_country"
-            android:layout_width="@dimen/country_icon_size"
-            android:layout_height="@dimen/country_icon_size"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/tv_description"
-            android:adjustViewBounds="true" />
+    <TextView
+        android:id="@+id/tv_category"
+        style="@style/Text.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/tv_description"
+        android:textColor="@color/md_pink_a400" />
 
-        <CheckBox
-            android:id="@+id/cb_enable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            android:focusable="false" />
+    <ImageView
+        android:id="@+id/im_country"
+        android:layout_width="@dimen/country_icon_size"
+        android:layout_height="@dimen/country_icon_size"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_description"
+        android:adjustViewBounds="true" />
 
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

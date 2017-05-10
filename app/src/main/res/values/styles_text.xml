@@ -3,7 +3,7 @@
 
     <!-- Base text style -->
     <style name="Text">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/md_grey900</item>
         <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 

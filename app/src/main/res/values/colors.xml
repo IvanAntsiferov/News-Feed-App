@@ -4,5 +4,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    
+    <color name="md_pink_a400">#F50057</color>
+    
+    <color name="md_grey900">#212121</color>
 
 </resources>
