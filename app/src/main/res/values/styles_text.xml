@@ -4,45 +4,40 @@
     <!-- Base text style -->
     <style name="Text">
         <item name="android:textColor">@android:color/black</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 
-    <!-- Small -->
-    <style name="Text.Small">
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    <!-- Material text styles -->
+    <style name="Text.Headline">
+        <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="Text.Small.Light">
-        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    <style name="Text.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
     </style>
 
-    <style name="Text.Small.Bold">
-        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    <style name="Text.Subheading">
+        <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- Medium -->
-    <style name="Text.Medium">
-        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    <style name="Text.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
     </style>
 
-    <style name="Text.Medium.Light">
-        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    <style name="Text.Body1">
+        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Text.Medium.Bold">
-        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    <style name="Text.Caption">
+        <item name="android:textSize">12sp</item>
     </style>
 
-    <!-- Large -->
-    <style name="Text.Large">
-        <item name="android:textAppearance">?android:textAppearanceLarge</item>
-    </style>
-
-    <style name="Text.Large.Light">
-        <item name="fontPath">fonts/Roboto-Light.ttf</item>
-    </style>
-
-    <style name="Text.Large.Bold">
-        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    <style name="Text.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
 </resources>
