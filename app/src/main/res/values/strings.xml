@@ -1,6 +1,6 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
-    <string name="app_name">Material News Feed</string>
+    <string name="app_name">News Feed</string>
 
     <string name="title_list">Latest News</string>
     <string name="title_details">Details</string>

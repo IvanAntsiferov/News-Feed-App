@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.voltek.materialnewsfeed">
+    package="com.voltek.newsfeed">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".NewsApp"
+        android:name="com.voltek.newsfeed.NewsApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".presentation.list.ListActivity"
+            android:name="com.voltek.newsfeed.presentation.list.ListActivity"
             android:launchMode="singleTask">
 
             <intent-filter>
@@ -26,14 +26,14 @@
         </activity>
 
         <activity
-            android:name=".presentation.details.DetailsActivity"
+            android:name="com.voltek.newsfeed.presentation.details.DetailsActivity"
             android:label="@string/title_details"
-            android:parentActivityName=".presentation.list.ListActivity" />
+            android:parentActivityName="com.voltek.newsfeed.presentation.list.ListActivity" />
 
         <activity
-            android:name=".presentation.news_sources.NewsSourcesActivity"
+            android:name="com.voltek.newsfeed.presentation.news_sources.NewsSourcesActivity"
             android:label="@string/title_news_sources"
-            android:parentActivityName=".presentation.list.ListActivity" />
+            android:parentActivityName="com.voltek.newsfeed.presentation.list.ListActivity" />
 
     </application>
 
