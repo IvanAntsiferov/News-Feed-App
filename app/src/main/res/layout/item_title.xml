@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tv_source_title"
-    style="@style/Text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp" />
+    android:layout_marginLeft="@dimen/generic_margin"
+    android:layout_marginRight="@dimen/generic_margin"
+    android:layout_marginTop="@dimen/generic_margin"
+    android:textAppearance="@style/Text.Title.Italic"
+    android:textColor="@color/md_grey800" />

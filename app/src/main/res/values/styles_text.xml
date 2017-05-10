@@ -7,6 +7,16 @@
         <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 
+    <!-- Custom text styles -->
+    <style name="Text.Subheading.Bold">
+        <item name="android:textSize">16sp</item>
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="Text.Title.Italic">
+        <item name="fontPath">fonts/Roboto-MediumItalic.ttf</item>
+    </style>
+
     <!-- Material text styles -->
     <style name="Text.Headline">
         <item name="android:textSize">24sp</item>

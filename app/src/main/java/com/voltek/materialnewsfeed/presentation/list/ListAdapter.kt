@@ -68,7 +68,14 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
 
         RxView.clicks(holder.itemView).subscribe({ mOnItemClickSubject.onNext(item) })
 
-        Glide.with(mContext).load(item.urlToImage).into(holder.image)
+        Glide
+                .with(mContext)
+                .load(item.urlToImage)
+                .placeholder(R.drawable.im_news_placeholder)
+                .centerCrop()
+                .dontAnimate()
+                .into(holder.image)
+
         holder.title.text = item.title
     }
 

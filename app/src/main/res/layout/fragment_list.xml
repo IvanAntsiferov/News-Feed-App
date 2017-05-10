@@ -5,15 +5,12 @@
 
     <TextView
         android:id="@+id/tv_message"
+        style="@style/Generic.Container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:background="@android:color/white"
-        android:elevation="2dp"
         android:gravity="center"
-        android:padding="8dp"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:textAppearance="@style/Text.Subheading"
         android:visibility="gone" />
 
     <android.support.v4.widget.SwipeRefreshLayout
