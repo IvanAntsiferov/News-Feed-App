@@ -70,7 +70,11 @@ class DetailsFragment : BaseFragment(),
 
     override fun render(model: DetailsContract.DetailsModel) {
         if (model.articleLoaded) {
-            Glide.with(context).load(model.urlToImage).into(im_image)
+            Glide
+                    .with(context)
+                    .load(model.urlToImage)
+                    .into(im_image)
+
             tv_title.text = model.title
             tv_description.text = model.description
 

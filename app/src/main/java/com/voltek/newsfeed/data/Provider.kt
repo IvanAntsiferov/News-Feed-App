@@ -42,8 +42,6 @@ object Provider {
         interface Resources {
 
             fun getString(@IdRes id: Int): String
-
-            fun getString(@IdRes id: Int, vararg args: Any): String
         }
     }
 }

@@ -38,7 +38,7 @@ class ArticlesRepository {
                         }, {
                             val message: String = when (it) {
                                 is NoConnectionException -> mRes.getString(R.string.error_no_connection)
-                                else -> mRes.getString(R.string.error_retrieve_failed, source.name)
+                                else -> mRes.getString(R.string.error_retrieve_failed) + source.name
                             }
                             emitter.onNext(Result(null, message))
                         })

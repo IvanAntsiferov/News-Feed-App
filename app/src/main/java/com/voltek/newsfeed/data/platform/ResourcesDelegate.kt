@@ -15,6 +15,4 @@ class ResourcesDelegate : Provider.Platform.Resources {
     }
 
     override fun getString(id: Int): String = mContext.getString(id)
-
-    override fun getString(id: Int, vararg args: Any): String = mContext.getString(id, args)
 }

@@ -49,8 +49,7 @@ class ListActivity : BaseActivity() {
             replaceFragment(
                     DetailsFragment.newInstance(article),
                     R.id.details_fragment_container,
-                    DetailsFragment.TAG,
-                    anim = BaseActivity.SLIDE
+                    DetailsFragment.TAG
             )
         } else {
             val intent = android.content.Intent(this, DetailsActivity::class.java)

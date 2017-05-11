@@ -21,11 +21,6 @@ abstract class BaseActivity : MvpAppCompatActivity(),
         Navigator,
         CompositeDisposableComponent {
 
-    companion object {
-        const val FADE = 0
-        const val SLIDE = 1
-    }
-
     // Holds all disposables with input events subscriptions
     override val mDisposable = CompositeDisposable()
 
@@ -94,21 +89,11 @@ abstract class BaseActivity : MvpAppCompatActivity(),
     protected fun replaceFragment(
             fragment: BaseFragment,
             @IdRes id: Int,
-            tag: String,
-            anim: Int = FADE
+            tag: String
     ) {
         val transaction = supportFragmentManager.beginTransaction()
 
-        when (anim) {
-            FADE -> transaction.setCustomAnimations(
-                    android.R.anim.fade_in,
-                    android.R.anim.fade_out
-            )
-            SLIDE -> transaction.setCustomAnimations(
-                    android.R.anim.slide_in_left,
-                    android.R.anim.slide_out_right
-            )
-        }
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
 
         transaction.replace(id, fragment, tag)
         transaction.commit()
