@@ -7,13 +7,17 @@ import dagger.Provides
 import io.reactivex.Scheduler
 
 @Module
-class InteractorModule(val jobScheduler: Scheduler, val uiScheduler: Scheduler) {
+class InteractorModule(
+        val uiScheduler: Scheduler,
+        val ioScheduler: Scheduler,
+        val computationScheduler: Scheduler
+) {
 
     @Provides
     fun provideGetArticlesInteractor(): GetArticlesInteractor =
-            GetArticlesInteractor(jobScheduler, uiScheduler)
+            GetArticlesInteractor(ioScheduler, uiScheduler)
 
     @Provides
     fun provideNewsSourcesInteractor(): NewsSourcesInteractor =
-            NewsSourcesInteractor(jobScheduler, uiScheduler)
+            NewsSourcesInteractor(ioScheduler, uiScheduler)
 }
