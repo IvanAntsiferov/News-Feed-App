@@ -9,12 +9,19 @@
 
     <!-- Custom text styles -->
     <style name="Text.Subheading.Bold">
-        <item name="android:textSize">16sp</item>
         <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="Text.Subheading.Italic">
+        <item name="fontPath">fonts/Roboto-Italic.ttf</item>
     </style>
 
     <style name="Text.Title.Italic">
         <item name="fontPath">fonts/Roboto-MediumItalic.ttf</item>
+    </style>
+
+    <style name="Text.Headline.Bold">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
     </style>
 
     <!-- Material text styles -->

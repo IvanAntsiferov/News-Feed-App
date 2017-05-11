@@ -71,17 +71,13 @@ class DetailsFragment : BaseFragment(),
     override fun render(model: DetailsContract.DetailsModel) {
         if (model.articleLoaded) {
             Glide.with(context).load(model.urlToImage).into(im_image)
-            tv_author.text = model.author
             tv_title.text = model.title
-            tv_published_at.text = model.publishedAt
             tv_description.text = model.description
 
             tv_message.text = ""
         } else {
             im_image.setImageResource(android.R.color.transparent)
-            tv_author.text = ""
             tv_title.text = ""
-            tv_published_at.text = ""
             tv_description.text = ""
 
             tv_message.text = getString(R.string.error_empty_details)
