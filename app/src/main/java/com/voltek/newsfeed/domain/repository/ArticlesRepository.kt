@@ -31,9 +31,9 @@ class ArticlesRepository {
                         .subscribe({
                             val result = ArrayList<Article>()
                             val sourceTitle = Article()
-                            sourceTitle.source = source.name
                             result.add(sourceTitle)
                             result.addAll(it)
+                            result.forEach { article -> article.source = source.name }
                             emitter.onNext(Result(result))
                         }, {
                             val message: String = when (it) {

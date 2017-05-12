@@ -10,22 +10,20 @@ import org.parceler.Parcels
 
 class DetailsActivity : BaseActivity() {
 
-    companion object {
-        const val TAG = "DetailsActivity"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generic)
         setupToolbar(displayHomeAsUpEnabled = true)
 
         val article: Article = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
+        title = article.source
 
         if (savedInstanceState == null)
             replaceFragment(
                     DetailsFragment.newInstance(article),
                     R.id.fragment_container,
-                    DetailsFragment.TAG)
+                    DetailsFragment.TAG
+            )
     }
 
     override fun executeCommand(command: Command): Boolean = when (command) {

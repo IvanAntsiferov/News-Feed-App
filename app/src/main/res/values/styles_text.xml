@@ -16,8 +16,8 @@
         <item name="fontPath">fonts/Roboto-Italic.ttf</item>
     </style>
 
-    <style name="Text.Title.Italic">
-        <item name="fontPath">fonts/Roboto-MediumItalic.ttf</item>
+    <style name="Text.Headline.BoldItalic">
+        <item name="fontPath">fonts/Roboto-BoldItalic.ttf</item>
     </style>
 
     <style name="Text.Headline.Bold">

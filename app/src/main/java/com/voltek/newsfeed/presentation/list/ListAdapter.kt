@@ -82,7 +82,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     override fun getItemCount(): Int = mItems.size
 
     override fun getItemViewType(position: Int): Int =
-            if (mItems[position].source.isEmpty()) ARTICLE else TITLE
+            if (mItems[position].isEmpty()) TITLE else ARTICLE
 
     fun replace(items: List<Article>) {
         mItems.clear()

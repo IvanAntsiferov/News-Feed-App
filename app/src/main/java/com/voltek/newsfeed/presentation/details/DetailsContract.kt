@@ -9,11 +9,9 @@ object DetailsContract {
     class DetailsModel {
         var articleLoaded = false
 
-        var author: String = ""
         var title: String = ""
         var description: String = ""
         var urlToImage: String = ""
-        var publishedAt: String = ""
     }
 
     interface DetailsView : BaseView {

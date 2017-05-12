@@ -45,9 +45,7 @@ class DetailsPresenter(private val article: Article) : MvpPresenter<DetailsView>
             updateModel()
         } else {
             mModel.articleLoaded = true
-            mModel.author = article.author ?: ""
             mModel.description = article.description ?: ""
-            mModel.publishedAt = article.publishedAt ?: ""
             mModel.title = article.title ?: ""
             mModel.urlToImage = article.urlToImage ?: ""
             updateModel()
