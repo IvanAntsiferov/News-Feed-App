@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="generic_margin_horizontal">48dp</dimen>
+    <dimen name="generic_margin_vertical">8dp</dimen>
+
+    <dimen name="item_article_image_height">96dp</dimen>
+
+</resources>
