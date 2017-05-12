@@ -5,7 +5,10 @@
 
     <style name="Generic.Container">
         <item name="android:padding">@dimen/generic_padding</item>
-        <item name="android:layout_margin">@dimen/generic_margin</item>
+        <item name="android:layout_marginLeft">@dimen/generic_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/generic_margin_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/generic_margin_vertical</item>
+        <item name="android:layout_marginTop">@dimen/generic_margin_vertical</item>
         <item name="android:background">@drawable/ll_generic_container</item>
         <item name="android:elevation">@dimen/generic_elevation</item>
     </style>
