@@ -5,6 +5,7 @@ import com.voltek.newsfeed.dagger.module.RouterModule
 import com.voltek.newsfeed.presentation.details.DetailsPresenter
 import com.voltek.newsfeed.presentation.list.ListPresenter
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesPresenter
+import com.voltek.newsfeed.presentation.splash.SplashPresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -14,6 +15,8 @@ import javax.inject.Singleton
         InteractorModule::class)
 )
 interface PresenterComponent {
+
+    fun inject(presenter: SplashPresenter)
 
     fun inject(presenter: ListPresenter)
 

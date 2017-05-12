@@ -15,16 +15,19 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.voltek.newsfeed.presentation.list.ListActivity"
-            android:launchMode="singleTask">
+            android:name="com.voltek.newsfeed.presentation.splash.SplashActivity"
+            android:theme="@style/SplashTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+        <activity
+            android:name="com.voltek.newsfeed.presentation.list.ListActivity"
+            android:launchMode="singleTask" />
 
         <activity
             android:name="com.voltek.newsfeed.presentation.details.DetailsActivity"
