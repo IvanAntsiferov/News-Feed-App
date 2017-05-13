@@ -10,6 +10,7 @@ import com.voltek.newsfeed.data.entity.Source
 import com.voltek.newsfeed.presentation.BaseFragment
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesView
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -55,7 +56,7 @@ class NewsSourcesFragment : BaseFragment(),
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = mAdapter
+        recycler_view.adapter = ScaleInAnimationAdapter(mAdapter)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

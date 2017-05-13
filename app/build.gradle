@@ -47,6 +47,7 @@ ext {
     timberVersion = '4.5.1'
     calligraphyVersion = '2.2.0'
     moxyVersion = '1.5.2'
+    recyclerviewAnimatorsVersion = '2.2.6'
 }
 
 dependencies {
@@ -98,6 +99,9 @@ dependencies {
     compile "com.arello-mobile:moxy:${moxyVersion}"
     compile "com.arello-mobile:moxy-app-compat:${moxyVersion}"
     kapt "com.arello-mobile:moxy-compiler:${moxyVersion}"
+
+    // Animations
+    compile "jp.wasabeef:recyclerview-animators:${recyclerviewAnimatorsVersion}"
 }
 
 kapt {
