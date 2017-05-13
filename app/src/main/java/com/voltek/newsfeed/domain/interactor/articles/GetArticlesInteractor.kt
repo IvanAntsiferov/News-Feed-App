@@ -25,6 +25,8 @@ class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Sc
     }
 
     override fun buildObservable(parameter: Parameter<ArticleUI?>): Observable<Result<List<ArticleUI>?>> =
-            mNewsSourcesRepo.getCategory("")
+            mNewsSourcesRepo
+                    .getCategory("")
+                    .toObservable()
                     .flatMap { mArticlesRepo.get(it.data ?: ArrayList()) }
 }

@@ -15,6 +15,7 @@ import com.voltek.newsfeed.presentation.list.ListContract.ListView
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesActivity
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
+import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
@@ -47,6 +48,7 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     // Apply new view model
     private fun updateModel() {
+        Timber.d("updateModel")
         viewState.render(mModel)
     }
 
@@ -104,6 +106,7 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     private fun finishLoading() {
         mModel.loading = false
+        mArticles.unsubscribe()
         updateModel()
     }
 }

@@ -3,8 +3,8 @@ package com.voltek.newsfeed.presentation.splash
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
-import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.data.exception.NoNewsSourcesSelectedException
+import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor
 import com.voltek.newsfeed.navigation.command.CommandShowResult
@@ -32,8 +32,13 @@ class SplashPresenter : MvpPresenter<SplashView>() {
         // Check, if there is no enabled news sources, open NewsSources screen with proper message.
         mNewsSources.execute(
                 Parameter(NewsSourcesInteractor.GET),
-                Consumer { result(hasEnabled(it?.data ?: ArrayList())) },
-                Consumer {},
+                Consumer {
+                    result(hasEnabled(it?.data ?: ArrayList()))
+                },
+                Consumer {
+                    it.printStackTrace()
+                    result(false)
+                },
                 Action {}
         )
     }
@@ -47,5 +52,5 @@ class SplashPresenter : MvpPresenter<SplashView>() {
         }
     }
 
-    private fun hasEnabled(sources: List<SourceRAW>): Boolean = sources.any { it.isEnabled }
+    private fun hasEnabled(sources: List<SourceUI>): Boolean = sources.any { it.isEnabled }
 }

@@ -3,7 +3,6 @@ package com.voltek.newsfeed.presentation.news_sources
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
-import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor
 import com.voltek.newsfeed.presentation.Event
@@ -36,6 +35,10 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
                         Parameter(NewsSourcesInteractor.ENABLE, event.source),
                         Consumer {}, Consumer {}, Action {}
                 )
+
+                mModel.sources.firstOrNull {
+                    it.id == event.source.id
+                }?.isEnabled = !event.source.isEnabled
             }
         }
     }
@@ -72,7 +75,7 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
         mNewsSources.execute(
                 Parameter(filter),
                 Consumer {
-                    mModel.sources = ArrayList(it.data ?: ArrayList<SourceRAW>())
+                    mModel.sources = ArrayList(it.data ?: ArrayList())
                     mModel.message = it.message
                     updateModel()
                 },

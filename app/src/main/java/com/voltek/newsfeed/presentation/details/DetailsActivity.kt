@@ -2,7 +2,7 @@ package com.voltek.newsfeed.presentation.details
 
 import android.os.Bundle
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.domain.entity.ArticleUI
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.navigation.command.CommandShareArticle
 import com.voltek.newsfeed.navigation.proxy.Command
@@ -16,7 +16,7 @@ class DetailsActivity : BaseActivity() {
         setContentView(R.layout.activity_generic)
         setupToolbar(displayHomeAsUpEnabled = true)
 
-        val article: ArticleRAW = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
+        val article: ArticleUI = Parcels.unwrap(intent.getParcelableExtra(DetailsFragment.ARG_ARTICLE))
         title = article.source
 
         if (savedInstanceState == null)

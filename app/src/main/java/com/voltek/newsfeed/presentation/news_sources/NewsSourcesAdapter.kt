@@ -11,17 +11,17 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.SourceRAW
+import com.voltek.newsfeed.domain.entity.SourceUI
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_source.view.*
 
-class NewsSourcesAdapter(private val mContext: Context, private var mItems: MutableList<SourceRAW>)
+class NewsSourcesAdapter(private val mContext: Context, private var mItems: MutableList<SourceUI>)
     : RecyclerView.Adapter<NewsSourcesAdapter.ViewHolder>() {
 
-    private var mOnItemClickSubject: PublishSubject<SourceRAW> = PublishSubject.create()
+    private var mOnItemClickSubject: PublishSubject<SourceUI> = PublishSubject.create()
 
-    fun getOnItemClickObservable(): Observable<SourceRAW> = mOnItemClickSubject
+    fun getOnItemClickObservable(): Observable<SourceUI> = mOnItemClickSubject
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.tv_name
@@ -62,7 +62,7 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
 
     override fun getItemCount(): Int = mItems.size
 
-    fun replace(items: List<SourceRAW>) {
+    fun replace(items: List<SourceUI>) {
         val currentSize = mItems.size
         val newSize = items.size
 

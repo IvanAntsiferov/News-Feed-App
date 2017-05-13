@@ -8,7 +8,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.domain.entity.ArticleUI
 import com.voltek.newsfeed.presentation.BaseFragment
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.details.DetailsContract.DetailsView
@@ -24,7 +24,7 @@ class DetailsFragment : BaseFragment(),
 
         const val ARG_ARTICLE = "ARG_ARTICLE"
 
-        fun newInstance(article: ArticleRAW): DetailsFragment {
+        fun newInstance(article: ArticleUI): DetailsFragment {
             val fragment = DetailsFragment()
             val args = Bundle()
             args.putParcelable(ARG_ARTICLE, Parcels.wrap(article))

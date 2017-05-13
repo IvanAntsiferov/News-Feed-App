@@ -6,7 +6,6 @@ import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.presentation.BaseFragment
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesView
@@ -50,7 +49,7 @@ class NewsSourcesFragment : BaseFragment(),
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mAdapter = NewsSourcesAdapter(context, ArrayList<SourceRAW>())
+        mAdapter = NewsSourcesAdapter(context, ArrayList())
         return inflater?.inflate(R.layout.fragment_list, container, false)
     }
 

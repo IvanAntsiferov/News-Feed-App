@@ -9,6 +9,7 @@ import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Result
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
@@ -55,7 +56,7 @@ class NewsSourcesRepository {
         emitter.onComplete()
     }
 
-    fun getCategory(category: String): Observable<Result<List<SourceUI>?>> = Observable.create {
+    fun getCategory(category: String): Single<Result<List<SourceUI>?>> = Single.create {
         val emitter = it
 
         val query: List<SourceRAW>
@@ -78,8 +79,7 @@ class NewsSourcesRepository {
                 message = mRes.getString(R.string.error_no_news_sources_for_category)
         }
 
-        emitter.onNext(Result(query.map { Mapper.SourceRAWtoSourceUI(it) }, message))
-        emitter.onComplete()
+        emitter.onSuccess(Result(query.map { Mapper.SourceRAWtoSourceUI(it) }, message))
     }
 
     fun refresh(): Observable<Result<List<SourceUI>?>> = Observable.create {
@@ -109,15 +109,16 @@ class NewsSourcesRepository {
         emitter.onComplete()
     }
 
-    fun update(id: String, isEnabled: Boolean): Observable<Unit> = Observable.create {
+    fun update(id: String, isEnabled: Boolean): Single<Unit> = Single.create {
         val emitter = it
 
         val source = mDb.findById(id)
+
         if (source != null) {
             source.isEnabled = isEnabled
             mDb.save(arrayListOf(source))
             mSourcesEnabledSubject.onNext(Unit)
-            emitter.onComplete()
+            emitter.onSuccess(Unit)
         } else {
             emitter.onError(Exception())
         }

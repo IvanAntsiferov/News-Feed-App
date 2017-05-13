@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestListener
 import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.ArticleRAW
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -19,9 +18,10 @@ import kotlinx.android.synthetic.main.item_title.view.*
 import android.view.animation.AnimationUtils
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.target.Target
+import com.voltek.newsfeed.domain.entity.ArticleUI
 import java.lang.Exception
 
-class ListAdapter(private val mContext: Context, private var mItems: MutableList<ArticleRAW>)
+class ListAdapter(private val mContext: Context, private var mItems: MutableList<ArticleUI>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -29,9 +29,9 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         private const val ARTICLE = 1
     }
 
-    private var mOnItemClickSubject: PublishSubject<ArticleRAW> = PublishSubject.create()
+    private var mOnItemClickSubject: PublishSubject<ArticleUI> = PublishSubject.create()
 
-    fun getOnItemClickObservable(): Observable<ArticleRAW> = mOnItemClickSubject
+    fun getOnItemClickObservable(): Observable<ArticleUI> = mOnItemClickSubject
 
     class ViewHolderTitle(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.tv_source_title
@@ -109,7 +109,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     override fun getItemViewType(position: Int): Int =
             if (mItems[position].isEmpty()) TITLE else ARTICLE
 
-    fun replace(items: List<ArticleRAW>) {
+    fun replace(items: List<ArticleUI>) {
         val currentSize = mItems.size
         val newSize = items.size
 
@@ -122,7 +122,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         } else if (currentSize > 0 && newSize > 0) {
             mItems.clear()
             mItems.addAll(items)
-            notifyItemRangeChanged(currentSize, newSize)
+            notifyDataSetChanged()
         }
     }
 }

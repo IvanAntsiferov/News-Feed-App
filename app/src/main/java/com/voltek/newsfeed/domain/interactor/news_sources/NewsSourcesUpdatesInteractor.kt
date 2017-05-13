@@ -7,6 +7,7 @@ import com.voltek.newsfeed.domain.interactor.Result
 import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -23,6 +24,8 @@ class NewsSourcesUpdatesInteractor(jobScheduler: Scheduler, uiScheduler: Schedul
     }
 
     override fun buildObservable(parameter: Parameter<Unit?>): Observable<Result<Unit?>> =
-            mNewsSourcesRepo.getSourcesEnabledObservable()
+            mNewsSourcesRepo
+                    .getSourcesEnabledObservable()
+                    .debounce(500, TimeUnit.MILLISECONDS)
                     .map { Result(null) }
 }

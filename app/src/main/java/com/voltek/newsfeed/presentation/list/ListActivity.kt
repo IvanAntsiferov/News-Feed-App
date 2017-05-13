@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.presentation.list
 
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.domain.entity.ArticleUI
 import com.voltek.newsfeed.navigation.command.CommandOpenArticleDetails
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
@@ -45,7 +45,7 @@ class ListActivity : BaseActivity() {
         else -> false
     }
 
-    private fun openDetails(article: ArticleRAW): Boolean {
+    private fun openDetails(article: ArticleUI): Boolean {
         if (mDualPane) {
             replaceFragment(
                     DetailsFragment.newInstance(article),

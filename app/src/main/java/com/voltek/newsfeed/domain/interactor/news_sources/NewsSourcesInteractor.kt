@@ -30,14 +30,23 @@ class NewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
     override fun buildObservable(parameter: Parameter<SourceUI?>): Observable<Result<List<SourceUI>?>> {
         if (parameter.flag == ENABLE && parameter.item != null) {
             val source = parameter.item
-            source.isEnabled = !source.isEnabled
-            return mNewsSourcesRepo.update(source).map { Result(null) }
+            return mNewsSourcesRepo
+                    .update(source.id, !source.isEnabled)
+                    .toObservable()
+                    .map { Result(null) }
+
         } else if (parameter.flag == REFRESH) {
-            return mNewsSourcesRepo.refresh()
+            return mNewsSourcesRepo
+                    .refresh()
+
         } else if (parameter.flag == GET) {
-            return mNewsSourcesRepo.getAll()
+            return mNewsSourcesRepo
+                    .getAll()
+
         } else {
-            return mNewsSourcesRepo.getCategory(parameter.flag)
+            return mNewsSourcesRepo
+                    .getCategory(parameter.flag)
+                    .toObservable()
         }
     }
 }
