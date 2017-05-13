@@ -1,9 +1,14 @@
 package com.voltek.newsfeed.presentation.news_sources
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.view.View
 import com.voltek.newsfeed.R
+import com.voltek.newsfeed.data.exception.NoNewsSourcesSelectedException
+import com.voltek.newsfeed.navigation.command.CommandShowResult
 import com.voltek.newsfeed.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.BaseActivity
+import kotlinx.android.synthetic.main.activity_generic.*
 
 class NewsSourcesActivity : BaseActivity() {
 
@@ -19,7 +24,22 @@ class NewsSourcesActivity : BaseActivity() {
                     NewsSourcesFragment.TAG)
     }
 
-    override fun executeCommand(command: Command): Boolean {
-        return false
+    override fun executeCommand(command: Command): Boolean = when (command) {
+        is CommandShowResult -> {
+            when (command.error) {
+                is NoNewsSourcesSelectedException -> {
+                    val snackBar = Snackbar
+                            .make(
+                                    root,
+                                    R.string.error_no_news_sources_selected,
+                                    Snackbar.LENGTH_INDEFINITE
+                            )
+                    snackBar.setAction(android.R.string.ok) { snackBar.dismiss() }
+                    snackBar.show()
+                }
+            }
+            true
+        }
+        else -> false
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.entity.Article
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
+import com.voltek.newsfeed.navigation.command.CommandShareArticle
 import com.voltek.newsfeed.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.BaseActivity
 import org.parceler.Parcels

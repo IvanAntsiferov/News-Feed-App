@@ -15,8 +15,7 @@ import com.voltek.newsfeed.navigation.proxy.Navigator
 import io.reactivex.disposables.CompositeDisposable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.widget.Toast
-import com.voltek.newsfeed.navigation.command.CommandShowResult
-import com.voltek.newsfeed.presentation.details.CommandShareArticle
+import com.voltek.newsfeed.navigation.command.CommandShareArticle
 
 abstract class BaseActivity : MvpAppCompatActivity(),
         Navigator,

@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.data.entity.Article
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
+import com.voltek.newsfeed.navigation.command.CommandShareArticle
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
 import com.voltek.newsfeed.navigation.proxy.Router
 import com.voltek.newsfeed.presentation.Event

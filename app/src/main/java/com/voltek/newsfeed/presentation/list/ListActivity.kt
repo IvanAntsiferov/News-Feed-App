@@ -2,11 +2,12 @@ package com.voltek.newsfeed.presentation.list
 
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.entity.Article
+import com.voltek.newsfeed.navigation.command.CommandOpenArticleDetails
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
 import com.voltek.newsfeed.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.BaseActivity
-import com.voltek.newsfeed.presentation.details.CommandShareArticle
+import com.voltek.newsfeed.navigation.command.CommandShareArticle
 import com.voltek.newsfeed.presentation.details.DetailsActivity
 import com.voltek.newsfeed.presentation.details.DetailsFragment
 import kotlinx.android.synthetic.main.activity_list.*

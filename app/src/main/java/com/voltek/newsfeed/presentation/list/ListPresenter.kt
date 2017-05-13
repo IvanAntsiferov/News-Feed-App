@@ -6,6 +6,7 @@ import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.articles.GetArticlesInteractor
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesUpdatesInteractor
+import com.voltek.newsfeed.navigation.command.CommandOpenArticleDetails
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
 import com.voltek.newsfeed.navigation.proxy.Router
 import com.voltek.newsfeed.presentation.Event
