@@ -31,6 +31,8 @@ object Provider {
 
             fun queryCategory(category: String): List<SourceRAW>
 
+            fun findById(id: String): SourceRAW?
+
             fun save(items: List<SourceRAW>)
 
             fun deleteAll()

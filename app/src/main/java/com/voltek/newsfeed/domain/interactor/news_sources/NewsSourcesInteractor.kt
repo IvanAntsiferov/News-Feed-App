@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.domain.interactor.news_sources
 
 import com.voltek.newsfeed.NewsApp
-import com.voltek.newsfeed.data.entity.SourceRAW
+import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.BaseInteractor
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.Result
@@ -11,7 +11,7 @@ import io.reactivex.Scheduler
 import javax.inject.Inject
 
 class NewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
-    : BaseInteractor<List<SourceRAW>?, SourceRAW>(jobScheduler, uiScheduler) {
+    : BaseInteractor<List<SourceUI>?, SourceUI>(jobScheduler, uiScheduler) {
 
     companion object {
         // Flags, using for specifying type of performing operation
@@ -27,7 +27,7 @@ class NewsSourcesInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler)
         NewsApp.interactorComponent.inject(this)
     }
 
-    override fun buildObservable(parameter: Parameter<SourceRAW?>): Observable<Result<List<SourceRAW>?>> {
+    override fun buildObservable(parameter: Parameter<SourceUI?>): Observable<Result<List<SourceUI>?>> {
         if (parameter.flag == ENABLE && parameter.item != null) {
             val source = parameter.item
             source.isEnabled = !source.isEnabled

@@ -5,6 +5,8 @@ import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.Provider
 import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.data.exception.NoConnectionException
+import com.voltek.newsfeed.domain.Mapper
+import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Result
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -29,7 +31,7 @@ class NewsSourcesRepository {
        NewsApp.repositoryComponent.inject(this)
     }
 
-    fun getAll(): Observable<Result<List<SourceRAW>?>> = Observable.create {
+    fun getAll(): Observable<Result<List<SourceUI>?>> = Observable.create {
         val emitter = it
 
         val sourcesCache = mDb.queryAll()
@@ -38,7 +40,7 @@ class NewsSourcesRepository {
             mNet.get()
                     .subscribe({
                         mDb.save(it)
-                        emitter.onNext(Result(mDb.queryAll()))
+                        emitter.onNext(Result(mDb.queryAll().map { Mapper.SourceRAWtoSourceUI(it) }))
                     }, {
                         val message: String = when (it) {
                             is NoConnectionException -> mRes.getString(R.string.error_no_connection)
@@ -47,13 +49,13 @@ class NewsSourcesRepository {
                         emitter.onNext(Result(null, message))
                     })
         } else {
-            emitter.onNext(Result(sourcesCache))
+            emitter.onNext(Result(sourcesCache.map { Mapper.SourceRAWtoSourceUI(it) }))
         }
 
         emitter.onComplete()
     }
 
-    fun getCategory(category: String): Observable<Result<List<SourceRAW>?>> = Observable.create {
+    fun getCategory(category: String): Observable<Result<List<SourceUI>?>> = Observable.create {
         val emitter = it
 
         val query: List<SourceRAW>
@@ -76,11 +78,11 @@ class NewsSourcesRepository {
                 message = mRes.getString(R.string.error_no_news_sources_for_category)
         }
 
-        emitter.onNext(Result(query, message))
+        emitter.onNext(Result(query.map { Mapper.SourceRAWtoSourceUI(it) }, message))
         emitter.onComplete()
     }
 
-    fun refresh(): Observable<Result<List<SourceRAW>?>> = Observable.create {
+    fun refresh(): Observable<Result<List<SourceUI>?>> = Observable.create {
         val emitter = it
 
         mNet.get()
@@ -95,24 +97,29 @@ class NewsSourcesRepository {
 
                     mDb.deleteAll()
                     mDb.save(new)
-                    emitter.onNext(Result(mDb.queryAll()))
+                    emitter.onNext(Result(mDb.queryAll().map { Mapper.SourceRAWtoSourceUI(it) }))
                 }, {
                     val message: String = when (it) {
                         is NoConnectionException -> mRes.getString(R.string.error_no_connection)
                         else -> mRes.getString(R.string.error_request_failed)
                     }
-                    emitter.onNext(Result(mDb.queryAll(), message))
+                    emitter.onNext(Result(mDb.queryAll().map { Mapper.SourceRAWtoSourceUI(it) }, message))
                 })
 
         emitter.onComplete()
     }
 
-    fun update(vararg source: SourceRAW): Observable<Unit> = Observable.create {
+    fun update(id: String, isEnabled: Boolean): Observable<Unit> = Observable.create {
         val emitter = it
 
-        mDb.save(source.toMutableList())
-
-        mSourcesEnabledSubject.onNext(Unit)
-        emitter.onComplete()
+        val source = mDb.findById(id)
+        if (source != null) {
+            source.isEnabled = isEnabled
+            mDb.save(arrayListOf(source))
+            mSourcesEnabledSubject.onNext(Unit)
+            emitter.onComplete()
+        } else {
+            emitter.onError(Exception())
+        }
     }
 }

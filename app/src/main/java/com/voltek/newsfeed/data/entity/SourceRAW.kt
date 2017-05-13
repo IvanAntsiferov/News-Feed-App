@@ -10,17 +10,17 @@ open class SourceRAW : RealmObject() {
     @PrimaryKey
     var id: String = ""
 
-    var name: String= ""
+    var name: String = ""
 
-    var description: String= ""
+    var description: String = ""
 
-    var url: String= ""
+    var url: String = ""
 
-    var category: String= ""
+    var category: String = ""
 
-    var language: String= ""
+    var language: String = ""
 
-    var country: String= ""
+    var country: String = ""
 
     var isEnabled: Boolean = false
 }
