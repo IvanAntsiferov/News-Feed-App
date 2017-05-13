@@ -16,6 +16,7 @@ import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.list.ListContract.ListModel
 import com.voltek.newsfeed.presentation.list.ListContract.ListView
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -42,6 +43,7 @@ class ListFragment : BaseFragment(),
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = ScaleInAnimationAdapter(mAdapter)
+        recycler_view.itemAnimator = SlideInLeftAnimator()
     }
 
     override fun attachInputListeners() {

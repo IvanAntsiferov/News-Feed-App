@@ -63,8 +63,19 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
     override fun getItemCount(): Int = mItems.size
 
     fun replace(items: List<Source>) {
-        mItems.clear()
-        mItems.addAll(items)
-        notifyDataSetChanged()
+        val currentSize = mItems.size
+        val newSize = items.size
+
+        if (currentSize == 0 && newSize > 0) {
+            mItems.addAll(items)
+            notifyItemRangeInserted(0, newSize)
+        } else if (currentSize > 0 && newSize == 0) {
+            mItems.clear()
+            notifyDataSetChanged()
+        } else if (currentSize > 0 && newSize > 0) {
+            mItems.clear()
+            mItems.addAll(items)
+            notifyItemRangeChanged(currentSize, newSize)
+        }
     }
 }

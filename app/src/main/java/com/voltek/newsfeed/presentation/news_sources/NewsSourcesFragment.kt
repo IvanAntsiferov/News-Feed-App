@@ -11,6 +11,7 @@ import com.voltek.newsfeed.presentation.BaseFragment
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesView
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -57,6 +58,7 @@ class NewsSourcesFragment : BaseFragment(),
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = ScaleInAnimationAdapter(mAdapter)
+        recycler_view.itemAnimator = ScaleInLeftAnimator()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
