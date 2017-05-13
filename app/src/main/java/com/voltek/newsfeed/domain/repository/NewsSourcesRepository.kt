@@ -7,6 +7,7 @@ import com.voltek.newsfeed.data.entity.Source
 import com.voltek.newsfeed.data.exception.NoConnectionException
 import com.voltek.newsfeed.domain.interactor.Result
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class NewsSourcesRepository {
@@ -19,6 +20,10 @@ class NewsSourcesRepository {
 
     @Inject
     lateinit var mRes: Provider.Platform.Resources
+
+    private var mSourcesEnabledSubject: PublishSubject<Unit> = PublishSubject.create()
+
+    fun getSourcesEnabledObservable(): Observable<Unit> = mSourcesEnabledSubject
 
     init {
        NewsApp.repositoryComponent.inject(this)
@@ -107,6 +112,7 @@ class NewsSourcesRepository {
 
         mDb.save(source.toMutableList())
 
+        mSourcesEnabledSubject.onNext(Unit)
         emitter.onComplete()
     }
 }

@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.articles.GetArticlesInteractor
+import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesUpdatesInteractor
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
 import com.voltek.newsfeed.navigation.proxy.Router
 import com.voltek.newsfeed.presentation.Event
@@ -23,6 +24,9 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     @Inject
     lateinit var mArticles: GetArticlesInteractor
+
+    @Inject
+    lateinit var mNewsSourcesChanges: NewsSourcesUpdatesInteractor
 
     // Holds current model through full presenter lifecycle
     private var mModel: ListModel = ListModel()
@@ -48,6 +52,14 @@ class ListPresenter : MvpPresenter<ListView>() {
     init {
         NewsApp.presenterComponent.inject(this)
 
+        // Listen for enabled news sources changes and reload articles when it happens.
+        mNewsSourcesChanges.execute(
+                Parameter(),
+                Consumer { loadArticles() },
+                Consumer {},
+                Action {}
+        )
+
         loadArticles()
     }
 
@@ -63,6 +75,7 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     override fun onDestroy() {
         mArticles.unsubscribe()
+        mNewsSourcesChanges.unsubscribe()
     }
 
     private fun loadArticles() {
@@ -90,7 +103,6 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     private fun finishLoading() {
         mModel.loading = false
-        mArticles.unsubscribe()
         updateModel()
     }
 }
