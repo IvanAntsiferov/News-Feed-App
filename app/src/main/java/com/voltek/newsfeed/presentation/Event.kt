@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.presentation
 
-import com.voltek.newsfeed.data.entity.Article
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.data.entity.SourceRAW
 
 /**
  * UI input events
@@ -12,9 +12,9 @@ sealed class Event {
 
     class OpenNewsSources : Event()
 
-    class OpenArticleDetails(val article: Article) : Event()
+    class OpenArticleDetails(val article: ArticleRAW) : Event()
 
-    class EnableNewsSource(val source: Source): Event()
+    class EnableNewsSource(val source: SourceRAW): Event()
 
     class Refresh : Event()
 

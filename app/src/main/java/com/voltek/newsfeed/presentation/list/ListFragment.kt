@@ -58,6 +58,7 @@ class ListFragment : BaseFragment(),
 
         // On article click
         mAdapter.getOnItemClickObservable()
+                .distinctUntilChanged() // Skip reopening of details in two pane mode
                 .subscribe({ mPresenter.notify(Event.OpenArticleDetails(it)) })
                 .bind()
 

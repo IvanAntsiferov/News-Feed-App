@@ -5,8 +5,8 @@ import android.net.ConnectivityManager
 import com.voltek.newsfeed.BuildConfig
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.data.Provider
-import com.voltek.newsfeed.data.entity.Article
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.data.exception.NoConnectionException
 import com.voltek.newsfeed.data.exception.RequestFailedException
 import com.voltek.newsfeed.data.network.api.NewsApi
@@ -25,7 +25,7 @@ class ApiDelegate : Provider.Api.Articles, Provider.Api.NewsSources {
         NewsApp.dataComponent.inject(this)
     }
 
-    override fun get(source: String): Single<List<Article>> = Single.create {
+    override fun get(source: String): Single<List<ArticleRAW>> = Single.create {
         val emitter = it
 
         if (hasConnection()) {
@@ -40,7 +40,7 @@ class ApiDelegate : Provider.Api.Articles, Provider.Api.NewsSources {
         }
     }
 
-    override fun get(): Single<List<Source>> = Single.create {
+    override fun get(): Single<List<SourceRAW>> = Single.create {
         val emitter = it
 
         if (hasConnection()) {

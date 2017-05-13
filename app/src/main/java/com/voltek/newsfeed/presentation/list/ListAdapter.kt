@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestListener
 import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.data.entity.Article
+import com.voltek.newsfeed.data.entity.ArticleRAW
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -21,7 +21,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable
 import com.bumptech.glide.request.target.Target
 import java.lang.Exception
 
-class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
+class ListAdapter(private val mContext: Context, private var mItems: MutableList<ArticleRAW>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -29,9 +29,9 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         private const val ARTICLE = 1
     }
 
-    private var mOnItemClickSubject: PublishSubject<Article> = PublishSubject.create()
+    private var mOnItemClickSubject: PublishSubject<ArticleRAW> = PublishSubject.create()
 
-    fun getOnItemClickObservable(): Observable<Article> = mOnItemClickSubject
+    fun getOnItemClickObservable(): Observable<ArticleRAW> = mOnItemClickSubject
 
     class ViewHolderTitle(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.tv_source_title
@@ -109,7 +109,7 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
     override fun getItemViewType(position: Int): Int =
             if (mItems[position].isEmpty()) TITLE else ARTICLE
 
-    fun replace(items: List<Article>) {
+    fun replace(items: List<ArticleRAW>) {
         val currentSize = mItems.size
         val newSize = items.size
 

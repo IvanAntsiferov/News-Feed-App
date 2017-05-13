@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.domain.interactor.articles
 
 import com.voltek.newsfeed.NewsApp
-import com.voltek.newsfeed.data.entity.Article
+import com.voltek.newsfeed.data.entity.ArticleRAW
 import com.voltek.newsfeed.domain.interactor.BaseInteractor
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.Result
@@ -12,7 +12,7 @@ import io.reactivex.Scheduler
 import javax.inject.Inject
 
 class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Scheduler)
-    : BaseInteractor<List<Article>?, Article>(jobScheduler, uiScheduler) {
+    : BaseInteractor<List<ArticleRAW>?, ArticleRAW>(jobScheduler, uiScheduler) {
 
     @Inject
     lateinit var mArticlesRepo: ArticlesRepository
@@ -24,7 +24,7 @@ class GetArticlesInteractor constructor(jobScheduler: Scheduler, uiScheduler: Sc
         NewsApp.interactorComponent.inject(this)
     }
 
-    override fun buildObservable(parameter: Parameter<Article?>): Observable<Result<List<Article>?>> =
+    override fun buildObservable(parameter: Parameter<ArticleRAW?>): Observable<Result<List<ArticleRAW>?>> =
             mNewsSourcesRepo.getCategory("")
                     .flatMap { mArticlesRepo.get(it.data ?: ArrayList()) }
 }

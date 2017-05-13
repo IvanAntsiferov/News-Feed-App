@@ -1,8 +1,8 @@
 package com.voltek.newsfeed.data
 
 import android.support.annotation.IdRes
-import com.voltek.newsfeed.data.entity.Article
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.data.entity.SourceRAW
 import io.reactivex.Single
 
 /**
@@ -13,11 +13,11 @@ object Provider {
     object Api {
 
         interface Articles {
-            fun get(source: String): Single<List<Article>>
+            fun get(source: String): Single<List<ArticleRAW>>
         }
 
         interface NewsSources {
-            fun get(): Single<List<Source>>
+            fun get(): Single<List<SourceRAW>>
         }
     }
 
@@ -25,13 +25,13 @@ object Provider {
 
         interface NewsSources {
 
-            fun queryAll(): List<Source>
+            fun queryAll(): List<SourceRAW>
 
-            fun queryEnabled(): List<Source>
+            fun queryEnabled(): List<SourceRAW>
 
-            fun queryCategory(category: String): List<Source>
+            fun queryCategory(category: String): List<SourceRAW>
 
-            fun save(items: List<Source>)
+            fun save(items: List<SourceRAW>)
 
             fun deleteAll()
         }

@@ -1,8 +1,8 @@
 package com.voltek.newsfeed.data.network.api
 
-import com.voltek.newsfeed.data.entity.Article
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.data.entity.SourceRAW
 
-data class NewsApiArticlesResponse(val articles: List<Article>)
+data class NewsApiArticlesResponse(val articles: List<ArticleRAW>)
 
-data class NewsApiSourcesResponse(val sources: List<Source>)
+data class NewsApiSourcesResponse(val sources: List<SourceRAW>)

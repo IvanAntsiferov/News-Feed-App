@@ -3,7 +3,7 @@ package com.voltek.newsfeed.presentation.splash
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.data.exception.NoNewsSourcesSelectedException
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor
@@ -47,5 +47,5 @@ class SplashPresenter : MvpPresenter<SplashView>() {
         }
     }
 
-    private fun hasEnabled(sources: List<Source>): Boolean = sources.any { it.isEnabled }
+    private fun hasEnabled(sources: List<SourceRAW>): Boolean = sources.any { it.isEnabled }
 }

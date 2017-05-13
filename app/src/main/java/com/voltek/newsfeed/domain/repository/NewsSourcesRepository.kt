@@ -3,7 +3,7 @@ package com.voltek.newsfeed.domain.repository
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.Provider
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.data.exception.NoConnectionException
 import com.voltek.newsfeed.domain.interactor.Result
 import io.reactivex.Observable
@@ -29,7 +29,7 @@ class NewsSourcesRepository {
        NewsApp.repositoryComponent.inject(this)
     }
 
-    fun getAll(): Observable<Result<List<Source>?>> = Observable.create {
+    fun getAll(): Observable<Result<List<SourceRAW>?>> = Observable.create {
         val emitter = it
 
         val sourcesCache = mDb.queryAll()
@@ -53,10 +53,10 @@ class NewsSourcesRepository {
         emitter.onComplete()
     }
 
-    fun getCategory(category: String): Observable<Result<List<Source>?>> = Observable.create {
+    fun getCategory(category: String): Observable<Result<List<SourceRAW>?>> = Observable.create {
         val emitter = it
 
-        val query: List<Source>
+        val query: List<SourceRAW>
         var message = ""
 
         if (category == mRes.getString(R.string.category_all)) {
@@ -80,7 +80,7 @@ class NewsSourcesRepository {
         emitter.onComplete()
     }
 
-    fun refresh(): Observable<Result<List<Source>?>> = Observable.create {
+    fun refresh(): Observable<Result<List<SourceRAW>?>> = Observable.create {
         val emitter = it
 
         mNet.get()
@@ -107,7 +107,7 @@ class NewsSourcesRepository {
         emitter.onComplete()
     }
 
-    fun update(vararg source: Source): Observable<Unit> = Observable.create {
+    fun update(vararg source: SourceRAW): Observable<Unit> = Observable.create {
         val emitter = it
 
         mDb.save(source.toMutableList())

@@ -6,7 +6,7 @@ import com.vicpin.krealmextensions.queryAll
 import com.vicpin.krealmextensions.saveAll
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.data.Provider
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.SourceRAW
 
 class DatabaseDelegate : Provider.Database.NewsSources {
 
@@ -15,20 +15,20 @@ class DatabaseDelegate : Provider.Database.NewsSources {
     }
 
     // Provider.Database.NewsSources
-    override fun queryAll(): List<Source> = Source().queryAll()
+    override fun queryAll(): List<SourceRAW> = SourceRAW().queryAll()
 
-    override fun queryEnabled(): List<Source> =
-            Source().query({ query -> query.equalTo("isEnabled", true) })
+    override fun queryEnabled(): List<SourceRAW> =
+            SourceRAW().query({ query -> query.equalTo("isEnabled", true) })
 
-    override fun queryCategory(category: String): List<Source> =
-            Source().query({ query -> query.equalTo("category", category.toLowerCase()) })
+    override fun queryCategory(category: String): List<SourceRAW> =
+            SourceRAW().query({ query -> query.equalTo("category", category.toLowerCase()) })
 
 
-    override fun save(items: List<Source>) {
+    override fun save(items: List<SourceRAW>) {
         items.saveAll()
     }
 
     override fun deleteAll() {
-        Source().deleteAll()
+        SourceRAW().deleteAll()
     }
 }

@@ -5,7 +5,7 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 
 @RealmClass
-open class Source : RealmObject() {
+open class SourceRAW : RealmObject() {
 
     @PrimaryKey
     var id: String = ""

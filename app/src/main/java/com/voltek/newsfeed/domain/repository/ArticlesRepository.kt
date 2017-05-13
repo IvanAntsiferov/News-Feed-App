@@ -3,8 +3,8 @@ package com.voltek.newsfeed.domain.repository
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.Provider
-import com.voltek.newsfeed.data.entity.Article
-import com.voltek.newsfeed.data.entity.Source
+import com.voltek.newsfeed.data.entity.ArticleRAW
+import com.voltek.newsfeed.data.entity.SourceRAW
 import com.voltek.newsfeed.data.exception.NoConnectionException
 import com.voltek.newsfeed.domain.interactor.Result
 import io.reactivex.Observable
@@ -22,15 +22,15 @@ class ArticlesRepository {
         NewsApp.repositoryComponent.inject(this)
     }
 
-    fun get(sources: List<Source>): Observable<Result<List<Article>?>> = Observable.create {
+    fun get(sources: List<SourceRAW>): Observable<Result<List<ArticleRAW>?>> = Observable.create {
         val emitter = it
 
         if (!sources.isEmpty()) {
             for (source in sources) {
                 mNet.get(source.id)
                         .subscribe({
-                            val result = ArrayList<Article>()
-                            val sourceTitle = Article()
+                            val result = ArrayList<ArticleRAW>()
+                            val sourceTitle = ArticleRAW()
                             result.add(sourceTitle)
                             result.addAll(it)
                             result.forEach { article -> article.source = source.name }

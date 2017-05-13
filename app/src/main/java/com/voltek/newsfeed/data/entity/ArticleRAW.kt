@@ -3,7 +3,7 @@ package com.voltek.newsfeed.data.entity
 import org.parceler.Parcel
 
 @Parcel
-data class Article(
+data class ArticleRAW(
         val author: String? = null,
         val title: String? = null,
         val description: String? = null,
