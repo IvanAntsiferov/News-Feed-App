@@ -24,5 +24,5 @@ class NewsSourcesUpdatesInteractor(jobScheduler: Scheduler, uiScheduler: Schedul
 
     override fun buildObservable(parameter: Parameter<Unit?>): Observable<Result<Unit?>> =
             mNewsSourcesRepo.getSourcesEnabledObservable()
-                    .map { Result(Unit) }
+                    .map { Result(null) }
 }
