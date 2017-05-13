@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestListener
 import com.jakewharton.rxbinding2.view.RxView
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.entity.Article
@@ -15,6 +16,10 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_title.view.*
+import android.view.animation.AnimationUtils
+import com.bumptech.glide.load.resource.drawable.GlideDrawable
+import com.bumptech.glide.request.target.Target
+import java.lang.Exception
 
 class ListAdapter(private val mContext: Context, private var mItems: MutableList<Article>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -74,6 +79,26 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
                 .placeholder(R.drawable.im_news_placeholder)
                 .centerCrop()
                 .dontAnimate()
+                .listener(object : RequestListener<String, GlideDrawable> {
+                    override fun onException(
+                            e: Exception?,
+                            model: String?,
+                            target: Target<GlideDrawable>?,
+                            isFirstResource: Boolean
+                    ): Boolean = false
+
+                    override fun onResourceReady(
+                            resource: GlideDrawable?,
+                            model: String?,
+                            target: Target<GlideDrawable>?,
+                            isFromMemoryCache: Boolean,
+                            isFirstResource: Boolean
+                    ): Boolean {
+                        val fadeIn = AnimationUtils.loadAnimation(mContext, android.R.anim.fade_in)
+                        holder.image.startAnimation(fadeIn)
+                        return false
+                    }
+                })
                 .into(holder.image)
 
         holder.title.text = item.title
