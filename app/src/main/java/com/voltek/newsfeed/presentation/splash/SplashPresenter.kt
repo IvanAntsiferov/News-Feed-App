@@ -7,8 +7,8 @@ import com.voltek.newsfeed.data.exception.NoNewsSourcesSelectedException
 import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor
-import com.voltek.newsfeed.navigation.command.CommandShowResult
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
+import com.voltek.newsfeed.navigation.command.CommandSystemMessage
 import com.voltek.newsfeed.navigation.proxy.Router
 import com.voltek.newsfeed.presentation.list.ListActivity
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesActivity
@@ -43,12 +43,16 @@ class SplashPresenter : MvpPresenter<SplashView>() {
         )
     }
 
+    override fun onDestroy() {
+        mNewsSources.unsubscribe()
+    }
+
     private fun result(hasEnabled: Boolean) {
         mRouter.execute(CommandStartActivity(ListActivity(), finish = true))
 
         if (!hasEnabled) {
             mRouter.execute(CommandStartActivity(NewsSourcesActivity(), finish = true))
-            mRouter.execute(CommandShowResult(error = NoNewsSourcesSelectedException()))
+            mRouter.execute(CommandSystemMessage(error = NoNewsSourcesSelectedException()))
         }
     }
 

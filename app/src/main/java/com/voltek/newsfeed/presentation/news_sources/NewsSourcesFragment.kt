@@ -1,6 +1,7 @@
 package com.voltek.newsfeed.presentation.news_sources
 
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -105,17 +106,17 @@ class NewsSourcesFragment : BaseFragment(),
         activity.invalidateOptionsMenu()
 
         when (model.categoryId) {
-            R.id.action_all -> activity.title = getString(R.string.category_all)
-            R.id.action_enabled -> activity.title = getString(R.string.category_enabled)
-            R.id.action_business -> activity.title = getString(R.string.category_business)
-            R.id.action_entertainment -> activity.title = getString(R.string.category_entertainment)
-            R.id.action_gaming -> activity.title = getString(R.string.category_gaming)
-            R.id.action_general -> activity.title = getString(R.string.category_general)
-            R.id.action_music -> activity.title = getString(R.string.category_music)
-            R.id.action_politics -> activity.title = getString(R.string.category_politics)
-            R.id.action_science_and_nature -> activity.title = getString(R.string.category_science_and_nature)
-            R.id.action_sport -> activity.title = getString(R.string.category_sport)
-            R.id.action_technology -> activity.title = getString(R.string.category_technology)
+            R.id.action_all -> setTitle(R.string.category_all)
+            R.id.action_enabled -> setTitle(R.string.category_enabled)
+            R.id.action_business -> setTitle(R.string.category_business)
+            R.id.action_entertainment -> setTitle(R.string.category_entertainment)
+            R.id.action_gaming -> setTitle(R.string.category_gaming)
+            R.id.action_general -> setTitle(R.string.category_general)
+            R.id.action_music -> setTitle(R.string.category_music)
+            R.id.action_politics -> setTitle(R.string.category_politics)
+            R.id.action_science_and_nature -> setTitle(R.string.category_science_and_nature)
+            R.id.action_sport -> setTitle(R.string.category_sport)
+            R.id.action_technology -> setTitle(R.string.category_technology)
         }
 
         if (!model.message.isEmpty()) {
@@ -131,5 +132,9 @@ class NewsSourcesFragment : BaseFragment(),
             tv_message.visibility = View.GONE
             tv_message.text = ""
         }
+    }
+
+    private fun setTitle(@IdRes id: Int) {
+        activity.title = getString(id)
     }
 }

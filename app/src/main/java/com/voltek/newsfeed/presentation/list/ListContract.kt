@@ -9,9 +9,13 @@ import com.voltek.newsfeed.presentation.BaseView
 object ListContract {
 
     class ListModel(subscriber: (BaseModel) -> Unit) : BaseModel(subscriber) {
+
         var scrollToTop: Boolean = false
+
         var loading: Boolean = false
+
         var articles: ArrayList<ArticleUI> = ArrayList()
+
         var message: String = ""
 
         fun addData(data: List<ArticleUI>?) {

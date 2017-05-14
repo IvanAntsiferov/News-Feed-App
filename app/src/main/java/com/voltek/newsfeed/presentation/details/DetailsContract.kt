@@ -8,6 +8,7 @@ import com.voltek.newsfeed.presentation.BaseView
 object DetailsContract {
 
     class DetailsModel(subscriber: (BaseModel) -> Unit) : BaseModel(subscriber) {
+
         var articleLoaded = false
 
         var title: String = ""

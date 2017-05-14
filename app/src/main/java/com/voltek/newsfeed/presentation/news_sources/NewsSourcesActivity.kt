@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.exception.NoNewsSourcesSelectedException
-import com.voltek.newsfeed.navigation.command.CommandShowResult
+import com.voltek.newsfeed.navigation.command.CommandSystemMessage
 import com.voltek.newsfeed.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_generic.*
@@ -25,7 +25,7 @@ class NewsSourcesActivity : BaseActivity() {
     }
 
     override fun executeCommand(command: Command): Boolean = when (command) {
-        is CommandShowResult -> {
+        is CommandSystemMessage -> {
             when (command.error) {
                 is NoNewsSourcesSelectedException -> {
                     val snackBar = Snackbar

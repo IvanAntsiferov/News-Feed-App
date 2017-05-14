@@ -10,9 +10,13 @@ import com.voltek.newsfeed.presentation.BaseView
 object NewsSourcesContract {
 
     class NewsSourcesModel(subscriber: (BaseModel) -> Unit) : BaseModel(subscriber) {
+
         var categoryId: Int = R.id.action_all
+
         var loading: Boolean = false
+
         var sources: ArrayList<SourceUI> = ArrayList()
+
         var message: String = ""
 
         fun resetId() {

@@ -42,9 +42,6 @@ abstract class BaseActivity : MvpAppCompatActivity(),
     protected fun startActivity(command: CommandStartActivity): Boolean {
         val intent = Intent(this, command.activity)
 
-        if (command.args != null)
-            intent.putExtras(command.args)
-
         startActivity(intent)
 
         if (command.finish)
