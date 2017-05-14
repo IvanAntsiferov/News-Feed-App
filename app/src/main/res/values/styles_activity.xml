@@ -5,9 +5,7 @@
         <item name="android:windowBackground">@drawable/ll_splash</item>
     </style>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -16,14 +14,12 @@
         <item name="android:windowAnimationStyle">@style/ActivityTransitionAnimation</item>
     </style>
 
-    <!-- Toolbar(Actionbar) theme -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Clicking on icons triggers a ripple effect -->
         <item name="selectableItemBackground">?android:selectableItemBackground</item>
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
     </style>
 
-    <!-- Activity transitions animations -->
     <style name="ActivityTransitionAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>

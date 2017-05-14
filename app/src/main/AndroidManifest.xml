@@ -31,12 +31,10 @@
 
         <activity
             android:name="com.voltek.newsfeed.presentation.details.DetailsActivity"
-            android:label="@string/title_details"
             android:parentActivityName="com.voltek.newsfeed.presentation.list.ListActivity" />
 
         <activity
             android:name="com.voltek.newsfeed.presentation.news_sources.NewsSourcesActivity"
-            android:label="@string/title_news_sources"
             android:parentActivityName="com.voltek.newsfeed.presentation.list.ListActivity" />
 
     </application>
