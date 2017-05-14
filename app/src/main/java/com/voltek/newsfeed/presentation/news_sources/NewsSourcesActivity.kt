@@ -20,7 +20,8 @@ class NewsSourcesActivity : BaseActivity() {
             replaceFragment(
                     NewsSourcesFragment.newInstance(),
                     R.id.fragment_container,
-                    NewsSourcesFragment.TAG)
+                    NewsSourcesFragment.TAG
+            )
     }
 
     override fun executeCommand(command: Command): Boolean = when (command) {

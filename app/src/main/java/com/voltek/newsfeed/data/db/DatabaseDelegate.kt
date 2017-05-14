@@ -1,15 +1,10 @@
 package com.voltek.newsfeed.data.db
 
 import com.vicpin.krealmextensions.*
-import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.data.Provider
 import com.voltek.newsfeed.data.entity.SourceRAW
 
 class DatabaseDelegate : Provider.Database.NewsSources {
-
-    init {
-        NewsApp.dataComponent.inject(this)
-    }
 
     // Provider.Database.NewsSources
     override fun queryAll(): List<SourceRAW> = SourceRAW().queryAll()

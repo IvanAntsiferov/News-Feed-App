@@ -33,7 +33,7 @@ class ArticlesRepository {
                             val result = ArrayList<ArticleUI>()
                             val sourceTitle = ArticleUI()
                             result.add(sourceTitle)
-                            result.addAll(it.map { Mapper.ArticleRAWtoArticleUI(it) })
+                            result.addAll(it.map { Mapper.Article(it) })
                             result.forEach { article -> article.source = source.name }
                             emitter.onNext(Result(result))
                         }, {

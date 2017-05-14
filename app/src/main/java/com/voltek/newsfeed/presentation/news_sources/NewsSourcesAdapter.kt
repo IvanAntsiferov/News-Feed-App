@@ -1,6 +1,7 @@
 package com.voltek.newsfeed.presentation.news_sources
 
 import android.content.Context
+import android.support.annotation.IdRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -51,12 +52,12 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         holder.enabled.isChecked = item.isEnabled
 
         when (item.country) {
-            "au" -> Glide.with(mContext).load("").error(R.drawable.ic_australia_24dp).into(holder.country)
-            "de" -> Glide.with(mContext).load("").error(R.drawable.ic_germany_24dp).into(holder.country)
-            "gb" -> Glide.with(mContext).load("").error(R.drawable.ic_united_kingdom_24dp).into(holder.country)
-            "in" -> Glide.with(mContext).load("").error(R.drawable.ic_india_24dp).into(holder.country)
-            "it" -> Glide.with(mContext).load("").error(R.drawable.ic_italy_24dp).into(holder.country)
-            "us" -> Glide.with(mContext).load("").error(R.drawable.ic_united_states_24dp).into(holder.country)
+            "au" -> loadImage(holder.country, R.drawable.ic_australia_24dp)
+            "de" -> loadImage(holder.country, R.drawable.ic_germany_24dp)
+            "gb" -> loadImage(holder.country, R.drawable.ic_united_kingdom_24dp)
+            "in" -> loadImage(holder.country, R.drawable.ic_india_24dp)
+            "it" -> loadImage(holder.country, R.drawable.ic_italy_24dp)
+            "us" -> loadImage(holder.country, R.drawable.ic_united_states_24dp)
         }
     }
 
@@ -73,5 +74,9 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
             mItems.clear()
             notifyDataSetChanged()
         }
+    }
+
+    private fun loadImage(imageView: ImageView, @IdRes resId: Int) {
+        Glide.with(mContext).load("").error(resId).into(imageView)
     }
 }

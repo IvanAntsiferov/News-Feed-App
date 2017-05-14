@@ -6,7 +6,7 @@ import android.support.annotation.Nullable
 import com.voltek.newsfeed.presentation.BaseActivity
 
 /**
- * Basic command for between activity navigation.
+ * Basic command for navigation between activities.
  *
  * @param activityInstance activity, that need to be started
  * @param args bundle arguments for this activity

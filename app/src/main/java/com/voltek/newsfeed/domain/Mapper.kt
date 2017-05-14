@@ -7,7 +7,7 @@ import com.voltek.newsfeed.domain.entity.SourceUI
 
 object Mapper {
 
-    fun ArticleRAWtoArticleUI(item: ArticleRAW): ArticleUI =
+    fun Article(item: ArticleRAW): ArticleUI =
             ArticleUI(
                     title = item.title,
                     description = item.description,
@@ -16,7 +16,7 @@ object Mapper {
             )
 
 
-    fun SourceRAWtoSourceUI(item: SourceRAW): SourceUI =
+    fun Source(item: SourceRAW): SourceUI =
             SourceUI(
                     id = item.id,
                     name = item.name,

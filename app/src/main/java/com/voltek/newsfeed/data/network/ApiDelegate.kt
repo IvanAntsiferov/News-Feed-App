@@ -25,6 +25,7 @@ class ApiDelegate : Provider.Api.Articles, Provider.Api.NewsSources {
         NewsApp.dataComponent.inject(this)
     }
 
+    // Provider.Api.Articles
     override fun get(source: String): Single<List<ArticleRAW>> = Single.create {
         val emitter = it
 
@@ -40,6 +41,7 @@ class ApiDelegate : Provider.Api.Articles, Provider.Api.NewsSources {
         }
     }
 
+    // Provider.Api.NewsSources
     override fun get(): Single<List<SourceRAW>> = Single.create {
         val emitter = it
 

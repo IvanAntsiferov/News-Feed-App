@@ -24,6 +24,7 @@ class NewsSourcesRepository {
     @Inject
     lateinit var mRes: Provider.Platform.Resources
 
+    // Notifies subscribers when enabled news sources has changed
     private var mSourcesEnabledSubject: PublishSubject<Unit> = PublishSubject.create()
 
     fun getSourcesEnabledObservable(): Observable<Unit> = mSourcesEnabledSubject
@@ -41,7 +42,7 @@ class NewsSourcesRepository {
             mNet.get()
                     .subscribe({
                         mDb.save(it)
-                        emitter.onNext(Result(mDb.queryAll().map { Mapper.SourceRAWtoSourceUI(it) }))
+                        emitter.onNext(Result(mDb.queryAll().map { Mapper.Source(it) }))
                     }, {
                         val message: String = when (it) {
                             is NoConnectionException -> mRes.getString(R.string.error_no_connection)
@@ -50,7 +51,7 @@ class NewsSourcesRepository {
                         emitter.onNext(Result(null, message))
                     })
         } else {
-            emitter.onNext(Result(sourcesCache.map { Mapper.SourceRAWtoSourceUI(it) }))
+            emitter.onNext(Result(sourcesCache.map { Mapper.Source(it) }))
         }
 
         emitter.onComplete()
@@ -79,7 +80,7 @@ class NewsSourcesRepository {
                 message = mRes.getString(R.string.error_no_news_sources_for_category)
         }
 
-        emitter.onSuccess(Result(query.map { Mapper.SourceRAWtoSourceUI(it) }, message))
+        emitter.onSuccess(Result(query.map { Mapper.Source(it) }, message))
     }
 
     fun refresh(): Observable<Result<List<SourceUI>?>> = Observable.create {
@@ -97,13 +98,13 @@ class NewsSourcesRepository {
 
                     mDb.deleteAll()
                     mDb.save(new)
-                    emitter.onNext(Result(mDb.queryAll().map { Mapper.SourceRAWtoSourceUI(it) }))
+                    emitter.onNext(Result(mDb.queryAll().map { Mapper.Source(it) }))
                 }, {
                     val message: String = when (it) {
                         is NoConnectionException -> mRes.getString(R.string.error_no_connection)
                         else -> mRes.getString(R.string.error_request_failed)
                     }
-                    emitter.onNext(Result(mDb.queryAll().map { Mapper.SourceRAWtoSourceUI(it) }, message))
+                    emitter.onNext(Result(mDb.queryAll().map { Mapper.Source(it) }, message))
                 })
 
         emitter.onComplete()
