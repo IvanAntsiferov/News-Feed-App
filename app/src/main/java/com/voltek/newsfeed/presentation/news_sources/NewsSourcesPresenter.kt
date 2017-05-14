@@ -18,7 +18,8 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
     @Inject
     lateinit var mNewsSources: NewsSourcesInteractor
 
-    private var mModel: NewsSourcesModel = NewsSourcesModel()
+    private var mModel: NewsSourcesModel =
+            NewsSourcesModel { viewState.render(it as NewsSourcesModel) }
 
     fun notify(event: Event) {
         when (event) {
@@ -41,10 +42,6 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
                 }?.isEnabled = !event.source.isEnabled
             }
         }
-    }
-
-    private fun updateModel() {
-        viewState.render(mModel)
     }
 
     init {
@@ -70,7 +67,7 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
         mModel.sources.clear()
         mModel.loading = true
         mModel.message = ""
-        updateModel()
+        mModel.update()
 
         mNewsSources.execute(
                 Parameter(filter),
@@ -91,6 +88,6 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
     private fun finishLoading() {
         mModel.loading = false
         mNewsSources.unsubscribe()
-        updateModel()
+        mModel.update()
     }
 }

@@ -20,7 +20,7 @@ class DetailsPresenter(private val article: ArticleUI) : MvpPresenter<DetailsVie
     @Inject
     lateinit var mRouter: Router
 
-    private var mModel: DetailsModel = DetailsModel()
+    private var mModel: DetailsModel = DetailsModel { viewState.render(it as DetailsModel) }
 
     fun notify(event: Event) {
         when (event) {
@@ -34,22 +34,18 @@ class DetailsPresenter(private val article: ArticleUI) : MvpPresenter<DetailsVie
         }
     }
 
-    private fun updateModel() {
-        viewState.render(mModel)
-    }
-
     init {
         NewsApp.presenterComponent.inject(this)
 
         if (article.isEmpty()) {
             mModel.articleLoaded = false
-            updateModel()
+            mModel.update()
         } else {
             mModel.articleLoaded = true
             mModel.description = article.description ?: ""
             mModel.title = article.title ?: ""
             mModel.urlToImage = article.urlToImage ?: ""
-            updateModel()
+            mModel.update()
         }
     }
 

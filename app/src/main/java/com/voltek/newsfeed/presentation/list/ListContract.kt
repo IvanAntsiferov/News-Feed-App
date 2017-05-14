@@ -3,11 +3,12 @@ package com.voltek.newsfeed.presentation.list
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.voltek.newsfeed.domain.entity.ArticleUI
+import com.voltek.newsfeed.presentation.BaseModel
 import com.voltek.newsfeed.presentation.BaseView
 
 object ListContract {
 
-    class ListModel {
+    class ListModel(subscriber: (BaseModel) -> Unit) : BaseModel(subscriber) {
         var scrollToTop: Boolean = false
         var loading: Boolean = false
         var articles: ArrayList<ArticleUI> = ArrayList()

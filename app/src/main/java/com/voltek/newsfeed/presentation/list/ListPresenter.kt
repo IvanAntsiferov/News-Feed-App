@@ -30,7 +30,7 @@ class ListPresenter : MvpPresenter<ListView>() {
     lateinit var mNewsSourcesChanges: NewsSourcesUpdatesInteractor
 
     // Holds current model through full presenter lifecycle
-    private var mModel: ListModel = ListModel()
+    private var mModel: ListModel = ListModel { viewState.render(it as ListModel) }
 
     // View notify presenter about events using this method
     fun notify(event: Event) {
@@ -43,11 +43,6 @@ class ListPresenter : MvpPresenter<ListView>() {
                 }
             }
         }
-    }
-
-    // Apply new view model
-    private fun updateModel() {
-        viewState.render(mModel)
     }
 
     init {
@@ -87,14 +82,14 @@ class ListPresenter : MvpPresenter<ListView>() {
         mModel.articles.clear()
         mModel.loading = true
         mModel.message = ""
-        updateModel()
+        mModel.update()
 
         mArticles.execute(
                 Parameter(),
                 Consumer {
                     mModel.addData(it.data)
                     mModel.message = it.message
-                    updateModel()
+                    mModel.update()
                 },
                 Consumer {
                     mModel.message = it.message ?: ""
@@ -109,6 +104,6 @@ class ListPresenter : MvpPresenter<ListView>() {
     private fun finishLoading() {
         mModel.loading = false
         mArticles.unsubscribe()
-        updateModel()
+        mModel.update()
     }
 }
