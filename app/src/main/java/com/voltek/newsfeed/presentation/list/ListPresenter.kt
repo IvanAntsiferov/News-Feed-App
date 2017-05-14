@@ -15,7 +15,6 @@ import com.voltek.newsfeed.presentation.list.ListContract.ListView
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesActivity
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
@@ -48,7 +47,6 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     // Apply new view model
     private fun updateModel() {
-        Timber.d("updateModel")
         viewState.render(mModel)
     }
 
@@ -58,7 +56,10 @@ class ListPresenter : MvpPresenter<ListView>() {
         // Listen for enabled news sources changes and reload articles when it happens.
         mNewsSourcesChanges.execute(
                 Parameter(),
-                Consumer { loadArticles() },
+                Consumer {
+                    mModel.scrollToTop = true
+                    loadArticles()
+                },
                 Consumer {},
                 Action {}
         )
@@ -69,6 +70,7 @@ class ListPresenter : MvpPresenter<ListView>() {
     override fun attachView(view: ListView?) {
         super.attachView(view)
         viewState.attachInputListeners()
+        mModel.scrollToTop = false
     }
 
     override fun detachView(view: ListView?) {

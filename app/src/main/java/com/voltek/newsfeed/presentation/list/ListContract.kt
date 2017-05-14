@@ -8,6 +8,7 @@ import com.voltek.newsfeed.presentation.BaseView
 object ListContract {
 
     class ListModel {
+        var scrollToTop: Boolean = false
         var loading: Boolean = false
         var articles: ArrayList<ArticleUI> = ArrayList()
         var message: String = ""

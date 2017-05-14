@@ -90,5 +90,9 @@ class ListFragment : BaseFragment(),
             tv_message.visibility = GONE
             tv_message.text = ""
         }
+
+        if (model.scrollToTop) {
+            recycler_view.smoothScrollToPosition(0)
+        }
     }
 }
