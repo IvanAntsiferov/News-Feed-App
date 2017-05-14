@@ -9,8 +9,7 @@ data class ArticleUI(
         val url: String? = null,
         val urlToImage: String? = null
 ) {
-    fun isEmpty() = title == null && description == null && url == null &&
-            urlToImage == null
+    fun isEmpty() = (title == null && description == null && url == null && urlToImage == null)
 
     var source: String = ""
 }

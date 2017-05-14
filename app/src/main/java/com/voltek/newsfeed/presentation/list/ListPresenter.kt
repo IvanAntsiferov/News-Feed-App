@@ -103,7 +103,6 @@ class ListPresenter : MvpPresenter<ListView>() {
 
     private fun finishLoading() {
         mModel.loading = false
-        mArticles.unsubscribe()
         mModel.update()
     }
 }

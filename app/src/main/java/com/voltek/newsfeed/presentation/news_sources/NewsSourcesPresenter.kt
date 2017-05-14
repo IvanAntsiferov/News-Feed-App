@@ -87,7 +87,6 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
 
     private fun finishLoading() {
         mModel.loading = false
-        mNewsSources.unsubscribe()
         mModel.update()
     }
 }
