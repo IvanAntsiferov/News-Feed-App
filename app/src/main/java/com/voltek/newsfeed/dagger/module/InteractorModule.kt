@@ -26,5 +26,5 @@ class InteractorModule(
     @Provides
     @Singleton
     fun provideNewsSourcesUpdatesInteractor(): NewsSourcesUpdatesInteractor =
-            NewsSourcesUpdatesInteractor(computationScheduler, uiScheduler)
+            NewsSourcesUpdatesInteractor(ioScheduler, uiScheduler)
 }

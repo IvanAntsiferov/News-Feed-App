@@ -72,10 +72,6 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         } else if (currentSize > 0 && newSize == 0) {
             mItems.clear()
             notifyDataSetChanged()
-        } else if (currentSize > 0 && newSize > 0) {
-            mItems.clear()
-            mItems.addAll(items)
-            notifyItemRangeChanged(currentSize, newSize)
         }
     }
 }

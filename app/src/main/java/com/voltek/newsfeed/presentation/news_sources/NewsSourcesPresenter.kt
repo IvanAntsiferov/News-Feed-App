@@ -77,7 +77,6 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
                 Consumer {
                     mModel.sources = ArrayList(it.data ?: ArrayList())
                     mModel.message = it.message
-                    updateModel()
                 },
                 Consumer {
                     mModel.message = it.message ?: ""
