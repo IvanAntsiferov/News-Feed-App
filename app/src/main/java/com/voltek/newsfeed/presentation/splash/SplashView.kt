@@ -1,5 +1,5 @@
 package com.voltek.newsfeed.presentation.splash
 
-import com.arellomobile.mvp.MvpView
+import com.voltek.newsfeed.presentation.BaseView
 
-interface SplashView : MvpView
+interface SplashView : BaseView

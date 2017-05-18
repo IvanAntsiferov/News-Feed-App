@@ -1,7 +1,6 @@
 package com.voltek.newsfeed.presentation.list
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.articles.GetArticlesInteractor
@@ -9,6 +8,7 @@ import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesUpdatesInte
 import com.voltek.newsfeed.navigation.command.CommandOpenArticleDetails
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
 import com.voltek.newsfeed.navigation.proxy.Router
+import com.voltek.newsfeed.presentation.BasePresenter
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.list.ListContract.ListModel
 import com.voltek.newsfeed.presentation.list.ListContract.ListView
@@ -18,7 +18,7 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 @InjectViewState
-class ListPresenter : MvpPresenter<ListView>() {
+class ListPresenter : BasePresenter<ListView>() {
 
     @Inject
     lateinit var mRouter: Router
@@ -33,7 +33,7 @@ class ListPresenter : MvpPresenter<ListView>() {
     private var mModel: ListModel = ListModel { viewState.render(it as ListModel) }
 
     // View notify presenter about events using this method
-    fun notify(event: Event) {
+    override fun notify(event: Event) {
         when (event) {
             is Event.OpenArticleDetails -> mRouter.execute(CommandOpenArticleDetails(event.article))
             is Event.OpenNewsSources -> mRouter.execute(CommandStartActivity(NewsSourcesActivity()))

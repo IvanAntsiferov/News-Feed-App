@@ -1,13 +1,13 @@
 package com.voltek.newsfeed.presentation.details
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.domain.entity.ArticleUI
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.navigation.command.CommandShareArticle
 import com.voltek.newsfeed.navigation.command.CommandStartActivity
 import com.voltek.newsfeed.navigation.proxy.Router
+import com.voltek.newsfeed.presentation.BasePresenter
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.details.DetailsContract.DetailsModel
 import com.voltek.newsfeed.presentation.details.DetailsContract.DetailsView
@@ -15,14 +15,14 @@ import com.voltek.newsfeed.presentation.news_sources.NewsSourcesActivity
 import javax.inject.Inject
 
 @InjectViewState
-class DetailsPresenter(private val article: ArticleUI) : MvpPresenter<DetailsView>() {
+class DetailsPresenter(private val article: ArticleUI) : BasePresenter<DetailsView>() {
 
     @Inject
     lateinit var mRouter: Router
 
     private var mModel: DetailsModel = DetailsModel { viewState.render(it as DetailsModel) }
 
-    fun notify(event: Event) {
+    override fun notify(event: Event) {
         when (event) {
             is Event.Share -> {
                 if (!article.isEmpty()) {

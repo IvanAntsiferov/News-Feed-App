@@ -6,7 +6,7 @@ import com.voltek.newsfeed.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.BaseActivity
 
 class SplashActivity : BaseActivity(),
-    SplashView {
+        SplashView {
 
     @InjectPresenter
     lateinit var mPresenter: SplashPresenter
@@ -15,4 +15,8 @@ class SplashActivity : BaseActivity(),
         is CommandStartActivity -> startActivity(command)
         else -> false
     }
+
+    override fun attachInputListeners() {}
+
+    override fun detachInputListeners() {}
 }

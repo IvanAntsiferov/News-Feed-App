@@ -1,10 +1,10 @@
 package com.voltek.newsfeed.presentation.news_sources
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor
+import com.voltek.newsfeed.presentation.BasePresenter
 import com.voltek.newsfeed.presentation.Event
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesModel
 import com.voltek.newsfeed.presentation.news_sources.NewsSourcesContract.NewsSourcesView
@@ -13,7 +13,7 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 @InjectViewState
-class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
+class NewsSourcesPresenter : BasePresenter<NewsSourcesView>() {
 
     @Inject
     lateinit var mNewsSources: NewsSourcesInteractor
@@ -21,7 +21,7 @@ class NewsSourcesPresenter : MvpPresenter<NewsSourcesView>() {
     private var mModel: NewsSourcesModel =
             NewsSourcesModel { viewState.render(it as NewsSourcesModel) }
 
-    fun notify(event: Event) {
+    override fun notify(event: Event) {
         when (event) {
             is Event.FilterSources -> {
                 mModel.categoryId = event.id
