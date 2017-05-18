@@ -19,7 +19,7 @@ class NewsSourcesRepository {
     lateinit var mNet: Provider.Api.NewsSources
 
     @Inject
-    lateinit var mDb: Provider.Database.NewsSources
+    lateinit var mDb: Provider.Storage.NewsSources
 
     @Inject
     lateinit var mRes: Provider.Platform.Resources

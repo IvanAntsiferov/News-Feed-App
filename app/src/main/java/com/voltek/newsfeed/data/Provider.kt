@@ -21,7 +21,7 @@ object Provider {
         }
     }
 
-    object Database {
+    object Storage {
 
         interface NewsSources {
 

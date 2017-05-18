@@ -1,9 +1,9 @@
 package com.voltek.newsfeed.dagger.module
 
 import com.voltek.newsfeed.data.Provider
-import com.voltek.newsfeed.data.db.DatabaseDelegate
+import com.voltek.newsfeed.data.storage.NewsSourcesStorage
 import com.voltek.newsfeed.data.network.ApiDelegate
-import com.voltek.newsfeed.data.platform.ResourcesDelegate
+import com.voltek.newsfeed.data.platform.ResourcesManager
 import dagger.Module
 import dagger.Provides
 
@@ -12,14 +12,14 @@ class DataModule {
 
     // Main modules
     @Provides
-    fun provideDatabase(): DatabaseDelegate = DatabaseDelegate()
+    fun provideDatabase(): NewsSourcesStorage = NewsSourcesStorage()
 
     @Provides
     fun provideApi(): ApiDelegate = ApiDelegate()
 
     // Interfaces to access data
     @Provides
-    fun provideDatabaseNewsSources(database: DatabaseDelegate): Provider.Database.NewsSources = database
+    fun provideDatabaseNewsSources(database: NewsSourcesStorage): Provider.Storage.NewsSources = database
 
     @Provides
     fun provideApiArticles(api: ApiDelegate): Provider.Api.Articles = api
@@ -28,5 +28,5 @@ class DataModule {
     fun provideApiNewsSources(api: ApiDelegate): Provider.Api.NewsSources = api
 
     @Provides
-    fun provideResources(): Provider.Platform.Resources = ResourcesDelegate()
+    fun provideResources(): Provider.Platform.Resources = ResourcesManager()
 }

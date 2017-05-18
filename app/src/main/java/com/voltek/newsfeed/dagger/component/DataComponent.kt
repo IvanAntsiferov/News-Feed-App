@@ -2,9 +2,9 @@ package com.voltek.newsfeed.dagger.component
 
 import com.voltek.newsfeed.dagger.module.AppModule
 import com.voltek.newsfeed.dagger.module.NetworkModule
-import com.voltek.newsfeed.data.db.DatabaseDelegate
+import com.voltek.newsfeed.data.storage.NewsSourcesStorage
 import com.voltek.newsfeed.data.network.ApiDelegate
-import com.voltek.newsfeed.data.platform.ResourcesDelegate
+import com.voltek.newsfeed.data.platform.ResourcesManager
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,9 +15,9 @@ import javax.inject.Singleton
 )
 interface DataComponent {
 
-    fun inject(database: DatabaseDelegate)
+    fun inject(storage: NewsSourcesStorage)
 
     fun inject(api: ApiDelegate)
 
-    fun inject(resources: ResourcesDelegate)
+    fun inject(platform: ResourcesManager)
 }

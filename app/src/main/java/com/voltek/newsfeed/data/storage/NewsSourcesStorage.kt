@@ -1,12 +1,11 @@
-package com.voltek.newsfeed.data.db
+package com.voltek.newsfeed.data.storage
 
 import com.vicpin.krealmextensions.*
 import com.voltek.newsfeed.data.Provider
 import com.voltek.newsfeed.data.entity.SourceRAW
 
-class DatabaseDelegate : Provider.Database.NewsSources {
+class NewsSourcesStorage : Provider.Storage.NewsSources {
 
-    // Provider.Database.NewsSources
     override fun queryAll(): List<SourceRAW> = SourceRAW().queryAll()
 
     override fun queryEnabled(): List<SourceRAW> =

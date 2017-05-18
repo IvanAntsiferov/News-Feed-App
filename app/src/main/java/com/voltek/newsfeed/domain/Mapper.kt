@@ -15,7 +15,6 @@ object Mapper {
                     urlToImage = item.urlToImage
             )
 
-
     fun Source(item: SourceRAW): SourceUI =
             SourceUI(
                     id = item.id,

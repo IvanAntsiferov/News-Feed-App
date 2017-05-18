@@ -6,7 +6,7 @@ import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.data.Provider
 import javax.inject.Inject
 
-class ResourcesDelegate : Provider.Platform.Resources {
+class ResourcesManager : Provider.Platform.Resources {
 
     @Inject
     lateinit var mContext: Context
