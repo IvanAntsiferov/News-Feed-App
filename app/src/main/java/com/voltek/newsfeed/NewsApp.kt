@@ -6,7 +6,6 @@ import com.voltek.newsfeed.dagger.component.*
 import com.voltek.newsfeed.dagger.module.*
 import com.voltek.newsfeed.navigation.RouterHolder
 import com.voltek.newsfeed.navigation.proxy.NavigatorBinder
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
@@ -40,6 +39,7 @@ class NewsApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // Dependency injection
         val appModule = AppModule(this)
         val interactorModule = InteractorModule(
                 AndroidSchedulers.mainThread(),
@@ -49,7 +49,9 @@ class NewsApp : Application() {
         val networkModule = NetworkModule(BASE_URL)
         val repositoryModule = RepositoryModule()
         val routerModule = RouterModule(routerHolder)
-        val dataModule = DataModule()
+        val apiModule = ApiModule()
+        val platformModule = PlatformModule()
+        val storageModule = StorageModule()
 
         presenterComponent = DaggerPresenterComponent.builder()
                 .routerModule(routerModule)
@@ -61,7 +63,9 @@ class NewsApp : Application() {
                 .build()
 
         repositoryComponent = DaggerRepositoryComponent.builder()
-                .dataModule(dataModule)
+                .apiModule(apiModule)
+                .platformModule(platformModule)
+                .storageModule(storageModule)
                 .build()
 
         dataComponent = DaggerDataComponent.builder()
