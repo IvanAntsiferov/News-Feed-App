@@ -3,6 +3,7 @@ package com.voltek.newsfeed.presentation.news_sources
 import com.arellomobile.mvp.InjectViewState
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.domain.interactor.Parameter
+import com.voltek.newsfeed.domain.interactor.news_sources.EnableNewsSourceInteractor
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor
 import com.voltek.newsfeed.presentation.BasePresenter
 import com.voltek.newsfeed.presentation.Event
@@ -18,6 +19,9 @@ class NewsSourcesPresenter : BasePresenter<NewsSourcesView>() {
     @Inject
     lateinit var mNewsSources: NewsSourcesInteractor
 
+    @Inject
+    lateinit var mNewsSourceEnable: EnableNewsSourceInteractor
+
     private val mModel: NewsSourcesModel =
             NewsSourcesModel { viewState.render(it as NewsSourcesModel) }
 
@@ -32,14 +36,19 @@ class NewsSourcesPresenter : BasePresenter<NewsSourcesView>() {
                 loadNewsSources(NewsSourcesInteractor.REFRESH)
             }
             is Event.EnableNewsSource -> {
-                mNewsSources.execute(
-                        Parameter(NewsSourcesInteractor.ENABLE, event.source),
-                        Consumer {}, Consumer {}, Action {}
+                mNewsSourceEnable.execute(
+                        Parameter(item = event.source),
+                        Consumer {},
+                        Consumer {
+                            mModel.message = it.message ?: ""
+                            mModel.update()
+                        },
+                        Action {
+                            mModel.sources.firstOrNull {
+                                it.id == event.source.id
+                            }?.isEnabled = !event.source.isEnabled
+                        }
                 )
-
-                mModel.sources.firstOrNull {
-                    it.id == event.source.id
-                }?.isEnabled = !event.source.isEnabled
             }
         }
     }
