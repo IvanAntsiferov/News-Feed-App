@@ -20,7 +20,7 @@ class DetailsPresenter(private val article: ArticleUI) : BasePresenter<DetailsVi
     @Inject
     lateinit var mRouter: Router
 
-    private var mModel: DetailsModel = DetailsModel { viewState.render(it as DetailsModel) }
+    private val mModel: DetailsModel = DetailsModel { viewState.render(it as DetailsModel) }
 
     override fun notify(event: Event) {
         when (event) {

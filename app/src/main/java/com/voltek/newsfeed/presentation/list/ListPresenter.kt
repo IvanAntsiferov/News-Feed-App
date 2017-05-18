@@ -30,7 +30,7 @@ class ListPresenter : BasePresenter<ListView>() {
     lateinit var mNewsSourcesChanges: NewsSourcesUpdatesInteractor
 
     // Holds current model through full presenter lifecycle
-    private var mModel: ListModel = ListModel { viewState.render(it as ListModel) }
+    private val mModel: ListModel = ListModel { viewState.render(it as ListModel) }
 
     // View notify presenter about events using this method
     override fun notify(event: Event) {
@@ -48,16 +48,7 @@ class ListPresenter : BasePresenter<ListView>() {
     init {
         NewsApp.presenterComponent.inject(this)
 
-        // Listen for enabled news sources changes and reload articles when it happens.
-        mNewsSourcesChanges.execute(
-                Parameter(),
-                Consumer {
-                    mModel.scrollToTop = true
-                    loadArticles()
-                },
-                Consumer {},
-                Action {}
-        )
+        listenForChanges()
 
         loadArticles()
     }
@@ -98,6 +89,19 @@ class ListPresenter : BasePresenter<ListView>() {
                 Action {
                     finishLoading()
                 }
+        )
+    }
+
+    private fun listenForChanges() {
+        // Listen for enabled news sources changes and reload articles when it happens.
+        mNewsSourcesChanges.execute(
+                Parameter(),
+                Consumer {
+                    mModel.scrollToTop = true
+                    loadArticles()
+                },
+                Consumer {},
+                Action {}
         )
     }
 

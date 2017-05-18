@@ -18,7 +18,7 @@ class NewsSourcesPresenter : BasePresenter<NewsSourcesView>() {
     @Inject
     lateinit var mNewsSources: NewsSourcesInteractor
 
-    private var mModel: NewsSourcesModel =
+    private val mModel: NewsSourcesModel =
             NewsSourcesModel { viewState.render(it as NewsSourcesModel) }
 
     override fun notify(event: Event) {

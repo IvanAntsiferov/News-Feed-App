@@ -33,6 +33,14 @@ class SplashPresenter : BasePresenter<SplashView>() {
     init {
         NewsApp.presenterComponent.inject(this)
 
+        checkNewsSources()
+    }
+
+    override fun onDestroy() {
+        mNewsSources.unsubscribe()
+    }
+
+    private fun checkNewsSources() {
         // Fetch news sources in background.
         // Check, if there is no enabled news sources, open NewsSources screen with proper message.
         mNewsSources.execute(
@@ -48,9 +56,7 @@ class SplashPresenter : BasePresenter<SplashView>() {
         )
     }
 
-    override fun onDestroy() {
-        mNewsSources.unsubscribe()
-    }
+    private fun hasEnabled(sources: List<SourceUI>): Boolean = sources.any { it.isEnabled }
 
     private fun result(hasEnabled: Boolean) {
         mRouter.execute(CommandStartActivity(ListActivity(), finish = true))
@@ -60,6 +66,4 @@ class SplashPresenter : BasePresenter<SplashView>() {
             mRouter.execute(CommandSystemMessage(error = NoNewsSourcesSelectedException()))
         }
     }
-
-    private fun hasEnabled(sources: List<SourceUI>): Boolean = sources.any { it.isEnabled }
 }
