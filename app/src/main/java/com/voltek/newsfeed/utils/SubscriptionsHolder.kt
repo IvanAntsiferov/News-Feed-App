@@ -3,7 +3,7 @@ package com.voltek.newsfeed.utils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-interface CompositeDisposableComponent {
+interface SubscriptionsHolder {
 
     /**
      * Holds Disposables

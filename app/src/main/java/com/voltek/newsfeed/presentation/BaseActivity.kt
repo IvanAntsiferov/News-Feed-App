@@ -6,7 +6,7 @@ import android.net.Uri
 import android.support.annotation.IdRes
 import android.support.v7.widget.Toolbar
 import com.arellomobile.mvp.MvpAppCompatActivity
-import com.voltek.newsfeed.utils.CompositeDisposableComponent
+import com.voltek.newsfeed.utils.SubscriptionsHolder
 import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.navigation.command.CommandOpenWebsite
@@ -19,7 +19,7 @@ import com.voltek.newsfeed.navigation.command.CommandShareArticle
 
 abstract class BaseActivity : MvpAppCompatActivity(),
         Navigator,
-        CompositeDisposableComponent {
+        SubscriptionsHolder {
 
     // Holds all disposables with input events subscriptions
     override val mDisposable = CompositeDisposable()

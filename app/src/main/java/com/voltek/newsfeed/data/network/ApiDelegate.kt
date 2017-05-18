@@ -7,8 +7,8 @@ import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.data.Provider
 import com.voltek.newsfeed.data.entity.ArticleRAW
 import com.voltek.newsfeed.data.entity.SourceRAW
-import com.voltek.newsfeed.data.exception.NoConnectionException
-import com.voltek.newsfeed.data.exception.RequestFailedException
+import com.voltek.newsfeed.domain.exception.NoConnectionException
+import com.voltek.newsfeed.domain.exception.RequestFailedException
 import com.voltek.newsfeed.data.network.api.NewsApi
 import io.reactivex.Single
 import javax.inject.Inject

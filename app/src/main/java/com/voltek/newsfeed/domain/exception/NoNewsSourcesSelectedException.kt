@@ -1,3 +1,3 @@
-package com.voltek.newsfeed.data.exception
+package com.voltek.newsfeed.domain.exception
 
 class NoNewsSourcesSelectedException : Exception()

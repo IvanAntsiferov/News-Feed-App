@@ -4,7 +4,7 @@ import com.voltek.newsfeed.NewsApp
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.data.Provider
 import com.voltek.newsfeed.data.entity.SourceRAW
-import com.voltek.newsfeed.data.exception.NoConnectionException
+import com.voltek.newsfeed.domain.exception.NoConnectionException
 import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Result

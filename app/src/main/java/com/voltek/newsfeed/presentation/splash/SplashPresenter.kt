@@ -2,7 +2,7 @@ package com.voltek.newsfeed.presentation.splash
 
 import com.arellomobile.mvp.InjectViewState
 import com.voltek.newsfeed.NewsApp
-import com.voltek.newsfeed.data.exception.NoNewsSourcesSelectedException
+import com.voltek.newsfeed.domain.exception.NoNewsSourcesSelectedException
 import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Parameter
 import com.voltek.newsfeed.domain.interactor.news_sources.NewsSourcesInteractor

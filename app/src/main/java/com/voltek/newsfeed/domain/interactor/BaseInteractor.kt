@@ -1,6 +1,6 @@
 package com.voltek.newsfeed.domain.interactor
 
-import com.voltek.newsfeed.utils.CompositeDisposableComponent
+import com.voltek.newsfeed.utils.SubscriptionsHolder
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -10,7 +10,7 @@ import io.reactivex.functions.Consumer
 abstract class BaseInteractor<ResultType : Any?, in ParameterType>(
         protected val jobScheduler: Scheduler,
         protected val uiScheduler: Scheduler
-) : CompositeDisposableComponent {
+) : SubscriptionsHolder {
 
     override val mDisposable = CompositeDisposable()
 
