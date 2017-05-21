@@ -8,6 +8,7 @@ import com.voltek.newsfeed.domain.exception.NoConnectionException
 import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.entity.SourceUI
 import com.voltek.newsfeed.domain.interactor.Result
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
@@ -110,7 +111,7 @@ class NewsSourcesRepository {
         emitter.onComplete()
     }
 
-    fun update(id: String, isEnabled: Boolean): Single<Unit> = Single.create {
+    fun update(id: String, isEnabled: Boolean): Completable = Completable.create {
         val emitter = it
 
         val source = mDb.findById(id)
@@ -119,7 +120,7 @@ class NewsSourcesRepository {
             source.isEnabled = isEnabled
             mDb.save(arrayListOf(source))
             mSourcesEnabledSubject.onNext(Unit)
-            emitter.onSuccess(Unit)
+            emitter.onComplete()
         } else {
             emitter.onError(Exception())
         }

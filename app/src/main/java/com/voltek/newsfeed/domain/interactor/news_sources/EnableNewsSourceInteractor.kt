@@ -25,7 +25,7 @@ class EnableNewsSourceInteractor(jobScheduler: Scheduler, uiScheduler: Scheduler
             val source = parameter.item
             return mNewsSourcesRepo
                     .update(source.id, !source.isEnabled)
-                    .toObservable()
+                    .toObservable<Result<Unit>>()
                     .map { Result(null) }
         } else {
             return Observable.error { NullPointerException() }
