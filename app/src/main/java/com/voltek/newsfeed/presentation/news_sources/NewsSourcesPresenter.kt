@@ -70,6 +70,7 @@ class NewsSourcesPresenter : BasePresenter<NewsSourcesView>() {
 
     override fun onDestroy() {
         mNewsSources.unsubscribe()
+        mNewsSourceEnable.unsubscribe()
     }
 
     private fun loadNewsSources(filter: String) {

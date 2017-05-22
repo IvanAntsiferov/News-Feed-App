@@ -20,8 +20,6 @@ import javax.inject.Inject
 @InjectViewState
 class SplashPresenter : BasePresenter<SplashView>() {
 
-    // TODO move choosing screen logic to proper interactor
-
     @Inject
     lateinit var mRouter: Router
 

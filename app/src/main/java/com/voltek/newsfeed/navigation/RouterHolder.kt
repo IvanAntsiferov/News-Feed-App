@@ -3,6 +3,7 @@ package com.voltek.newsfeed.navigation
 import com.voltek.newsfeed.navigation.command.CommandNavigatorAttached
 import com.voltek.newsfeed.navigation.proxy.*
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 
 /**
  * Manages app navigation, lifecycle tied to app process. Can hold only one navigator at a time.
@@ -19,10 +20,19 @@ class RouterHolder : Router, NavigatorBinder {
     private var commandsQueue: ArrayList<Command> = ArrayList()
 
     init {
+        subscribeToCommandsFeed()
+    }
+
+    private fun subscribeToCommandsFeed() {
         CommandsFeed
                 .filter { !runCommand(it) } // If command executed
                 .filter { !runQueue(it) } // If new navigator attached
-                .subscribe({ addToQueue(it) }) // Else, try to add command to queue
+                .subscribe({
+                    addToQueue(it)
+                }, {
+                    Timber.e(it)
+                    subscribeToCommandsFeed() // Re-subscribe on exception
+                })
     }
 
     // Router
@@ -69,7 +79,7 @@ class RouterHolder : Router, NavigatorBinder {
      */
     private fun addToQueue(command: Command): Boolean {
         if (command.addToQueue) {
-            if (!commandsQueue.isEmpty())
+            if (commandsQueue.isNotEmpty())
                 command.id = commandsQueue[commandsQueue.lastIndex].id + 1
             return commandsQueue.add(command)
         } else {

@@ -100,7 +100,9 @@ class ListPresenter : BasePresenter<ListView>() {
                     mModel.scrollToTop = true
                     loadArticles()
                 },
-                Consumer {},
+                Consumer {
+                    it.printStackTrace()
+                },
                 Action {}
         )
     }
