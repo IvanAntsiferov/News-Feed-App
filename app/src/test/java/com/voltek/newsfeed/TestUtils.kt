@@ -3,6 +3,7 @@ package com.voltek.newsfeed
 import com.voltek.newsfeed.data.network.entity.ArticleAPI
 import com.voltek.newsfeed.data.network.entity.SourceAPI
 import com.voltek.newsfeed.data.storage.entity.SourceDB
+import com.voltek.newsfeed.presentation.entity.ArticleUI
 import com.voltek.newsfeed.presentation.entity.SourceUI
 
 object TestUtils {
@@ -47,4 +48,10 @@ object TestUtils {
             "category",
             "country",
             false)
+
+    fun articleUI() = ArticleUI(
+            title = "title",
+            description = "description",
+            url = "url",
+            urlToImage = "urlToImage")
 }
