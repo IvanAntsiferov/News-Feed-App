@@ -20,7 +20,7 @@ class SplashPresenter(
         private val newsSources: NewsSourcesUseCase
 ) : BasePresenter<SplashView>() {
 
-    override fun notify(event: Event) {}
+    override fun event(event: Event) {}
 
     init {
         bind(arrayOf(newsSources))

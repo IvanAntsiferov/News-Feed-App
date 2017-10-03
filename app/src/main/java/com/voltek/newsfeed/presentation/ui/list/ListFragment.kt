@@ -63,7 +63,7 @@ class ListFragment : BaseFragment(),
         RxToolbar.itemClicks(activity.toolbar)
                 .subscribe({
                     when (it.itemId) {
-                        R.id.action_news_sources -> presenter.notify(Event.OpenNewsSources())
+                        R.id.action_news_sources -> presenter.event(Event.OpenNewsSources())
                     }
                 })
                 .bind()
@@ -71,12 +71,12 @@ class ListFragment : BaseFragment(),
         // On article click
         adapter.getOnItemClickObservable()
                 .distinctUntilChanged() // Skip reopening of details in two pane mode
-                .subscribe({ presenter.notify(Event.OpenArticleDetails(it)) })
+                .subscribe({ presenter.event(Event.OpenArticleDetails(it)) })
                 .bind()
 
         // Swipe to refresh
         RxSwipeRefreshLayout.refreshes(swipe_container)
-                .subscribe({ presenter.notify(Event.Refresh()) })
+                .subscribe({ presenter.event(Event.Refresh()) })
                 .bind()
     }
 

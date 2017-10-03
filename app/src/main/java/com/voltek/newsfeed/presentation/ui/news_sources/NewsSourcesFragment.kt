@@ -87,18 +87,18 @@ class NewsSourcesFragment : BaseFragment(),
                     when (it.itemId) {
                         in CATEGORY_ITEMS_IDS -> {
                             if (!it.isChecked) {
-                                presenter.notify(
+                                presenter.event(
                                         Event.FilterSources(it.title.toString(), it.itemId)
                                 )
                             }
                         }
-                        R.id.action_refresh -> presenter.notify(Event.Refresh())
+                        R.id.action_refresh -> presenter.event(Event.Refresh())
                     }
                 })
                 .bind()
 
         adapter.getOnItemClickObservable()
-                .subscribe({ presenter.notify(Event.EnableNewsSource(it)) })
+                .subscribe({ presenter.event(Event.EnableNewsSource(it)) })
                 .bind()
     }
 

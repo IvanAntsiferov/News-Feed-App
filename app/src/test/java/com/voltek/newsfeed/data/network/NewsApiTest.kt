@@ -1,25 +1,19 @@
-package com.voltek.newsfeed.api
+package com.voltek.newsfeed.data.network
 
-import com.voltek.newsfeed.data.network.ENDPOINT_ARTICLES
-import com.voltek.newsfeed.data.network.ENDPOINT_SOURCES
-import com.voltek.newsfeed.data.network.NewsApi
-import com.voltek.newsfeed.data.network.PARAM_SOURCE
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import okio.Okio
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import okhttp3.mockwebserver.MockResponse
-import okio.Okio
-import org.junit.Assert.*
 import java.io.IOException
 import java.nio.charset.Charset
 
-@RunWith(JUnit4::class)
 class NewsApiTest {
 
     private lateinit var service: NewsApi
@@ -45,9 +39,9 @@ class NewsApiTest {
     fun getArticles() {
         enqueueResponse("news-api-articles.json")
 
-        val NEWS_SOURCE = "bbc-news"
+        val newsSource = "bbc-news"
 
-        service.fetchArticles(NEWS_SOURCE).subscribe { response, error ->
+        service.fetchArticles(newsSource).subscribe { response, _ ->
             assertTrue(response != null)
             assertEquals(10, response.articles.size)
             assertEquals("American eclipse - Live", response.articles[0].title)
@@ -55,14 +49,14 @@ class NewsApiTest {
         }
 
         val request = mockServer.takeRequest()
-        assertEquals("/$ENDPOINT_ARTICLES?$PARAM_SOURCE=$NEWS_SOURCE", request.path)
+        assertEquals("/$ENDPOINT_ARTICLES?$PARAM_SOURCE=$newsSource", request.path)
     }
 
     @Test
     fun getNewsSources() {
         enqueueResponse("news-api-sources.json")
 
-        service.fetchSources().subscribe { response, error ->
+        service.fetchSources().subscribe { response, _ ->
             assertTrue(response != null)
             assertEquals(70, response.sources.size)
             assertEquals("al-jazeera-english", response.sources[1].id)

@@ -1,3 +1,3 @@
 package com.voltek.newsfeed.domain.exception
 
-class NoNewsSourcesSelectedException : Exception()
+class NoNewsSourcesSelectedException(message: String? = null) : Exception(message)

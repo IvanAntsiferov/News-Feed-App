@@ -64,10 +64,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'design'
     }
+    androidTestCompile "org.mockito:mockito-android:$versions.mockito"
 
     // Unit tests
     testCompile "junit:junit:$versions.junit"
-    testCompile "org.mockito:mockito-android:$versions.mockito"
+    testCompile "org.mockito:mockito-core:$versions.mockito"
     testCompile "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver", {
         exclude group: 'com.squareup.okio', module: 'okio'
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
