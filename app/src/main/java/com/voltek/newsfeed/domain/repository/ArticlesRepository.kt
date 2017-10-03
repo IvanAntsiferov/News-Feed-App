@@ -5,6 +5,7 @@ import com.voltek.newsfeed.data.network.NewsApi
 import com.voltek.newsfeed.data.platform.ResourcesManager
 import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.exception.NoConnectionException
+import com.voltek.newsfeed.domain.exception.NoNewsSourcesSelectedException
 import com.voltek.newsfeed.domain.use_case.Result
 import com.voltek.newsfeed.presentation.entity.ArticleUI
 import com.voltek.newsfeed.presentation.entity.SourceUI
@@ -17,7 +18,7 @@ class ArticlesRepository(private val api: NewsApi, private val res: ResourcesMan
 
         if (!sources.isEmpty()) {
             for (source in sources) {
-                this.api.fetchArticles(source.id)
+                api.fetchArticles(source.id)
                         .subscribe({
                             val result = ArrayList<ArticleUI>()
                             val sourceTitle = ArticleUI()
@@ -27,14 +28,15 @@ class ArticlesRepository(private val api: NewsApi, private val res: ResourcesMan
                             emitter.onNext(Result(result))
                         }, {
                             val message: String = when (it) {
-                                is NoConnectionException -> this.res.getString(R.string.error_no_connection)
-                                else -> this.res.getString(R.string.error_retrieve_failed) + source.name
+                                is NoConnectionException -> res.getString(R.string.error_no_connection)
+                                else -> res.getString(R.string.error_retrieve_failed) + source.name
                             }
                             emitter.onNext(Result(null, message))
                         })
             }
         } else {
-            emitter.onError(Exception(this.res.getString(R.string.error_no_news_sources_selected)))
+            emitter.onError(NoNewsSourcesSelectedException(
+                    res.getString(R.string.error_no_news_sources_selected)))
         }
 
         emitter.onComplete()
