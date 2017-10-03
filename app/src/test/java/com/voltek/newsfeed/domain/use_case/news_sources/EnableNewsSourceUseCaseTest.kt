@@ -1,0 +1,86 @@
+package com.voltek.newsfeed.domain.use_case.news_sources
+
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
+import com.voltek.newsfeed.CurrentThreadExecutor
+import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
+import com.voltek.newsfeed.domain.use_case.Parameter
+import io.reactivex.Completable
+import io.reactivex.functions.Action
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
+import org.junit.Before
+import org.junit.Test
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
+
+class EnableNewsSourceUseCaseTest {
+
+    private lateinit var enableNewsSourceUseCase: EnableNewsSourceUseCase
+
+    private val scheduler = Schedulers.from(CurrentThreadExecutor())
+
+    private val sourceUI = TestUtils.sourceUI()
+
+    @Mock
+    lateinit var newsSourcesRepository: NewsSourcesRepository
+
+    @Before
+    fun prepare() {
+        MockitoAnnotations.initMocks(this)
+        enableNewsSourceUseCase =
+                EnableNewsSourceUseCase(newsSourcesRepository, scheduler, scheduler)
+    }
+
+    @Test
+    fun executeNormal() {
+        whenever(newsSourcesRepository.update(sourceUI.id, !sourceUI.isEnabled))
+                .thenReturn(Completable.complete())
+        var error = false
+        var completed = false
+        enableNewsSourceUseCase.execute(
+                Parameter(item = sourceUI),
+                Consumer {},
+                Consumer {
+                    error = true
+                },
+                Action {
+                    completed = true
+                }
+        )
+        assertFalse(error)
+        assertTrue(completed)
+        verify(newsSourcesRepository, times(1)).update(sourceUI.id, !sourceUI.isEnabled)
+    }
+
+    @Test
+    fun executeWithNull() {
+        var error = false
+        var completed = false
+        var emittedResult = false
+        var emittedMessage = ""
+        enableNewsSourceUseCase.execute(
+                Parameter(),
+                Consumer {
+                    emittedResult = true
+                    emittedMessage = it.message
+                },
+                Consumer {
+                    error = true
+                },
+                Action {
+                    completed = true
+                }
+        )
+        assertTrue(error)
+        assertFalse(completed)
+        assertFalse(emittedResult)
+        assertTrue(emittedMessage.isEmpty())
+        verify(newsSourcesRepository, times(0)).update(any(), any())
+    }
+}
