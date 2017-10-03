@@ -1,42 +1,16 @@
 package com.voltek.newsfeed.domain
 
-import com.voltek.newsfeed.data.network.entity.ArticleAPI
-import com.voltek.newsfeed.data.network.entity.SourceAPI
-import com.voltek.newsfeed.data.storage.entity.SourceDB
+import com.voltek.newsfeed.TestUtils
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class MapperTest {
 
-    private val sourceAPI = SourceAPI(
-            id = "id",
-            name = "name",
-            description = "description",
-            url = "url",
-            category = "category",
-            country = "country",
-            isEnabled = false)
+    private val sourceAPI = TestUtils.sourceAPI()
 
-    private val sourceDB: SourceDB
-        get() {
-            val s = SourceDB()
-            with(s) {
-                id = "id"
-                name = "name"
-                description = "description"
-                url = "url"
-                category = "category"
-                country = "country"
-                isEnabled = false
-            }
-            return s
-        }
+    private val sourceDB = TestUtils.sourceDB()
 
-    private val articleAPI = ArticleAPI(
-            title = "title",
-            description = "description",
-            url = "url",
-            urlToImage = "urlToImage")
+    private val articleAPI = TestUtils.articleAPI()
 
     @Test
     fun articleAPItoUI() {

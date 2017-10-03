@@ -1,14 +1,15 @@
 package com.voltek.newsfeed.domain.repository
 
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.voltek.newsfeed.R
+import com.voltek.newsfeed.TestUtils
 import com.voltek.newsfeed.data.network.NewsApi
-import com.voltek.newsfeed.data.network.entity.ArticleAPI
 import com.voltek.newsfeed.data.network.entity.NewsApiArticlesResponse
 import com.voltek.newsfeed.data.platform.ResourcesManager
 import com.voltek.newsfeed.domain.exception.NoConnectionException
 import com.voltek.newsfeed.domain.exception.NoNewsSourcesSelectedException
-import com.voltek.newsfeed.presentation.entity.SourceUI
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -20,19 +21,12 @@ class ArticlesRepositoryTest {
 
     private lateinit var articlesRepo: ArticlesRepository
 
-    private val stringNoConnection = "stringNoConnection"
-    private val stringServerError = "stringServerError"
+    private val stringNoConnection = TestUtils.stringNoConnection
+    private val stringServerError = TestUtils.stringServerError
 
-    private val sources = arrayListOf(SourceUI(
-            "id", "name", "description", "url", "category", "country", false))
+    private val sources = arrayListOf(TestUtils.sourceUI())
 
-    private val response = NewsApiArticlesResponse(
-            arrayListOf(
-                    ArticleAPI(
-                            title = "title",
-                            description = "description",
-                            url = "url",
-                            urlToImage = "urlToImage")))
+    private val response = NewsApiArticlesResponse(arrayListOf(TestUtils.articleAPI()))
 
     @Mock
     lateinit var api: NewsApi
@@ -53,6 +47,7 @@ class ArticlesRepositoryTest {
         articlesRepo.get(ArrayList())
                 .test()
                 .assertError({ it is NoNewsSourcesSelectedException })
+        verify(api, times(0)).fetchArticles(anyString())
     }
 
     @Test
@@ -63,12 +58,14 @@ class ArticlesRepositoryTest {
                 .assertValue { it.data == null }
                 .assertValue { it.message == stringNoConnection }
                 .assertComplete()
+        verify(api, times(1)).fetchArticles(anyString())
         whenever(api.fetchArticles(anyString())).thenReturn(Single.error(Exception()))
         articlesRepo.get(sources)
                 .test()
                 .assertValue { it.data == null }
                 .assertValue { it.message == (stringServerError + sources[0].name) }
                 .assertComplete()
+        verify(api, times(2)).fetchArticles(anyString())
     }
 
     @Test
@@ -80,5 +77,6 @@ class ArticlesRepositoryTest {
                 .assertValue { it.data?.size == 2 } // Because of Header
                 .assertValue { it.data!![1].title == response.articles[0].title }
                 .assertComplete()
+        verify(api, times(1)).fetchArticles(anyString())
     }
 }

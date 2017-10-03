@@ -8,6 +8,7 @@ import com.voltek.newsfeed.data.platform.ResourcesManager
 import com.voltek.newsfeed.data.storage.NewsSourcesStorage
 import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.exception.NoConnectionException
+import com.voltek.newsfeed.domain.exception.WrongNewsSourceIdException
 import com.voltek.newsfeed.domain.use_case.Result
 import com.voltek.newsfeed.presentation.entity.SourceUI
 import io.reactivex.Completable
@@ -88,10 +89,12 @@ class NewsSourcesRepository(
                             is NoConnectionException -> res.getString(R.string.error_no_connection)
                             else -> res.getString(R.string.error_request_failed)
                         }
-                        Result(storage.queryAll().map { Mapper.sourceDBtoUI(it) }, message)
+                        Result(null, message)
                     }
                     .flatMap {
-                        Single.fromCallable { Result(storage.queryAll().map { Mapper.sourceDBtoUI(it) }) }
+                        Single.fromCallable {
+                            Result(storage.queryAll().map { Mapper.sourceDBtoUI(it) }, it.message)
+                        }
                     }
 
     fun update(id: String, isEnabled: Boolean): Completable = Completable.create {
@@ -105,7 +108,7 @@ class NewsSourcesRepository(
             mSourcesEnabledSubject.onNext(Unit)
             emitter.onComplete()
         } else {
-            emitter.onError(Exception())
+            emitter.onError(WrongNewsSourceIdException())
         }
     }
 
