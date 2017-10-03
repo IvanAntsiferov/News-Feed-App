@@ -17,7 +17,7 @@ Simple Android app, displaying list of latest news from choosen news sources.
 ## Technical Details
 App built with sort of MVI + Clean Architecture.
 
-Presentation layer is done a bit diffrent from classic MVP. There is [Model](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/BaseModel.kt) class instance in Presenter, that holds current View state. Presenter does not send any commands to view, istead of this, it changes Model properties, and than View `render` changes. View input [events](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/Event.kt) sent to presenter through `notify` method.
+Presentation layer is done a bit diffrent from classic MVP. There is [Model](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/base/BaseModel.kt) class instance in Presenter, that holds current View state. Presenter does not send any commands to view, istead of this, it changes Model properties, and than View `render` changes. View input [events](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/base/Event.kt) sent to presenter through `notify` method.
 
 Domain layer works much more like MVP + Clean Architecture approach. There is an useCases, thats represents use cases and repositories, thats works with data layer and mapping entities from `RAW` to `UI` versions.
 
@@ -43,6 +43,8 @@ This app uses [News API](https://newsapi.org/) to retrieve data. You must provid
 * [Calligraphy](https://github.com/chrisjenx/Calligraphy)
 * [Timber](https://github.com/JakeWharton/timber)
 * [RecyclerView Animators](https://github.com/wasabeef/recyclerview-animators)
+* [Mockito](https://github.com/mockito/mockito)
+* [Mockito-Kotlin](https://github.com/nhaarman/mockito-kotlin)
 
 ### License
 

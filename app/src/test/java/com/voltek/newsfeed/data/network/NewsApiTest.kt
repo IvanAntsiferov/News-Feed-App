@@ -1,9 +1,5 @@
-package com.voltek.newsfeed.api
+package com.voltek.newsfeed.data.network
 
-import com.voltek.newsfeed.data.network.ENDPOINT_ARTICLES
-import com.voltek.newsfeed.data.network.ENDPOINT_SOURCES
-import com.voltek.newsfeed.data.network.NewsApi
-import com.voltek.newsfeed.data.network.PARAM_SOURCE
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
