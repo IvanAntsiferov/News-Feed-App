@@ -1,16 +1,16 @@
 package com.voltek.newsfeed.domain
 
-import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.MockData
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class MapperTest {
 
-    private val sourceAPI = TestUtils.sourceAPI()
+    private val sourceAPI = MockData.sourceAPI()
 
-    private val sourceDB = TestUtils.sourceDB()
+    private val sourceDB = MockData.sourceDB()
 
-    private val articleAPI = TestUtils.articleAPI()
+    private val articleAPI = MockData.articleAPI()
 
     @Test
     fun articleAPItoUI() {

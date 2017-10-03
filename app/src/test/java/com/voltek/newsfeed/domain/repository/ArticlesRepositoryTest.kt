@@ -4,7 +4,7 @@ import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.data.network.NewsApi
 import com.voltek.newsfeed.data.network.entity.NewsApiArticlesResponse
 import com.voltek.newsfeed.data.platform.ResourcesManager
@@ -21,12 +21,12 @@ class ArticlesRepositoryTest {
 
     private lateinit var articlesRepo: ArticlesRepository
 
-    private val stringNoConnection = TestUtils.stringNoConnection
-    private val stringServerError = TestUtils.stringServerError
+    private val stringNoConnection = MockData.stringNoConnection
+    private val stringServerError = MockData.stringServerError
 
-    private val sources = arrayListOf(TestUtils.sourceUI())
+    private val sources = arrayListOf(MockData.sourceUI())
 
-    private val response = NewsApiArticlesResponse(arrayListOf(TestUtils.articleAPI()))
+    private val response = NewsApiArticlesResponse(arrayListOf(MockData.articleAPI()))
 
     @Mock
     lateinit var api: NewsApi

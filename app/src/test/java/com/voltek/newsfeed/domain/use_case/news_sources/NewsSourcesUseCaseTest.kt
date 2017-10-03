@@ -3,9 +3,9 @@ package com.voltek.newsfeed.domain.use_case.news_sources
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import com.voltek.newsfeed.CurrentThreadExecutor
-import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
+import com.voltek.newsfeed.domain.use_case.BaseUseCaseTest
 import com.voltek.newsfeed.domain.use_case.Parameter
 import com.voltek.newsfeed.domain.use_case.Result
 import com.voltek.newsfeed.presentation.entity.SourceUI
@@ -13,7 +13,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
@@ -21,13 +20,11 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class NewsSourcesUseCaseTest {
+class NewsSourcesUseCaseTest : BaseUseCaseTest() {
 
     private lateinit var newsSourcesUseCase: NewsSourcesUseCase
 
-    private val scheduler = Schedulers.from(CurrentThreadExecutor())
-
-    private val sourceUI = TestUtils.sourceUI()
+    private val sourceUI = MockData.sourceUI()
 
     @Mock
     lateinit var newsSourcesRepository: NewsSourcesRepository

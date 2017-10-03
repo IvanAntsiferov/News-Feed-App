@@ -3,7 +3,7 @@ package com.voltek.newsfeed.presentation.ui.details
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
-import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.presentation.base.Event
 import com.voltek.newsfeed.presentation.entity.ArticleUI
 import com.voltek.newsfeed.presentation.navigation.command.CommandBack
@@ -22,7 +22,7 @@ class DetailsPresenterTest : BasePresenterTest() {
 
     private lateinit var detailsPresenter: DetailsPresenter
 
-    private val articleUI = TestUtils.articleUI()
+    private val articleUI = MockData.articleUI()
 
     @Mock
     lateinit var view: DetailsView

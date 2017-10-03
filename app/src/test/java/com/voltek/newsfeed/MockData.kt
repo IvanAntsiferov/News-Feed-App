@@ -6,7 +6,7 @@ import com.voltek.newsfeed.data.storage.entity.SourceDB
 import com.voltek.newsfeed.presentation.entity.ArticleUI
 import com.voltek.newsfeed.presentation.entity.SourceUI
 
-object TestUtils {
+object MockData {
 
     const val stringNoConnection = "stringNoConnection"
     const val stringServerError = "stringServerError"

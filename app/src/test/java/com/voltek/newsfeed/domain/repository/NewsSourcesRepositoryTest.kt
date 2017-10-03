@@ -5,7 +5,7 @@ import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.voltek.newsfeed.R
-import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.data.network.NewsApi
 import com.voltek.newsfeed.data.network.entity.NewsApiSourcesResponse
 import com.voltek.newsfeed.data.platform.ResourcesManager
@@ -24,17 +24,17 @@ class NewsSourcesRepositoryTest {
 
     private lateinit var newsSourcesRepo: NewsSourcesRepository
 
-    private val stringNoConnection = TestUtils.stringNoConnection
-    private val stringServerError = TestUtils.stringServerError
+    private val stringNoConnection = MockData.stringNoConnection
+    private val stringServerError = MockData.stringServerError
     private val stringCategoryAll = "stringCategoryAll"
     private val stringCategoryEnabled = "stringCategoryEnabled"
     private val stringNoNewsSourcesLoaded = "stringNoNewsSourcesLoaded"
     private val stringNoNewsSourcesSelectedYet = "stringNoNewsSourcesSelectedYet"
     private val stringNoNewsSourcesForCategory = "stringNoNewsSourcesForCategory"
 
-    private val responseSources = NewsApiSourcesResponse(arrayListOf(TestUtils.sourceAPI()))
+    private val responseSources = NewsApiSourcesResponse(arrayListOf(MockData.sourceAPI()))
 
-    private val sourceDB = TestUtils.sourceDB()
+    private val sourceDB = MockData.sourceDB()
 
     @Mock
     lateinit var api: NewsApi

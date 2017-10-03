@@ -4,14 +4,13 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import com.voltek.newsfeed.CurrentThreadExecutor
-import com.voltek.newsfeed.TestUtils
+import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
+import com.voltek.newsfeed.domain.use_case.BaseUseCaseTest
 import com.voltek.newsfeed.domain.use_case.Parameter
 import io.reactivex.Completable
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import org.junit.Before
@@ -19,13 +18,11 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class EnableNewsSourceUseCaseTest {
+class EnableNewsSourceUseCaseTest : BaseUseCaseTest() {
 
     private lateinit var enableNewsSourceUseCase: EnableNewsSourceUseCase
 
-    private val scheduler = Schedulers.from(CurrentThreadExecutor())
-
-    private val sourceUI = TestUtils.sourceUI()
+    private val sourceUI = MockData.sourceUI()
 
     @Mock
     lateinit var newsSourcesRepository: NewsSourcesRepository
