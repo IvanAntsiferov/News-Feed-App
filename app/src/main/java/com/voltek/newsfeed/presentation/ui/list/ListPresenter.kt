@@ -28,8 +28,8 @@ class ListPresenter(
         loadArticles()
     }
 
-    // View notify presenter about events using this method
-    override fun notify(event: Event) {
+    // View event presenter about events using this method
+    override fun event(event: Event) {
         when (event) {
             is Event.OpenArticleDetails -> router.execute(CommandOpenArticleDetailsScreen(event.article))
             is Event.OpenNewsSources -> router.execute(CommandOpenNewsSourcesScreen())

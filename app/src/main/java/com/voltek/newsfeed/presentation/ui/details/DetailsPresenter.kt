@@ -17,7 +17,7 @@ class DetailsPresenter(private val router: Router) : BasePresenter<DetailsView>(
 
     lateinit private var article: ArticleUI
 
-    override fun notify(event: Event) {
+    override fun event(event: Event) {
         when (event) {
             is Event.Share -> {
                 if (!article.isEmpty()) {

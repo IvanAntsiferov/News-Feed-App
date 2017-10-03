@@ -7,7 +7,7 @@ abstract class BasePresenter<View : BaseView> : MvpPresenter<View>() {
 
     private val useCases = ArrayList<BaseUseCase<*, *>>()
 
-    abstract fun notify(event: Event)
+    abstract fun event(event: Event)
 
     override fun attachView(view: View?) {
         super.attachView(view)

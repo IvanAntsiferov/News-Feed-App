@@ -24,7 +24,7 @@ class NewsSourcesPresenter(
         loadNewsSources(NewsSourcesUseCase.GET)
     }
 
-    override fun notify(event: Event) {
+    override fun event(event: Event) {
         when (event) {
             is Event.FilterSources -> {
                 model.categoryId = event.id

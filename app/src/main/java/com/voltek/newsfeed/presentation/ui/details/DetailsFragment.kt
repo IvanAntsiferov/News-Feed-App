@@ -59,9 +59,9 @@ class DetailsFragment : BaseFragment(),
         RxToolbar.itemClicks(activity.toolbar)
                 .subscribe({
                     when (it.itemId) {
-                        R.id.action_share -> presenter.notify(Event.Share())
-                        R.id.action_website -> presenter.notify(Event.OpenWebsite())
-                        R.id.action_news_sources -> presenter.notify(Event.OpenNewsSources())
+                        R.id.action_share -> presenter.event(Event.Share())
+                        R.id.action_website -> presenter.event(Event.OpenWebsite())
+                        R.id.action_news_sources -> presenter.event(Event.OpenNewsSources())
                     }
                 })
                 .bind()
@@ -69,7 +69,7 @@ class DetailsFragment : BaseFragment(),
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
         android.R.id.home -> {
-            presenter.notify(Event.Back())
+            presenter.event(Event.Back())
             true
         }
         else -> false
