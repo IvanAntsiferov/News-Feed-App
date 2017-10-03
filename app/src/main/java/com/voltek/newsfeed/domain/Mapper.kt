@@ -40,15 +40,4 @@ object Mapper {
                     country = item.country,
                     isEnabled = item.isEnabled
             )
-
-    fun sourceAPItoUI(item: SourceAPI): SourceUI =
-            SourceUI(
-                    id = item.id ?: "",
-                    name = item.name ?: "",
-                    description = item.description ?: "",
-                    url = item.url ?: "",
-                    category = item.category ?: "",
-                    country = item.country ?: "",
-                    isEnabled = item.isEnabled ?: false
-            )
 }
