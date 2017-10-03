@@ -37,12 +37,16 @@ class DetailsPresenterTest : BasePresenterTest() {
     fun setArticle() {
         // Normal case
         detailsPresenter.attachView(view)
+        verify(view, times(1)).attachInputListeners()
         detailsPresenter.setArticle(articleUI)
         verify(view, times(1)).render(any())
         // Empty article case
         detailsPresenter.attachView(view)
         detailsPresenter.setArticle(ArticleUI())
         verify(view, times(2)).render(any())
+        // Detach view
+        detailsPresenter.detachView(view)
+        verify(view, times(1)).detachInputListeners()
     }
 
     @Test
@@ -61,6 +65,7 @@ class DetailsPresenterTest : BasePresenterTest() {
         detailsPresenter.setArticle(articleUI)
         detailsPresenter.event(Event.OpenWebsite())
         assertTrue(queue[0] is CommandOpenWebsite)
+        assertEquals(1, queue.size)
         assertEquals(articleUI.url, (queue[0] as CommandOpenWebsite).url)
     }
 
@@ -69,6 +74,7 @@ class DetailsPresenterTest : BasePresenterTest() {
         detailsPresenter.attachView(view)
         detailsPresenter.event(Event.OpenNewsSources())
         assertTrue(queue[0] is CommandOpenNewsSourcesScreen)
+        assertEquals(1, queue.size)
     }
 
     @Test
@@ -76,5 +82,6 @@ class DetailsPresenterTest : BasePresenterTest() {
         detailsPresenter.attachView(view)
         detailsPresenter.event(Event.Back())
         assertTrue(queue[0] is CommandBack)
+        assertEquals(1, queue.size)
     }
 }

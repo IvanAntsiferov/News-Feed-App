@@ -6,6 +6,7 @@ import com.voltek.newsfeed.domain.use_case.news_sources.EnableNewsSourceUseCase
 import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUseCase
 import com.voltek.newsfeed.presentation.base.BasePresenter
 import com.voltek.newsfeed.presentation.base.Event
+import com.voltek.newsfeed.presentation.entity.SourceUI
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
 
@@ -35,21 +36,25 @@ class NewsSourcesPresenter(
                 loadNewsSources(NewsSourcesUseCase.REFRESH)
             }
             is Event.EnableNewsSource -> {
-                newsSourceEnable.execute(
-                        Parameter(item = event.source),
-                        Consumer {},
-                        Consumer {
-                            model.message = it.message ?: ""
-                            model.update()
-                        },
-                        Action {
-                            model.sources.firstOrNull {
-                                it.id == event.source.id
-                            }?.isEnabled = !event.source.isEnabled
-                        }
-                )
+                enableNewsSource(event.source)
             }
         }
+    }
+
+    private fun enableNewsSource(source: SourceUI) {
+        newsSourceEnable.execute(
+                Parameter(item = source),
+                Consumer {},
+                Consumer {
+                    model.message = it.message ?: ""
+                    model.update()
+                },
+                Action {
+                    model.sources.firstOrNull {
+                        it.id == source.id
+                    }?.isEnabled = !source.isEnabled
+                }
+        )
     }
 
     private fun loadNewsSources(filter: String) {
