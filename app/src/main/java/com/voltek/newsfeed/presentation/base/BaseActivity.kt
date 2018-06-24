@@ -72,7 +72,7 @@ abstract class BaseActivity : MvpAppCompatActivity(),
             displayHomeAsUpEnabled: Boolean = false,
             displayShowHomeEnabled: Boolean = false
     ) {
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
         supportActionBar?.setDisplayShowHomeEnabled(displayShowHomeEnabled)

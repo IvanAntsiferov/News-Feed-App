@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.presentation.ui.news_sources
 
 import android.content.Context
-import android.support.annotation.IdRes
+import android.support.annotation.DrawableRes
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -34,13 +34,13 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         val enabled: CheckBox = view.cb_enable
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent?.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.item_source, parent, false)
         return NewsSourcesAdapter.ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mItems[position]
 
         RxView.clicks(holder!!.itemView).subscribe({
@@ -74,7 +74,7 @@ class NewsSourcesAdapter(private val mContext: Context, private var mItems: Muta
         diffResult.dispatchUpdatesTo(this)
     }
 
-    private fun loadImage(imageView: ImageView, @IdRes resId: Int) {
+    private fun loadImage(imageView: ImageView, @DrawableRes resId: Int) {
         Glide.with(mContext).load("").error(resId).into(imageView)
     }
 }

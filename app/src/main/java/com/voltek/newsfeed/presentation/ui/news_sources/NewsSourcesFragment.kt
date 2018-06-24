@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.presentation.ui.news_sources
 
 import android.os.Bundle
-import android.support.annotation.IdRes
+import android.support.annotation.StringRes
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -59,12 +59,12 @@ class NewsSourcesFragment : BaseFragment(),
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        adapter = NewsSourcesAdapter(context, ArrayList())
-        return inflater?.inflate(R.layout.fragment_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        adapter = NewsSourcesAdapter(context!!, ArrayList())
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = ScaleInAnimationAdapter(adapter)
@@ -81,9 +81,9 @@ class NewsSourcesFragment : BaseFragment(),
     }
 
     override fun attachInputListeners() {
-        RxToolbar.itemClicks(activity.toolbar)
+        RxToolbar.itemClicks(activity!!.toolbar)
                 .filter { !swipe_container.isRefreshing }
-                .subscribe({
+                .subscribe {
                     when (it.itemId) {
                         in CATEGORY_ITEMS_IDS -> {
                             if (!it.isChecked) {
@@ -94,7 +94,7 @@ class NewsSourcesFragment : BaseFragment(),
                         }
                         R.id.action_refresh -> presenter.event(Event.Refresh())
                     }
-                })
+                }
                 .bind()
 
         adapter.getOnItemClickObservable()
@@ -113,7 +113,7 @@ class NewsSourcesFragment : BaseFragment(),
         adapter.replace(model.sources)
 
         category = model.categoryId
-        activity.invalidateOptionsMenu()
+        activity!!.invalidateOptionsMenu()
 
         when (model.categoryId) {
             R.id.action_all -> setTitle(R.string.category_all)
@@ -144,7 +144,7 @@ class NewsSourcesFragment : BaseFragment(),
         }
     }
 
-    private fun setTitle(@IdRes id: Int) {
-        activity.title = getString(id)
+    private fun setTitle(@StringRes id: Int) {
+        activity!!.title = getString(id)
     }
 }

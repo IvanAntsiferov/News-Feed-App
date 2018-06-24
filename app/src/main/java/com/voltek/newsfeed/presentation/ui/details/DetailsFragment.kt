@@ -45,25 +45,25 @@ class DetailsFragment : BaseFragment(),
     @ProvidePresenter
     fun providePresenter() = presenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fragment_details, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_details, container, false)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_fragment_details, menu)
     }
 
     override fun attachInputListeners() {
-        presenter.setArticle(Parcels.unwrap(arguments.getParcelable(ARG_ARTICLE)))
+        presenter.setArticle(Parcels.unwrap(arguments!!.getParcelable(ARG_ARTICLE)))
 
-        RxToolbar.itemClicks(activity.toolbar)
-                .subscribe({
+        RxToolbar.itemClicks(activity!!.toolbar)
+                .subscribe {
                     when (it.itemId) {
                         R.id.action_share -> presenter.event(Event.Share())
                         R.id.action_website -> presenter.event(Event.OpenWebsite())
                         R.id.action_news_sources -> presenter.event(Event.OpenNewsSources())
                     }
-                })
+                }
                 .bind()
     }
 
@@ -81,7 +81,7 @@ class DetailsFragment : BaseFragment(),
 
     override fun render(model: DetailsModel) {
         if (model.articleLoaded) {
-            activity.title = model.source
+            activity!!.title = model.source
 
             Glide
                     .with(context)
