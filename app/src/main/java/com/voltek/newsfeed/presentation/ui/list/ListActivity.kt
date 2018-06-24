@@ -7,7 +7,7 @@ import com.voltek.newsfeed.presentation.entity.ArticleUI
 import com.voltek.newsfeed.presentation.navigation.command.*
 import com.voltek.newsfeed.presentation.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.ui.details.DetailsFragment
-import com.voltek.newsfeed.presentation.ui.news_sources.NewsSourcesActivity
+import com.voltek.newsfeed.presentation.ui.newssources.NewsSourcesActivity
 import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : BaseActivity() {

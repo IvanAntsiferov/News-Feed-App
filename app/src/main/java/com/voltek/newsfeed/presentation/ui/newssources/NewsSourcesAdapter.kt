@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.presentation.ui.news_sources
+package com.voltek.newsfeed.presentation.ui.newssources
 
 import android.content.Context
 import android.support.annotation.DrawableRes

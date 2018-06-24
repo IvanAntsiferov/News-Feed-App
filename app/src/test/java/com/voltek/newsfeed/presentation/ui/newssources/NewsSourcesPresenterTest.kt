@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.presentation.ui.news_sources
+package com.voltek.newsfeed.presentation.ui.newssources
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times

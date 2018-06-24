@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.presentation.ui.news_sources
+package com.voltek.newsfeed.presentation.ui.newssources
 
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.base.BaseModel

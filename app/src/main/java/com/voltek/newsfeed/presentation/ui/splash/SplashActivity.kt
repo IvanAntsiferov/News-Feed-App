@@ -9,7 +9,7 @@ import com.voltek.newsfeed.presentation.navigation.command.CommandOpenNewsSource
 import com.voltek.newsfeed.presentation.navigation.proxy.Command
 import com.voltek.newsfeed.presentation.base.BaseActivity
 import com.voltek.newsfeed.presentation.ui.list.ListActivity
-import com.voltek.newsfeed.presentation.ui.news_sources.NewsSourcesActivity
+import com.voltek.newsfeed.presentation.ui.newssources.NewsSourcesActivity
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity(),

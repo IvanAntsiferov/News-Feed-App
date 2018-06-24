@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.presentation.ui.news_sources
+package com.voltek.newsfeed.presentation.ui.newssources
 
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType

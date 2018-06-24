@@ -7,7 +7,7 @@ import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUseCase
 import com.voltek.newsfeed.presentation.navigation.proxy.Router
 import com.voltek.newsfeed.presentation.ui.details.DetailsPresenter
 import com.voltek.newsfeed.presentation.ui.list.ListPresenter
-import com.voltek.newsfeed.presentation.ui.news_sources.NewsSourcesPresenter
+import com.voltek.newsfeed.presentation.ui.newssources.NewsSourcesPresenter
 import com.voltek.newsfeed.presentation.ui.splash.SplashPresenter
 import dagger.Module
 import dagger.Provides
