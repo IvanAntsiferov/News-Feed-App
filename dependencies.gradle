@@ -16,7 +16,6 @@ ext.versions = [
         hawk                    : '2.0.1',
         kotlinRealmExtensions   : '1.1.1',
         timber                  : '4.7.0',
-        calligraphy             : '2.3.0',
         moxy                    : '1.5.3',
         recyclerviewAnimators   : '2.3.0',
 

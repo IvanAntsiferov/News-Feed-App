@@ -1,6 +1,5 @@
 package com.voltek.newsfeed.presentation.base
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.support.annotation.IdRes
@@ -12,7 +11,6 @@ import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.presentation.navigation.proxy.Navigator
 import io.reactivex.disposables.CompositeDisposable
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.widget.Toast
 import com.voltek.newsfeed.presentation.navigation.command.CommandShareArticle
 
@@ -31,10 +29,6 @@ abstract class BaseActivity : MvpAppCompatActivity(),
     override fun onPause() {
         super.onPause()
         App.getNavigatorBinder().removeNavigator()
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     // Base navigator commands

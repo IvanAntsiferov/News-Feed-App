@@ -10,14 +10,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import timber.log.Timber
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 class App : Application() {
 
     companion object {
-
-        // Const
-        private const val FONT_PATH = "fonts/Roboto-Regular.ttf"
 
         // Navigation
         private val routerHolder: RouterHolder = RouterHolder()
@@ -47,11 +43,6 @@ class App : Application() {
                 .appModule(appModule)
                 .build()
 
-        // Libs init
-        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFontPath(FONT_PATH)
-                .setFontAttrId(R.attr.fontPath)
-                .build())
         Realm.init(this)
         Hawk.init(this).build()
         Timber.plant(Timber.DebugTree())

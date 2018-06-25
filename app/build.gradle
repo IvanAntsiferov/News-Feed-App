@@ -125,9 +125,6 @@ dependencies {
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timber"
 
-    // Fonts
-    implementation "uk.co.chrisjenx:calligraphy:$versions.calligraphy"
-
     // MVP
     implementation "com.arello-mobile:moxy:$versions.moxy"
     implementation "com.arello-mobile:moxy-app-compat:$versions.moxy"
