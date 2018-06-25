@@ -37,4 +37,3 @@ gen/
 build/
 /*/build/
 local.properties
-proguard/
