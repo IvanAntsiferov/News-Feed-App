@@ -1,9 +1,9 @@
-package com.voltek.newsfeed.domain.use_case.news_sources
+package com.voltek.newsfeed.domain.usecase.newssources
 
 import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
-import com.voltek.newsfeed.domain.use_case.BaseUseCase
-import com.voltek.newsfeed.domain.use_case.Parameter
-import com.voltek.newsfeed.domain.use_case.Result
+import com.voltek.newsfeed.domain.usecase.BaseUseCase
+import com.voltek.newsfeed.domain.usecase.Parameter
+import com.voltek.newsfeed.domain.usecase.Result
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import java.util.concurrent.TimeUnit

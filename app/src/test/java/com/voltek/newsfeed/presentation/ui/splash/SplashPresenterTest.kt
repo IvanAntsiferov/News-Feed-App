@@ -3,7 +3,7 @@ package com.voltek.newsfeed.presentation.ui.splash
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
-import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUseCase
+import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUseCase
 import com.voltek.newsfeed.presentation.ui.BasePresenterTest
 import org.junit.Before
 import org.junit.Test

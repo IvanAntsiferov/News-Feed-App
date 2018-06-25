@@ -4,8 +4,8 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.voltek.newsfeed.MockData
-import com.voltek.newsfeed.domain.use_case.articles.GetArticlesUseCase
-import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUpdatesUseCase
+import com.voltek.newsfeed.domain.usecase.articles.GetArticlesUseCase
+import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUpdatesUseCase
 import com.voltek.newsfeed.presentation.base.Event
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenArticleDetailsScreen
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenNewsSourcesScreen

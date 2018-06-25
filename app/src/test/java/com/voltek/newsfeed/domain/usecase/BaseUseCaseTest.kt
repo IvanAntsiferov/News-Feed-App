@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.domain.use_case
+package com.voltek.newsfeed.domain.usecase
 
 import com.voltek.newsfeed.CurrentThreadExecutor
 import io.reactivex.schedulers.Schedulers

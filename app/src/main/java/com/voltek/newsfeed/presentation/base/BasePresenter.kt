@@ -1,7 +1,7 @@
 package com.voltek.newsfeed.presentation.base
 
 import com.arellomobile.mvp.MvpPresenter
-import com.voltek.newsfeed.domain.use_case.BaseUseCase
+import com.voltek.newsfeed.domain.usecase.BaseUseCase
 
 abstract class BasePresenter<View : BaseView> : MvpPresenter<View>() {
 

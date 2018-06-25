@@ -9,7 +9,7 @@ import com.voltek.newsfeed.data.storage.NewsSourcesStorage
 import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.exception.NoConnectionException
 import com.voltek.newsfeed.domain.exception.WrongNewsSourceIdException
-import com.voltek.newsfeed.domain.use_case.Result
+import com.voltek.newsfeed.domain.usecase.Result
 import com.voltek.newsfeed.presentation.entity.SourceUI
 import io.reactivex.Completable
 import io.reactivex.Observable

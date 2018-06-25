@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.domain.use_case
+package com.voltek.newsfeed.domain.usecase
 
 /**
  * Common interactor input parameters class.

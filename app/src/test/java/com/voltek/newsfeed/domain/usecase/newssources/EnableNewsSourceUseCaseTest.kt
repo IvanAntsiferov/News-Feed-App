@@ -1,4 +1,4 @@
-package com.voltek.newsfeed.domain.use_case.news_sources
+package com.voltek.newsfeed.domain.usecase.newssources
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times
@@ -6,8 +6,8 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
-import com.voltek.newsfeed.domain.use_case.BaseUseCaseTest
-import com.voltek.newsfeed.domain.use_case.Parameter
+import com.voltek.newsfeed.domain.usecase.BaseUseCaseTest
+import com.voltek.newsfeed.domain.usecase.Parameter
 import io.reactivex.Completable
 import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
