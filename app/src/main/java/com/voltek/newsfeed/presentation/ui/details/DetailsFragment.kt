@@ -13,7 +13,6 @@ import com.voltek.newsfeed.presentation.base.Event
 import com.voltek.newsfeed.presentation.entity.ArticleUI
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.parceler.Parcels
 import javax.inject.Inject
 
 class DetailsFragment : BaseFragment(),
@@ -27,7 +26,7 @@ class DetailsFragment : BaseFragment(),
         fun newInstance(article: ArticleUI): DetailsFragment {
             val fragment = DetailsFragment()
             val args = Bundle()
-            args.putParcelable(ARG_ARTICLE, Parcels.wrap(article))
+            args.putParcelable(ARG_ARTICLE, article)
             fragment.arguments = args
             return fragment
         }
@@ -54,7 +53,8 @@ class DetailsFragment : BaseFragment(),
     }
 
     override fun attachInputListeners() {
-        presenter.setArticle(Parcels.unwrap(arguments!!.getParcelable(ARG_ARTICLE)))
+        val article = arguments!!.getParcelable(ARG_ARTICLE) as ArticleUI
+        presenter.setArticle(article)
 
         RxToolbar.itemClicks(activity!!.toolbar)
                 .subscribe {

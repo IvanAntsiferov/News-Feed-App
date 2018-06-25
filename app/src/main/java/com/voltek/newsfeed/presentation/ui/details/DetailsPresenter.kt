@@ -15,7 +15,7 @@ class DetailsPresenter(private val router: Router) : BasePresenter<DetailsView>(
 
     private val model: DetailsModel = DetailsModel { viewState.render(it as DetailsModel) }
 
-    lateinit private var article: ArticleUI
+    private lateinit var article: ArticleUI
 
     override fun event(event: Event) {
         when (event) {

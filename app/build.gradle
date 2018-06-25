@@ -122,10 +122,6 @@ dependencies {
     implementation "com.orhanobut:hawk:$versions.hawk"
     implementation "com.github.vicpinm:krealmextensions:$versions.kotlinRealmExtensions"
 
-    // Parcel
-    implementation "org.parceler:parceler-api:$versions.parceler"
-    kapt "org.parceler:parceler:$versions.parceler"
-
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timber"
 
