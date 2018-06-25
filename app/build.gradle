@@ -5,7 +5,21 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
-apply from: '../jacoco.gradle'
+apply from: 'gradle/jacoco.gradle'
+apply from: "gradle/utils.gradle"
+
+def KEY_STORE_DIR = "keystore/"
+def RELEASE_KEY_STORE_PROPERTIES_FILE_NAME = "keystore_release.properties"
+def DEBUG_KEY_STORE_PROPERTIES_FILE_NAME = "keystore_debug.properties"
+
+def keystoreReleaseProperties = loadProps(KEY_STORE_DIR + RELEASE_KEY_STORE_PROPERTIES_FILE_NAME)
+def keystoreDebugProperties = loadProps(KEY_STORE_DIR + DEBUG_KEY_STORE_PROPERTIES_FILE_NAME)
+
+def appVersion = [
+        major: 1,
+        minor: 1,
+        patch: 0
+]
 
 android {
     compileSdkVersion 27
@@ -16,11 +30,29 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 2
-        versionName "1.1"
+        versionName "${appVersion.major}.${appVersion.minor}.${appVersion.patch}"
+        buildConfigField 'String', 'ApiKey', ApiKey
     }
 
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+
+    signingConfigs {
+
+        debug {
+            storeFile rootProject.file(KEY_STORE_DIR + keystoreDebugProperties['storeFile'])
+            storePassword keystoreDebugProperties['storePassword']
+            keyAlias keystoreDebugProperties['keyAlias']
+            keyPassword keystoreDebugProperties['keyPassword']
+        }
+
+        release {
+            storeFile rootProject.file(KEY_STORE_DIR + keystoreReleaseProperties['storeFile'])
+            storePassword keystoreReleaseProperties['storePassword']
+            keyAlias keystoreReleaseProperties['keyAlias']
+            keyPassword keystoreReleaseProperties['keyPassword']
+        }
     }
 
     buildTypes {
@@ -29,15 +61,12 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
 
         debug {
-            debuggable true
             testCoverageEnabled true
-        }
-
-        buildTypes.each {
-            it.buildConfigField 'String', 'ApiKey', ApiKey
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -46,15 +75,19 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
+androidExtensions {
+    experimental = true
+}
+
+kapt {
+    generateStubs = true
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlinGradlePlugin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinGradlePlugin"
 
     // Android support library
     implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
