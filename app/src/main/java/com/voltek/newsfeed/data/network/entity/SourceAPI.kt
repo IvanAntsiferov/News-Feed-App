@@ -1,5 +1,8 @@
 package com.voltek.newsfeed.data.network.entity
 
+import android.support.annotation.Keep
+
+@Keep
 data class SourceAPI(
         val id: String? = null,
         val name: String? = null,

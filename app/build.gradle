@@ -60,12 +60,15 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles fileTree('proguard').asList().toArray()
             signingConfig signingConfigs.release
         }
 
         debug {
             testCoverageEnabled true
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
             signingConfig signingConfigs.debug
         }
     }
@@ -98,6 +101,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
 
     // Rx
     implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"

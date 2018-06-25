@@ -7,7 +7,7 @@ import android.support.annotation.IdRes
 import android.support.v7.widget.Toolbar
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.voltek.newsfeed.utils.SubscriptionsHolder
-import com.voltek.newsfeed.NewsApp
+import com.voltek.newsfeed.App
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.presentation.navigation.proxy.Navigator
@@ -25,12 +25,12 @@ abstract class BaseActivity : MvpAppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        NewsApp.getNavigatorBinder().setNavigator(this)
+        App.getNavigatorBinder().setNavigator(this)
     }
 
     override fun onPause() {
         super.onPause()
-        NewsApp.getNavigatorBinder().removeNavigator()
+        App.getNavigatorBinder().removeNavigator()
     }
 
     override fun attachBaseContext(newBase: Context) {

@@ -6,6 +6,7 @@ ext.versions = [
         supportLibrary          : '27.1.1',
 
         retrofit                : '2.4.0',
+        okhttp                  : '3.10.0',
         rxJava                  : '2.1.15',
         rxAndroid               : '2.0.2',
         rxKotlin                : '2.2.0',

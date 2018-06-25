@@ -3,7 +3,7 @@ package com.voltek.newsfeed.presentation.ui.splash
 import android.content.Intent
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.voltek.newsfeed.NewsApp
+import com.voltek.newsfeed.App
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenArticlesListScreen
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenNewsSourcesScreen
 import com.voltek.newsfeed.presentation.navigation.proxy.Command
@@ -16,7 +16,7 @@ class SplashActivity : BaseActivity(),
         SplashView {
 
     init {
-        NewsApp.appComponent.inject(this)
+        App.appComponent.inject(this)
     }
 
     @Inject

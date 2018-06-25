@@ -1,10 +1,12 @@
 package com.voltek.newsfeed.data.storage.entity
 
+import android.support.annotation.Keep
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 
 @RealmClass
+@Keep
 open class SourceDB : RealmObject() {
 
     @PrimaryKey

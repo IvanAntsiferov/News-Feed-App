@@ -12,7 +12,7 @@ import io.realm.Realm
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
-class NewsApp : Application() {
+class App : Application() {
 
     companion object {
 

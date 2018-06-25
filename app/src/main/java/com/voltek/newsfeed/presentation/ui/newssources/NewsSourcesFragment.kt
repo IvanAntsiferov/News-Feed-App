@@ -7,7 +7,7 @@ import android.view.*
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
-import com.voltek.newsfeed.NewsApp
+import com.voltek.newsfeed.App
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.base.BaseFragment
 import com.voltek.newsfeed.presentation.base.Event
@@ -41,7 +41,7 @@ class NewsSourcesFragment : BaseFragment(),
     }
 
     init {
-        NewsApp.appComponent.inject(this)
+        App.appComponent.inject(this)
     }
 
     @Inject
