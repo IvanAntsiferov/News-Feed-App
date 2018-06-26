@@ -1,5 +1,6 @@
 package com.voltek.newsfeed.dagger
 
+import com.voltek.newsfeed.analytics.Analytics
 import com.voltek.newsfeed.domain.usecase.articles.GetArticlesUseCase
 import com.voltek.newsfeed.domain.usecase.newssources.EnableNewsSourceUseCase
 import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUpdatesUseCase
@@ -16,21 +17,28 @@ import dagger.Provides
 class PresenterModule {
 
     @Provides
-    fun provideSplashPresenter(router: Router, newsSourcesUseCase: NewsSourcesUseCase)
-            = SplashPresenter(router, newsSourcesUseCase)
+    fun provideSplashPresenter(
+            router: Router,
+            newsSourcesUseCase: NewsSourcesUseCase
+    ) = SplashPresenter(router, newsSourcesUseCase)
 
     @Provides
     fun provideNewsSourcesPresenter(
             newsSourcesUseCase: NewsSourcesUseCase,
-            enableNewsSourceUseCase: EnableNewsSourceUseCase
-    ) = NewsSourcesPresenter(newsSourcesUseCase, enableNewsSourceUseCase)
+            enableNewsSourceUseCase: EnableNewsSourceUseCase,
+            analytics: Analytics
+    ) = NewsSourcesPresenter(newsSourcesUseCase, enableNewsSourceUseCase, analytics)
 
     @Provides
-    fun provideListPresenter(router: Router,
-                             getArticlesUseCase: GetArticlesUseCase,
-                             newsSourcesUpdatesUseCase: NewsSourcesUpdatesUseCase
+    fun provideListPresenter(
+            router: Router,
+            getArticlesUseCase: GetArticlesUseCase,
+            newsSourcesUpdatesUseCase: NewsSourcesUpdatesUseCase
     ) = ListPresenter(router, getArticlesUseCase, newsSourcesUpdatesUseCase)
 
     @Provides
-    fun provideDetailsPresenter(router: Router) = DetailsPresenter(router)
+    fun provideDetailsPresenter(
+            router: Router,
+            analytics: Analytics
+    ) = DetailsPresenter(router, analytics)
 }

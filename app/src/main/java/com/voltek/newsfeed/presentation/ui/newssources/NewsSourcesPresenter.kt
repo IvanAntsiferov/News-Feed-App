@@ -1,6 +1,7 @@
 package com.voltek.newsfeed.presentation.ui.newssources
 
 import com.arellomobile.mvp.InjectViewState
+import com.voltek.newsfeed.analytics.Analytics
 import com.voltek.newsfeed.domain.usecase.Parameter
 import com.voltek.newsfeed.domain.usecase.newssources.EnableNewsSourceUseCase
 import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUseCase
@@ -13,7 +14,8 @@ import io.reactivex.functions.Consumer
 @InjectViewState
 class NewsSourcesPresenter(
         private val newsSources: NewsSourcesUseCase,
-        private val newsSourceEnable: EnableNewsSourceUseCase
+        private val newsSourceEnable: EnableNewsSourceUseCase,
+        private val analytics: Analytics
 ) : BasePresenter<NewsSourcesView>() {
 
     private val model: NewsSourcesModel =
@@ -30,6 +32,7 @@ class NewsSourcesPresenter(
     override fun event(event: Event) {
         when (event) {
             is Event.FilterSources -> {
+                analytics.newsSourcesFilter(event.filter)
                 model.categoryId = event.id
                 loadNewsSources(event.filter)
             }
@@ -38,7 +41,14 @@ class NewsSourcesPresenter(
                 loadNewsSources(NewsSourcesUseCase.REFRESH)
             }
             is Event.EnableNewsSource -> {
-                enableNewsSource(event.source)
+                val source = event.source
+                with(source) {
+                    when {
+                        isEnabled -> analytics.newsSourceDisable(name, url, category)
+                        else -> analytics.newsSourceEnable(name, url, category)
+                    }
+                }
+                enableNewsSource(source)
             }
         }
     }
