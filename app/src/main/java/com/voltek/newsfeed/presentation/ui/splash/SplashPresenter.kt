@@ -1,6 +1,7 @@
 package com.voltek.newsfeed.presentation.ui.splash
 
 import com.arellomobile.mvp.InjectViewState
+import com.voltek.newsfeed.Logger
 import com.voltek.newsfeed.domain.exception.NoNewsSourcesSelectedException
 import com.voltek.newsfeed.domain.use_case.Parameter
 import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUseCase
@@ -30,6 +31,7 @@ class SplashPresenter(
         checkNewsSources()
     }
 
+    // TODO make new use case class for this logic
     private fun checkNewsSources() {
         // Fetch news sources in background.
         // Check, if there is no enabled news sources, open NewsSources screen with proper message.
@@ -39,7 +41,7 @@ class SplashPresenter(
                     result(hasEnabled(it?.data ?: ArrayList()))
                 },
                 Consumer {
-                    it.printStackTrace()
+                    Logger.e(it)
                     result(false)
                 },
                 Action {}

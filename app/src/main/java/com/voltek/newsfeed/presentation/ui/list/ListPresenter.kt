@@ -1,6 +1,7 @@
 package com.voltek.newsfeed.presentation.ui.list
 
 import com.arellomobile.mvp.InjectViewState
+import com.voltek.newsfeed.Logger
 import com.voltek.newsfeed.domain.use_case.Parameter
 import com.voltek.newsfeed.domain.use_case.articles.GetArticlesUseCase
 import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUpdatesUseCase
@@ -83,7 +84,7 @@ class ListPresenter(
                     loadArticles()
                 },
                 Consumer {
-                    it.printStackTrace()
+                    Logger.e(it)
                 },
                 Action {}
         )
