@@ -52,10 +52,13 @@ class NewsSourcesPresenterTest : BasePresenterTest() {
 
     @Test
     fun eventFilterSources() {
+        val event = Event.FilterSources("random", -1)
+
         newsSourcesPresenter.attachView(view)
-        newsSourcesPresenter.event(Event.FilterSources("", -1))
+        newsSourcesPresenter.event(event)
         verify(newsSources, times(2)).execute(any(), any(), any(), any())
         verify(view, times(2)).render(any())
+        verify(analytics).newsSourcesFilter(event.filter)
     }
 
     @Test
@@ -73,5 +76,19 @@ class NewsSourcesPresenterTest : BasePresenterTest() {
         verify(newsSources).execute(any(), any(), any(), any())
         verify(newsSourceEnable).execute(any(), any(), any(), any())
         verify(view).render(any())
+    }
+
+    @Test
+    fun enableDisableNewsSourceAnalytics() {
+        val source = sourceUI
+        val event = Event.EnableNewsSource(sourceUI)
+
+        event.source.isEnabled = false
+        newsSourcesPresenter.event(Event.EnableNewsSource(sourceUI))
+        verify(analytics).newsSourceEnable(source.name, source.url, source.category)
+
+        event.source.isEnabled = true
+        newsSourcesPresenter.event(Event.EnableNewsSource(sourceUI))
+        verify(analytics).newsSourceDisable(source.name, source.url, source.category)
     }
 }

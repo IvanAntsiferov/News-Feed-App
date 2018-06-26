@@ -43,6 +43,7 @@ class DetailsPresenterTest : BasePresenterTest() {
         detailsPresenter.attachView(view)
         verify(view).attachInputListeners()
         detailsPresenter.setArticle(articleUI)
+        verify(analytics).articleView(articleUI.title!!, articleUI.url!!, articleUI.source)
         verify(view).render(any())
         // Empty article case
         detailsPresenter.attachView(view)
@@ -61,6 +62,7 @@ class DetailsPresenterTest : BasePresenterTest() {
         assertTrue(queue[0] is CommandShareArticle)
         assertEquals(articleUI.title, (queue[0] as CommandShareArticle).title)
         assertEquals(articleUI.url, (queue[0] as CommandShareArticle).url)
+        verify(analytics).articleShare(articleUI.title!!, articleUI.url!!, articleUI.source)
     }
 
     @Test
