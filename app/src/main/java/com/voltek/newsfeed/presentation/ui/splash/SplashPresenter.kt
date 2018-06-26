@@ -24,7 +24,9 @@ class SplashPresenter(
 
     init {
         bind(arrayOf(newsSources))
+    }
 
+    override fun onFirstViewAttach() {
         checkNewsSources()
     }
 

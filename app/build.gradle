@@ -34,10 +34,6 @@ android {
         buildConfigField 'String', 'ApiKey', ApiKey
     }
 
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
-
     signingConfigs {
 
         debug {

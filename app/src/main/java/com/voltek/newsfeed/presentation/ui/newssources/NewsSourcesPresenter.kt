@@ -21,7 +21,9 @@ class NewsSourcesPresenter(
 
     init {
         bind(arrayOf(newsSources, newsSourceEnable))
+    }
 
+    override fun onFirstViewAttach() {
         loadNewsSources(NewsSourcesUseCase.GET)
     }
 

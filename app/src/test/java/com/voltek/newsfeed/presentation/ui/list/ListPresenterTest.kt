@@ -69,9 +69,9 @@ class ListPresenterTest : BasePresenterTest() {
 
     @Test
     fun eventRefresh() {
+        listPresenter.attachView(view)
         listPresenter.event(Event.Refresh())
         verify(articles, times(1)).execute(any(), any(), any(), any())
-        listPresenter.attachView(view)
         verify(view, times(1)).render(any())
     }
 }

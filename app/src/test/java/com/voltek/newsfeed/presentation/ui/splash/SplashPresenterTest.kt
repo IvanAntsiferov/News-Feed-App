@@ -28,8 +28,8 @@ class SplashPresenterTest : BasePresenterTest() {
 
     @Test
     fun initTest() {
-        verify(newsSourcesUseCase, times(1)).execute(any(), any(), any(), any())
         splashPresenter.attachView(view)
+        verify(newsSourcesUseCase, times(1)).execute(any(), any(), any(), any())
         verify(view, times(1)).attachInputListeners()
         splashPresenter.detachView(view)
         verify(view, times(1)).detachInputListeners()

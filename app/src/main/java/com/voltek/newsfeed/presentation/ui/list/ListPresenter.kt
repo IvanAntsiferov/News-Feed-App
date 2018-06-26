@@ -19,16 +19,17 @@ class ListPresenter(
         private val newsSourcesChanges: NewsSourcesUpdatesUseCase
 ) : BasePresenter<ListView>() {
 
-    // Holds current model through full presenter lifecycle
     private val model: ListModel = ListModel { viewState.render(it as ListModel) }
 
     init {
         bind(arrayOf(articles, newsSourcesChanges))
+    }
+
+    override fun onFirstViewAttach() {
         listenForChanges()
         loadArticles()
     }
 
-    // View event presenter about events using this method
     override fun event(event: Event) {
         when (event) {
             is Event.OpenArticleDetails -> router.execute(CommandOpenArticleDetailsScreen(event.article))
