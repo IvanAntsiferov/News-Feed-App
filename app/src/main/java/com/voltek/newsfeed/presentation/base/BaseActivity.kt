@@ -1,18 +1,16 @@
 package com.voltek.newsfeed.presentation.base
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.support.annotation.IdRes
 import android.support.v7.widget.Toolbar
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.voltek.newsfeed.utils.SubscriptionsHolder
-import com.voltek.newsfeed.NewsApp
+import com.voltek.newsfeed.App
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.navigation.command.CommandOpenWebsite
 import com.voltek.newsfeed.presentation.navigation.proxy.Navigator
 import io.reactivex.disposables.CompositeDisposable
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.widget.Toast
 import com.voltek.newsfeed.presentation.navigation.command.CommandShareArticle
 
@@ -25,16 +23,12 @@ abstract class BaseActivity : MvpAppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        NewsApp.getNavigatorBinder().setNavigator(this)
+        App.getNavigatorBinder().setNavigator(this)
     }
 
     override fun onPause() {
         super.onPause()
-        NewsApp.getNavigatorBinder().removeNavigator()
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+        App.getNavigatorBinder().removeNavigator()
     }
 
     // Base navigator commands
@@ -72,7 +66,7 @@ abstract class BaseActivity : MvpAppCompatActivity(),
             displayHomeAsUpEnabled: Boolean = false,
             displayShowHomeEnabled: Boolean = false
     ) {
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
         supportActionBar?.setDisplayShowHomeEnabled(displayShowHomeEnabled)

@@ -1,14 +1,10 @@
-apply from: 'dependencies.gradle'
-
 buildscript {
     apply from: 'dependencies.gradle'
 
     repositories {
         jcenter()
         mavenCentral()
-        maven {
-            url 'https://maven.google.com'
-        }
+        google()
     }
 
     dependencies {

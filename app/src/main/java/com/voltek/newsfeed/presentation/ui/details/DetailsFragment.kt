@@ -6,14 +6,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
-import com.voltek.newsfeed.NewsApp
+import com.voltek.newsfeed.App
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.base.BaseFragment
 import com.voltek.newsfeed.presentation.base.Event
 import com.voltek.newsfeed.presentation.entity.ArticleUI
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.parceler.Parcels
 import javax.inject.Inject
 
 class DetailsFragment : BaseFragment(),
@@ -27,14 +26,14 @@ class DetailsFragment : BaseFragment(),
         fun newInstance(article: ArticleUI): DetailsFragment {
             val fragment = DetailsFragment()
             val args = Bundle()
-            args.putParcelable(ARG_ARTICLE, Parcels.wrap(article))
+            args.putParcelable(ARG_ARTICLE, article)
             fragment.arguments = args
             return fragment
         }
     }
 
     init {
-        NewsApp.appComponent.inject(this)
+        App.appComponent.inject(this)
         setHasOptionsMenu(true)
     }
 
@@ -45,25 +44,26 @@ class DetailsFragment : BaseFragment(),
     @ProvidePresenter
     fun providePresenter() = presenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fragment_details, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_details, container, false)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_fragment_details, menu)
     }
 
     override fun attachInputListeners() {
-        presenter.setArticle(Parcels.unwrap(arguments.getParcelable(ARG_ARTICLE)))
+        val article = arguments!!.getParcelable(ARG_ARTICLE) as ArticleUI
+        presenter.setArticle(article)
 
-        RxToolbar.itemClicks(activity.toolbar)
-                .subscribe({
+        RxToolbar.itemClicks(activity!!.toolbar)
+                .subscribe {
                     when (it.itemId) {
                         R.id.action_share -> presenter.event(Event.Share())
                         R.id.action_website -> presenter.event(Event.OpenWebsite())
                         R.id.action_news_sources -> presenter.event(Event.OpenNewsSources())
                     }
-                })
+                }
                 .bind()
     }
 
@@ -81,7 +81,7 @@ class DetailsFragment : BaseFragment(),
 
     override fun render(model: DetailsModel) {
         if (model.articleLoaded) {
-            activity.title = model.source
+            activity!!.title = model.source
 
             Glide
                     .with(context)

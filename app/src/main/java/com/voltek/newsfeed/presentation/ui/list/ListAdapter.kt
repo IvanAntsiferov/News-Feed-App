@@ -46,8 +46,8 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         val title: TextView = view.tv_title
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent?.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         when (viewType) {
             TITLE -> {
                 val view = layoutInflater.inflate(R.layout.item_title, parent, false)
@@ -60,8 +60,8 @@ class ListAdapter(private val mContext: Context, private var mItems: MutableList
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        when (holder?.itemViewType) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder.itemViewType) {
             TITLE -> bindTitle(holder as ViewHolderTitle, position)
             ARTICLE -> bindArticle(holder as ViewHolderArticle, position)
         }

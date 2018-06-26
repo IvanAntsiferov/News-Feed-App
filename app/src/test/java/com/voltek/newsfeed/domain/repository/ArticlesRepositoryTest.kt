@@ -46,7 +46,7 @@ class ArticlesRepositoryTest {
     fun noSourcesSelected() {
         articlesRepo.get(ArrayList())
                 .test()
-                .assertError({ it is NoNewsSourcesSelectedException })
+                .assertError { it is NoNewsSourcesSelectedException }
         verify(api, times(0)).fetchArticles(anyString())
     }
 
@@ -58,7 +58,7 @@ class ArticlesRepositoryTest {
                 .assertValue { it.data == null }
                 .assertValue { it.message == stringNoConnection }
                 .assertComplete()
-        verify(api, times(1)).fetchArticles(anyString())
+        verify(api).fetchArticles(anyString())
         whenever(api.fetchArticles(anyString())).thenReturn(Single.error(Exception()))
         articlesRepo.get(sources)
                 .test()
@@ -77,6 +77,6 @@ class ArticlesRepositoryTest {
                 .assertValue { it.data?.size == 2 } // Because of Header
                 .assertValue { it.data!![1].title == response.articles[0].title }
                 .assertComplete()
-        verify(api, times(1)).fetchArticles(anyString())
+        verify(api).fetchArticles(anyString())
     }
 }

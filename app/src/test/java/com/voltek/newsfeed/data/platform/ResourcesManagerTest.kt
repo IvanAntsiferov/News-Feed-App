@@ -1,7 +1,6 @@
 package com.voltek.newsfeed.data.platform
 
 import android.content.Context
-import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import junit.framework.Assert.assertEquals
@@ -29,6 +28,6 @@ class ResourcesManagerTest {
         val string = "string"
         whenever(context.getString(id)).thenReturn(string)
         assertEquals(string, resourcesManager.getString(id))
-        verify(context, times(1)).getString(id)
+        verify(context).getString(id)
     }
 }

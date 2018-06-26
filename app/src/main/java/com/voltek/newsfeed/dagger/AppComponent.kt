@@ -2,7 +2,7 @@ package com.voltek.newsfeed.dagger
 
 import com.voltek.newsfeed.presentation.ui.details.DetailsFragment
 import com.voltek.newsfeed.presentation.ui.list.ListFragment
-import com.voltek.newsfeed.presentation.ui.news_sources.NewsSourcesFragment
+import com.voltek.newsfeed.presentation.ui.newssources.NewsSourcesFragment
 import com.voltek.newsfeed.presentation.ui.splash.SplashActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -17,7 +17,8 @@ import javax.inject.Singleton
         RouterModule::class,
         RouterModule::class,
         StorageModule::class,
-        UseCaseModule::class)
+        UseCaseModule::class,
+        AnalyticsModule::class)
 )
 interface AppComponent {
 

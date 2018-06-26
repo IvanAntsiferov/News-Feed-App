@@ -9,7 +9,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jakewharton.rxbinding2.support.v7.widget.RxToolbar
-import com.voltek.newsfeed.NewsApp
+import com.voltek.newsfeed.App
 import com.voltek.newsfeed.R
 import com.voltek.newsfeed.presentation.base.BaseFragment
 import com.voltek.newsfeed.presentation.base.Event
@@ -29,7 +29,7 @@ class ListFragment : BaseFragment(),
     }
 
     init {
-        NewsApp.appComponent.inject(this)
+        App.appComponent.inject(this)
         setHasOptionsMenu(true)
     }
 
@@ -42,12 +42,12 @@ class ListFragment : BaseFragment(),
 
     private lateinit var adapter: ListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        adapter = ListAdapter(context, ArrayList())
-        return inflater?.inflate(R.layout.fragment_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        adapter = ListAdapter(context!!, ArrayList())
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler_view.hasFixedSize()
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.adapter = ScaleInAnimationAdapter(adapter)
@@ -60,23 +60,23 @@ class ListFragment : BaseFragment(),
 
     override fun attachInputListeners() {
         // Toolbar
-        RxToolbar.itemClicks(activity.toolbar)
-                .subscribe({
+        RxToolbar.itemClicks(activity!!.toolbar)
+                .subscribe {
                     when (it.itemId) {
                         R.id.action_news_sources -> presenter.event(Event.OpenNewsSources())
                     }
-                })
+                }
                 .bind()
 
         // On article click
         adapter.getOnItemClickObservable()
                 .distinctUntilChanged() // Skip reopening of details in two pane mode
-                .subscribe({ presenter.event(Event.OpenArticleDetails(it)) })
+                .subscribe { presenter.event(Event.OpenArticleDetails(it)) }
                 .bind()
 
         // Swipe to refresh
         RxSwipeRefreshLayout.refreshes(swipe_container)
-                .subscribe({ presenter.event(Event.Refresh()) })
+                .subscribe { presenter.event(Event.Refresh()) }
                 .bind()
     }
 

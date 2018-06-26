@@ -1,0 +1,8 @@
+ext.loadProps = { fileName ->
+    def propertiesFile = rootProject.file(fileName)
+    def props = new Properties()
+    if (propertiesFile.exists()) {
+        props.load(new FileInputStream(propertiesFile))
+    }
+    return props
+}

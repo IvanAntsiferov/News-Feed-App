@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.voltek.newsfeed.NewsApp"
+        android:name="com.voltek.newsfeed.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,7 +30,7 @@
             android:launchMode="singleTask" />
 
         <activity
-            android:name="com.voltek.newsfeed.presentation.ui.news_sources.NewsSourcesActivity"
+            android:name="com.voltek.newsfeed.presentation.ui.newssources.NewsSourcesActivity"
             android:parentActivityName="com.voltek.newsfeed.presentation.ui.list.ListActivity" />
 
     </application>

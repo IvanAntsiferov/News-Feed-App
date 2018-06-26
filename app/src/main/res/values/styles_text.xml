@@ -4,24 +4,23 @@
     <!-- Base text style -->
     <style name="Text">
         <item name="android:textColor">@color/md_grey900</item>
-        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 
     <!-- Custom text styles -->
     <style name="Text.Subheading.Bold">
-        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.Subheading.Italic">
-        <item name="fontPath">fonts/Roboto-Italic.ttf</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
     <style name="Text.Headline.BoldItalic">
-        <item name="fontPath">fonts/Roboto-BoldItalic.ttf</item>
+        <item name="android:textStyle">bold|italic</item>
     </style>
 
     <style name="Text.Headline.Bold">
-        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Material text styles -->
@@ -31,7 +30,6 @@
 
     <style name="Text.Title">
         <item name="android:textSize">20sp</item>
-        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
     </style>
 
     <style name="Text.Subheading">
@@ -40,7 +38,6 @@
 
     <style name="Text.Body2">
         <item name="android:textSize">14sp</item>
-        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
     </style>
 
     <style name="Text.Body1">
@@ -53,7 +50,6 @@
 
     <style name="Text.Button">
         <item name="android:textSize">14sp</item>
-        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
         <item name="android:textAllCaps">true</item>
     </style>
 

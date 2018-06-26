@@ -2,10 +2,10 @@ package com.voltek.newsfeed.dagger
 
 import com.voltek.newsfeed.domain.repository.ArticlesRepository
 import com.voltek.newsfeed.domain.repository.NewsSourcesRepository
-import com.voltek.newsfeed.domain.use_case.articles.GetArticlesUseCase
-import com.voltek.newsfeed.domain.use_case.news_sources.EnableNewsSourceUseCase
-import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUpdatesUseCase
-import com.voltek.newsfeed.domain.use_case.news_sources.NewsSourcesUseCase
+import com.voltek.newsfeed.domain.usecase.articles.GetArticlesUseCase
+import com.voltek.newsfeed.domain.usecase.newssources.EnableNewsSourceUseCase
+import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUpdatesUseCase
+import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUseCase
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler

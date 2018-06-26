@@ -6,7 +6,7 @@ import com.voltek.newsfeed.data.platform.ResourcesManager
 import com.voltek.newsfeed.domain.Mapper
 import com.voltek.newsfeed.domain.exception.NoConnectionException
 import com.voltek.newsfeed.domain.exception.NoNewsSourcesSelectedException
-import com.voltek.newsfeed.domain.use_case.Result
+import com.voltek.newsfeed.domain.usecase.Result
 import com.voltek.newsfeed.presentation.entity.ArticleUI
 import com.voltek.newsfeed.presentation.entity.SourceUI
 import io.reactivex.Observable
