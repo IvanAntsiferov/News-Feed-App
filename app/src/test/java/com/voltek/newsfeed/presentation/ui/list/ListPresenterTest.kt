@@ -11,49 +11,39 @@ import com.voltek.newsfeed.presentation.navigation.command.CommandOpenNewsSource
 import com.voltek.newsfeed.presentation.ui.BasePresenterTest
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 
-class ListPresenterTest : BasePresenterTest() {
-
-    private lateinit var listPresenter: ListPresenter
+class ListPresenterTest : BasePresenterTest<ListPresenter>() {
 
     private val articleUI = MockData.articleUI()
 
     @Mock
     lateinit var articles: GetArticlesUseCase
-
     @Mock
     lateinit var newsSourcesChanges: NewsSourcesUpdatesUseCase
-
     @Mock
     lateinit var view: ListView
 
-    @Before
-    fun prepare() {
-        MockitoAnnotations.initMocks(this)
-        listPresenter = ListPresenter(router, articles, newsSourcesChanges)
-    }
+    override fun initPresenter() = ListPresenter(router, articles, newsSourcesChanges)
 
     @Test
     fun lifecycleTest() {
-        listPresenter.attachView(view)
+        presenter.attachView(view)
         verify(articles).execute(any(), any(), any(), any())
         verify(newsSourcesChanges).execute(any(), any(), any(), any())
         verify(view).render(any())
         verify(view).attachInputListeners()
-        listPresenter.detachView(view)
+        presenter.detachView(view)
         verify(view).detachInputListeners()
-        listPresenter.onDestroy()
+        presenter.onDestroy()
         verify(articles).unsubscribe()
         verify(newsSourcesChanges).unsubscribe()
     }
 
     @Test
     fun eventOpenArticleDetails() {
-        listPresenter.event(Event.OpenArticleDetails(articleUI))
+        presenter.event(Event.OpenArticleDetails(articleUI))
         assertTrue(queue[0] is CommandOpenArticleDetailsScreen)
         assertEquals(1, queue.size)
         assertEquals(articleUI.url, (queue[0] as CommandOpenArticleDetailsScreen).article.url)
@@ -61,15 +51,15 @@ class ListPresenterTest : BasePresenterTest() {
 
     @Test
     fun eventOpenNewsSources() {
-        listPresenter.event(Event.OpenNewsSources())
+        presenter.event(Event.OpenNewsSources())
         assertTrue(queue[0] is CommandOpenNewsSourcesScreen)
         assertEquals(1, queue.size)
     }
 
     @Test
     fun eventRefresh() {
-        listPresenter.attachView(view)
-        listPresenter.event(Event.Refresh())
+        presenter.attachView(view)
+        presenter.event(Event.Refresh())
         verify(articles).execute(any(), any(), any(), any())
         verify(view).render(any())
     }
