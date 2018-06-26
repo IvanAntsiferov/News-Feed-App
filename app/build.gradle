@@ -17,7 +17,7 @@ def keystoreDebugProperties = loadProps(KEY_STORE_DIR + DEBUG_KEY_STORE_PROPERTI
 
 def appVersion = [
         major: 1,
-        minor: 1,
+        minor: 2,
         patch: 0
 ]
 
@@ -29,7 +29,7 @@ android {
         applicationId "com.voltek.newsfeed"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 2
+        versionCode 3
         versionName "${appVersion.major}.${appVersion.minor}.${appVersion.patch}"
         buildConfigField 'String', 'ApiKey', ApiKey
     }
