@@ -46,7 +46,7 @@ class ArticlesRepositoryTest {
     fun noSourcesSelected() {
         articlesRepo.get(ArrayList())
                 .test()
-                .assertError({ it is NoNewsSourcesSelectedException })
+                .assertError { it is NoNewsSourcesSelectedException }
         verify(api, times(0)).fetchArticles(anyString())
     }
 

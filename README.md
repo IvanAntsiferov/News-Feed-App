@@ -17,11 +17,11 @@ Simple Android app, displaying list of latest news from chosen news sources. Mai
 ## Technical Details
 App built with MVI architecture.
 
-Presentation layer is done a bit different from classic MVP. There is [Model](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/base/BaseModel.kt) class instance in Presenter, that holds current View state. Presenter does not send any commands to view, instead of this, presenter change Model properties, and than View `render` changes. View input [events](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/base/Event.kt) sent to presenter through `notify` method.
+Presentation layer is done a bit different from classic MVP. There is [Model](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/base/BaseModel.kt) class instance in Presenter, that holds current view state. Presenter does not send any commands to view, instead of this, presenter change `Model` properties, and than View `render` changes. View input [events](https://github.com/IvanAntsiferov/News-Feed-App/blob/master/app/src/main/java/com/voltek/newsfeed/presentation/base/Event.kt) sent to presenter through `event` method.
 
-Domain layer works much more like MVP + Clean Architecture approach. There is a domain layer, that's represented by use cases and repositories, it works with data layer and mapping entities from `RAW` to `UI` versions. Domain layer knows nothing about Android SDK.
+Domain layer works much more like MVP + Clean Architecture approach. Business logic is represented by use cases and repositories. Repositories work with data layer and handle entities mapping. Domain layer knows nothing about Android SDK.
 
-Data layer works directly with Android specific tools: network calls, DB queries and stuff like that.
+Data layer works directly with Android specific tools: network calls, DB queries (In this case app persistent storage made with Realm) and stuff like that.
 
 ## How To Build Project
 This app uses [News API](https://newsapi.org/) to retrieve data. You must provide your own api key in order to build the app. Paste it to project [gradle.properties](https://raw.githubusercontent.com/IvanAntsiferov/News-Feed-App/master/gradle.properties) in variable named ```ApiKey```.
@@ -39,8 +39,6 @@ This app uses [News API](https://newsapi.org/) to retrieve data. You must provid
 * [Dagger 2](https://github.com/google/dagger)
 * [Glide](https://github.com/bumptech/glide)
 * [Hawk](https://github.com/orhanobut/hawk)
-* [Parceler](https://github.com/johncarl81/parceler)
-* [Calligraphy](https://github.com/chrisjenx/Calligraphy)
 * [Timber](https://github.com/JakeWharton/timber)
 * [RecyclerView Animators](https://github.com/wasabeef/recyclerview-animators)
 * [Mockito](https://github.com/mockito/mockito)
