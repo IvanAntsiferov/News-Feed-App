@@ -1,7 +1,6 @@
 package com.voltek.newsfeed.presentation.ui.splash
 
 import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUseCase
 import com.voltek.newsfeed.presentation.ui.BasePresenterTest
@@ -29,11 +28,11 @@ class SplashPresenterTest : BasePresenterTest() {
     @Test
     fun initTest() {
         splashPresenter.attachView(view)
-        verify(newsSourcesUseCase, times(1)).execute(any(), any(), any(), any())
-        verify(view, times(1)).attachInputListeners()
+        verify(newsSourcesUseCase).execute(any(), any(), any(), any())
+        verify(view).attachInputListeners()
         splashPresenter.detachView(view)
-        verify(view, times(1)).detachInputListeners()
+        verify(view).detachInputListeners()
         splashPresenter.onDestroy()
-        verify(newsSourcesUseCase, times(1)).unsubscribe()
+        verify(newsSourcesUseCase).unsubscribe()
     }
 }

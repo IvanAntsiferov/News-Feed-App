@@ -69,7 +69,7 @@ class GetArticlesUseCaseTest : BaseUseCaseTest() {
         assertTrue(emittedMessage.isEmpty())
         assertFalse(error)
         assertTrue(completed)
-        verify(newsSourcesRepository, times(1)).getCategory("")
-        verify(articlesRepository, times(1)).get(arrayListOf(sourceUI))
+        verify(newsSourcesRepository).getCategory("")
+        verify(articlesRepository).get(arrayListOf(sourceUI))
     }
 }

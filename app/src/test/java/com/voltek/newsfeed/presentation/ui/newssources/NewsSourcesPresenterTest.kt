@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.voltek.newsfeed.MockData
+import com.voltek.newsfeed.analytics.Analytics
 import com.voltek.newsfeed.domain.usecase.newssources.EnableNewsSourceUseCase
 import com.voltek.newsfeed.domain.usecase.newssources.NewsSourcesUseCase
 import com.voltek.newsfeed.presentation.base.Event
@@ -28,22 +29,25 @@ class NewsSourcesPresenterTest : BasePresenterTest() {
     @Mock
     lateinit var view: NewsSourcesView
 
+    @Mock
+    lateinit var analytics: Analytics
+
     @Before
     fun prepare() {
         MockitoAnnotations.initMocks(this)
-        newsSourcesPresenter = NewsSourcesPresenter(newsSources, newsSourceEnable)
+        newsSourcesPresenter = NewsSourcesPresenter(newsSources, newsSourceEnable, analytics)
     }
 
     @Test
     fun lifecycleTest() {
         newsSourcesPresenter.attachView(view)
-        verify(view, times(1)).attachInputListeners()
-        verify(newsSources, times(1)).execute(any(), any(), any(), any())
+        verify(view).attachInputListeners()
+        verify(newsSources).execute(any(), any(), any(), any())
         newsSourcesPresenter.detachView(view)
-        verify(view, times(1)).detachInputListeners()
+        verify(view).detachInputListeners()
         newsSourcesPresenter.onDestroy()
-        verify(newsSources, times(1)).unsubscribe()
-        verify(newsSourceEnable, times(1)).unsubscribe()
+        verify(newsSources).unsubscribe()
+        verify(newsSourceEnable).unsubscribe()
     }
 
     @Test
@@ -66,8 +70,8 @@ class NewsSourcesPresenterTest : BasePresenterTest() {
     fun eventEnableNewsSource() {
         newsSourcesPresenter.attachView(view)
         newsSourcesPresenter.event(Event.EnableNewsSource(sourceUI))
-        verify(newsSources, times(1)).execute(any(), any(), any(), any())
-        verify(newsSourceEnable, times(1)).execute(any(), any(), any(), any())
-        verify(view, times(1)).render(any())
+        verify(newsSources).execute(any(), any(), any(), any())
+        verify(newsSourceEnable).execute(any(), any(), any(), any())
+        verify(view).render(any())
     }
 }

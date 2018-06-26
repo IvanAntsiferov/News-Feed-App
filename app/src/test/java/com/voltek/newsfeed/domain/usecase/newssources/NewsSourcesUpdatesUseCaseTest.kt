@@ -54,6 +54,6 @@ class NewsSourcesUpdatesUseCaseTest : BaseUseCaseTest() {
         Assert.assertFalse(completed)
         Assert.assertFalse(emittedResult)
         Assert.assertTrue(emittedMessage.isEmpty())
-        verify(newsSourcesRepository, times(1)).getSourcesEnabledObservable()
+        verify(newsSourcesRepository).getSourcesEnabledObservable()
     }
 }

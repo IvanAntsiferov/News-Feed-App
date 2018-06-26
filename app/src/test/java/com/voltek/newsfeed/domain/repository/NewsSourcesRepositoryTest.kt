@@ -73,7 +73,7 @@ class NewsSourcesRepositoryTest {
         newsSourcesRepo.update(id, false)
                 .test()
                 .assertError { it is WrongNewsSourceIdException }
-        verify(storage, times(1)).findById(id)
+        verify(storage).findById(id)
     }
 
     @Test
@@ -83,8 +83,8 @@ class NewsSourcesRepositoryTest {
         newsSourcesRepo.update(id, false)
                 .test()
                 .assertComplete()
-        verify(storage, times(1)).findById(id)
-        verify(storage, times(1)).save(arrayListOf(sourceDB))
+        verify(storage).findById(id)
+        verify(storage).save(arrayListOf(sourceDB))
     }
 
     @Test
@@ -95,8 +95,8 @@ class NewsSourcesRepositoryTest {
                 .test()
                 .assertNoErrors()
         verify(storage, times(2)).queryAll()
-        verify(storage, times(1)).save(any())
-        verify(api, times(1)).fetchSources()
+        verify(storage).save(any())
+        verify(api).fetchSources()
     }
 
     @Test
@@ -106,7 +106,7 @@ class NewsSourcesRepositoryTest {
                 .test()
                 .assertValue { it.message.isEmpty() }
                 .assertValue { it.data!![0].id == sourceDB.id }
-        verify(storage, times(1)).queryAll()
+        verify(storage).queryAll()
         verify(storage, times(0)).save(any())
         verify(api, times(0)).fetchSources()
     }
@@ -126,8 +126,8 @@ class NewsSourcesRepositoryTest {
                 .assertValue { it.message == stringServerError }
                 .assertValue { it.data == null }
                 .assertComplete()
-        verify(res, times(1)).getString(R.string.error_no_connection)
-        verify(res, times(1)).getString(R.string.error_request_failed)
+        verify(res).getString(R.string.error_no_connection)
+        verify(res).getString(R.string.error_request_failed)
         verify(storage, times(2)).queryAll()
         verify(storage, times(0)).save(any())
         verify(api, times(2)).fetchSources()
@@ -141,7 +141,7 @@ class NewsSourcesRepositoryTest {
                 .test()
                 .assertValue { it.data!![0].id == sourceDB.id }
                 .assertComplete()
-        verify(storage, times(1)).queryCategory(category)
+        verify(storage).queryCategory(category)
         verify(storage, times(0)).queryAll()
     }
 
@@ -154,8 +154,8 @@ class NewsSourcesRepositoryTest {
                 .assertValue { it.message == stringNoNewsSourcesForCategory }
                 .assertValue { it.data!!.isEmpty() }
                 .assertComplete()
-        verify(res, times(1)).getString(R.string.error_no_news_sources_for_category)
-        verify(storage, times(1)).queryCategory(category)
+        verify(res).getString(R.string.error_no_news_sources_for_category)
+        verify(storage).queryCategory(category)
         verify(storage, times(0)).queryAll()
     }
 
@@ -167,7 +167,7 @@ class NewsSourcesRepositoryTest {
                 .assertValue { it.message.isEmpty() }
                 .assertValue { it.data!![0].id == sourceDB.id }
                 .assertComplete()
-        verify(storage, times(1)).queryAll()
+        verify(storage).queryAll()
         verify(storage, times(0)).queryCategory(anyString())
     }
 
@@ -179,8 +179,8 @@ class NewsSourcesRepositoryTest {
                 .assertValue { it.message == stringNoNewsSourcesLoaded }
                 .assertValue { it.data!!.isEmpty() }
                 .assertComplete()
-        verify(res, times(1)).getString(R.string.error_no_news_sources_loaded)
-        verify(storage, times(1)).queryAll()
+        verify(res).getString(R.string.error_no_news_sources_loaded)
+        verify(storage).queryAll()
         verify(storage, times(0)).queryCategory(anyString())
     }
 
@@ -246,8 +246,8 @@ class NewsSourcesRepositoryTest {
                 .assertComplete()
 
         verify(api, times(2)).fetchSources()
-        verify(res, times(1)).getString(R.string.error_no_connection)
-        verify(res, times(1)).getString(R.string.error_request_failed)
+        verify(res).getString(R.string.error_no_connection)
+        verify(res).getString(R.string.error_request_failed)
         verify(storage, times(2)).queryAll()
         verify(storage, times(0)).queryEnabled()
         verify(storage, times(0)).save(any())
@@ -264,11 +264,11 @@ class NewsSourcesRepositoryTest {
                 .assertValue { it.message.isEmpty() }
                 .assertValue { it.data!![0].id == sourceDB.id }
                 .assertComplete()
-        verify(api, times(1)).fetchSources()
+        verify(api).fetchSources()
         verify(res, times(0)).getString(anyInt())
-        verify(storage, times(1)).queryAll()
-        verify(storage, times(1)).queryEnabled()
-        verify(storage, times(1)).save(any())
-        verify(storage, times(1)).deleteAll()
+        verify(storage).queryAll()
+        verify(storage).queryEnabled()
+        verify(storage).save(any())
+        verify(storage).deleteAll()
     }
 }

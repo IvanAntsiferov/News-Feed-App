@@ -1,7 +1,6 @@
 package com.voltek.newsfeed.presentation.ui.list
 
 import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.voltek.newsfeed.MockData
 import com.voltek.newsfeed.domain.usecase.articles.GetArticlesUseCase
@@ -41,15 +40,15 @@ class ListPresenterTest : BasePresenterTest() {
     @Test
     fun lifecycleTest() {
         listPresenter.attachView(view)
-        verify(articles, times(1)).execute(any(), any(), any(), any())
-        verify(newsSourcesChanges, times(1)).execute(any(), any(), any(), any())
-        verify(view, times(1)).render(any())
-        verify(view, times(1)).attachInputListeners()
+        verify(articles).execute(any(), any(), any(), any())
+        verify(newsSourcesChanges).execute(any(), any(), any(), any())
+        verify(view).render(any())
+        verify(view).attachInputListeners()
         listPresenter.detachView(view)
-        verify(view, times(1)).detachInputListeners()
+        verify(view).detachInputListeners()
         listPresenter.onDestroy()
-        verify(articles, times(1)).unsubscribe()
-        verify(newsSourcesChanges, times(1)).unsubscribe()
+        verify(articles).unsubscribe()
+        verify(newsSourcesChanges).unsubscribe()
     }
 
     @Test
@@ -71,7 +70,7 @@ class ListPresenterTest : BasePresenterTest() {
     fun eventRefresh() {
         listPresenter.attachView(view)
         listPresenter.event(Event.Refresh())
-        verify(articles, times(1)).execute(any(), any(), any(), any())
-        verify(view, times(1)).render(any())
+        verify(articles).execute(any(), any(), any(), any())
+        verify(view).render(any())
     }
 }

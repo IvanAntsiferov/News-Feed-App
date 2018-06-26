@@ -52,7 +52,7 @@ class EnableNewsSourceUseCaseTest : BaseUseCaseTest() {
         )
         assertFalse(error)
         assertTrue(completed)
-        verify(newsSourcesRepository, times(1)).update(sourceUI.id, !sourceUI.isEnabled)
+        verify(newsSourcesRepository).update(sourceUI.id, !sourceUI.isEnabled)
     }
 
     @Test

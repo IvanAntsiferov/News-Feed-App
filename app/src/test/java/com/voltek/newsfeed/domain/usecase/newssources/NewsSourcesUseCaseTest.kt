@@ -60,7 +60,7 @@ class NewsSourcesUseCaseTest : BaseUseCaseTest() {
         Assert.assertTrue(completed)
         Assert.assertEquals(sourceUI.id, emittedResult[0].id)
         Assert.assertTrue(emittedMessage.isEmpty())
-        verify(newsSourcesRepository, times(1)).refresh()
+        verify(newsSourcesRepository).refresh()
         verify(newsSourcesRepository, times(0)).getAll()
         verify(newsSourcesRepository, times(0)).getCategory(anyString())
     }
@@ -91,7 +91,7 @@ class NewsSourcesUseCaseTest : BaseUseCaseTest() {
         Assert.assertEquals(sourceUI.id, emittedResult[0].id)
         Assert.assertTrue(emittedMessage.isEmpty())
         verify(newsSourcesRepository, times(0)).refresh()
-        verify(newsSourcesRepository, times(1)).getAll()
+        verify(newsSourcesRepository).getAll()
         verify(newsSourcesRepository, times(0)).getCategory(anyString())
     }
 
@@ -123,6 +123,6 @@ class NewsSourcesUseCaseTest : BaseUseCaseTest() {
         Assert.assertTrue(emittedMessage.isEmpty())
         verify(newsSourcesRepository, times(0)).refresh()
         verify(newsSourcesRepository, times(0)).getAll()
-        verify(newsSourcesRepository, times(1)).getCategory(category)
+        verify(newsSourcesRepository).getCategory(category)
     }
 }
