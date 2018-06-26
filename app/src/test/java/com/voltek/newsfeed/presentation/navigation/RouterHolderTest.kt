@@ -91,20 +91,28 @@ class RouterHolderTest {
         val command = CommandSystemMessage("Error", NoConnectionException())
         router.execute(command)
         assertTrue(routerHolder.commandsQueue[0] is CommandSystemMessage)
+
         val realCommand = routerHolder.commandsQueue[0] as CommandSystemMessage
         assertEquals(command.message, realCommand.message)
         assertEquals(command.error, realCommand.error)
+
         router.execute(CommandBack())
         assertEquals(2, routerHolder.commandsQueue.size)
-        router.execute(CommandOpenWebsite("url"))
-        assertEquals("url", (routerHolder.commandsQueue[2] as CommandOpenWebsite).url)
-        router.execute(CommandShareArticle("title", "url"))
+
+        val openWebsite = CommandOpenWebsite("url")
+        router.execute(openWebsite)
+        assertEquals(openWebsite.url, (routerHolder.commandsQueue[2] as CommandOpenWebsite).url)
+
+        val shareArticle = CommandShareArticle("title", "url")
+        router.execute(shareArticle)
         assertEquals(4, routerHolder.commandsQueue.size)
-        assertEquals("title", (routerHolder.commandsQueue[3] as CommandShareArticle).title)
-        assertEquals("url", (routerHolder.commandsQueue[3] as CommandShareArticle).url)
+        assertEquals(shareArticle.title, (routerHolder.commandsQueue[3] as CommandShareArticle).title)
+        assertEquals(shareArticle.url, (routerHolder.commandsQueue[3] as CommandShareArticle).url)
+
         router.execute(CommandOpenArticleDetailsScreen(ArticleUI()))
         assertTrue((routerHolder.commandsQueue[4] as CommandOpenArticleDetailsScreen).article.isEmpty())
         assertEquals(5, routerHolder.commandsQueue.size)
+
         navigatorBinder.setNavigator(trueNavigator)
         assertTrue(routerHolder.commandsQueue.isEmpty())
     }
