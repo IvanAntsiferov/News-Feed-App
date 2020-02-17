@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/IvanAntsiferov/News-Feed-App.svg?branch=master)](https://travis-ci.org/IvanAntsiferov/News-Feed-App)
+[![codecov](https://codecov.io/gh/IvanAntsiferov/News-Feed-App/branch/master/graph/badge.svg)](https://codecov.io/gh/IvanAntsiferov/News-Feed-App)
+
+# Readme is outdated for now because of News Feed App version 2 development.
 
 # News Feed App
 Simple Android app, displaying list of latest news from chosen news sources. Main features:

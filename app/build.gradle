@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
 
 apply from: 'gradle/jacoco.gradle'
 apply from: "gradle/utils.gradle"
@@ -16,21 +13,23 @@ def keystoreReleaseProperties = loadProps(KEY_STORE_DIR + RELEASE_KEY_STORE_PROP
 def keystoreDebugProperties = loadProps(KEY_STORE_DIR + DEBUG_KEY_STORE_PROPERTIES_FILE_NAME)
 
 def appVersion = [
-        major: 1,
-        minor: 2,
+        major: 2,
+        minor: 0,
         patch: 0
 ]
+def appVersionName = "${appVersion.major}.${appVersion.minor}.${appVersion.patch}"
+def appVersionCode = 4
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.voltek.newsfeed"
+        applicationId "com.antsiferov.newsfeed"
+        versionCode appVersionCode
+        versionName appVersionName
         minSdkVersion 21
-        targetSdkVersion 27
-        versionCode 3
-        versionName "${appVersion.major}.${appVersion.minor}.${appVersion.patch}"
+        targetSdkVersion 29
         buildConfigField 'String', 'ApiKey', ApiKey
     }
 
@@ -69,73 +68,21 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
     }
-}
 
-androidExtensions {
-    experimental = true
-}
-
-kapt {
-    generateStubs = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinGradlePlugin"
-
-    // Android support library
-    implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
-    implementation "com.android.support:design:$versions.supportLibrary"
-    implementation "com.android.support:recyclerview-v7:$versions.supportLibrary"
-
-    // Networking
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
-    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
-
-    // Rx
-    implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"
-    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBindingKotlin"
-    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$versions.rxBindingKotlin"
-    implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$versions.rxBindingKotlin"
-
-    // Dependency injection
-    implementation "com.google.dagger:dagger:$versions.dagger"
-    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
-
-    // Images
-    implementation "com.github.bumptech.glide:glide:$versions.glide"
-
-    // Data storage
-    implementation "com.orhanobut:hawk:$versions.hawk"
-    implementation "com.github.vicpinm:krealmextensions:$versions.kotlinRealmExtensions"
-
-    // Logging
-    implementation "com.jakewharton.timber:timber:$versions.timber"
-
-    // MVP
-    implementation "com.arello-mobile:moxy:$versions.moxy"
-    implementation "com.arello-mobile:moxy-app-compat:$versions.moxy"
-    kapt "com.arello-mobile:moxy-compiler:$versions.moxy"
-
-    // Animations
-    implementation "jp.wasabeef:recyclerview-animators:$versions.recyclerviewAnimators"
-
-    // Unit tests
-    testImplementation "junit:junit:$versions.junit"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver", {
-        exclude group: 'com.squareup.okio', module: 'okio'
-        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
-    }
-    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$versions.mockitoKotlin", {
-        exclude group: 'org.jetbrains.kotlin'
-    }
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

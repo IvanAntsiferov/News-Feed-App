@@ -1,43 +1,5 @@
 <resources>
 
-    <!-- App title -->
     <string name="app_name">News Feed</string>
-
-    <!-- Activity titles -->
-    <string name="title_list">Latest News</string>
-
-    <!-- Toolbar actions -->
-    <string name="action_news_sources">News Sources</string>
-    <string name="action_filter">Filter</string>
-    <string name="action_refresh">Refresh</string>
-    <string name="action_share">Share</string>
-    <string name="action_website">Website</string>
-
-    <!-- News sources categories -->
-    <string name="category_all">All</string>
-    <string name="category_enabled">Enabled</string>
-    <string name="category_business">Business</string>
-    <string name="category_entertainment">Entertainment</string>
-    <string name="category_gaming">Gaming</string>
-    <string name="category_general">General</string>
-    <string name="category_music">Music</string>
-    <string name="category_politics">Politics</string>
-    <string name="category_science_and_nature">Science-and-nature</string>
-    <string name="category_sport">Sport</string>
-    <string name="category_technology">Technology</string>
-
-    <!-- Errors -->
-    <string name="error_common">Something went wrong</string>
-
-    <string name="error_no_connection">There is no internet connection</string>
-    <string name="error_request_failed">Server does not respond</string>
-    <string name="error_retrieve_failed">Failed to retrieve news from\u0020</string>
-    <string name="error_empty_details">An error occurred while loading article details</string>
-    <string name="error_no_browser">You don\'t have web-browser installed on your device</string>
-
-    <string name="error_no_news_sources_selected">Choose at least one news source</string>
-    <string name="error_no_news_sources_selected_yet">You have not selected any news sources yet</string>
-    <string name="error_no_news_sources_for_category">There is no news sources found for chosen category</string>
-    <string name="error_no_news_sources_loaded">An error occurred while loading news sources</string>
 
 </resources>

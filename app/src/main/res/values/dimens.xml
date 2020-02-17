@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="generic_margin_horizontal">16dp</dimen>
-    <dimen name="generic_margin_vertical">16dp</dimen>
 
-    <dimen name="generic_padding_small">4dp</dimen>
-    <dimen name="generic_padding">8dp</dimen>
-
-    <dimen name="generic_elevation">4dp</dimen>
-
-    <dimen name="item_article_image_height">128dp</dimen>
-
-    <dimen name="country_icon_size">24dp</dimen>
 
 </resources>
